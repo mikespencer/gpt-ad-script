@@ -6,7 +6,7 @@
   'use strict';
 
   if(typeof define === 'function'){
-    define('wp.overrides', ['overrides.core', 'utils.core'], function(overrides, utils){
+    define(['overrides.core', 'utils.core'], function(overrides, utils){
 
       /**
        * Object of checks for overrides
@@ -19,18 +19,11 @@
           'leaderboard$': function(){
             this.keyvalues['lb_test_kv'] = ['true'];
             this.keyvalues.pos.push('ad1');
-            //this.keyvalues.pos.push('ad1');
           }
         },
         where: {
-          //if 'where' of the ad matches 'washingtonpost.com'...
-          /*'washingtonpost.com': function(){
-            if(utils.urlCheck('reload', {type: 'variable'}) === 'true'){
-              this.config.where += '/reloaded';
-            }
-          },*/
           '^politics$': function(){
-            this.config.where += '/front';
+            //this.config.where += '/front';
           }
         }
       };

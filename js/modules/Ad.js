@@ -1,4 +1,5 @@
 /*global googletag*/
+
 /**
  * wpAd Ad object. Builds an individual ad
  */

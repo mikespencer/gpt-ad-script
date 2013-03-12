@@ -11,7 +11,7 @@
       var overrides = {
 
         /**
-         *  Takes an Ad object (from generic.js), modifies it with any specific overrides, then returns it
+         * Takes an Ad object (from generic.js), modifies it with any specific overrides, then returns it
          */
         exec: function(ad) {
           var key, check, r;
@@ -27,15 +27,16 @@
               }
             }
           }
-          //old way - no regex, but probably faster..
-          /*for(var key in overrides.checks){
-            if(overrides.checks.hasOwnProperty(key) && ad.config[key] && overrides.checks[key][ad.config[key]]){
-              overrides.checks[key][ad.config[key]].call(ad);
-            }
-          }*/
           return ad;
-        }
+        },
+
+        /**
+         * Define the checks in site specific overrides script
+         */
+        checks: {}
+
       };
+
       return overrides;
 
     });

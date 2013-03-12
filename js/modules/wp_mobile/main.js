@@ -6,14 +6,14 @@
   'use strict';
 
   if(typeof define === 'function'){
-    define('mobile', ['generic.core', 'mobile.config', 'utils.core'], function(wpAd, config, utils){
-      
+    define(['generic.core', 'wp_mobile/config', 'utils.core'], function(wpAd, config, utils){
+
       //set the base node
       wpAd.dfpSite = '/701/mob.wp.';
-      
+
       //expose helper functions
       wpAd.utils = utils;
-      
+
       //expose config
       wpAd.config = config;
 

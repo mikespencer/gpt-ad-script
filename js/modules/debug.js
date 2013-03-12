@@ -9,7 +9,7 @@
     define('debug', ['utils'], function(utils){
 
       var debug = {
-        
+
         init: function(){
           var l = wpAd.debugQueue.length, i = 0;
           for(i;i<l;i++){

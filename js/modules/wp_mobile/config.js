@@ -6,7 +6,7 @@
   'use strict';
 
   if(typeof define === 'function'){
-    define('mobile.config', function(){
+    define(function(){
       return {
         flights: {
           defaults: {

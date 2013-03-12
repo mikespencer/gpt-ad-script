@@ -1,110 +1,95 @@
 /**
  * Checks and builds an ad template of open spots on the current page
  */
-
- /*
-  NONE OF THIS WORKS YET...
- */
 (function(w, d, define, commercialNode){
 
   'use strict';
 
   if(typeof define === 'function'){
-    define('templateBuilder', ['estNowWithYear', 'utils.core'], function(estNowWithYear, utils){
+    define('templateBuilder', ['utils.core'], function(utils){
 
-      /**
-       * Checks and returns an object of open spots and relevant properties (hardcodes, etc).
-       */
-      function TemplateBuilder(config){
-        this.flights = config;
-        //this.template = this.exec();
+      var templateBuilder = {
 
-        //if(!wpAd.flags.demoAds) {
-          this.template = {};
-          /*if(wpAd.config.tiffanyTiles){
-            wpAd.tools.extendTemplates(wpAd.config.tiffanyTiles);
-          }*/
-          for(var key in this.flights) {
-            if(this.flights.hasOwnProperty(key)){
-              //key needs to be pos in templtae..
-              this.loopThroughTemplate(key, this.flights[key]);
+        exec: function(json){
+          templateBuilder.template = {};
+          for(var key in json){
+            if(json.hasOwnProperty(key)){
+              json[key].id = key;
+              if(templateBuilder.checkFlight(json[key])){
+                templateBuilder.addToTemplate(json[key]);
+              }
             }
           }
-        //} else {
-        //  wpAd.templates = wpAd.tools.demoAds();
-        //}
+          return templateBuilder.template;
+        },
 
-      }
-
-      TemplateBuilder.prototype = {
-        constructor: TemplateBuilder,
-
-        //store open spots/pos values here
-        openSpots: {},
-
-        //store explicitely closed (!) spots here
-        //maybe not..? just delete from openSpots when encountered? That way we can override later in the json config to open it again?
-        closedSpots: {},
-
-        //final template of open spots
-        //may not be necessary..
-        template: {},
-
-        loopThroughTemplate: function (id, template) {
-          for(var key in this.checks){
-            if(template.hasOwnProperty(key) && this.checks.hasOwnProperty(key)){
-              if(!this.checkProperties(key, template[key])){
+        checkFlight: function(template){
+          var key;
+          for(key in templateBuilder.checks){
+            if(templateBuilder.checks.hasOwnProperty(key) && template.hasOwnProperty(key)){
+              if(!templateBuilder.checkProperty(key, template[key])){
                 return false;
               }
             }
           }
-          return id;
+          return true;
         },
 
-        checkProperties: function(prop, props){
-          //!this.checks[key].call(this, template[key], template)
-          var i = 0, l;
-          props = typeof props === 'object' ? props : [props];
-          l = props.l;
+        checkProperty: function(prop, val){
+          val = utils.isArray(val) ? val : [val];
+
+          var l = val.length,
+            i = 0,
+            check = false;
+
           for(i;i<l;i++){
-            if(this.checks[prop].call(this, props[i], props)){
-              return true;
+            if(templateBuilder.checks[prop](val[i])){
+              check = true;
             }
           }
-
-          return false;
+          return check;
         },
 
-        //may not be necessary..
-        finaliseTemplate: function(inclusions, exclusions){
-          for(var key in exclusions){
-            if(exclusions.hasOwnProperty(key) && inclusions.hasOwnProperty(key)){
-              delete inclusions[key];
+        addToTemplate: function(template){
+          if(template.what){
+            var pos = template.what, l = pos.length, i = 0, newPos;
+            for(i;i<l;i++){
+              if(/^\!/.test(pos[i])){
+                newPos = pos[i].split(/\!/)[1];
+                if(templateBuilder.template[newPos]){
+                  delete templateBuilder.template[newPos];
+                }
+              } else {
+                templateBuilder.template[pos[i]] = template;
+              }
             }
           }
-          return inclusions;
         },
 
+        //true/false checks:
         checks: {
-          test: function(template_value, template){
-            return true;
+          test: function(val){
+            return typeof val === 'function' ? val() : val;
           },
 
-          where: function (template_value, template) {
-            return false;
+          where: function(where){
+            var open = true;
+            if(/^\!/.test(where)){
+              open = false;
+              where = where.split('!')[1];
+            }
+            return new RegExp('^' + where).test(w.commercialNode) ? open : false;
           },
 
-          when: function (template_value, template) {
-            return true;
-          },
-
-          what: function (template_value, template) {
-            return true;
+          when: function (when) {
+            when = when.split('/');
+            return when[0] <= utils.estNowWithYear && when[1] >= utils.estNowWithYear;
           }
         }
+
       };
 
-      return TemplateBuilder;
+      return templateBuilder;
 
     });
   }

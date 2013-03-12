@@ -1,7 +1,7 @@
 /*global requirejs, placeAd2:true, placeAd2Queue */
 
 /**
- *  Universal script that does adops initialisation and determines and loads site specific ad script/s
+ * Universal script that does adops initialisation and loads site specific ad script
  */
 (function(w, d, requirejs, define){
 
@@ -9,10 +9,10 @@
 
   //potential site specific scripts/modules with attribute mapping 
   var siteMapping = {
-      wp: 'wp',
-      slate: 'slate',
-      theroot: 'root',
-      mobile: 'mobile'
+      wp: 'wp/main',
+      slate: 'slate/main',
+      theroot: 'theroot/main',
+      wp_mobile: 'wp_mobile/main'
     },
 
     //requirejs configuration
@@ -52,6 +52,9 @@
       });
     }
 
+    //get flights
+    wpAd.flights = wpAd.templateBuilder.exec(wpAd.config.flights);
+
     //call any queued up functions
     if(wpAd.init && typeof wpAd.init === 'object'){
       var len = wpAd.init.length,
@@ -84,9 +87,9 @@
         pos = posArray.join('_');
       }
 
-      //if the ad type is legit and hasn't already been build/rendered on the page
-      if(wpAd.config.adTypes[what]){
-        if(!wpAd.template[pos]){
+      //if the ad type is legit and open and hasn't already been build/rendered on the page
+      if(!wpAd.flags.no_ads && (wpAd.flags.allAds || (wpAd.flights && wpAd.flights[pos] || wpAd.flights[what + '*']) && wpAd.config.adTypes[what])){
+        if(!wpAd.adsOnPage[pos]){
 
           //build and store our new ad
           ad = new wpAd.Ad({
@@ -96,7 +99,8 @@
             size: wpAd.config.adTypes[what].size,
             what: what,
             pos: pos,
-            posOverride: posOverride
+            posOverride: posOverride,
+            hardcode: wpAd.flights[pos] && wpAd.flights[pos].hardcode
           });
 
           //overrides (the new hackbin)
@@ -108,20 +112,21 @@
           ad.render();
 
           //store for debugging
-          wpAd.template[pos] = ad;
+          wpAd.adsOnPage[pos] = ad;
 
         } else{
           //refresh if ad/spot already rendered
-          wpAd.template[pos].slot.refresh();
+          wpAd.adsOnPage[pos].slot.refresh();
         }
-      }
 
-      if(wpAd.flags.debug){
-        wpAd.debugQueue.push(ad);
+        if(wpAd.flags.debug){
+          wpAd.debugQueue.push(ad);
+        }
+        try{
+          w.console.log('RENDERED AD:\n', ad.config.pos + '\n', ad);
+        }catch(e){}
+
       }
-      try{
-        w.console.log('RENDERED AD:\n', ad.config.pos + '\n', ad);
-      }catch(e){}
 
     };
 
@@ -142,9 +147,9 @@
       var l = queue.length,
         i = 0;
       for(i;i<l;i++){
-        //console.time('placeAd2');
+        console.time('placeAd2');
         placeAd2.apply(window, queue[i]);
-        //console.timeEnd('placeAd2');
+        console.timeEnd('placeAd2');
       }
     }
   }

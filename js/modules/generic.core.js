@@ -7,14 +7,25 @@
   'use strict';
 
   if(typeof define === 'function'){
-    define(['Ad', 'GPTConfig'], function(Ad, GPTConfig){
+    define(['Ad', 'GPTConfig', 'templateBuilder'], function(Ad, GPTConfig, templateBuilder){
 
       return {
-        //utils: utils,
+
+        //Ad builder
         Ad: Ad,
+
+        //Initial GPT setup
         GPTConfig: GPTConfig,
-        template: {},
+
+        //stores all ads on the page here
+        adsOnPage: {},
+
+        //container for array of functions to execute on load
         init: [],
+
+        templateBuilder: templateBuilder,
+
+        //platform/site universal flags
         flags: {
           debug: /debugadcode/i.test(location.search),
           allAds: /allAds/.test(location.search),

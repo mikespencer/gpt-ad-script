@@ -6,7 +6,7 @@
   'use strict';
 
   if(typeof define === 'function'){
-    define('wp', ['generic', 'wp.config', 'utils', 'wp.overrides', 'zoneBuilder'], function(wpAd, config, utils, overrides, zoneBuilder){
+    define(['generic', 'wp/config', 'wp/overrides', 'utils', 'zoneBuilder'], function(wpAd, config, overrides, utils, zoneBuilder){
 
       //override commercialNode on wp
       w.commercialNode = zoneBuilder.exec();
