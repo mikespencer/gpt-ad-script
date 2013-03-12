@@ -4,3 +4,4 @@
 - Hardcodes?
 - Enahnce and cleanup debug
 - Interstitial/out of page slot?
+- !c stuff - figure out all kevyalues

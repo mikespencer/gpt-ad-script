@@ -20,21 +20,26 @@
        * Add ad specific, site specific keyvalues here:
        */
       utils.extend(wpAd.Ad.prototype.keyvaluesConfig, {
-        article: function(){
-          return ['wp_article'];
-        }
+
       });
 
       /**
        * Add global, site specific keyvalues here:
        */
       utils.extend(wpAd.GPTConfig.prototype.keyvaluesConfig, {
-        WPATC: function(){
-          return ['wpatc_cookie'];
+
+        article: function(){
+          return ['wp_article'];
         },
+
         front: function(){
           return ['true'];
+        },
+
+        WPATC: function(){
+          return ['wpatc_cookie'];
         }
+
       });
 
       //commercialNode base:

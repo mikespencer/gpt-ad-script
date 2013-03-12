@@ -47,9 +47,12 @@
 
     if(wpAd.flags.debug){
       wpAd.debugQueue = [];
+
+      //could even potentially pull this out completely, tweak and have as a bookmarklet...
       requirejs(['debug'], function(debug){
         debug.init();
       });
+
     }
 
     //get flights

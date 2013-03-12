@@ -1,5 +1,6 @@
 /**
- *  Debug info for adops
+ * Debug info for adops
+ * For now this will do for basic dubug functionality, but this could do with a major cleanup before launch
  */
 (function(w, d, define){
 
@@ -58,10 +59,26 @@
         keyvalueList: function(ad){
           var list = '<div style="font-weight:bold;">Keyvalues</div>',
             keyvalues = utils.extend(wpAd.gpt_config.keyvalues, ad.keyvalues),
-            key;
+            sortedKeys = [],
+            key, l, i;
 
           for(key in keyvalues){
-            list += '<div><b>- ' + key + ': </b>' + keyvalues[key] + '</div>';
+            if(keyvalues.hasOwnProperty(key)){
+              sortedKeys.push(key);
+            }
+          }
+
+          //sort alphabetically, ignoring case
+          sortedKeys.sort(function(a, b){
+            a = a.toLowerCase();
+            b = b.toLowerCase();
+            return a < b ? -1 : a > b ? 1 : 0;
+          });
+
+          l = sortedKeys.length;
+
+          for(i=0;i<l;i++){
+            list += '<div><b>- ' + sortedKeys[i] + ': </b>' + keyvalues[sortedKeys[i]].toString().replace(/\,/g, ', ') + '</div>';
           }
 
           return list;
