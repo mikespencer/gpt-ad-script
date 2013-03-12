@@ -20,7 +20,7 @@
       baseUrl: 'js/modules',
       paths: {
         'gpt': 'http://www.googletagservices.com/tag/js/gpt',
-        'jquery': 'http://js.washingtonpost.com/wpost/js/combo/?token=20121010232000&c=true&m=true&context=eidos&r=/jquery-1.7.1.js'
+        'jquery': 'http://js.washingtonpost.com/wpost/js/combo/?token=20121010232000&c=true&m=true&context=eidos&r=/jquery-1.7.1'
       },
       shim: {
         'gpt': {
