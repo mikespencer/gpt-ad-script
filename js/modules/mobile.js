@@ -6,7 +6,7 @@
   'use strict';
 
   if(typeof define === 'function'){
-    define('mobile', ['generic.core', 'mobile.config', 'utils.core'], function(wpAd, config, utils){
+    define('mobile', ['generic.core', 'json!mobile.config.json', 'utils.core'], function(wpAd, config, utils){
       
       //set the base node
       wpAd.dfpSite = '/701/mob.wp.';
