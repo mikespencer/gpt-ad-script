@@ -1,4 +1,4 @@
-/*global requirejs, placeAd2:true, placeAd2Queue */
+/*global placeAd2:true, placeAd2Queue */
 
 /**
  * Universal script that does adops initialisation and loads site specific ad script
@@ -6,6 +6,11 @@
 (function(w, d, requirejs, define){
 
   'use strict';
+
+  //no_ads flag test:
+  if(/no_ads/.test(location.search)){
+    return false;
+  }
 
   //potential site specific scripts/modules with attribute mapping 
   var siteMapping = {
@@ -20,11 +25,16 @@
       baseUrl: 'js/modules',
       paths: {
         'gpt': 'http://www.googletagservices.com/tag/js/gpt',
-        'jquery': 'http://js.washingtonpost.com/wpost/js/combo/?token=20121010232000&c=true&m=true&context=eidos&r=/jquery-1.7.1.js'
+        'jquery': 'http://js.washingtonpost.com/wpost/js/combo/?token=20121010232000&c=true&m=true&context=eidos&r=/jquery-1.7.1.js',
+        'jqueryUI': 'http://code.jquery.com/ui/1.10.1/jquery-ui'
       },
       shim: {
         'gpt': {
           exports: 'googletag'
+        },
+        'jqueryUI':{
+          deps: ['jquery'],
+          exports: '$'
         }
       }
     },
@@ -90,8 +100,8 @@
         pos = posArray.join('_');
       }
 
-      //if the ad type is legit and open and hasn't already been build/rendered on the page
-      if(!wpAd.flags.no_ads && (wpAd.flags.allAds || (wpAd.flights && wpAd.flights[pos] || wpAd.flights[what + '*']) && wpAd.config.adTypes[what])){
+      //if the ad type is legit, open and hasn't already been built/rendered on the page
+      if((wpAd.flights && wpAd.flights[pos] || wpAd.flights[what + '*']) && wpAd.config.adTypes[what] || wpAd.flags.allAds){
         if(!wpAd.adsOnPage[pos]){
 
           //build and store our new ad
@@ -125,9 +135,6 @@
         if(wpAd.flags.debug){
           wpAd.debugQueue.push(ad);
         }
-        try{
-          w.console.log('RENDERED AD:\n', ad.config.pos + '\n', ad);
-        }catch(e){}
 
       }
 
@@ -150,9 +157,7 @@
       var l = queue.length,
         i = 0;
       for(i;i<l;i++){
-        console.time('placeAd2');
         placeAd2.apply(window, queue[i]);
-        console.timeEnd('placeAd2');
       }
     }
   }

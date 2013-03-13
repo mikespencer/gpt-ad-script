@@ -7,63 +7,80 @@
   'use strict';
 
   if(typeof define === 'function'){
-    define('debug', ['utils'], function(utils){
+    define('debug', ['utils', 'jqueryUI'], function(utils, $){
 
+      console.log($);
       var debug = {
 
+        cssURL: 'css/debug.css',
+
         init: function(){
-          var l = wpAd.debugQueue.length, i = 0;
+          var l = wpAd.debugQueue.length,
+            i = 0;
+
+          utils.addCSS(debug.cssURL);
+
           for(i;i<l;i++){
             debug.exec.call(this, wpAd.debugQueue[i]);
           }
+
           wpAd.debugQueue = { push: debug.exec };
         },
 
         exec: function(ad){
-          debug.buildDebugBox(ad);
-          /*try{
-            w.console.log('RENDERED AD:\n', ad.config.pos, '\n', ad);
-          }catch(e){}*/
+          var box = debug.buildDebugBox(ad);
+          try{
+            w.console.log('RENDERED AD:\n', ad.config.pos + '\n', ad);
+          }catch(e){}
+
+          $(box).css({
+            position: 'absolute'
+          }).draggable({
+            //opacity: 0.7,
+            stack: 'div.ad-debug-box'
+          });
+        },
+
+        getTemplateId: function(ad){
+          var t = (w.wpAd.flights[ad.config.pos] || wpAd.flights[ad.config.what + '*']);
+          return t ? t.id : 'unknown';
         },
 
         buildDebugBox: function(ad){
           if(ad.container){
             var box = d.createElement('div');
-            box.setAttribute('class', 'debug-box');
-
-            //will probably just end up writing a stylesheet for this mess:
-            box.style.width = '300px';
-            box.style.backgroundColor = '#ffc700';
-            box.style.border = '1px solid #000';
-            box.style.color = '#000';
-            box.style.fontFamily = 'sans-serif';
-            box.style.fontSize = '12px';
-            box.style.position = 'absolute';
-            box.style.textAlign = 'left';
-            box.style.top = '0';
-            box.style.zIndex = '9999999999';
-            box.style.padding = '10px';
-            box.style.lineHeight = '20px';
-            box.style.boxShadow = '0 0 10px 0px #333';
-
+            box.setAttribute('class', 'ad-debug-box');
             box.innerHTML = debug.content(ad);
             ad.container.style.position = 'relative';
             ad.container.insertBefore(box, ad.container.firstChild);
+            return box;
           }
         },
 
+        title: function(ad){
+          return '<div class="ad-debug-section">' +
+            '<div class="ad-debug-bold large">' + ad.config.pos + '</div>' +
+            '<div>Template: ' + debug.getTemplateId(ad) + '</div>' +
+          '</div>';
+        },
+
         where: function(ad){
-          return '<b>Where:</b><br />' + ad.fullGPTSite + '<br /><br />';
+          return '<div class="ad-debug-section">' +
+            '<div class="ad-debug-bold">Where:</div>' +
+            '<div>' + ad.fullGPTSite + '</div>' +
+          '</div>';
         },
 
         keyvalueList: function(ad){
-          var list = '<div style="font-weight:bold;">Keyvalues</div>',
+          var list = '<div class="ad-debug-section">' +
+              '<div class="ad-debug-bold">Keyvalues: </div>' +
+                '<ul>',
             keyvalues = utils.extend(wpAd.gpt_config.keyvalues, ad.keyvalues),
             sortedKeys = [],
             key, l, i;
 
           for(key in keyvalues){
-            if(keyvalues.hasOwnProperty(key)){
+            if(keyvalues.hasOwnProperty(key) && keyvalues[key].length){
               sortedKeys.push(key);
             }
           }
@@ -78,14 +95,14 @@
           l = sortedKeys.length;
 
           for(i=0;i<l;i++){
-            list += '<div><b>- ' + sortedKeys[i] + ': </b>' + keyvalues[sortedKeys[i]].toString().replace(/\,/g, ', ') + '</div>';
+            list += '<li><span class="ad-debug-bold">' + sortedKeys[i] + ': </span>' + keyvalues[sortedKeys[i]].toString().replace(/\,/g, ', ') + '</li>';
           }
 
-          return list;
+          return list + '</ul></div>';
         },
 
         content: function(ad){
-          return debug.where(ad) + debug.keyvalueList(ad);
+          return debug.title(ad) + debug.where(ad) + debug.keyvalueList(ad);
         }
 
       };

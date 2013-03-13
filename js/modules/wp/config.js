@@ -24,7 +24,7 @@
               '200x50',
               '150x60',
               '285x29',
-              'bigbox',
+              'bigbox*',
               'bigbox_vi',
               'inline_bb',
               'itb',

@@ -28,8 +28,7 @@
         //platform/site universal flags
         flags: {
           debug: /debugadcode/i.test(location.search),
-          allAds: /allAds/.test(location.search),
-          no_ads: /no_ads/.test(location.search)
+          allAds: /allAds/.test(location.search)
         }
       };
 
