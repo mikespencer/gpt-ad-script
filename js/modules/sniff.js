@@ -32,6 +32,22 @@
                         return false;
                     }
                 },
+                flashVersion: function() {
+                    var i, a, o, p, s = "Shockwave",
+                        f = "Flash",
+                        t = " 2.0",
+                        u = s + " " + f,
+                        v = s + f + ".",
+                        rSW = new RegExp("^" + u + " (\\d+)");
+                    if ((o = navigator.plugins) && (p = o[u] || o[u + t]) && (a = p.description.match(rSW))) return Number(a[1]);
+                    else if ( !! (w.ActiveXObject)) for (i = 10; i > 0; i--) try {
+                        if ( !! (new ActiveXObject(v + v + i))) return Number(i);
+                    } catch (e) {}
+                    return 0;
+                },
+                hasFlash: function() {
+                    return !!sniff.flashVersion();
+                },
                 hasOSVersion: function() {
                     auaindex = ua.indexOf( 'Android ' );
                     iuaindex = ua.indexOf( 'OS ' );
