@@ -5,7 +5,7 @@
     if (typeof define === "function") {
 
         /**
-         * Set of functions that return various pieces ofdevice info
+         * Set of functions that return various pieces of device info
          * @class sniff
          */
         define(function() {
@@ -13,14 +13,8 @@
             var iuaindex, auaindex, ual, ua = n.userAgent;
 
             var sniff = {
-
-                isApple: function() {
-                     return ua.match(/iPad|iPhone|iPod/g) ? true : false;
-                },
-                isAndroid: function() {
-                    ual = ua.toLowerCase();
-                    return ual.match(/android/g) ? true : false;
-                },
+                isApple: ua.match(/iPad|iPhone|iPod/g) ? true : false,
+                isAndroid: ua.toLowerCase().match(/android/g) ? true : false,
                 iDeviceType: function() {
                     if (ua.match(/iPad/g)) {
                         return "iPad";
@@ -39,7 +33,7 @@
                         u = s + " " + f,
                         v = s + f + ".",
                         rSW = new RegExp("^" + u + " (\\d+)");
-                    if ((o = navigator.plugins) && (p = o[u] || o[u + t]) && (a = p.description.match(rSW))) return Number(a[1]);
+                    if ((o = n.plugins) && (p = o[u] || o[u + t]) && (a = p.description.match(rSW))) return Number(a[1]);
                     else if ( !! (w.ActiveXObject)) for (i = 10; i > 0; i--) try {
                         if ( !! (new ActiveXObject(v + v + i))) return Number(i);
                     } catch (e) {}
@@ -58,6 +52,11 @@
                     } else {
                         return false;
                     }
+                },
+                deviceDisplay: {
+                    height: screen.height,
+                    width: screen.width,
+                    isRetina: !!(window.devicePixelRatio > 1)
                 }
             };
             return sniff;
