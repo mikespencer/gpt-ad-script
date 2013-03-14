@@ -6,7 +6,8 @@
   'use strict';
 
   if(typeof define === 'function'){
-    define(['generic', 'wp/config', 'wp/overrides', 'utils', 'zoneBuilder'], function(wpAd, config, overrides, utils, zoneBuilder){
+    define(['generic', 'wp/config', 'wp/overrides', 'utils', 'zoneBuilder', 'templateBuilder'],
+    function(wpAd, config, overrides, utils, zoneBuilder, templateBuilder){
 
       //override commercialNode on wp
       w.commercialNode = zoneBuilder.exec();
@@ -28,16 +29,15 @@
        */
       utils.extend(wpAd.GPTConfig.prototype.keyvaluesConfig, {
 
-        article: function(){
-          return ['wp_article'];
-        },
-
         front: function(){
-          return ['true'];
+          if(!wpAd.wp_meta_data.contentType){
+            return ['n'];
+          }
+          return wpAd.wp_meta_data.contentType.toString().toLowerCase() === 'front' ? ['y'] : ['n'];
         },
 
         WPATC: function(){
-          return ['wpatc_cookie'];
+          return [false];
         }
 
       });
@@ -48,16 +48,14 @@
       //pass in config:
       wpAd.config = config;
 
+      //determine open spots:
+      wpAd.flights = templateBuilder.exec(config.flights);
+
       //pass in site specific overrides:
       wpAd.overrides = overrides;
 
       //expose helper functions:
       wpAd.utils = utils;
-
-      //testing
-      wpAd.init.push(function(){
-        try{w.console.log('loaded and initialising');}catch(e){}
-      });
 
       return wpAd;
     });

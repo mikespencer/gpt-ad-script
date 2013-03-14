@@ -1,5 +1,5 @@
 /**
- *  Template of ad flights and available ad spots on washingtonpost.com (desktop)
+ * Template of ad flights and available ad spots on washingtonpost.com (desktop)
  */
 (function(w, d, define){
 

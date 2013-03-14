@@ -47,10 +47,12 @@
         },
 
         keyvaluesConfig: {
+
           kw: function(){
             var param = utils.urlCheck('test_ads', { type: 'variable' });
             return param ? ['test_' + param] : false;
           },
+
           poe: function(){
             var name = w.location.hostname + '_poe';
             if(utils.getCookie(name)){
@@ -60,6 +62,7 @@
               return ['yes'];
             }
           }
+
         }
       };
 

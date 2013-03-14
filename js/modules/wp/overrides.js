@@ -17,7 +17,8 @@
         pos: {
           //if 'pos' of the ad === leaderboard..
           'leaderboard$': function(){
-            this.keyvalues['lb_test_kv'] = ['true'];
+            this.keyvalues.lb_test_kv = [];
+            this.keyvalues.lb_test_kv.push('true');
             this.keyvalues.pos.push('ad1');
           }
         },

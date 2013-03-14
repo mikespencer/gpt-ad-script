@@ -21,7 +21,9 @@
           'posOverride': false
         }, config, true);
 
-        this.keyvalues = this.buildKeyvalues();
+        if(!config.hardcode){
+          this.keyvalues = this.buildKeyvalues();
+        }
       }
 
       Ad.prototype = {
@@ -78,6 +80,16 @@
           return this;
         },
 
+        slugDisplay: function(){
+          var display = arguments[0] ? 'block' : 'none';
+          if(this.config.slug){
+            this.config.slug.style.display = display;
+          }
+          if(this.config.wpni_adi){
+            this.config.wpni_adi.style.display = display;
+          }
+        },
+
         render: function(){
           if(!this.slot){
 
@@ -87,12 +99,7 @@
 
             this.addKeyvalue(this.keyvalues);
 
-            if(this.config.slug){
-              this.config.slug.style.display = 'block';
-            }
-            if(this.config.wpni_adi){
-              this.config.wpni_adi.style.display = 'block';
-            }
+            this.slugDisplay(true);
 
             googletag.display(this.container.id);
 

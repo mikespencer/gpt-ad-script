@@ -17,6 +17,13 @@
       //expose config
       wpAd.config = config;
 
+      //hardcoded template for mobile:
+      wpAd.flights = {
+        t: {
+          id: 'default'
+        }
+      };
+
       return wpAd;
     });
   }

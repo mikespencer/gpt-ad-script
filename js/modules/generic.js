@@ -16,7 +16,14 @@
       utils.extend(wpAd.GPTConfig.prototype.keyvaluesConfig, {
 
         page_id: function(){
-          return wpAd.wp_meta_data.page_id || false;
+          if(!wpAd.wp_meta_data.page_id){
+            return false;
+          }
+          var l = wpAd.wp_meta_data.page_id.length;
+          while(l--){
+            wpAd.wp_meta_data.page_id[l] = wpAd.wp_meta_data.page_id[l].replace(/\./g, '_');
+          }
+          return wpAd.wp_meta_data.page_id;
         },
 
         rs: function(){

@@ -1,6 +1,18 @@
-.ad-debug-box
+@mixin transition($args...)
+  -moz-transition: $args
+  -webkit-transition: $args
+  -o-transition: $args
+  transition: $args
+
+@mixin shadow($a, $b, $c, $d, $e)
+  -moz-box-shadow: $a $b $c $d $e
+  -webkit-box-shadow: $a $b $c $d $e
+  -o-box-shadow: $a $b $c $d $e
+  box-shadow: $a $b $c $d $e
+
+body .ad-debug-box
   width: 300px
-  background-color: #ffc700
+  background-color: #fa0
   border: 1px solid #000
   color: #000
   font-family: sans-serif
@@ -8,11 +20,12 @@
   position: absolute
   text-align: left
   top: 0
-  line-height: 20px
-  box-shadow: 0 0 10px 0 #333
-  z-index: 999999999
   cursor: move
-  opacity: 0.92
+  line-height: 20px
+  z-index: 999999999
+  opacity: 0.95
+  @include shadow(0, 0, 10px, 2px, #333)
+  @include transition(box-shadow 0.2s)
 
   .ad-debug-bold
     font-weight: bold
@@ -21,7 +34,7 @@
     margin: 10px
 
   .large
-    font-size: 16px
+    font-size: 16px    
 
   ul, li
     margin: 0
@@ -29,4 +42,7 @@
     list-style: square
     float: none
   ul
-    padding-left: 15px
+    padding-left: 16px
+
+body .ad-debug-box.dragging
+  @include shadow(0, 0, 16px, 4px, #333)

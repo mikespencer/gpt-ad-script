@@ -1,5 +1,5 @@
 /**
- * Extended set of helper functions for ads
+ * @fileoverview Extended set of helper functions for ads.
  */
 (function(w, d, define){
 
@@ -8,10 +8,14 @@
   define('utils', ['utils.core'], function(utils){
 
     /**
-     * extend basic utils object with advanced functionality
+     * extends basic utils object with more advanced functionality.
      */
     utils = utils.extend(utils, {
 
+      /**
+       * Appends a css stylesheet to the <head>.
+       * @param {String} url A URL to the CSS file.
+       */
       addCSS: function (url) {
         var l = d.createElement('link');
         l.href = url;
@@ -20,6 +24,10 @@
         d.getElementsByTagName('head')[0].appendChild(l);
       },
 
+      /**
+       * Appends a tracking pixel to the <body>.
+       * @param {String} url A URL to the tracking pixel.
+       */
       addPixel: function (url) {
         var i = d.createElement('img');
         i.src = url.replace(/\[timestamp\]|%n|\[random\]/gi, Math.floor(Math.random() * 1E9));
@@ -31,6 +39,11 @@
         d.body.appendChild(i);
       },
 
+      /**
+       * Creates a duplicate Object independent of the original.
+       * @param {Object} obj Object to be cloned.
+       * @return {Object} Cloned Object.
+       */
       clone: function (obj) {
         if(!utils.isObject(obj)) {
           return obj;
@@ -45,6 +58,10 @@
         return temp;
       },
 
+      /**
+       * Detects and returns the version of Flash Player installed.
+       * @return {Number} Version of Flash Player, or 0 if no Flash Player.
+       */
       flashver: function(){
         var i,a,o,p,s="Shockwave",f="Flash",t=" 2.0",u=s+" "+f,v=s+f+".",rSW=new RegExp("^"+u+" (\\d+)");
         if((o=navigator.plugins)&&(p=o[u]||o[u+t])&&(a=p.description.match(rSW)))return a[1];
@@ -52,19 +69,24 @@
         return 0;
       },
 
-      getScript: function(src) {
+      /**
+       * Asynchronously append a JavaScript File to the <head>, with optional onload callback.
+       * @param {String|Object} url URL to the JavaScript file to be loaded.
+       * @param {Function} opt_callback Callback function to execute once the script has loaded.
+       */
+      getScript: function(src, opt_callback) {
         var s = d.createElement('script'),
-          target = d.body || d.getElementsByTagName('head')[0] || false,
-          callback = arguments[1] || false;
+          target = d.body || d.getElementsByTagName('head')[0] || false;
+        opt_callback = opt_callback || false;
         if(target){
           s.type = 'text/' + (src.type || 'javascript');
           s.src = src.src || src;
-          if(typeof callback === 'function'){
+          if(typeof opt_callback === 'function'){
             s.onreadystatechange = s.onload = function() {
               var state = s.readyState;
-              if (!callback.done && (!state || /loaded|complete/.test(state))) {
-                callback.done = true;
-                callback();
+              if (!opt_callback.done && (!state || /loaded|complete/.test(state))) {
+                opt_callback.done = true;
+                opt_callback();
               }
             };
           }
@@ -72,6 +94,11 @@
         }
       },
 
+      /**
+       * Builds and returns a DOM iframe element.
+       * @param {Object} atts Attribute mapping for the iframe that will overwrite defaults.
+       * @return {Element} The constructed iframe DOM element.
+       */
       iframeBuilder: function (atts) {
         var i = d.createElement('iframe'),
           key;

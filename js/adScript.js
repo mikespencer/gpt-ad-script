@@ -65,20 +65,6 @@
 
     }
 
-    //get flights
-    wpAd.flights = wpAd.templateBuilder.exec(wpAd.config.flights);
-
-    //call any queued up functions
-    if(wpAd.init && typeof wpAd.init === 'object'){
-      var len = wpAd.init.length,
-        i = 0;
-      for(i;i<len;i++){
-        if(typeof wpAd.init[i] === 'function'){
-          wpAd.init[i]();
-        }
-      }
-    }
-
     //initialise GPT
     wpAd.gpt_config = new wpAd.GPTConfig({
       googletag: w.googletag,
@@ -113,7 +99,7 @@
             what: what,
             pos: pos,
             posOverride: posOverride,
-            hardcode: wpAd.flights[pos] && wpAd.flights[pos].hardcode
+            hardcode: wpAd.flights[pos] && wpAd.flights[pos].hardcode || false
           });
 
           //overrides (the new hackbin)
@@ -133,7 +119,7 @@
         }
 
         if(wpAd.flags.debug){
-          wpAd.debugQueue.push(ad);
+          wpAd.debugQueue.push(wpAd.adsOnPage[pos]);
         }
 
       }

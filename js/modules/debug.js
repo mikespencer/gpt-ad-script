@@ -9,7 +9,6 @@
   if(typeof define === 'function'){
     define('debug', ['utils', 'jqueryUI'], function(utils, $){
 
-      console.log($);
       var debug = {
 
         cssURL: 'css/debug.css',
@@ -23,22 +22,36 @@
           for(i;i<l;i++){
             debug.exec.call(this, wpAd.debugQueue[i]);
           }
-
           wpAd.debugQueue = { push: debug.exec };
         },
 
         exec: function(ad){
-          var box = debug.buildDebugBox(ad);
-          try{
-            w.console.log('RENDERED AD:\n', ad.config.pos + '\n', ad);
-          }catch(e){}
+          if(ad.container){
+            var box = debug.buildDebugBox(ad);
 
-          $(box).css({
-            position: 'absolute'
-          }).draggable({
-            //opacity: 0.7,
-            stack: 'div.ad-debug-box'
-          });
+            try{
+              //w.console.log('RENDERED AD:\n', ad.config.pos + '\n', ad);
+            }catch(e){}
+
+            $(box).css({
+              position: 'absolute',
+              top: $(ad.container).offset().top + 'px',
+              left: $(ad.container).offset().left + 'px'
+            }).draggable({
+              stack: 'div.ad-debug-box',
+              start: function(){
+                $(this).addClass('dragging');
+              },
+              stop: function(){
+                $(this).removeClass('dragging');
+              }
+            });
+
+          } else {
+            try{
+              w.console.log('Could not find container for', ad.config.pos);
+            }catch(e){}
+          }
         },
 
         getTemplateId: function(ad){
@@ -47,20 +60,27 @@
         },
 
         buildDebugBox: function(ad){
-          if(ad.container){
-            var box = d.createElement('div');
-            box.setAttribute('class', 'ad-debug-box');
-            box.innerHTML = debug.content(ad);
-            ad.container.style.position = 'relative';
-            ad.container.insertBefore(box, ad.container.firstChild);
-            return box;
-          }
+          return $(d.createElement('div')).addClass('ad-debug-box').html(debug.content(ad)).prependTo('body')[0];
         },
 
         title: function(ad){
           return '<div class="ad-debug-section">' +
             '<div class="ad-debug-bold large">' + ad.config.pos + '</div>' +
             '<div>Template: ' + debug.getTemplateId(ad) + '</div>' +
+          '</div>';
+        },
+
+        sizes: function(ad){
+          var sizes = '',
+            l = ad.config.size.length,
+            i = 0;
+          for(i;i<l;i++){
+            sizes += '<li>' + ad.config.size[i].join('x') + '</li>';
+          }
+
+          return '<div class="ad-debug-section">' +
+            '<div class="ad-debug-bold">Sizes:</div>' +
+            '<ul>' + sizes + '</ul>' +
           '</div>';
         },
 
@@ -75,7 +95,9 @@
           var list = '<div class="ad-debug-section">' +
               '<div class="ad-debug-bold">Keyvalues: </div>' +
                 '<ul>',
-            keyvalues = utils.extend(wpAd.gpt_config.keyvalues, ad.keyvalues),
+
+            //important to use "utils.clone", as "utils.extend" will permanently overwrite first arg
+            keyvalues = utils.extend(utils.clone(wpAd.gpt_config.keyvalues), ad.keyvalues),
             sortedKeys = [],
             key, l, i;
 
@@ -102,7 +124,7 @@
         },
 
         content: function(ad){
-          return debug.title(ad) + debug.where(ad) + debug.keyvalueList(ad);
+          return debug.title(ad) + debug.where(ad) + debug.sizes(ad) + debug.keyvalueList(ad);
         }
 
       };
