@@ -6,7 +6,7 @@
   'use strict';
 
   if(typeof define === 'function'){
-    define('overrides.core', function(){
+    define(function(){
 
       var overrides = {
 

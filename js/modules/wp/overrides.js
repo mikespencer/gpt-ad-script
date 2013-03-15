@@ -24,7 +24,7 @@
         },
         where: {
           '^politics$': function(){
-            //this.config.where += '/front';
+            this.config.where += '/front';
           }
         }
       };

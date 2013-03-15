@@ -7,7 +7,7 @@
   'use strict';
 
   if(typeof define === 'function'){
-    define('debug', ['utils', 'jqueryUI'], function(utils, $){
+    define(['utils', 'jqueryUI'], function(utils, $){
 
       var debug = {
 
@@ -30,7 +30,7 @@
             var box = debug.buildDebugBox(ad);
 
             try{
-              //w.console.log('RENDERED AD:\n', ad.config.pos + '\n', ad);
+              w.console.log('RENDERED AD:\n', ad.config.pos + '\n', ad);
             }catch(e){}
 
             $(box).css({
@@ -97,7 +97,7 @@
                 '<ul>',
 
             //important to use "utils.clone", as "utils.extend" will permanently overwrite first arg
-            keyvalues = utils.extend(utils.clone(wpAd.gpt_config.keyvalues), ad.keyvalues),
+            keyvalues = utils.extend(utils.clone(wpAd.gptConfig.keyvalues), ad.keyvalues),
             sortedKeys = [],
             key, l, i;
 

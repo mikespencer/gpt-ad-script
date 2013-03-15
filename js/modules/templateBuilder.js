@@ -6,19 +6,25 @@
   'use strict';
 
   if(typeof define === 'function'){
-    define('templateBuilder', ['utils.core'], function(utils){
+    define(['utils.core'], function(utils){
 
       var templateBuilder = {
 
+        demoAds: utils.urlCheck('demoAds', {type: 'variable'}),
+
         exec: function(json){
-          templateBuilder.template = {};
-          for(var key in json){
-            if(json.hasOwnProperty(key)){
-              json[key].id = key;
-              if(templateBuilder.checkFlight(json[key])){
-                templateBuilder.addToTemplate(json[key]);
+          if(!templateBuilder.demoAds){
+            templateBuilder.template = {};
+            for(var key in json){
+              if(json.hasOwnProperty(key)){
+                json[key].id = key;
+                if(templateBuilder.checkFlight(json[key])){
+                  templateBuilder.addToTemplate(json[key]);
+                }
               }
             }
+          } else {
+            templateBuilder.template = templateBuilder.demoAdsTemplate(templateBuilder.demoAds);
           }
           return templateBuilder.template;
         },
@@ -64,6 +70,35 @@
               }
             }
           }
+        },
+
+        demoAdsTemplate: function(adStr){
+          var ads = adStr.split(';'),
+            l = ads.length,
+            rv = {};
+          while(l--){
+            ads[l] = templateBuilder.posConverter(ads[l]);
+            rv[ads[l]] = { id: 'demoAds' };
+          }
+          return rv;
+        },
+
+        posConverter: function(pos){
+          var convert = {
+            'ad1': 'leaderboard',
+            'ad2': 'leaderboard_2',
+            'ad3': 'skyscraper',
+            'ad6': 'flex_ss_bb_hp',
+            'ad7': 'featurebar',
+            'ad14': 'tiffany_tile',
+            'ad16': 'flex_bb_hp',
+            'ad19': '336x35',
+            'ad20': 'bigbox',
+            'ad43': 'pushdown',
+            'ad44': 'extra_bb',
+            'ad45': 'deal'
+          };
+          return convert.hasOwnProperty(pos) ? convert[pos] : pos;
         },
 
         //true/false checks:

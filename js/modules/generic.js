@@ -6,14 +6,18 @@
   'use strict';
 
   if(typeof define === 'function'){
-    define('generic', ['generic.core', 'utils'], function(wpAd, utils){
+    define(['generic.core', 'utils'], function(wpAd, utils){
 
       wpAd.wp_meta_data = w.wp_meta_data || {};
+
+      wpAd.flags = utils.extend(wpAd.flags, {
+        //demoAds: utils.urlCheck('demoAds', {type: 'variable'})
+      });
 
       /**
        * Extend universal desktop page wide keyvalues
        */
-      utils.extend(wpAd.GPTConfig.prototype.keyvaluesConfig, {
+      utils.extend(wpAd.gptConfig.keyvaluesConfig, {
 
         page_id: function(){
           if(!wpAd.wp_meta_data.page_id){

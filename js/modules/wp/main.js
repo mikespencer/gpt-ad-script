@@ -17,17 +17,13 @@
         reload: (utils.urlCheck('reload', { type: 'variable' }) === 'true')
       });
 
-      /**
-       * Add ad specific, site specific keyvalues here:
-       */
+      //Add ad specific, site specific keyvalues here:
       utils.extend(wpAd.Ad.prototype.keyvaluesConfig, {
 
       });
 
-      /**
-       * Add global, site specific keyvalues here:
-       */
-      utils.extend(wpAd.GPTConfig.prototype.keyvaluesConfig, {
+      //Add global, site specific keyvalues here:
+      utils.extend(wpAd.gptConfig.keyvaluesConfig, {
 
         front: function(){
           if(!wpAd.wp_meta_data.contentType){

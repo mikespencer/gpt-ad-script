@@ -66,7 +66,7 @@
     };
 
   if(typeof w.define === 'function'){
-    w.define('zoneBuilder', function(){
+    w.define(function(){
       return zoneBuilder;
     });
   }

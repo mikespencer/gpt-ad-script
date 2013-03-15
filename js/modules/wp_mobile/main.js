@@ -17,7 +17,7 @@
       //expose config
       wpAd.config = config;
 
-      //hardcoded template for mobile:
+      //hardcoded template for mobile - no need for templateBuilder at this point:
       wpAd.flights = {
         t: {
           id: 'default'

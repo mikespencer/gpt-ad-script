@@ -7,15 +7,14 @@
   'use strict';
 
   if(typeof define === 'function'){
-    define(['Ad', 'GPTConfig', 'templateBuilder'], function(Ad, GPTConfig, templateBuilder){
+    define(['Ad', 'gptConfig', 'templateBuilder'], function(Ad, gptConfig, templateBuilder){
 
       return {
 
         //Ad builder
         Ad: Ad,
-
         //Initial GPT setup
-        GPTConfig: GPTConfig,
+        gptConfig: gptConfig,
 
         //stores all ads on the page here
         adsOnPage: {},

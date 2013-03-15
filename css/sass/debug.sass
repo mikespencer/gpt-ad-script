@@ -4,6 +4,12 @@
   -o-transition: $args
   transition: $args
 
+@mixin transform($args...)
+  -moz-transform: $args
+  -webkit-transform: $args
+  -o-transform: $args
+  transform: $args
+
 @mixin shadow($a, $b, $c, $d, $e)
   -moz-box-shadow: $a $b $c $d $e
   -webkit-box-shadow: $a $b $c $d $e
@@ -24,7 +30,7 @@ body .ad-debug-box
   line-height: 20px
   z-index: 999999999
   opacity: 0.95
-  @include shadow(0, 0, 10px, 2px, #333)
+  @include shadow(0, 0, 7px, 1px, #333)
   @include transition(box-shadow 0.2s)
 
   .ad-debug-bold
@@ -45,4 +51,5 @@ body .ad-debug-box
     padding-left: 16px
 
 body .ad-debug-box.dragging
-  @include shadow(0, 0, 16px, 4px, #333)
+  @include shadow(0, 0, 14px, 3px, #333)
+  @include transform(scale(1.03, 1.03))

@@ -1,5 +1,5 @@
 /**
- * GPT Initial setup
+ * this Initial setup
  */
 (function(w, d, define){
 
@@ -7,42 +7,29 @@
 
   if(typeof define === 'function'){
 
-    define('GPTConfig', ['utils.core'], function(utils){
+    define(['utils.core'], function(utils){
 
-      function GPTConfig(config){
-        this.config = utils.extend({
-          googletag: w.googletag
-        }, config);
+      return {
 
-        this.googletag = this.config.googletag;
-        this.pubservice = this.googletag.pubads();
+        init: function(config){
+          this.config = utils.extend({
+            googletag: w.googletag
+          }, config);
 
-        this.keyvalues = utils.keyvalueIterator(this.keyvaluesConfig, this);
-        this.addKeyvalue(this.keyvalues);
+          this.googletag = this.config.googletag;
+          this.pubservice = this.googletag.pubads();
 
-        if(this.config.sra){
-          this.pubservice.enableSingleRequest();
-        } else {
-          this.pubservice.enableAsyncRendering();
-        }
+          this.keyvalues = utils.keyvalueIterator(this.keyvaluesConfig, this);
+          utils.addKeyvalues(this.keyvalues, this.pubservice);
 
-        this.googletag.enableServices();
-      }
-
-      GPTConfig.prototype = {
-        constructor: GPTConfig,
-
-        addKeyvalue: function(){
-          if(typeof arguments[0] === 'object'){
-            var map = arguments[0], key;
-            for(key in map){
-              if(map.hasOwnProperty(key)){
-                this.pubservice.setTargeting(key, (typeof map[key] === 'object' ? map[key] : [map[key]]));
-              }
-            }
-          } else if(arguments.length === 2){
-            this.pubservice.setTargeting(arguments[0], (typeof arguments[1] === 'object' ? arguments[1] : [arguments[1]]));
+          if(this.config.sra){
+            this.pubservice.enableSingleRequest();
+          } else {
+            this.pubservice.enableAsyncRendering();
           }
+
+          this.googletag.enableServices();
+
           return this;
         },
 
@@ -64,9 +51,8 @@
           }
 
         }
-      };
 
-      return GPTConfig;
+      };
 
     });
   }

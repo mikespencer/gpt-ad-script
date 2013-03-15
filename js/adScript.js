@@ -24,7 +24,7 @@
     dev_config = {
       baseUrl: 'js/modules',
       paths: {
-        'gpt': 'http://www.googletagservices.com/tag/js/gpt',
+        'googletag': 'http://www.googletagservices.com/tag/js/gpt',
         'jquery': 'http://js.washingtonpost.com/wpost/js/combo/?token=20121010232000&c=true&m=true&context=eidos&r=/jquery-1.7.1.js',
         'jqueryUI': 'http://code.jquery.com/ui/1.10.1/jquery-ui'
       },
@@ -53,7 +53,7 @@
   requirejs.config(dev_config);
 
   //load dependencies:
-  requirejs([siteScript, 'gpt'], function (wpAd, googletag){
+  requirejs([siteScript, 'googletag'], function (wpAd, googletag){
 
     if(wpAd.flags.debug){
       wpAd.debugQueue = [];
@@ -66,7 +66,7 @@
     }
 
     //initialise GPT
-    wpAd.gpt_config = new wpAd.GPTConfig({
+    wpAd.gptConfig = wpAd.gptConfig.init({
       googletag: w.googletag,
       sra: false
     });

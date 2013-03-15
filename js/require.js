@@ -34,9 +34,10 @@ D=document.getElementsByTagName("base")[0]))B=w.head=D.parentNode;l.onError=func
 [s],!0});define=function(b,c,d){var i,g;"string"!==typeof b&&(d=c,c=b,b=null);J(c)||(d=c,c=[]);!c.length&&I(d)&&d.length&&(d.toString().replace(ia,"").replace(ja,function(b,d){c.push(d)}),c=(1===d.length?["require"]:["require","exports","module"]).concat(c));if(O){if(!(i=K))P&&"interactive"===P.readyState||M(document.getElementsByTagName("script"),function(b){if("interactive"===b.readyState)return P=b}),i=P;i&&(b||(b=i.getAttribute("data-requiremodule")),g=C[i.getAttribute("data-requirecontext")])}(g?
 g.defQueue:R).push([b,c,d])};define.amd={jQuery:!0};l.exec=function(b){return eval(b)};l(q)}})(this);
 
+
 /**
-  * AdOps config:
-  */
+ * AdOps config
+ */
 var googletag = googletag || {},
 
   //store placeAd2 calls if 'real' placeAd2 isn't defined yet

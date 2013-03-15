@@ -5,7 +5,7 @@
 
   'use strict';
 
-  define('utils', ['utils.core'], function(utils){
+  define(['utils.core'], function(utils){
 
     /**
      * extends basic utils object with more advanced functionality.

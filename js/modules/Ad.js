@@ -9,7 +9,7 @@
 
   if(typeof define === 'function'){
 
-    define('Ad', ['utils.core'], function(utils){
+    define(['utils.core'], function(utils){
 
       function Ad(config){
         this.config = utils.extend({
@@ -66,20 +66,6 @@
           return this.slot;
         },
 
-        addKeyvalue: function(){
-          if(typeof arguments[0] === 'object'){
-            var map = arguments[0], key;
-            for(key in map){
-              if(map.hasOwnProperty(key)){
-                this.slot.setTargeting(key, (typeof map[key] === 'object' ? map[key] : [map[key]]));
-              }
-            }
-          } else if(arguments.length === 2){
-            this.slot.setTargeting(arguments[0], (typeof arguments[1] === 'object' ? arguments[1] : [arguments[1]]));
-          }
-          return this;
-        },
-
         slugDisplay: function(){
           var display = arguments[0] ? 'block' : 'none';
           if(this.config.slug){
@@ -92,17 +78,16 @@
 
         render: function(){
           if(!this.slot){
-
             this.getSlug();
             this.container = this.getContainer();
-            this.slot = this.buildGPTSlot();
-
-            this.addKeyvalue(this.keyvalues);
-
             this.slugDisplay(true);
-
-            googletag.display(this.container.id);
-
+            if(!this.config.hardcode){
+              this.slot = this.buildGPTSlot();
+              utils.addKeyvalues(this.keyvalues, this.slot);
+              googletag.display(this.container.id);
+            } else {
+              this.container.innerHTML = this.config.hardcode;
+            }
           } else {
             this.refresh();
           }

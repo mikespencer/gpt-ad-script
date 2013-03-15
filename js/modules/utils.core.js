@@ -9,6 +9,20 @@
    * Helper functions for core functionality (can be extended in utils module).
    */
   var utils = {
+
+    /**
+     * Assigns keyvalues to a the gpt publisher service, or a gpt ad slot
+     * @param {Object} map Key/Value mapping
+     * @param {Object} target GPT publisher service, or GPT ad slot
+     */
+    addKeyvalues: function(map, target){
+      for(var key in map){
+        if(map.hasOwnProperty(key)){
+          target.setTargeting(key, utils.isArray(map[key]) ? map[key] : [map[key]]);
+        }
+      }
+    },
+
     /**
      * estNowWithYear for determining ad flights.
      * @type {String}.
@@ -149,7 +163,7 @@
   };
 
   if(typeof define === 'function'){
-    define('utils.core', function(){
+    define(function(){
       return utils;
     });
   }
