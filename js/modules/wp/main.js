@@ -6,8 +6,8 @@
   'use strict';
 
   if(typeof define === 'function'){
-    define(['generic.desktop', 'wp/config', 'wp/pageKeyvalues', 'wp/adKeyvalues', 'wp/overrides', 'utils', 'zoneBuilder', 'templateBuilder'],
-    function(wpAd, config, pageKeyvalues, adKeyvalues, overrides, utils, zoneBuilder, templateBuilder){
+    define(['generic.desktop', 'wp/config', 'wp/keyvalues', 'wp/overrides', 'utils', 'zoneBuilder', 'templateBuilder'],
+    function(wpAd, config, kvs, overrides, utils, zoneBuilder, templateBuilder){
 
       //override commercialNode on wp
       w.commercialNode = zoneBuilder.exec();
@@ -18,10 +18,12 @@
       });
 
       //Extend ad specific keyvalues here:
-      utils.extend(wpAd.Ad.prototype.keyvaluesConfig, adKeyvalues);
+      utils.extend(wpAd.Ad.prototype.keyvaluesConfig, {
+
+      });
 
       //add page specific keyvalues
-      utils.extend(wpAd.gptConfig.keyvaluesConfig, pageKeyvalues);
+      utils.extend(wpAd.gptConfig.keyvaluesConfig, kvs);
 
       //commercialNode base:
       wpAd.dfpSite = '/701/wpni.';

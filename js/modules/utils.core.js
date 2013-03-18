@@ -123,7 +123,7 @@
           if(val){
             //lets always make this an array, so that we can push to it later if necessary (overrides)
             val = utils.isArray(val) ? val : [val];
-            if(val[0]){
+            if(val[0] !== false){
               rv[key] = val;
             }
           }

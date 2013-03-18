@@ -5,8 +5,8 @@
 
   'use strict';
 
-  define(['generic.core', 'wp_mobile/config', 'utils.core', 'wp_mobile/pageKeyvalues', 'wp_mobile/adKeyvalues'],
-  function(wpAd, config, utils, pageKeyvalues, adKeyvalues){
+  define(['generic.core', 'wp_mobile/config', 'utils.core', 'wp_mobile/keyvalues'],
+  function(wpAd, config, utils, kvs){
 
     //set the base node
     wpAd.dfpSite = '/701/mob.wp.';
@@ -15,10 +15,12 @@
     wpAd.utils = utils;
 
     //add page specific keyvalues
-    utils.extend(wpAd.gptConfig.keyvaluesConfig, pageKeyvalues);
+    utils.extend(wpAd.gptConfig.keyvaluesConfig, kvs);
 
     //Extend ad specific keyvalues here:
-    utils.extend(wpAd.Ad.prototype.keyvaluesConfig, adKeyvalues);
+    utils.extend(wpAd.Ad.prototype.keyvaluesConfig, {
+
+    });
 
     //expose config
     wpAd.config = config;
