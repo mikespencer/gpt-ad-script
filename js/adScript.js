@@ -26,7 +26,8 @@
       paths: {
         'googletag': 'http://www.googletagservices.com/tag/js/gpt',
         'jquery': 'http://js.washingtonpost.com/wpost/js/combo/?token=20121010232000&c=true&m=true&context=eidos&r=/jquery-1.7.1.js',
-        'jqueryUI': 'http://code.jquery.com/ui/1.10.1/jquery-ui'
+        //'jqueryUI': 'http://code.jquery.com/ui/1.10.1/jquery-ui'
+        'jqueryUI': '../lib/jquery-ui.min'
       },
       shim: {
         'gpt': {
@@ -123,7 +124,6 @@
         }
 
       }
-
     };
 
     //build and display queued up ads from previous placeAd2 calls

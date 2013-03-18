@@ -5,11 +5,11 @@
 
   'use strict';
 
-  var commercialNode = w.commercialNode || 'politics',
+  define(['wp_meta_data'], function(wp_meta_data){
 
-    wp_meta_data = w.wp_meta_data || {},
+    var commercialNode = w.commercialNode || 'politics';
 
-    zoneBuilder = {
+    return {
 
       contentType: {
         audiostory: 'audio',
@@ -24,16 +24,16 @@
 
       zones: {
         contentType: function(){
-          var a = zoneBuilder.getString(wp_meta_data.contentType);
-          return a && commercialNode !== 'washingtonpost.com' && zoneBuilder.contentType[a.toLowerCase()] || '';
+          var a = this.getString(wp_meta_data.contentType);
+          return a && commercialNode !== 'washingtonpost.com' && this.contentType[a.toLowerCase()] || '';
         },
 
         contentName: function(){
-          return zoneBuilder.getString(wp_meta_data.contentName);
+          return this.getString(wp_meta_data.contentName);
         },
 
         subsection: function(){
-          return zoneBuilder.getString(wp_meta_data.subsection);
+          return this.getString(wp_meta_data.subsection);
         }
       },
 
@@ -48,27 +48,23 @@
       },
 
       exec: function(){
-        var zones = zoneBuilder.zones,
-          cn = [zoneBuilder.validate(commercialNode)],
+        var zones = this.zones,
+          cn = [this.validate(commercialNode)],
           key, t;
         for(key in zones){
           if(zones.hasOwnProperty(key)){
-            t = zoneBuilder.validate(zones[key]());
+            t = this.validate(zones[key].call(this));
             if(t){
               cn.push(t);
             }
           }
         }
-        zoneBuilder.executed = true;
+        this.executed = true;
         return cn.join('/').toLowerCase();
       }
 
     };
 
-  if(typeof w.define === 'function'){
-    w.define(function(){
-      return zoneBuilder;
-    });
-  }
+  });
 
 })(window, document, window.define);

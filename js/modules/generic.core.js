@@ -6,32 +6,31 @@
 
   'use strict';
 
-  if(typeof define === 'function'){
-    define(['Ad', 'gptConfig', 'templateBuilder'], function(Ad, gptConfig, templateBuilder){
+  define(['Ad', 'gptConfig', 'templateBuilder'], function(Ad, gptConfig, templateBuilder){
 
-      return {
+    return {
 
-        //Ad builder
-        Ad: Ad,
-        //Initial GPT setup
-        gptConfig: gptConfig,
+      //Ad builder
+      Ad: Ad,
 
-        //stores all ads on the page here
-        adsOnPage: {},
+      //Initial GPT setup
+      gptConfig: gptConfig,
 
-        //container for array of functions to execute on load
-        init: [],
+      //stores all ads on the page here
+      adsOnPage: {},
 
-        templateBuilder: templateBuilder,
+      //container for array of functions to execute on load
+      init: [],
 
-        //platform/site universal flags
-        flags: {
-          debug: /debugadcode/i.test(location.search),
-          allAds: /allAds/.test(location.search)
-        }
-      };
+      templateBuilder: templateBuilder,
 
-    });
-  }
+      //platform/site universal flags
+      flags: {
+        debug: /debugadcode/i.test(location.search),
+        allAds: /allAds/.test(location.search)
+      }
+    };
+
+  });
 
 })(window, document, window.define);

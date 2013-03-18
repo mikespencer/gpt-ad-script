@@ -5,20 +5,18 @@
 
   'use strict';
 
-  if(typeof define === 'function'){
-    define(function(){
-      return {
-        flights: {
-          defaults: {
-            what: ['t', 'b']
-          }
-        },
-        adTypes: {
-          't': { 'size': [[300,50], [320, 50], [1,1]] },
-          'b': { 'size': [[300,50], [320, 50], [1,1]] }
+  define(function(){
+    return {
+      flights: {
+        defaults: {
+          what: ['t', 'b']
         }
-      };
-    });
-  }
+      },
+      adTypes: {
+        't': { 'size': [[300,50], [320, 50], [1,1]] },
+        'b': { 'size': [[300,50], [320, 50], [1,1]] }
+      }
+    };
+  });
 
 })(window, document, window.define);

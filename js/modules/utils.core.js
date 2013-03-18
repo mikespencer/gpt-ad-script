@@ -120,9 +120,12 @@
       for(key in obj){
         if(obj.hasOwnProperty(key)){
           val = obj[key].call(opt_context);
-          if(val && val[0]){
+          if(val){
             //lets always make this an array, so that we can push to it later if necessary (overrides)
-            rv[key] = utils.isArray(val) ? val : [val];
+            val = utils.isArray(val) ? val : [val];
+            if(val[0]){
+              rv[key] = val;
+            }
           }
         }
       }
@@ -162,10 +165,8 @@
 
   };
 
-  if(typeof define === 'function'){
-    define(function(){
-      return utils;
-    });
-  }
+  define(function(){
+    return utils;
+  });
 
 })(window, document, window.define);

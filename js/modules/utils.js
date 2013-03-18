@@ -10,7 +10,7 @@
     /**
      * extends basic utils object with more advanced functionality.
      */
-    utils = utils.extend(utils, {
+    return utils.extend(utils, {
 
       /**
        * Appends a css stylesheet to the <head>.
@@ -123,8 +123,6 @@
       }
 
     });
-
-    return utils;
 
   });
 

@@ -5,56 +5,38 @@
 
   'use strict';
 
-  if(typeof define === 'function'){
+  define(['utils.core'], function(utils){
 
-    define(['utils.core'], function(utils){
+    return {
 
-      return {
+      init: function(config){
+        this.config = utils.extend({
+          googletag: w.googletag
+        }, config);
 
-        init: function(config){
-          this.config = utils.extend({
-            googletag: w.googletag
-          }, config);
+        this.googletag = this.config.googletag;
+        this.pubservice = this.googletag.pubads();
 
-          this.googletag = this.config.googletag;
-          this.pubservice = this.googletag.pubads();
+        this.keyvalues = utils.keyvalueIterator(this.keyvaluesConfig, this);
+        utils.addKeyvalues(this.keyvalues, this.pubservice);
 
-          this.keyvalues = utils.keyvalueIterator(this.keyvaluesConfig, this);
-          utils.addKeyvalues(this.keyvalues, this.pubservice);
-
-          if(this.config.sra){
-            this.pubservice.enableSingleRequest();
-          } else {
-            this.pubservice.enableAsyncRendering();
-          }
-
-          this.googletag.enableServices();
-
-          return this;
-        },
-
-        keyvaluesConfig: {
-
-          kw: function(){
-            var param = utils.urlCheck('test_ads', { type: 'variable' });
-            return param ? ['test_' + param] : false;
-          },
-
-          poe: function(){
-            var name = w.location.hostname + '_poe';
-            if(utils.getCookie(name)){
-              return ['no'];
-            } else {
-              utils.setCookie(name, 'true', '', '/', '','');
-              return ['yes'];
-            }
-          }
-
+        if(this.config.sra){
+          this.pubservice.enableSingleRequest();
+        } else {
+          this.pubservice.enableAsyncRendering();
         }
 
-      };
+        this.googletag.enableServices();
 
-    });
-  }
+        return this;
+      },
+
+      keyvaluesConfig: {
+        /*gets added in site script*/
+      }
+
+    };
+
+  });
 
 })(window, document, window.define);

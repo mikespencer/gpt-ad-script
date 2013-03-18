@@ -6,8 +6,8 @@
   'use strict';
 
   if(typeof define === 'function'){
-    define(['generic', 'wp/config', 'wp/overrides', 'utils', 'zoneBuilder', 'templateBuilder'],
-    function(wpAd, config, overrides, utils, zoneBuilder, templateBuilder){
+    define(['generic.desktop', 'wp/config', 'wp/pageKeyvalues', 'wp/adKeyvalues', 'wp/overrides', 'utils', 'zoneBuilder', 'templateBuilder'],
+    function(wpAd, config, pageKeyvalues, adKeyvalues, overrides, utils, zoneBuilder, templateBuilder){
 
       //override commercialNode on wp
       w.commercialNode = zoneBuilder.exec();
@@ -17,26 +17,11 @@
         reload: (utils.urlCheck('reload', { type: 'variable' }) === 'true')
       });
 
-      //Add ad specific, site specific keyvalues here:
-      utils.extend(wpAd.Ad.prototype.keyvaluesConfig, {
+      //Extend ad specific keyvalues here:
+      utils.extend(wpAd.Ad.prototype.keyvaluesConfig, adKeyvalues);
 
-      });
-
-      //Add global, site specific keyvalues here:
-      utils.extend(wpAd.gptConfig.keyvaluesConfig, {
-
-        front: function(){
-          if(!wpAd.wp_meta_data.contentType){
-            return ['n'];
-          }
-          return wpAd.wp_meta_data.contentType.toString().toLowerCase() === 'front' ? ['y'] : ['n'];
-        },
-
-        WPATC: function(){
-          return [false];
-        }
-
-      });
+      //add page specific keyvalues
+      utils.extend(wpAd.gptConfig.keyvaluesConfig, pageKeyvalues);
 
       //commercialNode base:
       wpAd.dfpSite = '/701/wpni.';
