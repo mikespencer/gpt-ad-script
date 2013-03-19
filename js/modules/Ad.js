@@ -30,6 +30,12 @@
       keyvaluesConfig: {
         pos: function(){
           return [this.config.pos];
+        },
+        ad: function(){
+          return false;
+        },
+        dfpcomp: function(){
+          return w.dfpcomp ? [w.dfpcomp] : false;
         }
       },
 

@@ -19,7 +19,11 @@
 
       //Extend ad specific keyvalues here:
       utils.extend(wpAd.Ad.prototype.keyvaluesConfig, {
-
+        ad: function(){
+          if(config.adTypes[this.config.what].keyvalues && config.adTypes[this.config.what].keyvalues.ad){
+            return config.adTypes[this.config.what].keyvalues.ad;
+          }
+        }
       });
 
       //add page specific keyvalues

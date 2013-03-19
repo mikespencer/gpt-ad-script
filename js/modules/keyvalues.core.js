@@ -5,11 +5,12 @@
 
   'use strict';
 
-  define(['utils.core'], function(utils){
+  define(['utils.core', 'wp_meta_data'], function(utils, wp_meta_data){
 
     return {
 
       kw: function(){
+        //kw=energy/re - move to wp??
         var param = utils.urlCheck('test_ads', { type: 'variable' });
         return param ? ['test_' + param] : false;
       },

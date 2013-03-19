@@ -5,7 +5,7 @@
 
   'use strict';
 
-  define(['utils.core'], function(utils){
+  define(['utils.core', 'wp_meta_data'], function(utils, wp_meta_data){
 
     /**
      * extends basic utils object with more advanced functionality.
@@ -70,6 +70,21 @@
       },
 
       /**
+       * true if the page type is determined as a front, else false.
+       * @type {Boolean}
+       */
+      front: (function(){
+        if(wp_meta_data.contentType) {
+          return wp_meta_data.contentType[0] === 'front' || wp_meta_data.contentType === 'front';
+        }
+        if(/^homepage/.test(commercialNode)){
+          return true;
+        }
+        //non-methode pages:
+        return w.commercialPageType && w.commercialPageType === 'front' ? true : false;
+      })(),
+
+      /**
        * Asynchronously append a JavaScript File to the <head>, with optional onload callback.
        * @param {String|Object} url URL to the JavaScript file to be loaded.
        * @param {Function} opt_callback Callback function to execute once the script has loaded.
@@ -105,7 +120,7 @@
 
         atts = atts || {};
 
-        //defaults
+        //default attributes
         i.frameBorder = "0";
         i.height = "0";
         i.width = "0";
@@ -120,6 +135,54 @@
         }
 
         return i;
+      },
+
+      /**
+       * A string of page keywords.
+       * @type {String}
+       */
+      keywords: (function () {
+        if(wp_meta_data.keywords) {
+          return utils.isArray(wp_meta_data.keywords) ? wp_meta_data.keywords.join(",") :
+            wp_meta_data.keywords;
+        } else {
+          //Pages where wp_meta_data.keywords is undefined.. there are plenty:
+          var meta = d.getElementsByTagName('meta'),
+            l = meta.length,
+            content;
+
+          while(l--) {
+            if(meta[l].getAttribute('name') === 'keywords') {
+              content = meta[l].getAttribute('content');
+              if(content){
+                return content;
+              }
+            }
+          }
+        }
+        return '';
+      })(),
+
+      /**
+       * Checks an array of values against a string of meta data.
+       * @param {Array|String} wordList A list of words to check for.
+       * @param {String} metaData String of words to check against.
+       * @return {Boolean} Returns true if a match is found, else returns false.
+       */
+      metaCheck: function (wordList, metaData) {
+        wordList = utils.isArray(wordList) ? wordList : [wordList];
+        var regex = [],
+          suffixes = '(|s|es|ed|ing|er)',
+          l = wordList.length;
+        if(l && metaData){
+          while(l--) {
+            regex.push(wordList[l] + suffixes);
+          }
+
+          regex = '\\b' + regex.join('\\b|\\b') + '\\b';
+          return (new RegExp(regex, 'i').test(metaData));
+        }
+        return false;
       }
 
     });
