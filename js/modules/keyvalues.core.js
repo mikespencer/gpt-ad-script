@@ -5,7 +5,7 @@
 
   'use strict';
 
-  define(['utils.core', 'wp_meta_data'], function(utils, wp_meta_data){
+  define(['utils.core'], function(utils){
 
     return {
 

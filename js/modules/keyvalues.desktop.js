@@ -27,7 +27,7 @@
 
         if(!utils.front) {
           for(key in obj) {
-            if(obj.hasOwnProperty(key) && utils.metaCheck(obj[key], utils.keywords)) {
+            if(obj.hasOwnProperty(key) && utils.wordsInString(obj[key], utils.keywords)) {
               rv.push(key);
             }
           }
