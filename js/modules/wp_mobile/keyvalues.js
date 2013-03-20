@@ -5,9 +5,16 @@
 
   'use strict';
 
-  define(['utils.core', 'keyvalues.core'], function(utils, kvs){
+  define([
+    'keyvalues/kw',
+    'keyvalues/poe'
+  ], function(kw, poe){
 
-    return utils.extend(kvs, {
+    return {
+
+      kw: kw,
+
+      poe: poe,
 
       forecast: function(){
         return ['1'];
@@ -29,7 +36,7 @@
         return [''];
       }
 
-    });
+    };
 
   });
 

@@ -5,15 +5,16 @@
 
   'use strict';
 
-  define(['keyvalues.desktop', 'utils.core', 'wp_meta_data'], function(kvs, utils, wp_meta_data){
+  define([
+    'utils/extend',
+    'keyvalues/all',
+    'wp/keyvalues/articleId',
+    'wp/keyvalues/WPATC'
+  ], function(extend, kvs, articleId, WPATC){
 
-    //Add wp page specific keyvalues here:
-    return utils.extend(kvs, {
-
-      WPATC: function(){
-        return [false];
-      }
-
+    return extend(kvs, {
+      articleId: articleId,
+      WPATC: WPATC
     });
 
   });

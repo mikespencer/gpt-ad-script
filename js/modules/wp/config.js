@@ -35,10 +35,6 @@
         homepage: {
           what: ['!leaderboard'],
           where: ['washingtonpost.com']
-        },
-        pd: {
-          what:['pushdown'],
-          when: ['201303180000/201303182359']
         }
       },
 
@@ -68,6 +64,7 @@
         "flex_ss_tp": { "size": [[300,250],[300,600]], "keyvalues": { "ad": ["bb","tp"] } },
         "grid_bigbox":  { "size": [[300,250]] },
         "inline_bb": { "size": [[300,250]], "keyvalues": { "ad": ["inline_bb"] } },
+        "interstitial": { "size": [['N/A']], "keyvalues": { "ad": ["interstitial"] } },
         "itb": { "size": [[1,1]] },
         "leaderboard": { "size": [[728,90]], "keyvalues": { "ad": ["lb"], "pos": ["ad1"] } },
         "leaderboard_2": { "size": [[728,90]], "keyvalues": { "ad": ["lb"], "pos": ["ad2"] } },

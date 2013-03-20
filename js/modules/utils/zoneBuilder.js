@@ -1,13 +1,13 @@
 /**
  * Dynamically extends commercialNode
  */
-(function(w, d, define){
+(function(w, d, define, commercialNode){
 
   'use strict';
 
-  define(['wp_meta_data'], function(wp_meta_data){
+  define(['utils/wp_meta_data'], function(wp_meta_data){
 
-    var commercialNode = w.commercialNode || 'politics';
+    commercialNode = commercialNode || 'politics';
 
     return {
 

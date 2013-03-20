@@ -5,11 +5,15 @@
 
   'use strict';
 
-  define(['utils.core'], function(utils){
+  define([
+    'utils/urlCheck',
+    'utils/isArray',
+    'utils/estNowWithYear'
+  ], function(urlCheck, isArray, estNowWithYear){
 
     return {
 
-      demoAds: utils.urlCheck('demoAds', {type: 'variable'}),
+      demoAds: urlCheck('demoAds', {type: 'variable'}),
 
       exec: function(json){
         if(!this.demoAds){
@@ -41,7 +45,7 @@
       },
 
       checkProperty: function(prop, val){
-        val = utils.isArray(val) ? val : [val];
+        val = isArray(val) ? val : [val];
 
         var l = val.length,
           i = 0,
@@ -112,12 +116,12 @@
             open = false;
             where = where.split('!')[1];
           }
-          return new RegExp('^' + where).test(w.commercialNode) ? open : false;
+          return new RegExp('^' + where).test(commercialNode) ? open : false;
         },
 
         when: function (when) {
           when = when.split('/');
-          return when[0] <= utils.estNowWithYear && when[1] >= utils.estNowWithYear;
+          return when[0] <= estNowWithYear && when[1] >= estNowWithYear;
         }
       }
 

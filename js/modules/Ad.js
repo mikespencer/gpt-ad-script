@@ -7,17 +7,27 @@
 
   'use strict';
 
-  define(['utils.core'], function(utils){
+  define([
+    'utils/extend',
+    'utils/keyvalueIterator',
+    'utils/addKeyvalues'
+  ], function(extend, keyvalueIterator, addKeyvalues){
 
     function Ad(config){
-      this.config = utils.extend({
+      this.config = extend({
         'dfpSite': '/701/wpni.',
         'where': undefined,
         'size': null,
         'what': null,
         'pos': false,
-        'posOverride': false
+        'posOverride': false,
+        'interstitial': false
       }, config, true);
+
+      if(this.config.pos === 'interstitial' && !this.config.interstitial){
+        this.config.interstitial = true;
+        this.addInterstitialDiv();
+      }
 
       if(!config.hardcode){
         this.keyvalues = this.buildKeyvalues();
@@ -49,7 +59,7 @@
       },
 
       buildKeyvalues: function(){
-        return utils.keyvalueIterator(this.keyvaluesConfig, this);
+        return keyvalueIterator(this.keyvaluesConfig, this);
       },
 
       getKeyvalues: function(){
@@ -60,10 +70,19 @@
         googletag.content().setContent(this.slot, this.hardcode);
       },
 
+      addInterstitialDiv: function(){
+        var s = d.createElement('div');
+        s.id = 'slug_' + this.config.pos;
+        s.style.display = 'none';
+        d.body.insertBefore(s, d.body.firstChild);
+      },
+
       buildGPTSlot: function(){
         this.fullGPTSite = this.config.dfpSite + this.config.where;
-        return googletag.defineSlot(this.fullGPTSite, this.config.size, this.container.id)
-          .addService(googletag.pubads());
+        return (!this.config.interstitial ?
+          googletag.defineSlot(this.fullGPTSite, this.config.size, this.container.id) :
+          googletag.defineOutOfPageSlot(this.fullGPTSite, this.container.id))
+            .addService(googletag.pubads());
       },
 
       getSlot: function(){
@@ -87,7 +106,7 @@
           this.slugDisplay(true);
           if(!this.config.hardcode){
             this.slot = this.buildGPTSlot();
-            utils.addKeyvalues(this.keyvalues, this.slot);
+            addKeyvalues(this.keyvalues, this.slot);
             googletag.display(this.container.id);
           } else {
             this.container.innerHTML = this.config.hardcode;

@@ -1,51 +1,82 @@
 /**
  * washingtonpost.com site specific ad script (desktop)
  */
-(function(w, d, commercialNode, define){
+(function(define){
 
   'use strict';
 
-  if(typeof define === 'function'){
-    define(['generic.desktop', 'wp/config', 'wp/keyvalues', 'wp/overrides', 'utils', 'zoneBuilder', 'templateBuilder'],
-    function(wpAd, config, kvs, overrides, utils, zoneBuilder, templateBuilder){
+  define([
+    'Ad',
+    'gptConfig',
+    'utils/zoneBuilder',
+    'utils/templateBuilder',
+    'utils/extend',
+    'utils/front',
+    'utils/flags',
+    'wp/config',
+    'wp/keyvalues',
+    'wp/overrides'
+  ], function(Ad, gptConfig, zoneBuilder, templateBuilder, extend, front, flags, config, kvs, overrides){
 
-      //override commercialNode on wp
-      w.commercialNode = zoneBuilder.exec();
+    //build commercialNode
+    commercialNode = zoneBuilder.exec();
 
-      //add wp specific flags
-      utils.extend(wpAd.flags, {
-        reload: (utils.urlCheck('reload', { type: 'variable' }) === 'true')
-      });
-
-      //Extend ad specific keyvalues here:
-      utils.extend(wpAd.Ad.prototype.keyvaluesConfig, {
-        ad: function(){
-          if(config.adTypes[this.config.what].keyvalues && config.adTypes[this.config.what].keyvalues.ad){
-            return config.adTypes[this.config.what].keyvalues.ad;
-          }
+    //Extend keyvalues on an individual ad level
+    extend(Ad.prototype.keyvaluesConfig, {
+      ad: function(){
+        if(config.adTypes[this.config.what].keyvalues && config.adTypes[this.config.what].keyvalues.ad){
+          return config.adTypes[this.config.what].keyvalues.ad;
         }
-      });
-
-      //add page specific keyvalues
-      utils.extend(wpAd.gptConfig.keyvaluesConfig, kvs);
-
-      //commercialNode base:
-      wpAd.dfpSite = '/701/wpni.';
-
-      //pass in config:
-      wpAd.config = config;
-
-      //determine open spots:
-      wpAd.flights = templateBuilder.exec(config.flights);
-
-      //pass in site specific overrides:
-      wpAd.overrides = overrides;
-
-      //expose helper functions:
-      wpAd.utils = utils;
-
-      return wpAd;
+      }
     });
-  }
 
-})(window, document, window.commercialNode, window.define);
+    //Custom flight templates that require additional conditionals
+    config.flights = extend({
+      interstitial: {
+        what: ['interstitial'],
+        test: [!front && !flags.no_interstitials]
+      }
+    }, config.flights);
+
+    //add page specific keyvalues
+    extend(gptConfig.keyvaluesConfig, kvs);
+
+    return {
+
+      //network id
+      dfpSite: '/701/wpni.',
+
+      //Ad builder
+      Ad: Ad,
+
+      //Initial GPT setup
+      gptConfig: gptConfig,
+
+      //stores all ads on the page here
+      adsOnPage: {},
+
+      //stores all ads placements on the page that aren't currently open (for debugging).
+      adsDisabledOnPage: {},
+
+      //container for array of functions to execute on load
+      init: [],
+
+      flags: flags,
+
+      config: config,
+
+      //determine open ad spots
+      flights: templateBuilder.exec(config.flights),
+
+      //overrides
+      overrides: overrides,
+
+      cleanScriptTags: function(){
+        // Found a call to this on a test page. Adding dummy function to prevent errors until we
+        // figure out what to do with this, as it won't be needed when we switch to GPT
+      }
+
+    };
+  });
+
+})(window.define);

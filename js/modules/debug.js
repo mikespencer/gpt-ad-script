@@ -6,9 +6,14 @@
 
   'use strict';
 
-  define(['utils', 'jqueryUI'], function(utils, $){
+  define([
+    'jqueryUI',
+    'utils/addCSS',
+    'utils/extend',
+    'utils/clone'
+  ], function($, addCSS, extend, clone){
 
-    var debug = {
+    return {
 
       cssURL: 'css/debug.css',
 
@@ -16,41 +21,48 @@
         var l = wpAd.debugQueue.length,
           i = 0;
 
-        utils.addCSS(debug.cssURL);
+        addCSS(this.cssURL);
 
         for(i;i<l;i++){
-          debug.exec.call(this, wpAd.debugQueue[i]);
+          this.exec.call(this, wpAd.debugQueue[i]);
         }
-        wpAd.debugQueue = { push: debug.exec };
+        wpAd.debugQueue = { push: this.exec };
       },
 
-      exec: function(ad){
-        if(ad.container){
-          var box = debug.buildDebugBox(ad);
+      exec: function(pos){
+        if(wpAd.adsOnPage[pos]){
+          var ad = wpAd.adsOnPage[pos];
+          if(ad.container){
+            var box = this.buildDebugBox(ad);
 
-          try{
-            w.console.log('RENDERED AD:\n', ad.config.pos + '\n', ad);
-          }catch(e){}
+            $(box).css({
+              position: 'absolute',
+              top: $(ad.container).offset().top + 'px',
+              left: $(ad.container).offset().left + 'px'
+            }).draggable({
+              stack: 'div.ad-debug-box',
+              start: function(){
+                $(this).addClass('dragging');
+              },
+              stop: function(){
+                $(this).removeClass('dragging');
+              }
+            });
 
-          $(box).css({
-            position: 'absolute',
-            top: $(ad.container).offset().top + 'px',
-            left: $(ad.container).offset().left + 'px'
-          }).draggable({
-            stack: 'div.ad-debug-box',
-            start: function(){
-              $(this).addClass('dragging');
-            },
-            stop: function(){
-              $(this).removeClass('dragging');
-            }
-          });
+            this.log('--ADOPS DEBUG-- RENDERED:', pos, ad);
 
-        } else {
-          try{
-            w.console.log('Could not find container for', ad.config.pos);
-          }catch(e){}
+          } else {
+            this.log('--ADOPS DEBUG-- Could not find container for', pos, ad);
+          }
+        } else{
+          this.log('--ADOPS DEBUG-- DISABLED:', pos);
         }
+      },
+
+      log: function(){
+        try{
+          if(w.console){console.log.apply(console, arguments);}
+        }catch(e){}
       },
 
       getTemplateId: function(ad){
@@ -59,13 +71,13 @@
       },
 
       buildDebugBox: function(ad){
-        return $(d.createElement('div')).addClass('ad-debug-box').html(debug.content(ad)).prependTo('body')[0];
+        return $(d.createElement('div')).addClass('ad-debug-box').html(this.content(ad)).prependTo('body')[0];
       },
 
       title: function(ad){
         return '<div class="ad-debug-section">' +
           '<div class="ad-debug-bold large">' + ad.config.pos + '</div>' +
-          '<div>Template: ' + debug.getTemplateId(ad) + '</div>' +
+          '<div>Template: ' + this.getTemplateId(ad) + '</div>' +
         '</div>';
       },
 
@@ -95,8 +107,8 @@
             '<div class="ad-debug-bold">Keyvalues: </div>' +
               '<ul>',
 
-          //important to use "utils.clone", as "utils.extend" will permanently overwrite first arg
-          keyvalues = utils.extend(utils.clone(wpAd.gptConfig.keyvalues), ad.keyvalues),
+          //important to use "clone", as "extend" will permanently overwrite first argument
+          keyvalues = extend(clone(wpAd.gptConfig.keyvalues), ad.keyvalues),
           sortedKeys = [],
           key, l, i;
 
@@ -123,12 +135,10 @@
       },
 
       content: function(ad){
-        return debug.title(ad) + debug.where(ad) + debug.sizes(ad) + debug.keyvalueList(ad);
+        return this.title(ad) + this.where(ad) + this.sizes(ad) + this.keyvalueList(ad);
       }
 
     };
-
-    return debug;
 
   });
 

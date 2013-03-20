@@ -5,34 +5,55 @@
 
   'use strict';
 
-  define(['generic.core', 'wp_mobile/config', 'utils.core', 'wp_mobile/keyvalues'],
-  function(wpAd, config, utils, kvs){
-
-    //set the base node
-    wpAd.dfpSite = '/701/mob.wp.';
-
-    //expose helper functions
-    wpAd.utils = utils;
+  define([
+    'Ad',
+    'gptConfig',
+    'wp_mobile/config',
+    'wp_mobile/keyvalues',
+    'utils/extend',
+    'utils/flags'
+  ], function(Ad, gptConfig, config, kvs, extend, flags){
 
     //add page specific keyvalues
-    utils.extend(wpAd.gptConfig.keyvaluesConfig, kvs);
+    extend(gptConfig.keyvaluesConfig, kvs);
 
     //Extend ad specific keyvalues here:
-    utils.extend(wpAd.Ad.prototype.keyvaluesConfig, {
+    extend(Ad.prototype.keyvaluesConfig, {
 
     });
 
-    //expose config
-    wpAd.config = config;
+    return {
 
-    //hardcoded template for mobile - no need for templateBuilder at this point:
-    wpAd.flights = {
-      t: {
-        id: 'default'
-      }
+      //set network id
+      dfpSite: '/701/mob.wp.',
+
+      //Ad builder
+      Ad: Ad,
+
+      //Initial GPT setup
+      gptConfig: gptConfig,
+
+      //stores all ads on the page here
+      adsOnPage: {},
+
+      //stores all ads placements on the page that aren't currently open (for debugging).
+      adsDisabledOnPage: {},
+
+      //container for array of functions to execute on load
+      init: [],
+
+      config: config,
+
+      flights: {
+        t: {
+          id: 'default'
+        }
+      },
+
+      flags: flags
+
     };
 
-    return wpAd;
   });
 
 })(window, document, window.define);

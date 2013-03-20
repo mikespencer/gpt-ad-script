@@ -41,7 +41,7 @@
     },
 
     //single request architecture
-    sra = false,
+    sra = true,
 
     //async rendering
     async = true,
@@ -56,8 +56,6 @@
   //load dependencies:
   requirejs([siteScript, 'googletag'], function (wpAd, googletag){
 
-    w.metaCheck = wpAd.utils.metaCheck;
-
     if(wpAd.flags.debug){
       wpAd.debugQueue = [];
 
@@ -71,45 +69,11 @@
     //initialise GPT
     wpAd.gptConfig = wpAd.gptConfig.init({
       googletag: w.googletag,
-      sra: false
+      sra: sra
     });
 
-    //--> INTERSTITIAL MESS. INTEGRATE INTO AD MODULE AND CALL VIA PLACEAD2
-    wpAd.interitial = (function(){
-
-      //function createInterstitialContainer
-      var slug_interstitial = d.createElement('div');
-      slug_interstitial.id = 'slug_interstitial';
-      d.body.insertBefore(slug_interstitial, d.body.firstChild);
-
-      var rv = {
-        container: d.getElementById('slug_interstitial'),
-        config:{
-          pos: 'interstitial',
-          size: [['n/a']]
-        },
-
-        //function interstitial kvs
-        keyvalues: {
-          ad: 'interstitial',
-          dcopt: 'ist'
-        },
-
-        //function interstitialInit
-        slot: googletag.defineOutOfPageSlot(wpAd.dfpSite + commercialNode, 'slug_interstitial')
-          .setTargeting('ad', 'interstitial')
-          .setTargeting('dcopt', 'ist')
-      };
-
-      googletag.display('slug_interstitial');
-
-      if(wpAd.flags.debug){
-        wpAd.debugQueue.push(rv);
-      }
-
-      return rv;
-    })();
-    //--> END OF INTERSTITIAL MONSTROSITY
+    //add to placeAd2queue
+    placeAd2(commercialNode, 'interstitial', false, '');
 
     //redefine placeAd2
     placeAd2 = function(where, what, del, otf){
@@ -158,11 +122,14 @@
           wpAd.adsOnPage[pos].slot.refresh();
         }
 
-        if(wpAd.flags.debug){
-          wpAd.debugQueue.push(wpAd.adsOnPage[pos]);
-        }
-
+      } else {
+        wpAd.adsDisabledOnPage[pos] = true;
       }
+
+      if(wpAd.flags.debug){
+        wpAd.debugQueue.push(pos);
+      }
+
     };
 
     //build and display queued up ads from previous placeAd2 calls
