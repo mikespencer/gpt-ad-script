@@ -1,4 +1,4 @@
-(function(d, define){
+(function(define){
 
   'use strict';
 
@@ -6,4 +6,4 @@
     return (/debugadcode/i.test(location.search));
   });
 
-})(document, window.define);
+})(window.define);

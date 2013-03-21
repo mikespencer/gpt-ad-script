@@ -49,19 +49,21 @@
               }
             });
 
-            this.log('--ADOPS DEBUG-- RENDERED:', pos, ad);
+            this.log('--ADOPS DEBUG--', 'RENDERED:', pos, ad);
 
           } else {
-            this.log('--ADOPS DEBUG-- Could not find container for', pos, ad);
+            this.log('--ADOPS DEBUG--', 'Could not find container for', pos, ad);
           }
         } else{
-          this.log('--ADOPS DEBUG-- DISABLED:', pos);
+          this.log('--ADOPS DEBUG--', 'DISABLED:', pos);
         }
       },
 
       log: function(){
         try{
-          if(w.console){console.log.apply(console, arguments);}
+          if(w.console){
+            console.log.apply(console, arguments);
+          }
         }catch(e){}
       },
 

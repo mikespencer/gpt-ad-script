@@ -1,28 +1,30 @@
 /**
  * WP mobile web specific ad script
  */
-(function(w, d, define){
+(function(define){
 
   'use strict';
 
   define([
+    'defaultSettings',
     'Ad',
     'gptConfig',
     'wp_mobile/config',
     'wp_mobile/keyvalues',
     'utils/extend',
+    'utils/extendKeyvalues',
     'utils/flags'
-  ], function(Ad, gptConfig, config, kvs, extend, flags){
+  ], function(defaultSettings, Ad, gptConfig, config, kvs, extend, extendKeyvalues, flags){
 
     //add page specific keyvalues
-    extend(gptConfig.keyvaluesConfig, kvs);
+    extendKeyvalues(gptConfig.keyvaluesConfig, kvs);
 
-    //Extend ad specific keyvalues here:
-    extend(Ad.prototype.keyvaluesConfig, {
+    //add mobile specific, ad level keyvalues
+    /*extendKeyvalues(Ad.prototype.keyvaluesConfig, {
+      
+    });*/
 
-    });
-
-    return {
+    return extend(defaultSettings, {
 
       //set network id
       dfpSite: '/701/mob.wp.',
@@ -32,15 +34,6 @@
 
       //Initial GPT setup
       gptConfig: gptConfig,
-
-      //stores all ads on the page here
-      adsOnPage: {},
-
-      //stores all ads placements on the page that aren't currently open (for debugging).
-      adsDisabledOnPage: {},
-
-      //container for array of functions to execute on load
-      init: [],
 
       config: config,
 
@@ -52,8 +45,8 @@
 
       flags: flags
 
-    };
+    });
 
   });
 
-})(window, document, window.define);
+})(window.define);

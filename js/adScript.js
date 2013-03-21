@@ -24,15 +24,9 @@
     dev_config = {
       baseUrl: 'js/modules',
       paths: {
-<<<<<<< HEAD
         'googletag': 'http://www.googletagservices.com/tag/js/gpt',
         'jquery': 'http://js.washingtonpost.com/wpost/js/combo/?token=20121010232000&c=true&m=true&context=eidos&r=/jquery-1.7.1.js',
-        //'jqueryUI': 'http://code.jquery.com/ui/1.10.1/jquery-ui'
         'jqueryUI': '../lib/jquery-ui.min'
-=======
-        'gpt': 'http://www.googletagservices.com/tag/js/gpt',
-        'jquery': 'http://js.washingtonpost.com/wpost/js/combo/?token=20121010232000&c=true&m=true&context=eidos&r=/jquery-1.7.1'
->>>>>>> 5e22a589d50064254638759b6e712775d3cc14ba
       },
       shim: {
         'googletag': {

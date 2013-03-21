@@ -1,4 +1,4 @@
-(function(d, define){
+(function(define){
 
   'use strict';
 
@@ -6,4 +6,4 @@
     return urlCheck('reload', { type: 'variable' }) === 'true';
   });
 
-})(document, window.define);
+})(window.define);

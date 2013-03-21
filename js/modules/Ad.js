@@ -9,9 +9,11 @@
 
   define([
     'utils/extend',
+    'utils/extendKeyvalues',
+    'utils/isArray',
     'utils/keyvalueIterator',
     'utils/addKeyvalues'
-  ], function(extend, keyvalueIterator, addKeyvalues){
+  ], function(extend, extendKeyvalues, isArray, keyvalueIterator, addKeyvalues){
 
     function Ad(config){
       this.config = extend({
@@ -38,15 +40,16 @@
       constructor: Ad,
 
       keyvaluesConfig: {
-        pos: function(){
-          return [this.config.pos];
-        },
-        ad: function(){
-          return false;
-        },
-        dfpcomp: function(){
-          return w.dfpcomp ? [w.dfpcomp] : false;
-        }
+        pos: [
+          function(){
+            return [this.config.pos];
+          }
+        ],
+        dfpcomp: [
+          function(){
+            return w.dfpcomp ? [w.dfpcomp] : false;
+          }
+        ]
       },
 
       getSlug: function(){
@@ -64,6 +67,10 @@
 
       getKeyvalues: function(){
         return this.keyvalues;
+      },
+
+      extendKeyvalues: function(obj){
+        this.keyvaluesConfig = extendKeyvalues(this.keyvaluesConfig, obj);
       },
 
       hardcode: function(){

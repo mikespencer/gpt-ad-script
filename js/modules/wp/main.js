@@ -6,29 +6,41 @@
   'use strict';
 
   define([
+    'defaultSettings',
     'Ad',
     'gptConfig',
     'utils/zoneBuilder',
     'utils/templateBuilder',
     'utils/extend',
+    'utils/extendKeyvalues',
     'utils/front',
     'utils/flags',
     'wp/config',
     'wp/keyvalues',
     'wp/overrides'
-  ], function(Ad, gptConfig, zoneBuilder, templateBuilder, extend, front, flags, config, kvs, overrides){
+  ], function(defaultSettings, Ad, gptConfig, zoneBuilder, templateBuilder, extend, extendKeyvalues, front, flags, config, kvs, overrides){
 
     //build commercialNode
     commercialNode = zoneBuilder.exec();
 
-    //Extend keyvalues on an individual ad level
-    extend(Ad.prototype.keyvaluesConfig, {
+    //extend or add keyvalues at the ad level
+    //each key can accept a function, or an array of functions
+    extendKeyvalues(Ad.prototype.keyvaluesConfig, {
       ad: function(){
         if(config.adTypes[this.config.what].keyvalues && config.adTypes[this.config.what].keyvalues.ad){
           return config.adTypes[this.config.what].keyvalues.ad;
         }
+      },
+      pos: function(){
+        var c = config.adTypes[this.config.pos];
+        if(c && c.keyvalues && c.keyvalues.pos){
+          return c.keyvalues.pos;
+        }
       }
     });
+
+    //add page specific keyvalues
+    extendKeyvalues(gptConfig.keyvaluesConfig, kvs);
 
     //Custom flight templates that require additional conditionals
     config.flights = extend({
@@ -38,10 +50,7 @@
       }
     }, config.flights);
 
-    //add page specific keyvalues
-    extend(gptConfig.keyvaluesConfig, kvs);
-
-    return {
+    return extend(defaultSettings, {
 
       //network id
       dfpSite: '/701/wpni.',
@@ -51,15 +60,6 @@
 
       //Initial GPT setup
       gptConfig: gptConfig,
-
-      //stores all ads on the page here
-      adsOnPage: {},
-
-      //stores all ads placements on the page that aren't currently open (for debugging).
-      adsDisabledOnPage: {},
-
-      //container for array of functions to execute on load
-      init: [],
 
       flags: flags,
 
@@ -76,7 +76,7 @@
         // figure out what to do with this, as it won't be needed when we switch to GPT
       }
 
-    };
+    });
   });
 
 })(window.define);

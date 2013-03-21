@@ -1,22 +1,24 @@
 /**
  * Extends universal desktop, page level keyvalues with wp desktop specific keyvalues
  */
-(function(w, d, define){
+(function(define){
 
   'use strict';
 
   define([
-    'utils/extend',
+    'utils/extendKeyvalues',
     'keyvalues/all',
     'wp/keyvalues/articleId',
+    'wp/keyvalues/kw',
     'wp/keyvalues/WPATC'
-  ], function(extend, kvs, articleId, WPATC){
+  ], function(extendKeyvalues, kvs, articleId, kw, WPATC){
 
-    return extend(kvs, {
-      articleId: articleId,
-      WPATC: WPATC
+    return extendKeyvalues(kvs, {
+      articleId: [articleId],
+      kw: [kw],
+      WPATC: [WPATC]
     });
 
   });
 
-})(window, document, window.define);
+})(window.define);

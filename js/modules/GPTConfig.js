@@ -15,6 +15,8 @@
 
       init: function(config){
         this.config = extend({
+          async: true,
+          sra: true,
           googletag: w.googletag
         }, config);
 
@@ -26,7 +28,7 @@
 
         if(this.config.sra){
           this.pubservice.enableSingleRequest();
-        } else {
+        } else{
           this.pubservice.enableAsyncRendering();
         }
 
@@ -35,9 +37,10 @@
         return this;
       },
 
-      keyvaluesConfig: {
-        /*gets added in site script*/
-      }
+      /**
+       * Placeholder. Gets added in site script
+       */
+      keyvaluesConfig: {}
 
     };
 

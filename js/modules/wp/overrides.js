@@ -1,7 +1,7 @@
 /**
  * Overrides for standard configuration of ad spots for unique circumstances on washingtonpost.com (desktop)
  */
-(function(w, d, define){
+(function(define){
 
   'use strict';
 
@@ -16,9 +16,8 @@
       pos: {
         //if 'pos' of the ad === leaderboard..
         'leaderboard$': function(){
-          this.keyvalues.lb_test_kv = [];
+          this.keyvalues.lb_test_kv = this.keyvalues.lb_test_kv || [];
           this.keyvalues.lb_test_kv.push('true');
-          this.keyvalues.pos.push('ad1');
         }
       },
       where: {
@@ -32,4 +31,4 @@
 
   });
 
-})(window, document, window.define);
+})(window.define);

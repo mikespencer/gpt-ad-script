@@ -1,7 +1,7 @@
 /**
  * Provides core functionality for overrides
  */
-(function(w, d, define){
+(function(define){
 
   'use strict';
 
@@ -30,7 +30,7 @@
       },
 
       /**
-       * Define the checks in site specific overrides script
+       * Placeholder. Define the checks in site specific overrides script
        */
       checks: {}
 
@@ -40,6 +40,4 @@
 
   });
 
-})(window, document, window.define);
-
-
+})(window.define);

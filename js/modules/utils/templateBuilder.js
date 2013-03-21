@@ -1,7 +1,7 @@
 /**
  * Checks and builds an ad template of open spots on the current page
  */
-(function(w, d, define, commercialNode){
+(function(define){
 
   'use strict';
 
@@ -129,4 +129,4 @@
 
   });
 
-})(window, document, define, commercialNode);
+})(define);

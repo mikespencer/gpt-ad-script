@@ -1,7 +1,7 @@
 /**
  * Dynamically extends commercialNode
  */
-(function(w, d, define, commercialNode){
+(function(define, commercialNode){
 
   'use strict';
 
@@ -67,4 +67,4 @@
 
   });
 
-})(window, document, window.define);
+})(window.define, window.commercialNode);

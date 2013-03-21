@@ -1,7 +1,7 @@
 /**
  * Template of ad flights and available ad spots on washingtonpost.com (desktop)
  */
-(function(w, d, define){
+(function(define){
 
   'use strict';
 
@@ -85,7 +85,7 @@
         "sponsor_links_bt": { "size": [[1,1]] },
         "sponsor_links_in": { "size": [[1,1]] },
         "sponsor_links_rr": { "size": [[1,1]] },
-        "tiffany_tile": { "size": [[200,60]], "keyvalues": { "ad": ["tiff"], "pos": ["ad14"] } },
+        "tiffany_tile": { "size": [[200,60], [184, 90]], "keyvalues": { "ad": ["tiff"], "pos": ["ad14"] } },
         "tooltile": { "size": [[1,1]] },
         "topjobs": { "size": [[1,1]] }
       }
@@ -93,4 +93,4 @@
 
   });
 
-})(window, document, window.define);
+})(window.define);
