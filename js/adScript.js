@@ -46,7 +46,7 @@
     async = true,
 
     //determine site script or default to 'wp'
-    siteScript = siteMapping[getSite()] || 'wp';
+    siteScript = siteMapping[getSite()] || siteMapping.wp;
 
 
   //configure requirejs;
@@ -60,7 +60,7 @@
 
       //could even potentially pull this out completely, tweak and have as a bookmarklet...
       requirejs(['debug'], function(debug){
-        debug.init();
+        wpAd.debugQueue = debug.init(wpAd.debugQueue);
       });
 
     }
@@ -75,7 +75,7 @@
     placeAd2(commercialNode, 'interstitial', false, '');
 
     //redefine placeAd2
-    placeAd2 = function(where, what, del, otf){
+    placeAd2 = function(where, what, del, onTheFly){
       var pos = what,
         posOverride = false,
         posArray,
@@ -102,7 +102,8 @@
             what: what,
             pos: pos,
             posOverride: posOverride,
-            hardcode: wpAd.flights[pos] && wpAd.flights[pos].hardcode || false
+            hardcode: wpAd.flights[pos] && wpAd.flights[pos].hardcode || false,
+            onTheFly: onTheFly
           });
 
           //overrides (the new hackbin)

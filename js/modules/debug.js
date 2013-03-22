@@ -17,22 +17,23 @@
 
       cssURL: 'css/debug.css',
 
-      init: function(){
-        var l = wpAd.debugQueue.length,
+      init: function(queue){
+        var l = queue.length,
           i = 0;
 
         addCSS(this.cssURL);
 
         for(i;i<l;i++){
-          this.exec.call(this, wpAd.debugQueue[i]);
+          this.exec.call(this, queue[i]);
         }
-        wpAd.debugQueue = { push: this.exec };
+        return { push: $.proxy(this.exec, this) };
       },
 
       exec: function(pos){
         if(wpAd.adsOnPage[pos]){
           var ad = wpAd.adsOnPage[pos];
           if(ad.container){
+            console.log(this);
             var box = this.buildDebugBox(ad);
 
             $(box).css({

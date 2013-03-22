@@ -23,7 +23,8 @@
         'what': null,
         'pos': false,
         'posOverride': false,
-        'interstitial': false
+        'interstitial': false,
+        'onTheFly': false
       }, config, true);
 
       if(this.config.pos === 'interstitial' && !this.config.interstitial){
@@ -48,6 +49,24 @@
         dfpcomp: [
           function(){
             return w.dfpcomp ? [w.dfpcomp] : false;
+          }
+        ],
+        onTheFly: [
+          function(){
+            var rv = {},
+              kvs, kv, len;
+            if(this.config.onTheFly){
+              kvs = this.config.onTheFly.split(';');
+              len = kvs.length;
+              while(len--){
+                kv = kvs[len].split('=');
+                if(kv[0] && kv[1]){
+                  rv[kv[0]] = rv[kv[0]] || [];
+                  rv[kv[0]].push(kv[1]);
+                }
+              }
+            }
+            return rv;
           }
         ]
       },
