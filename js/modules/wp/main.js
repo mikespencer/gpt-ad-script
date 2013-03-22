@@ -6,7 +6,9 @@
   'use strict';
 
   define([
+
     'defaultSettings',
+    'googletag',
     'Ad',
     'gptConfig',
     'utils/zoneBuilder',
@@ -18,7 +20,24 @@
     'wp/config',
     'wp/keyvalues',
     'wp/overrides'
-  ], function(defaultSettings, Ad, gptConfig, zoneBuilder, templateBuilder, extend, extendKeyvalues, front, flags, config, kvs, overrides){
+
+  ], function(
+
+    defaultSettings,
+    googletag,
+    Ad,
+    gptConfig,
+    zoneBuilder,
+    templateBuilder,
+    extend,
+    extendKeyvalues,
+    front,
+    flags,
+    config,
+    kvs,
+    overrides
+
+  ){
 
     //build commercialNode
     commercialNode = zoneBuilder.exec();
@@ -59,7 +78,10 @@
       Ad: Ad,
 
       //Initial GPT setup
-      gptConfig: gptConfig,
+      gptConfig: gptConfig.init({
+        googletag: googletag,
+        sra: true
+      }),
 
       flags: flags,
 

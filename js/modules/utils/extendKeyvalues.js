@@ -5,10 +5,11 @@
   define(['utils/isArray'], function(isArray){
 
     /**
-     * Merges and extends one set of keyvalues into another - including arrays of functions.
-     * @param {Object} obj Object to be extended (the defaults).
-     * @param {Object} additions Object to be merged into and/or overwrite properties in the default Object.
-     * @return {Object} The merged Object.
+     * Merges and extends one set of keyvalue functions into another as arrays of functions.
+     * @param {Object} kvs Object to be extended (the defaults).
+     * @param {Object} additions Object to be merged into the default Object, extending existing 
+     *    keys, or creating new ones that didn't previously exist
+     * @return {Object} The merged Object containing arrays of functions assigned to keys.
      */
     return function(kvs, additions){
       for(var key in additions){

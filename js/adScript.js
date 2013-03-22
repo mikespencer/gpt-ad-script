@@ -53,7 +53,7 @@
   requirejs.config(dev_config);
 
   //load dependencies:
-  requirejs([siteScript, 'googletag'], function (wpAd, googletag){
+  requirejs([siteScript/*, 'googletag'*/], function (wpAd){
 
     if(wpAd.flags.debug){
       wpAd.debugQueue = [];
@@ -66,10 +66,10 @@
     }
 
     //initialise GPT
-    wpAd.gptConfig = wpAd.gptConfig.init({
+    /*wpAd.gptConfig = wpAd.gptConfig.init({
       googletag: w.googletag,
       sra: sra
-    });
+    });*/
 
     //add to placeAd2queue
     placeAd2(commercialNode, 'interstitial', false, '');
