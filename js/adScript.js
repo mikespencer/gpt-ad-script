@@ -12,7 +12,7 @@
     return false;
   }
 
-  //potential site specific scripts/modules with attribute mapping 
+  //potential site specific scripts/modules with attribute mapping
   var siteMapping = {
       wp: 'wp/main',
       slate: 'slate/main',
@@ -22,11 +22,13 @@
 
     //requirejs configuration
     dev_config = {
-      baseUrl: 'js/modules',
+      baseUrl: 'js',
       paths: {
         'googletag': 'http://www.googletagservices.com/tag/js/gpt',
+        //'googletag': 'lib/gpt',
         'jquery': 'http://js.washingtonpost.com/wpost/js/combo/?token=20121010232000&c=true&m=true&context=eidos&r=/jquery-1.7.1.js',
-        'jqueryUI': '../lib/jquery-ui.min'
+        //'jquery': 'lib/jquery',
+        'jqueryUI': 'lib/jquery-ui.min'
       },
       shim: {
         'googletag': {
@@ -53,23 +55,16 @@
   requirejs.config(dev_config);
 
   //load dependencies:
-  requirejs([siteScript/*, 'googletag'*/], function (wpAd){
+  requirejs(['wp/main'], function (wpAd){
 
     if(wpAd.flags.debug){
       wpAd.debugQueue = [];
 
-      //could even potentially pull this out completely, tweak and have as a bookmarklet...
       requirejs(['debug'], function(debug){
         wpAd.debugQueue = debug.init(wpAd.debugQueue);
       });
 
     }
-
-    //initialise GPT
-    /*wpAd.gptConfig = wpAd.gptConfig.init({
-      googletag: w.googletag,
-      sra: sra
-    });*/
 
     //add to placeAd2queue
     placeAd2(commercialNode, 'interstitial', false, '');
