@@ -11,7 +11,6 @@
          */
         return (function() {
             n.geolocation.getCurrentPosition(GetLocation);
-
             function GetLocation(location) {
                 var loc = {
                     "latitude": location.coords.latitude,
