@@ -1,4 +1,4 @@
-(function(d, define){
+(function(){
 
   'use strict';
 
@@ -14,11 +14,11 @@
      * @param {Boolean} opt_secure Secure
      */
     return function (name, val, opt_expires, opt_path, opt_domain, opt_secure) {
-      d.cookie = name + "=" + escape(val) + (opt_expires ? "; expires=" + opt_expires : "") +
+      document.cookie = name + "=" + escape(val) + (opt_expires ? "; expires=" + opt_expires : "") +
         (opt_path ? "; path=" + opt_path : "") + (opt_domain ? "; domain=" + opt_domain : "") +
         (opt_secure ? "; secure" : "");
     };
 
   });
 
-})(document, window.define);
+})();

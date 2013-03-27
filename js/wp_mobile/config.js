@@ -1,7 +1,7 @@
 /**
  *  Template of ad flights and available ad spots on washingtonpost.com (mobile web)
  */
-(function(define){
+(function(){
 
   'use strict';
 
@@ -19,4 +19,4 @@
     };
   });
 
-})(window.define);
+})();

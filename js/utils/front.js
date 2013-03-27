@@ -1,4 +1,4 @@
-(function(define){
+(function(){
 
   'use strict';
 
@@ -12,9 +12,9 @@
         return true;
       }
       //non-methode pages:
-      return w.commercialPageType && w.commercialPageType === 'front' ? true : false;
+      return window.commercialPageType && window.commercialPageType === 'front' ? true : false;
     })();
 
   });
 
-})(window.define);
+})();

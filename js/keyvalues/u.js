@@ -1,4 +1,4 @@
-(function(w, define){
+(function(){
 
   'use strict';
 
@@ -20,7 +20,7 @@
           rv = 'o*' + s_vi[0] + ',' + s_vi[1];
 
           //get page name, replace spaces with underscores and then limit the string to 100 characters
-          if(w.TWP && TWP.Data && TWP.Data.Tracking && TWP.Data.Tracking.props && TWP.Data.Tracking.props.page_name){
+          if(window.TWP && TWP.Data && TWP.Data.Tracking && TWP.Data.Tracking.props && TWP.Data.Tracking.props.page_name){
             rv += ',' + TWP.Data.Tracking.props.page_name.replace(/ /g, '_').slice(0, 100);
           }
 
@@ -35,4 +35,4 @@
 
   });
 
-})(window, window.define);
+})();

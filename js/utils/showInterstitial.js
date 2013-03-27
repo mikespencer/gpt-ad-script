@@ -1,4 +1,4 @@
-(function(d, define){
+(function(){
 
   'use strict';
 
@@ -14,8 +14,8 @@
      * @type {Boolean} true to render the interstitial, false to not.
      */
     return (function(){
-      if(d.cookie && !flags.no_interstitials){
-        var name = d.domain + '_pageview',
+      if(document.cookie && !flags.no_interstitials){
+        var name = document.domain + '_pageview',
           cookieVal = getCookie(name),
           rv = true,
           time = new Date(parseInt(new Date().getTime(), 10) + 432E5).toString();
@@ -34,4 +34,4 @@
 
   });
 
-})(document, window.define);
+})();

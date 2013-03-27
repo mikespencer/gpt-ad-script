@@ -2,7 +2,7 @@
  * Builds quigo textlinks and returns them to page
  * @class textlinks
  */
-(function(win, doc, cn, define) {
+(function(win, doc, cn) {
 
     'use strict';
 
@@ -145,4 +145,4 @@
     }
 
 
-})(window, document, window.commercialNode, window.define);
+})(window, document, window.commercialNode);

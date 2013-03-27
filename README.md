@@ -1,1 +1,1 @@
-Need to work on getting wpAd out of debug and any other modules
+FIX DEBUG MODULE

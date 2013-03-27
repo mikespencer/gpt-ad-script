@@ -1,4 +1,4 @@
-(function(d, define){
+(function(){
 
   'use strict';
 
@@ -10,7 +10,7 @@
      * @return {String|null} The cookie value, or null if the cookie does not exist.
      */
     return function(name){
-      var cookie = '' + d.cookie,
+      var cookie = '' + document.cookie,
         search = '' + name + '=',
         str = null,
         offset = 0,
@@ -31,4 +31,4 @@
 
   });
 
-})(document, window.define);
+})();

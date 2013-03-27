@@ -1,4 +1,4 @@
-(function(w, define){
+(function(){
 
   'use strict';
 
@@ -8,7 +8,7 @@
   ], function(setCookie, getCookie){
 
     return function(){
-      var name = w.location.hostname + '_poe';
+      var name = window.location.hostname + '_poe';
       if(getCookie(name)){
         return ['no'];
       } else {
@@ -19,4 +19,4 @@
 
   });
 
-})(window, window.define);
+})();
