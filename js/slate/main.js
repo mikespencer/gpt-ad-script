@@ -74,7 +74,7 @@
     return extend(defaultSettings, {
 
       //network id
-      dfpSite: '/701/wpni.',
+      dfpSite: '/701/slate.',
 
       //Ad builder
       Ad: Ad,
