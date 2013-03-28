@@ -3,7 +3,7 @@
 /**
  * Universal script that does adops initialisation and loads site specific ad script
  */
-(function(w, d, requirejs, define){
+(function(){
 
   'use strict';
 
@@ -52,18 +52,17 @@
 
 
   //configure requirejs;
-  requirejs.config(dev_config);
+  require.config(dev_config);
 
   //load dependencies:
-  requirejs(['wp/main'], function (wpAd){
+  require(['siteScript'], function (wpAd){
 
     if(wpAd.flags.debug){
       wpAd.debugQueue = [];
 
-      requirejs(['debug'], function(debug){
+      require(['debug'], function(debug){
         wpAd.debugQueue = debug.init(wpAd.debugQueue);
       });
-
     }
 
     //add to placeAd2queue
@@ -92,7 +91,7 @@
           ad = new wpAd.Ad({
             templateSettings: wpAd.config.adTypes[what],
             dfpSite: wpAd.dfpSite,
-            where: w.commercialNode,
+            where: window.commercialNode,
             size: wpAd.config.adTypes[what].size,
             what: what,
             pos: pos,
@@ -131,7 +130,7 @@
     callPlaceAd2Queue(window.placeAd2Queue);
 
     //expose wpAd to the window for debugging + external code to access/build off of.
-    w.wpAd = wpAd;
+    window.wpAd = wpAd;
 
   });
 
@@ -153,8 +152,8 @@
    * Returns the site specific script, or returns false if unable to determine
    */
   function getSite(){
-    var adScript = d.getElementById('adScript'),
-      scripts =  adScript ? [adScript] : d.getElementsByTagName('script'),
+    var adScript = document.getElementById('adScript'),
+      scripts =  adScript ? [adScript] : document.getElementsByTagName('script'),
       l = scripts.length,
       attr;
     while(l--){
@@ -166,4 +165,4 @@
     return false;
   }
 
-})(window, document, window.requirejs, window.define);
+})();

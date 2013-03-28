@@ -1,4 +1,4 @@
-(function(define){
+(function(){
 
   'use strict';
 
@@ -15,7 +15,7 @@
 
     /**
      * Each key can take either a function, or an Array of functions that can assign multiple values
-     * to that particular key. 
+     * to that particular key.
      */
     return {
       '!c': [exclusions],
@@ -30,4 +30,4 @@
 
   });
 
-})(window.define);
+})();

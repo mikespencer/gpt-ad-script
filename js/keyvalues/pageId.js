@@ -1,4 +1,4 @@
-(function(define){
+(function(){
 
   'use strict';
 
@@ -17,4 +17,4 @@
 
   });
 
-})(window.define);
+})();

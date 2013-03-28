@@ -1,7 +1,7 @@
 /**
  * this Initial setup
  */
-(function(w, d, define){
+(function(){
 
   'use strict';
 
@@ -17,7 +17,7 @@
         this.config = extend({
           async: true,
           sra: true,
-          googletag: w.googletag
+          googletag: window.googletag
         }, config);
 
         this.googletag = this.config.googletag;
@@ -46,4 +46,4 @@
 
   });
 
-})(window, document, window.define);
+})();

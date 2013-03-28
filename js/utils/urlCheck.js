@@ -1,4 +1,4 @@
-(function(d, define){
+(function(){
 
   'use strict';
 
@@ -13,7 +13,7 @@
      *    and a match.
      */
     return function (arg, opt_variable) {
-      var loc = parent.window.location.href || d.referrer,
+      var loc = parent.window.location.href || document.referrer,
         obj = (opt_variable && typeof opt_variable === 'object') ? opt_variable : null,
         regex = (obj !== null && obj.type === 'variable') ? new RegExp("[\\?&;]" + arg + "=([^&#?]*)") : new RegExp(arg),
         results = regex.exec(loc);
@@ -22,4 +22,4 @@
 
   });
 
-})(document, window.define);
+})();

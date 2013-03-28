@@ -1,7 +1,7 @@
 /**
  * Overrides for standard configuration of ad spots for unique circumstances on washingtonpost.com (desktop)
  */
-(function(define){
+(function(){
 
   'use strict';
 
@@ -30,4 +30,4 @@
 
   });
 
-})(window.define);
+})();

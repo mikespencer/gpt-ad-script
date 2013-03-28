@@ -1,13 +1,13 @@
 /**
  * Dynamically extends commercialNode
  */
-(function(define, commercialNode){
+(function(){
 
   'use strict';
 
   define(['utils/wp_meta_data'], function(wp_meta_data){
 
-    commercialNode = commercialNode || 'politics';
+    commercialNode = window.commercialNode || 'politics';
 
     return {
 
@@ -67,4 +67,4 @@
 
   });
 
-})(window.define, window.commercialNode);
+})();

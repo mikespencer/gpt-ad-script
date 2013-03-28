@@ -1,7 +1,7 @@
 /**
  * Extends Universal, page level keyvalues with wp mobile specific keyvalues
  */
-(function(define){
+(function(){
 
   'use strict';
 
@@ -30,4 +30,4 @@
 
   });
 
-})(window.define);
+})();

@@ -1,4 +1,4 @@
-(function(d, define){
+(function(){
 
   'use strict';
 
@@ -10,7 +10,7 @@
      * @return {Element} The constructed iframe DOM element.
      */
     return function (atts) {
-      var i = d.createElement('iframe'),
+      var i = document.createElement('iframe'),
         key;
 
       atts = atts || {};
@@ -34,4 +34,4 @@
 
   });
 
-})(document, window.define);
+})();

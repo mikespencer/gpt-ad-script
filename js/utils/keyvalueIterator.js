@@ -1,4 +1,4 @@
-(function(define){
+(function(){
 
   'use strict';
 
@@ -16,7 +16,7 @@
       var rv = {},
         key, val, k, fnlen;
 
-      //loop through kvs 
+      //loop through kvs
       for(key in kvs){
         if(kvs.hasOwnProperty(key)){
 
@@ -59,4 +59,4 @@
 
   });
 
-})(window.define);
+})();

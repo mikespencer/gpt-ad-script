@@ -1,4 +1,4 @@
-(function(d, define){
+(function(){
 
   'use strict';
 
@@ -9,13 +9,13 @@
      * @param {String} url A URL to the CSS file.
      */
     return function (url) {
-      var l = d.createElement('link');
+      var l = document.createElement('link');
       l.href = url;
       l.rel = 'stylesheet';
       l.type = 'text/css';
-      d.getElementsByTagName('head')[0].appendChild(l);
+      document.getElementsByTagName('head')[0].appendChild(l);
     };
 
   });
 
-})(document, window.define);
+})();

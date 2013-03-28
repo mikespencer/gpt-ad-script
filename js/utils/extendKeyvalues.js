@@ -1,4 +1,4 @@
-(function(define){
+(function(){
 
   'use strict';
 
@@ -7,7 +7,7 @@
     /**
      * Merges and extends one set of keyvalue functions into another as arrays of functions.
      * @param {Object} kvs Object to be extended (the defaults).
-     * @param {Object} additions Object to be merged into the default Object, extending existing 
+     * @param {Object} additions Object to be merged into the default Object, extending existing
      *    keys, or creating new ones that didn't previously exist
      * @return {Object} The merged Object containing arrays of functions assigned to keys.
      */
@@ -28,4 +28,4 @@
 
   });
 
-})(window.define);
+})();

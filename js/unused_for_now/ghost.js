@@ -2,7 +2,7 @@
 
 //REQUIRES JQUERY
 
-(function(w, d, $, define) {
+(function(w, d, $) {
 
     'use strict';
 
@@ -96,4 +96,4 @@
     };
 
 
-})(window, document, window.jquery, window.define);
+})(window, document, window.jquery);

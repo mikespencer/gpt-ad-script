@@ -1,4 +1,4 @@
-(function(define){
+(function(){
 
   'use strict';
 
@@ -6,4 +6,4 @@
     return (/allAds/.test(location.search));
   });
 
-})(window.define);
+})();

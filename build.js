@@ -1,11 +1,15 @@
 ({
   appDir: "./",
   baseUrl: "js/",
-  dir: '../built-gpt-ad-script',
+  dir: '../gpt-built  ',
+  mainConfigFile: 'js/adScript.js',
 
   modules: [
     {
-      name: "adScript"
+      name: "wp_mobile/main"
+    },
+    {
+      name: "wp/main"
     }
   ],
 

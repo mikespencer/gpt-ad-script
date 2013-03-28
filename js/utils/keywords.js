@@ -1,4 +1,4 @@
-(function(d, define){
+(function(){
 
   'use strict';
 
@@ -14,7 +14,7 @@
           wp_meta_data.keywords;
       } else {
         //Pages where wp_meta_data.keywords is undefined.. there are plenty:
-        var meta = d.getElementsByTagName('meta'),
+        var meta = document.getElementsByTagName('meta'),
           l = meta.length,
           content;
 
@@ -32,4 +32,4 @@
 
   });
 
-})(document, window.define);
+})();

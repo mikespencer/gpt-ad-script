@@ -1,7 +1,7 @@
 /**
  * Provides core functionality for overrides
  */
-(function(define){
+(function(){
 
   'use strict';
 
@@ -38,4 +38,4 @@
 
   });
 
-})(window.define);
+})();

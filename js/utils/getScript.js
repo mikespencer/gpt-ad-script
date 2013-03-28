@@ -1,4 +1,4 @@
-(function(d, define){
+(function(){
 
   'use strict';
 
@@ -10,8 +10,8 @@
      * @param {Function} opt_callback Callback function to execute once the script has loaded.
      */
     return function(src, opt_callback) {
-      var s = d.createElement('script'),
-        target = d.body || d.getElementsByTagName('head')[0] || false;
+      var s = document.createElement('script'),
+        target = document.body || document.getElementsByTagName('head')[0] || false;
       opt_callback = opt_callback || false;
       if(target){
         s.type = 'text/' + (src.type || 'javascript');
@@ -31,4 +31,4 @@
 
   });
 
-})(document, window.define);
+})();

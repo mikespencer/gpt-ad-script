@@ -1,4 +1,4 @@
-(function(w, d, define) {
+(function(w, d) {
 
     'use strict';
 
@@ -30,4 +30,4 @@
     };
 
 
-})(window, document, window.define);
+})(window, document);

@@ -1,11 +1,11 @@
 /**
  * Defaults required by all ad scripts
  */
-(function(define){
+(function(){
 
   'use strict';
 
-  define(function(){
+  define(function(require){
 
     return {
 
@@ -22,4 +22,4 @@
 
   });
 
-})(window.define);
+})();

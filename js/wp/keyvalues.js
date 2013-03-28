@@ -1,7 +1,7 @@
 /**
 * Extends universal desktop, page level keyvalues with wp desktop specific keyvalues
 */
-(function(define){
+(function(){
 
   'use strict';
 
@@ -21,4 +21,4 @@
 
   });
 
-})(window.define);
+})();

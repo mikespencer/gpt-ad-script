@@ -3,7 +3,7 @@
 /**
  * wpAd Ad object. Builds an individual ad
  */
-(function(w, d, define){
+(function(){
 
   'use strict';
 
@@ -48,7 +48,7 @@
         ],
         dfpcomp: [
           function(){
-            return w.dfpcomp ? [w.dfpcomp] : false;
+            return window.dfpcomp ? [window.dfpcomp] : false;
           }
         ],
         onTheFly: [
@@ -72,8 +72,8 @@
       },
 
       getSlug: function(){
-        this.config.slug = d.getElementById('slug_' + this.config.pos);
-        this.config.wpni_adi = d.getElementById('wpni_adi_' + this.config.pos);
+        this.config.slug = document.getElementById('slug_' + this.config.pos);
+        this.config.wpni_adi = document.getElementById('wpni_adi_' + this.config.pos);
       },
 
       getContainer: function(){
@@ -97,10 +97,10 @@
       },
 
       addInterstitialDiv: function(){
-        var s = d.createElement('div');
+        var s = document.createElement('div');
         s.id = 'slug_' + this.config.pos;
         s.style.display = 'none';
-        d.body.insertBefore(s, d.body.firstChild);
+        document.body.insertBefore(s, document.body.firstChild);
       },
 
       buildGPTSlot: function(){
@@ -152,4 +152,4 @@
 
   });
 
-})(window, document, window.define);
+})();

@@ -1,7 +1,7 @@
 /**
  * washingtonpost.com site specific ad script (desktop)
  */
-(function(define){
+(function(){
 
   'use strict';
 
@@ -104,4 +104,4 @@
     });
   });
 
-})(window.define);
+})();

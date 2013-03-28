@@ -1,7 +1,7 @@
 /**
  * WP mobile web specific ad script
  */
-(function(define){
+(function(){
 
   'use strict';
 
@@ -53,4 +53,4 @@
 
   });
 
-})(window.define);
+})();

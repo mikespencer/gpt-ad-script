@@ -2,11 +2,11 @@
  * Debug info for adops
  * For now this will do for basic dubug functionality, but this could do with a major cleanup before launch
  */
-(function(w, d, define){
+(function(w, d){
 
   'use strict';
 
-  define([
+  define('debug', [
     'jqueryUI',
     'utils/addCSS',
     'utils/extend',
@@ -62,19 +62,19 @@
 
       log: function(){
         try{
-          if(w.console){
+          if(window.console){
             console.log.apply(console, arguments);
           }
         }catch(e){}
       },
 
       getTemplateId: function(ad){
-        var t = (w.wpAd.flights[ad.config.pos] || wpAd.flights[ad.config.what + '*']);
+        var t = (window.wpAd.flights[ad.config.pos] || wpAd.flights[ad.config.what + '*']);
         return t ? t.id : 'unknown';
       },
 
       buildDebugBox: function(ad){
-        return $(d.createElement('div')).addClass('ad-debug-box').html(this.content(ad)).prependTo('body')[0];
+        return $(document.createElement('div')).addClass('ad-debug-box').html(this.content(ad)).prependTo('body')[0];
       },
 
       title: function(ad){
@@ -145,4 +145,4 @@
 
   });
 
-})(window, document, define);
+})(window, document);

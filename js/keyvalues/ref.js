@@ -1,4 +1,4 @@
-(function(d, define){
+(function(){
 
   'use strict';
 
@@ -6,7 +6,7 @@
 
     return function(){
       var ref = [],
-        r = d.referrer || '';
+        r = document.referrer || '';
       if(/facebook\.com|digg\.com|reddit\.com|myspace\.com|newstrust\.net|twitter\.com|delicious\.com|stumbleupon\.com/i.test(r)) {
         ref.push('social');
       }
@@ -18,4 +18,4 @@
 
   });
 
-})(document, window.define);
+})();
