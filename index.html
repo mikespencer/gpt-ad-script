@@ -4,22 +4,12 @@
     <title>Test</title>
     <script>
       var commercialNode = 'politics';
-      /**
-       * AdOps config
-       */
-      var googletag = googletag || {},
-
-        //store placeAd2 calls if 'real' placeAd2 isn't defined yet
-        placeAd2Queue = [];
-
-      googletag.cmd = googletag.cmd || [];
-
-      //placeholder until placeAd2 is defined
-      function placeAd2(){
-        placeAd2Queue.push(arguments);
-      }
     </script>
-    <script src="js/adScript-wp.js" async></script>
+
+    <script src="js/ads-sync.js"></script>
+    <!--script src="js/adScript-wp.js" async></script-->
+    <script src="js/require.js" data-main="js/adScript" id="adScript" data-adops-site="wp"></script>
+
     <script>
       var wp_meta_data = {
         contentType: ['BlogStory'], page_id: ['thisIsThePageId'], keywords: ['energy', 'disaster', 'test', 'page']

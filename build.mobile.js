@@ -2,11 +2,10 @@
   baseUrl: "js/",
   mainConfigFile: 'js/adScript.js',
 
-  name: 'almond',
-  include: 'adScript',
+  name: 'adScript',
+  include: ['almond'],
   out: 'js/adScript-mobile.js',
   //excludeShallow: 'debug',
-  //wrap: true,
 
   namespace: "adsRequire",
 

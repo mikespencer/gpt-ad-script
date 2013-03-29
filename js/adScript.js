@@ -24,6 +24,9 @@
     dev_config = {
       baseUrl: 'js',
       paths: {
+        //remove from optimized script
+        'siteScript': siteMapping[getSite()] || siteMapping.wp,
+
         'googletag': 'http://www.googletagservices.com/tag/js/gpt',
         //'googletag': 'lib/gpt',
         'jquery': 'http://js.washingtonpost.com/wpost/js/combo/?token=20121010232000&c=true&m=true&context=eidos&r=/jquery-1.7.1.js',
@@ -55,14 +58,11 @@
   require.config(dev_config);
 
   //load dependencies:
-  require(['siteScript'], function (wpAd){
+  require(['siteScript', 'utils/getScript'], function (wpAd, getScript){
 
     if(wpAd.flags.debug){
-      wpAd.debugQueue = [];
-
-      require(['debug'], function(debug){
-        wpAd.debugQueue = debug.init(wpAd.debugQueue);
-      });
+      wpAd.debugQueue = wpAd.debugQueue || [];
+      setTimeout(function(){getScript('js/debugBookmarklet.js');}, 1000);
     }
 
     //add to placeAd2queue

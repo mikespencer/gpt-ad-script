@@ -1,4 +1,4 @@
-({
+  ({
   appDir: "./",
   baseUrl: "js/",
   dir: '../gpt-built  ',
