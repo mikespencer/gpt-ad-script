@@ -12,6 +12,9 @@
       //stores all ads on the page here
       adsOnPage: {},
 
+      //stores debug info
+      debugQueue: [],
+
       //stores all ads placements on the page that aren't currently open (for debugging).
       adsDisabledOnPage: {},
 

@@ -29,21 +29,20 @@
       cssURL: 'css/debug.css',
 
       init: function(queue){
-        if(queue){
-          var l = queue.length,
-            i = 0;
+        var l = queue.length,
+          i = 0;
 
-          //addCSS(this.cssURL);
-          var link = d.createElement('link');
-          link.href = this.cssURL;
-          link.type = 'text/css';
-          link.rel = 'stylesheet';
-          d.body.insertBefore(link, d.body.firstChild);
+        //addCSS(this.cssURL);
+        var link = d.createElement('link');
+        link.href = this.cssURL;
+        link.type = 'text/css';
+        link.rel = 'stylesheet';
+        d.body.insertBefore(link, d.body.firstChild);
 
-          for(i;i<l;i++){
-            this.exec.call(this, queue[i]);
-          }
+        for(i;i<l;i++){
+          this.exec.call(this, queue[i]);
         }
+
         return { push: $.proxy(this.exec, this) };
       },
 

@@ -38,8 +38,7 @@
   require(['siteScript', 'utils/getScript'], function (wpAd, getScript){
 
     if(wpAd.flags.debug){
-      wpAd.debugQueue = wpAd.debugQueue || [];
-      getScript('js/debug.js');
+      //getScript('js/debug.js');
     }
 
     //add to placeAd2queue
@@ -97,9 +96,8 @@
         wpAd.adsDisabledOnPage[pos] = true;
       }
 
-      if(wpAd.flags.debug){
-        wpAd.debugQueue.push(pos);
-      }
+      //always create this queue. If we want to implement debug as bookmarklet, this will be referenced:
+      wpAd.debugQueue.push(pos);
 
     };
 
