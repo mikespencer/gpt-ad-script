@@ -1,4 +1,5 @@
 /*global placeAd2:true, placeAd2Queue */
+/*jshint indent:2*/
 
 /**
  * Universal script that does adops initialisation and loads site specific ad script
@@ -12,57 +13,34 @@
     return false;
   }
 
-  //potential site specific scripts/modules with attribute mapping
-  var siteMapping = {
-      wp: 'wp/main',
-      slate: 'slate/main',
-      theroot: 'theroot/main',
-      wp_mobile: 'wp_mobile/main'
-    },
-
-    //requirejs configuration
-    dev_config = {
-      baseUrl: 'js',
-      paths: {
-        //remove from optimized script
-        'siteScript': siteMapping[getSite()] || siteMapping.wp,
-
-        'googletag': 'http://www.googletagservices.com/tag/js/gpt',
-        //'googletag': 'lib/gpt',
-        'jquery': 'http://js.washingtonpost.com/wpost/js/combo/?token=20121010232000&c=true&m=true&context=eidos&r=/jquery-1.7.1.js',
-        //'jquery': 'lib/jquery',
-        'jqueryUI': 'lib/jquery-ui.min'
-      },
-      shim: {
-        'googletag': {
-          exports: 'googletag'
-        },
-        'jqueryUI':{
-          deps: ['jquery'],
-          exports: '$'
-        }
-      }
-    },
-
-    //single request architecture
-    sra = true,
-
-    //async rendering
-    async = true,
-
-    //determine site script or default to 'wp'
-    siteScript = siteMapping[getSite()] || siteMapping.wp;
-
-
   //configure requirejs;
-  require.config(dev_config);
+  require.config({
+    baseUrl: 'js',
+    paths: {
+      //remove from optimized script
+      //'siteScript': siteMapping[getSite()] || siteMapping.wp,
+
+      'googletag': 'http://www.googletagservices.com/tag/js/gpt',
+      'jquery': 'http://js.washingtonpost.com/wpost/js/combo/?token=20121010232000&c=true&m=true&context=eidos&r=/jquery-1.7.1.js',
+      'jqueryUI': 'lib/jquery-ui.min'
+    },
+    shim: {
+      'googletag': {
+        exports: 'googletag'
+      },
+      'jqueryUI':{
+        deps: ['jquery'],
+        exports: '$'
+      }
+    }
+  });
 
   //load dependencies:
   require(['siteScript', 'utils/getScript'], function (wpAd, getScript){
 
     if(wpAd.flags.debug){
       wpAd.debugQueue = wpAd.debugQueue || [];
-      setTimeout(function(){getScript('js/debugBookmarklet.js');}, 1000);
+      getScript('js/debug.js');
     }
 
     //add to placeAd2queue
@@ -134,7 +112,6 @@
 
   });
 
-
   /**
    * Calls queued up placeAd2 calls when placeAd2 is redefined above
    */
@@ -146,23 +123,6 @@
         placeAd2.apply(window, queue[i]);
       }
     }
-  }
-
-  /**
-   * Returns the site specific script, or returns false if unable to determine
-   */
-  function getSite(){
-    var adScript = document.getElementById('adScript'),
-      scripts =  adScript ? [adScript] : document.getElementsByTagName('script'),
-      l = scripts.length,
-      attr;
-    while(l--){
-      attr = scripts[l].getAttribute('data-adops-site');
-      if(attr){
-        return attr;
-      }
-    }
-    return false;
   }
 
 })();

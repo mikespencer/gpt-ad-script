@@ -2,16 +2,27 @@
  * Debug info for adops
  * For now this will do for basic dubug functionality, but this could do with a major cleanup before launch
  */
-(function(w, d){
+(function(w, d, wpAd){
 
   'use strict';
 
-  define([
-    'jqueryUI',
-    'utils/addCSS',
-    'utils/extend',
-    'utils/clone'
-  ], function($, addCSS, extend, clone){
+  var jq = 'http://js.washingtonpost.com/wpost/js/combo/?token=20121010232000&c=true&m=true&context=eidos&r=/jquery-1.7.1.js',
+    jqui = '/js/lib/jquery-ui.min.js';
+
+  if(!w.jQuery){
+    getScript(jq, function(){
+      getScript(jqui, init);
+    });
+  } else{
+    getScript(jqui, init);
+  }
+
+  function init(){
+    var queue = wpAd.debugQueue || [];
+    wpAd.debugQueue = debug(w.jQuery).init(queue);
+  }
+
+  function debug($){
 
     return {
 
@@ -22,7 +33,12 @@
           var l = queue.length,
             i = 0;
 
-          addCSS(this.cssURL);
+          //addCSS(this.cssURL);
+          var link = d.createElement('link');
+          link.href = this.cssURL;
+          link.type = 'text/css';
+          link.rel = 'stylesheet';
+          d.body.insertBefore(link, d.body.firstChild);
 
           for(i;i<l;i++){
             this.exec.call(this, queue[i]);
@@ -64,14 +80,14 @@
 
       log: function(){
         try{
-          if(window.console){
+          if(w.console){
             console.log.apply(console, arguments);
           }
         }catch(e){}
       },
 
       getTemplateId: function(ad){
-        var t = (window.wpAd.flights[ad.config.pos] || wpAd.flights[ad.config.what + '*']);
+        var t = (w.wpAd.flights[ad.config.pos] || wpAd.flights[ad.config.what + '*']);
         return t ? t.id : 'unknown';
       },
 
@@ -144,7 +160,63 @@
       }
 
     };
+  }
 
-  });
 
-})(window, document);
+  /**
+   * HELPER FUNCTIONS:
+   */
+
+  function getScript(src, opt_callback){
+    var s = document.createElement('script'),
+      target = document.body || document.getElementsByTagName('head')[0] || false;
+    opt_callback = opt_callback || false;
+    if(target){
+      s.type = 'text/' + (src.type || 'javascript');
+      s.src = src.src || src;
+      if(typeof opt_callback === 'function'){
+        s.onreadystatechange = s.onload = function() {
+          var state = s.readyState;
+          if (!opt_callback.done && (!state || /loaded|complete/.test(state))) {
+            opt_callback.done = true;
+            opt_callback();
+          }
+        };
+      }
+      target.appendChild(s);
+    }
+  }
+
+  function isObject(a){
+    return typeof a === 'object' && a !== null && Object.prototype.toString.call(a) === '[object Object]';
+  }
+
+  function clone(obj) {
+    if(!isObject(obj)) {
+      return obj;
+    }
+    var temp = new obj.constructor(),
+      key;
+    for(key in obj) {
+      if(key !== '') {
+        temp[key] = clone(obj[key]);
+      }
+    }
+    return temp;
+  }
+
+  function extend(obj, additions, deep){
+    deep = deep || false;
+    for(var key in additions){
+      if(additions.hasOwnProperty(key)){
+        if(!deep || (!isObject(obj[key]) || !isObject(additions[key]))){
+          obj[key] = additions[key];
+        } else{
+          obj[key] = extend(obj[key], additions[key], true);
+        }
+      }
+    }
+    return obj;
+  }
+
+})(window, document, wpAd);
