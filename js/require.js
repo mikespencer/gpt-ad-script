@@ -33,19 +33,3 @@ D=document.getElementsByTagName("base")[0]))B=w.head=D.parentNode;l.onError=func
 !V?(O=!0,g.attachEvent("onreadystatechange",b.onScriptLoad)):(g.addEventListener("load",b.onScriptLoad,!1),g.addEventListener("error",b.onScriptError,!1)),g.src=d,K=g,D?B.insertBefore(g,D):B.appendChild(g),K=null,g;$&&(importScripts(d),b.completeLoad(c))};z&&M(document.getElementsByTagName("script"),function(b){B||(B=b.parentNode);if(s=b.getAttribute("data-main"))return q.baseUrl||(H=s.split("/"),ba=H.pop(),ca=H.length?H.join("/")+"/":"./",q.baseUrl=ca,s=ba),s=s.replace(aa,""),q.deps=q.deps?q.deps.concat(s):
 [s],!0});define=function(b,c,d){var i,g;"string"!==typeof b&&(d=c,c=b,b=null);J(c)||(d=c,c=[]);!c.length&&I(d)&&d.length&&(d.toString().replace(ia,"").replace(ja,function(b,d){c.push(d)}),c=(1===d.length?["require"]:["require","exports","module"]).concat(c));if(O){if(!(i=K))P&&"interactive"===P.readyState||M(document.getElementsByTagName("script"),function(b){if("interactive"===b.readyState)return P=b}),i=P;i&&(b||(b=i.getAttribute("data-requiremodule")),g=C[i.getAttribute("data-requirecontext")])}(g?
 g.defQueue:R).push([b,c,d])};define.amd={jQuery:!0};l.exec=function(b){return eval(b)};l(q)}})(this);
-
-
-/**
- * AdOps config
- */
-var googletag = googletag || {},
-
-  //store placeAd2 calls if 'real' placeAd2 isn't defined yet
-  placeAd2Queue = [];
-
-googletag.cmd = googletag.cmd || [];
-
-//placeholder until placeAd2 is defined
-function placeAd2(){
-  placeAd2Queue.push(arguments);
-}

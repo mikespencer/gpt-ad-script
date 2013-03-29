@@ -1,20 +1,20 @@
 ({
 
-  baseUrl: "js/",
+  baseUrl: "../js/",
 
-  //define wp specific script output
-  mainConfigFile: 'js/adScript.js',
+  mainConfigFile: '../js/adScript.js',
 
   name: 'adScript',
 
   include: ['almond'],
 
-  out: 'js/adScript-wp.js',
+  //define wp specific script output
+  out: '../js/min/wp.js',
 
   //for testing
   //optimize: 'none',
 
-  namespace: "adsRequire",
+  namespace: "wpAdRequire",
 
   paths: {
     //'googletag': 'http://www.googletagservices.com/tag/js/gpt',
