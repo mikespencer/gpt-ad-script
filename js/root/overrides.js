@@ -5,7 +5,7 @@
 
   'use strict';
 
-  define(['overrides'], function(overrides){
+  define(['overrides', 'utils/reload'], function(overrides, reload){
 
     /**
      * Object of checks for overrides
@@ -14,15 +14,14 @@
      */
     overrides.checks = {
       pos: {
-        'leaderboard$': function(){
-          this.keyvalues.lb_test_kv = this.keyvalues.lb_test_kv || [];
-          this.keyvalues.lb_test_kv.push('true');
-        }
+      	
       },
       where: {
-        '^politics$': function(){
-          this.config.where += '/front';
-        }
+		'homepage': function() {
+			if (reload) {
+				this.config.where += '/refresh';
+			};
+		}
       }
     };
 
