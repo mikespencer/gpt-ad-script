@@ -82,7 +82,7 @@
       //Initial GPT setup
       gptConfig: gptConfig.init({
         googletag: googletag,
-        sra: true
+        sra: false
       }),
 
       flags: flags,

@@ -2,14 +2,16 @@
 
   baseUrl: "../js/",
 
-  mainConfigFile: '../js/adScript.js',
+  mainConfigFile: '../js/main.js',
 
-  name: 'adScript',
+  name: 'main',
 
   include: ['almond'],
 
   //define mobile specific script output
   out: '../js/min/mobile.js',
+
+  preserveLicenseComments: false,
 
   //for testing
   //optimize: 'none',

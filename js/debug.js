@@ -1,6 +1,6 @@
 /**
  * Debug info for adops
- * For now this will do for basic dubug functionality, but this could do with a major cleanup before launch
+ * For now this will do for basic dubug functionality
  */
 (function(w, d, wpAd){
 

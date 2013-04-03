@@ -5,22 +5,13 @@
 
   'use strict';
 
-  define(['utils/wp_meta_data'], function(wp_meta_data){
+  define(['utils/wp_meta_data', 'utils/contentTypes'], function(wp_meta_data, contentTypes){
 
     commercialNode = window.commercialNode || 'politics';
 
     return {
 
-      contentType: {
-        audiostory: 'audio',
-        blogstory: 'blog',
-        front: 'front',
-        graphicstory: 'graphic',
-        mediagallery: 'photo',
-        panostory: 'pano',
-        ugcphotostory: 'ugc',
-        videostory: 'video'
-      },
+      contentType: contentTypes,
 
       zones: {
         contentType: function(){

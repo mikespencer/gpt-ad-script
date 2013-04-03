@@ -16,12 +16,10 @@
       init: function(config){
         this.config = extend({
           async: true,
-          sra: true,
-          googletag: window.googletag
+          sra: true
         }, config);
 
-        this.googletag = this.config.googletag;
-        this.pubservice = this.googletag.pubads();
+        this.pubservice = googletag.pubads();
 
         this.keyvalues = keyvalueIterator(this.keyvaluesConfig, this);
         addKeyvalues(this.keyvalues, this.pubservice);
@@ -32,7 +30,7 @@
           this.pubservice.enableAsyncRendering();
         }
 
-        this.googletag.enableServices();
+        googletag.enableServices();
 
         return this;
       },

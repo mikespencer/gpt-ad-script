@@ -2,14 +2,16 @@
 
   baseUrl: "../js/",
 
-  mainConfigFile: '../js/adScript.js',
+  mainConfigFile: '../js/main.js',
 
-  name: 'adScript',
+  name: 'main',
 
   include: ['almond'],
 
   //define wp specific script output
   out: '../js/min/wp.js',
+
+  preserveLicenseComments: false,
 
   //for testing
   //optimize: 'none',

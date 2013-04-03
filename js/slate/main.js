@@ -11,7 +11,6 @@
     'googletag',
     'Ad',
     'gptConfig',
-    'utils/zoneBuilder',
     'utils/templateBuilder',
     'utils/extend',
     'utils/extendKeyvalues',
@@ -28,7 +27,6 @@
     googletag,
     Ad,
     gptConfig,
-    zoneBuilder,
     templateBuilder,
     extend,
     extendKeyvalues,
@@ -41,23 +39,10 @@
 
   ){
 
-    //build commercialNode
-    commercialNode = zoneBuilder.exec();
-
     //extend or add keyvalues at the ad level
     //each key can accept a function, or an array of functions
     extendKeyvalues(Ad.prototype.keyvaluesConfig, {
-      ad: function(){
-        if(config.adTypes[this.config.what].keyvalues && config.adTypes[this.config.what].keyvalues.ad){
-          return config.adTypes[this.config.what].keyvalues.ad;
-        }
-      },
-      pos: function(){
-        var c = config.adTypes[this.config.pos];
-        if(c && c.keyvalues && c.keyvalues.pos){
-          return c.keyvalues.pos;
-        }
-      }
+      //none at the moment
     });
 
     //add page specific keyvalues
@@ -93,13 +78,7 @@
       flights: templateBuilder.exec(config.flights),
 
       //overrides
-      overrides: overrides,
-
-      cleanScriptTags: function(){
-        // Found a call to this on a test page. Adding dummy function to prevent errors until we
-        // figure out what to do with this, as it won't be needed when we switch to GPT
-        return false;
-      }
+      overrides: overrides
 
     });
   });

@@ -15,20 +15,18 @@
     overrides.checks = {
       pos: {
         'leaderboard$': function(){
-			if (this.config.where === "homepage") {
-				this.config.where += '/lb' + (reload ? 'refresh' : '');
-			};
+          if (this.config.where === "homepage") {
+            this.config.where += '/lb' + (reload ? 'refresh' : '');
+          }
         },
-		'rightflex$': function() {
-			if (this.config.where === "homepage") {
-				this.config.where += '/hp' + (reload ? 'refresh' : '');
-			};
-		}
+        'rightflex$': function() {
+          if (this.config.where === "homepage") {
+            this.config.where += '/hp' + (reload ? 'refresh' : '');
+          }
+        }
       },
       where: {
-        '^politics$': function(){
-          this.config.where += '/front';
-        }
+
       }
     };
 

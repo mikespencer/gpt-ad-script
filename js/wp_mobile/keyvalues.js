@@ -7,7 +7,7 @@
 
   define([
     'utils/extendKeyvalues',
-    'packages/keyvalues_mobile'
+    'packages/mobile/keyvalues'
   ], function(extendKeyvalues, kvs){
 
     return extendKeyvalues(kvs, {

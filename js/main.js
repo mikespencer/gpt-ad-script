@@ -17,9 +17,10 @@
   require.config({
     baseUrl: 'js',
     paths: {
-      //remove from optimized script
-      'siteScript': 'wp/main',
+      //remove from optimized script - just here for dev
+      'siteScript': 'slate/main',
       'googletag': 'http://www.googletagservices.com/tag/js/gpt',
+      //'googletag': 'lib/gpt',
       'jquery': 'http://js.washingtonpost.com/wpost/js/combo/?token=20121010232000&c=true&m=true&context=eidos&r=/jquery-1.7.1.js',
       'jqueryUI': 'lib/jquery-ui.min'
     },
@@ -38,7 +39,7 @@
   require(['siteScript', 'utils/getScript'], function (wpAd, getScript){
 
     if(wpAd.flags.debug){
-      //getScript('js/debug.js');
+      getScript('js/debug.js');
     }
 
     //add to placeAd2queue
@@ -46,6 +47,7 @@
 
     //redefine placeAd2
     placeAd2 = function(where, what, del, onTheFly){
+
       var pos = what,
         posOverride = false,
         posArray,
