@@ -1,1 +1,2133 @@
-var wpAdRequire;(function(){if(typeof wpAdRequire=="undefined"){wpAdRequire={};var e,t,n;(function(r){function d(e,t){return h.call(e,t)}function v(e,t){var n,r,i,s,o,u,a,f,c,h,p=t&&t.split("/"),d=l.map,v=d&&d["*"]||{};if(e&&e.charAt(0)===".")if(t){p=p.slice(0,p.length-1),e=p.concat(e.split("/"));for(f=0;f<e.length;f+=1){h=e[f];if(h===".")e.splice(f,1),f-=1;else if(h===".."){if(f===1&&(e[2]===".."||e[0]===".."))break;f>0&&(e.splice(f-1,2),f-=2)}}e=e.join("/")}else e.indexOf("./")===0&&(e=e.substring(2));if((p||v)&&d){n=e.split("/");for(f=n.length;f>0;f-=1){r=n.slice(0,f).join("/");if(p)for(c=p.length;c>0;c-=1){i=d[p.slice(0,c).join("/")];if(i){i=i[r];if(i){s=i,o=f;break}}}if(s)break;!u&&v&&v[r]&&(u=v[r],a=f)}!s&&u&&(s=u,o=a),s&&(n.splice(0,o,s),e=n.join("/"))}return e}function m(e,t){return function(){return s.apply(r,p.call(arguments,0).concat([e,t]))}}function g(e){return function(t){return v(t,e)}}function y(e){return function(t){a[e]=t}}function b(e){if(d(f,e)){var t=f[e];delete f[e],c[e]=!0,i.apply(r,t)}if(!d(a,e)&&!d(c,e))throw new Error("No "+e);return a[e]}function w(e){var t,n=e?e.indexOf("!"):-1;return n>-1&&(t=e.substring(0,n),e=e.substring(n+1,e.length)),[t,e]}function E(e){return function(){return l&&l.config&&l.config[e]||{}}}var i,s,o,u,a={},f={},l={},c={},h=Object.prototype.hasOwnProperty,p=[].slice;o=function(e,t){var n,r=w(e),i=r[0];return e=r[1],i&&(i=v(i,t),n=b(i)),i?n&&n.normalize?e=n.normalize(e,g(t)):e=v(e,t):(e=v(e,t),r=w(e),i=r[0],e=r[1],i&&(n=b(i))),{f:i?i+"!"+e:e,n:e,pr:i,p:n}},u={require:function(e){return m(e)},exports:function(e){var t=a[e];return typeof t!="undefined"?t:a[e]={}},module:function(e){return{id:e,uri:"",exports:a[e],config:E(e)}}},i=function(e,t,n,i){var s,l,h,p,v,g=[],w;i=i||e;if(typeof n=="function"){t=!t.length&&n.length?["require","exports","module"]:t;for(v=0;v<t.length;v+=1){p=o(t[v],i),l=p.f;if(l==="require")g[v]=u.require(e);else if(l==="exports")g[v]=u.exports(e),w=!0;else if(l==="module")s=g[v]=u.module(e);else if(d(a,l)||d(f,l)||d(c,l))g[v]=b(l);else{if(!p.p)throw new Error(e+" missing "+l);p.p.load(p.n,m(i,!0),y(l),{}),g[v]=a[l]}}h=n.apply(a[e],g);if(e)if(s&&s.exports!==r&&s.exports!==a[e])a[e]=s.exports;else if(h!==r||!w)a[e]=h}else e&&(a[e]=n)},e=t=s=function(e,t,n,a,f){return typeof e=="string"?u[e]?u[e](t):b(o(e,t).f):(e.splice||(l=e,t.splice?(e=t,t=n,n=null):e=r),t=t||function(){},typeof n=="function"&&(n=a,a=f),a?i(r,e,t,n):setTimeout(function(){i(r,e,t,n)},4),s)},s.config=function(e){return l=e,l.deps&&s(l.deps,l.callback),s},n=function(e,t,n){t.splice||(n=t,t=[]),!d(a,e)&&!d(f,e)&&(f[e]=[e,t,n])},n.amd={jQuery:!0}})(),wpAdRequire.requirejs=e,wpAdRequire.require=t,wpAdRequire.define=n}})(),wpAdRequire.define("almond",function(){}),function(){wpAdRequire.define("defaultSettings",[],function(){return{adsOnPage:{},debugQueue:[],adsDisabledOnPage:{},init:[]}})}(),function(){var e=void 0,g=!0,h=null,k=!1,m,n=this,aa=function(e){var t=typeof e;if("object"==t){if(!e)return"null";if(e instanceof Array)return"array";if(e instanceof Object)return t;var n=Object.prototype.toString.call(e);if("[object Window]"==n)return"object";if("[object Array]"==n||"number"==typeof e.length&&"undefined"!=typeof e.splice&&"undefined"!=typeof e.propertyIsEnumerable&&!e.propertyIsEnumerable("splice"))return"array";if("[object Function]"==n||"undefined"!=typeof e.call&&"undefined"!=typeof e.propertyIsEnumerable&&!e.propertyIsEnumerable("call"))return"function"}else if("function"==t&&"undefined"==typeof e.call)return"object";return t},p=function(e){return"array"==aa(e)},ba=function(e){var t=aa(e);return"array"==t||"object"==t&&"number"==typeof e.length},r=function(e){return"string"==typeof e},s=function(e){return"number"==typeof e},t=function(e){return"function"==aa(e)},ca="closure_uid_"+(1e9*Math.random()>>>0),da=0,ea=function(e,t,n){return e.call.apply(e.bind,arguments)},fa=function(e,t,n){if(!e)throw Error();if(2<arguments.length){var r=Array.prototype.slice.call(arguments,2);return function(){var n=Array.prototype.slice.call(arguments);return Array.prototype.unshift.apply(n,r),e.apply(t,n)}}return function(){return e.apply(t,arguments)}},ga=function(e,t,n){return ga=Function.prototype.bind&&-1!=Function.prototype.bind.toString().indexOf("native code")?ea:fa,ga.apply(h,arguments)},u=function(e,t){function n(){}n.prototype=t.prototype,e.Wb=t.prototype,e.prototype=new n},x=function(e){return e=parseFloat(e),isNaN(e)||1<e||0>e?0:e},ha=/^([\w-]+\.)*([\w-]{2,})(\:[0-9]+)?$/,y=function(e,t){if(!e)return t;var n=e.match(ha);return n?n[0]:t},ia=x("0.02"),ja=x("1"),ka=x("1"),la=x("0.005"),ma=x("0.01"),na=x("0.001"),oa=parseInt("1500",10),pa=isNaN(oa)?1500:oa,qa=x("0.01"),ra=x("0.0"),sa=/^true$/.test("false")?g:k,ta=function(){return y("","pagead2.googlesyndication.com")},ua="http://"+ta()+"/pagead/show_ads.js",z=function(){return n.googletag||(n.googletag={})},A=function(e,t,n){var r=z();if(!(e in r)||n)r[e]=t},va=function(e,t){e.addEventListener?e.addEventListener("load",t,k):e.attachEvent&&e.attachEvent("onload",t)},D={};D[1]=ta(),D[2]=y("","pubads.g.doubleclick.net"),D[3]=y("","securepubads.g.doubleclick.net"),D[4]=y("","partner.googleadservices.com"),D[5]=ua,D[6]=sa,D[7]=ia,D[8]=ja,D[9]=ka,D[10]=ma,D[11]=na,D[12]=la,D[13]=pa,D[15]=qa,A("_vars_",D);var E=function(e,t,n,r,i){this.ka=new Date,this.p=r||h,this.ja=n||h,this.Pa=e,this.Qa=t,this.ia=i||h};m=E.prototype,m.ab=function(){return this.p},m.$a=function(){return this.ja},m.Za=function(){return this.Pa},m.Va=function(){return this.ka},m.Db=function(){return this.Qa},m.Fb=function(){return this.ia};var wa=["Debug","Info","Warning","Error","Fatal"];E.prototype.toString=function(){var e=this.ka.toTimeString()+": "+wa[this.Pa]+": "+this.Qa;return this.ia&&(e+=" Duration: "+(this.ka.getTime()-this.ia.Va().getTime())+"ms."),e},E.prototype.getTimestamp=E.prototype.Va,E.prototype.getService=E.prototype.$a,E.prototype.getSlot=E.prototype.ab,E.prototype.getLevel=E.prototype.Za,E.prototype.getMessage=E.prototype.Db,E.prototype.getReference=E.prototype.Fb;var F=function(){this.H=[]};F.prototype.tb=function(){return this.H},F.prototype.Ab=function(e){return xa(this,function(t){return t.$a()===e})},F.prototype.Bb=function(e){return xa(this,function(t){return t.ab()===e})},F.prototype.zb=function(e){return xa(this,function(t){return t.Za()>=e})};var xa=function(e,t){for(var n=[],r=0;r<e.H.length;++r)t(e.H[r])&&n.push(e.H[r]);return n};F.prototype.log=function(e,t,n,r,i){return e=new E(e,t,n,r,i),this.H.push(e),e},F.prototype.info=function(e,t,n,r){return this.log(1,e,t,n,r)};var H=function(t,n,r,i){t.log(2,n,r,i,e)};F.prototype.error=function(e,t,n,r){return this.log(3,e,t,n,r)};var I=function(){var e=z();return e.debug_log||(e.debug_log=new F)};A("getEventLog",I),F.prototype.getAllEvents=F.prototype.tb,F.prototype.getEventsByService=F.prototype.Ab,F.prototype.getEventsBySlot=F.prototype.Bb,F.prototype.getEventsByLevel=F.prototype.zb;var J=function(){this.Wa=this.pa=0};J.prototype.push=function(e){for(var n=I(),r=0;r<arguments.length;++r)try{t(arguments[r])&&(arguments[r](),this.pa++)}catch(i){this.Wa++,n.error("Exception invoking function: "+i.message)}return n.info("Invoked queued function. Total: "+this.pa+" Errors: "+this.Wa),this.pa},J.prototype.push=J.prototype.push,function(){function t(t){this.t={},this.tick=function(t,n,r){this.t[t]=[r!=e?r:(new Date).getTime(),n]},this.tick("start",h,t)}var n=new t;window.GPT_jstiming={Timer:t,load:n};if(window.performance&&window.performance.timing){var n=window.performance.timing,r=window.GPT_jstiming.load,i=n.navigationStart,n=n.responseStart;0<i&&n>=i&&(r.tick("_wtsrt",e,i),r.tick("wtsrt_","_wtsrt",n),r.tick("tbsd_","wtsrt_"))}try{n=h,window.chrome&&window.chrome.csi&&(n=Math.floor(window.chrome.csi().pageT),r&&0<i&&(r.tick("_tbnd",e,window.chrome.csi().startE),r.tick("tbnd_","_tbnd",i))),n==h&&window.gtbExternal&&(n=window.gtbExternal.pageT()),n==h&&window.external&&(n=window.external.pageT,r&&0<i&&(r.tick("_tbnd",e,window.external.startE),r.tick("tbnd_","_tbnd",i))),n&&(window.GPT_jstiming.pt=n)}catch(s){}}();if(window.GPT_jstiming){window.GPT_jstiming.Ya={},window.GPT_jstiming.jb=1;var ya=function(t,n,r){var i=t.t[n],s=t.t.start;if(i&&(s||r))return i=t.t[n][0],r!=e?s=r:s=s[0],i-s},za=function(e,t,n){var r="";window.GPT_jstiming.pt&&(r+="&srt="+window.GPT_jstiming.pt,delete window.GPT_jstiming.pt);try{window.external&&window.external.tran?r+="&tran="+window.external.tran:window.gtbExternal&&window.gtbExternal.tran?r+="&tran="+window.gtbExternal.tran():window.chrome&&window.chrome.csi&&(r+="&tran="+window.chrome.csi().tran)}catch(i){}var s=window.chrome;if(s&&(s=s.loadTimes)){s().wasFetchedViaSpdy&&(r+="&p=s");if(s().wasNpnNegotiated){var r=r+"&npn=1",o=s().npnNegotiatedProtocol;o&&(r+="&npnv="+(encodeURIComponent||escape)(o))}s().wasAlternateProtocolAvailable&&(r+="&apa=1")}var u=e.t,a=u.start,s=[],o=[],f;for(f in u)if("start"!=f&&0!=f.indexOf("_")){var l=u[f][1];l?u[l]&&o.push(f+"."+ya(e,f,u[l][0])):a&&s.push(f+"."+ya(e,f))}delete u.start;if(t)for(var c in t)r+="&"+c+"="+t[c];return(t=n)||(t="https:"==document.location.protocol?"https://csi.gstatic.com/csi":"http://csi.gstatic.com/csi"),[t,"?v=3","&s="+(window.GPT_jstiming.sn||"gpt")+"&action=",e.name,o.length?"&it="+o.join(","):"","",r,"&rt=",s.join(",")].join("")},Aa=function(e,t,n){e=za(e,t,n);if(!e)return"";t=new Image;var r=window.GPT_jstiming.jb++;return window.GPT_jstiming.Ya[r]=t,t.onload=t.onerror=function(){window.GPT_jstiming&&delete window.GPT_jstiming.Ya[r]},t.src=e,t=h,e};window.GPT_jstiming.report=function(e,t,n){if("prerender"==document.webkitVisibilityState){var r=k,i=function(){if(!r){t?t.prerender="1":t={prerender:"1"};var s;"prerender"==document.webkitVisibilityState?s=k:(Aa(e,t,n),s=g),s&&(r=g,document.removeEventListener("webkitvisibilitychange",i,k))}};return document.addEventListener("webkitvisibilitychange",i,k),""}return Aa(e,t,n)}}var K=Array.prototype,Ba=K.indexOf?function(e,t,n){return K.indexOf.call(e,t,n)}:function(e,t,n){n=n==h?0:0>n?Math.max(0,e.length+n):n;if(r(e))return!r(t)||1!=t.length?-1:e.indexOf(t,n);for(;n<e.length;n++)if(n in e&&e[n]===t)return n;return-1},Ca=K.forEach?function(e,t,n){K.forEach.call(e,t,n)}:function(e,t,n){for(var i=e.length,s=r(e)?e.split(""):e,o=0;o<i;o++)o in s&&t.call(n,s[o],o,e)},L,Da,Ea,Fa,Ga=function(){return n.navigator?n.navigator.userAgent:h};Fa=Ea=Da=L=k;var Ha;if(Ha=Ga()){var Ia=n.navigator;L=0==Ha.indexOf("Opera"),Da=!L&&-1!=Ha.indexOf("MSIE"),Ea=!L&&-1!=Ha.indexOf("WebKit"),Fa=!L&&!Ea&&"Gecko"==Ia.product}var Ja=L,M=Da,Ka=Fa,La=Ea,Ma=function(){var t=n.document;return t?t.documentMode:e},Na;e:{var Oa="",N;if(Ja&&n.opera)var Pa=n.opera.version,Oa="function"==typeof Pa?Pa():Pa;else if(Ka?N=/rv\:([^\);]+)(\)|;)/:M?N=/MSIE\s+([^\);]+)(\)|;)/:La&&(N=/WebKit\/(\S+)/),N)var Qa=N.exec(Ga()),Oa=Qa?Qa[1]:"";if(M){var Ra=Ma();if(Ra>parseFloat(Oa)){Na=String(Ra);break e}}Na=Oa}var Sa=Na,Ta={},Ua=function(e){if(!Ta[e]){for(var t=0,n=String(Sa).replace(/^[\s\xa0]+|[\s\xa0]+$/g,"").split("."),r=String(e).replace(/^[\s\xa0]+|[\s\xa0]+$/g,"").split("."),i=Math.max(n.length,r.length),s=0;0==t&&s<i;s++){var o=n[s]||"",u=r[s]||"",a=RegExp("(\\d*)(\\D*)","g"),f=RegExp("(\\d*)(\\D*)","g");do{var l=a.exec(o)||["","",""],c=f.exec(u)||["","",""];if(0==l[0].length&&0==c[0].length)break;t=((0==l[1].length?0:parseInt(l[1],10))<(0==c[1].length?0:parseInt(c[1],10))?-1:(0==l[1].length?0:parseInt(l[1],10))>(0==c[1].length?0:parseInt(c[1],10))?1:0)||((0==l[2].length)<(0==c[2].length)?-1:(0==l[2].length)>(0==c[2].length)?1:0)||(l[2]<c[2]?-1:l[2]>c[2]?1:0)}while(0==t)}Ta[e]=0<=t}},Va=n.document,Wa=!Va||!M?e:Ma()||("CSS1Compat"==Va.compatMode?parseInt(Sa,10):5);if(Ka||M){var Xa;if(Xa=M)Xa=M&&9<=Wa;Xa||Ka&&Ua("1.9.1")}M&&Ua("9");var O=function(e,t){this.lb=e,this.kb=t};O.prototype.Jb=function(){return this.lb},O.prototype.Cb=function(){return this.kb},O.prototype.getWidth=O.prototype.Jb,O.prototype.getHeight=O.prototype.Cb;var P=function(e,t,n){this.A=e,this.Sa=s(t)?t:0,this.g=this.A+"_"+this.Sa,this.ib=n||"gpt_unit_"+this.g};m=P.prototype,m.o=function(){return this.g},m.getName=function(){return this.A},m.Ua=function(){return this.Sa},m.toString=P.prototype.o,m.l=function(){return this.ib},P.prototype.getId=P.prototype.o,P.prototype.getName=P.prototype.getName,P.prototype.getDomId=P.prototype.l,P.prototype.getInstance=P.prototype.Ua;var Ya=function(e){return e.replace(/[^a-zA-Z0-9]/g,function(e){return"&#"+e.charCodeAt()+";"})},Za=function(){var e=h,t=window,n=h;try{for(;t!=h&&t!==e;){n=t.location.protocol;if("https:"===n)break;if("http:"===n||"file:"===n)return k;e=t,t=t.parent}}catch(r){}return g},Q=function(e,t,n,r){this.A=e;var i=[];if(p(n))if(1<n.length&&s(n[0])&&s(n[1]))i.push(new O(n[0],n[1]));else for(var o=0;o<n.length;++o){var u=n[o];p(u)&&1<u.length&&s(u[0])&&s(u[1])&&i.push(new O(u[0],u[1]))}this.eb=i,this.g=new P(e,t,r),this.c=[],this.h={},this.m=h,this.b=I(),this.b.info("Created slot: "+this.g,h,this),this.w=this.L=h,this.Ea=this.Da="",this.W=g,this.d={},this.Z=[],this.Fa=k,this.Ca=this.Ba=h,this.cb=k};m=Q.prototype,m.set=function(e,t){var n=[" attribute ",e," with value ",t," for slot ",this.getName()].join("");return e&&r(e)&&t?(this.h[e]=t,this.L||this.w?H(this.b,"Setting"+n+" after its contents have been loaded",h,this):this.b.info("Setting"+n,h,this)):H(this.b,"Unable to set"+n,h,this),this},m.get=function(e){return e in this.h?this.h[e]:h},m.C=function(){var e=[],n;for(n in this.h)t(this.h[n])||e.push(n);return e},m.ha=function(e){for(var t=0;t<this.c.length;++t)if(e==this.c[t])return H(this.b,"Service "+e.getName()+" is already associated with slot "+this.g,e,this),this;return this.c.push(e),e.ba(this),this},m.getName=function(){return this.A},m.i=function(){return this.g},m.Ra=function(){return this.c},m.Gb=function(){return this.eb},m.B=function(){return!!document.getElementById(this.g.l())},m.Q=function(e){this.m=e},m.G=function(e){return this.Ea=e,this},m.aa=function(){return this.Ea},m.ra=function(e){if(r(e)&&!/^[\s\xa0]*$/.test(e==h?"":String(e))){var t=this.Z;0<=Ba(t,e)||t.push(e),this.b.info("Setting slot level ad category exclusion: "+e,h,this)}else H(this.b,"Invalid slot level ad category exclusion label supplied",h,this);return this},m.qa=function(){return this.b.info("Clearing all slot level ad category exclusions",h,this),this.Z=[],this},m.ub=function(){var e;e=this.Z;var t=e.length;if(0<t){for(var n=Array(t),r=0;r<t;r++)n[r]=e[r];e=n}else e=[];return e},m.recordImpression=function(){if(!this.cb)return H(this.b,"Not recording impression as enableManualImpression was not called on this slot.",h,this),this;for(var e=this.Ra(),t=k,n=0;n<e.length;++n){var r=e[n];r.isEnabled()&&(r.recordImpression(this),t=g)}return t||H(this.b,"Not recording impression as no service is enabled.",h,this),this},m.r=function(e,t){var n=[];p(t)?n=t:t&&n.push(t.toString());var i=[" targeting attribute ",e," with value ",n.join()," for slot ",this.getName()].join("");if(e&&r(e)){this.b.info("Setting"+i,h,this);e:{var i=this.d[e],s=n;if(!ba(i)||!ba(s)||i.length!=s.length)i=k;else{for(var o=i.length,u=0;u<o;u++)if(i[u]!==s[u]){i=k;break e}i=g}}this.d[e]=n;if(!i&&(this.L||this.w))for(i=0;i<this.c.length;++i)s=this.c[i],s.isEnabled()&&s.Ga(this,e,n)}else H(this.b,"Unable to set"+i,h,this);return this},m.mb=function(){this.b.info("Clearing slot targeting.",h,this);var e;e:{for(e in this.d){e=k;break e}e=g}this.d={};if(!e)for(e=0;e<this.c.length;++e){var t=this.c[e];t.isEnabled()&&t.clearSlotTargeting(this)}return this},m.Hb=function(){var e=this.d,t={},n;for(n in e)t[n]=e[n];return t},m.Eb=function(){return this.Fa},m.Qb=function(e,t){return this.Ca=(this.Ba=e)&&Boolean(t),t&&!e&&H(this.b,"Ignoring a call to setCollapseEmptyDiv(false, true). Slots that start out collapsed should also collapse when empty. Slot "+this.g,h,this),this},m.vb=function(){return this.Ba},m.yb=function(){return this.Ca};var $a=function(e){if(!e.B())return e.b.error("Unable to write to slot "+e.g+". It has not yet been rendered.",h,e),k;var t=n.document,i=e.g.l(),t=t&&t.getElementById(i);return t?(i=e.m,r(i)&&0<i.length?(e.Ia(),t.innerHTML=i,e.Ha(),g):k):(e.b.error("Unable to find the div container with id "+i+" for slot "+e.g,h,e),k)};m=Q.prototype,m.sb=function(e){this.L=this.b.info("Fetching ad for slot "+this.getName(),h,this),this.Da=e},m.wb=function(){return this.Da},m.rb=function(){this.b.info("Receiving ad for slot "+this.getName(),h,this,this.L)},m.Ia=function(){this.w=this.b.info("Rendering ad for slot "+this.getName(),h,this)},m.Ha=function(){this.b.info("Completed rendering ad for slot "+this.getName(),h,this,this.w)},Q.prototype.set=Q.prototype.set,Q.prototype.get=Q.prototype.get,Q.prototype.getName=Q.prototype.getName,Q.prototype.getSlotId=Q.prototype.i,Q.prototype.getSizes=Q.prototype.Gb,Q.prototype.addService=Q.prototype.ha,Q.prototype.getOutOfPage=Q.prototype.Eb,Q.prototype.getServices=Q.prototype.Ra,Q.prototype.getAttributeKeys=Q.prototype.C,Q.prototype.fetchStarted=Q.prototype.sb,Q.prototype.fetchEnded=Q.prototype.rb,Q.prototype.renderStarted=Q.prototype.Ia,Q.prototype.renderEnded=Q.prototype.Ha,Q.prototype.hasWrapperDiv=Q.prototype.B,Q.prototype.getContentUrl=Q.prototype.wb,Q.prototype.setClickUrl=Q.prototype.G,Q.prototype.getClickUrl=Q.prototype.aa,Q.prototype.clearTargeting=Q.prototype.mb,Q.prototype.getTargetingMap=Q.prototype.Hb,Q.prototype.setTargeting=Q.prototype.r,Q.prototype.setCategoryExclusion=Q.prototype.ra,Q.prototype.clearCategoryExclusions=Q.prototype.qa,Q.prototype.getCategoryExclusions=Q.prototype.ub,Q.prototype.getCollapseEmptyDiv=Q.prototype.vb,Q.prototype.setCollapseEmptyDiv=Q.prototype.Qb,Q.prototype.getDivStartsCollapsed=Q.prototype.yb;var R=function(){this.F={},this.M={},this.b=I()};R.prototype.add=function(e,t,n){return!r(e)||0>=e.length||!t?h:(e in this.F||(this.F[e]=[]),t=new Q(e,this.F[e].length,t,n),n=t.i().l(),this.M[n]?(this.b.error("Div element "+n+" is already associated with another slot"),h):(this.F[e].push(t),this.M[t.i().l()]=t))},R.prototype.find=function(e,t){var n=t||0,i=r(e)&&this.F[e]||[];return 0<=n&&n<i.length&&(i=i[n],i.i().Ua()==n)?i:h};var ab=function(){var e=z();return e.slot_manager_instance||(e.slot_manager_instance=new R)},bb=function(e,t,n){var r=ab();return r&&r.add(e,t,n)};A("defineOutOfPageSlot",function(e,t){var n=ab();return n?(n=n.add(e,[1,1],t))?(n.Fa=g,n):h:h}),A("defineSlot",bb),A("defineUnit",bb),R.prototype.find=R.prototype.find,R.getInstance=ab;var cb=function(e){var t=I();if(r(e)){var n;n=ab(),n.M[e]?n=n.M[e]:(H(n.b,"Ad unit lookup for div "+e+" failed."),n=h);if(n)if(e=n,e.W&&!e.B())H(e.b,"Slot "+e.A+" does not have a container div with id: "+e.g.l()+".",h,e);else for(t=0;t<e.c.length;++t)e.c[t].isEnabled()&&e.c[t].I(e);else t.error("Div "+e+" is not mapped to a known ad unit.")}else t.error("Unknown div id in display(): "+e.toString())};A("display",cb,g);var S=function(){this.Na=[],this.Oa={},this.la=k,this.h={},this.log=I(),this.log.info("Created service: "+this.getName(),this)};m=S.prototype,m.getName=function(){return"unknown"},m.getVersion=function(){return"unversioned"},m.set=function(e,t){var n=["attribute ",e," with value ",t," for service ",this.getName()].join("");return r(e)&&0<e.length?(this.h[e]=t,this.log.info("Setting "+n,this,h)):H(this.log,"Unable to set "+n,this,h),this},m.get=function(e){return this.h[e]},m.C=function(){var e=[],t;for(t in this.h)"function"!=typeof this.h[t]&&e.push(t);return e},m.k=function(){return this.Na},m.Xa=function(){return this.Oa},m.isEnabled=function(){return this.la},m.enable=function(){if(this.la)this.log.info("Service is already enabled.",this);else{this.la=g;try{this.oa()}catch(e){this.log.error("Failed to enable service: "+e,this)}}},m.display=function(e,t,n,r){this.enable(),e=n?bb(e,t,n):bb(e,t),e.ha(this),r&&e.G(r),cb(e.i().l())},m.ba=function(e){this.Na.push(e),this.Oa[e.i().o()]=e,this.log.info("Associated "+this.getName()+" service with slot "+e.getName(),this,e)},m.clearSlotTargeting=function(){},m.Ga=function(){},m.recordImpression=function(){},S.prototype.getSlots=S.prototype.k,S.prototype.getSlotIdMap=S.prototype.Xa,S.prototype.enable=S.prototype.enable,S.prototype.set=S.prototype.set,S.prototype.get=S.prototype.get,S.prototype.getAttributeKeys=S.prototype.C,S.prototype.display=S.prototype.display;var db=function(e,t){this.name=e,this.na=t?t:new n.GPT_jstiming.Timer,this.na.name=e,this.ma=[]};m=db.prototype,m.getName=function(){return this.name},m.tick=function(e,t){this.na.tick(e,t)},m.Ta=function(e){e&&this.ma.push(e)},m.report=function(){var e="https:"==n.location.protocol?"https://www.google.com/csi":"http://csi.gstatic.com/csi",t={};return this.ma.length&&(t.e=this.ma.join()),n.GPT_jstiming.report(this.na,t,e)},m.bb=function(e){va(window,function(){setTimeout(e,10)})};var T=function(e){this.name=e};u(T,db),T.prototype.tick=function(){},T.prototype.Ta=function(){},T.prototype.report=function(){return h},T.prototype.bb=function(){};var eb=function(){var t=n.GPT_jstiming.load,r=.01;return r==e&&(r=.01),n.GPT_jstiming&&n.GPT_jstiming.load&&("http:"==n.location.protocol||"https:"==n.location.protocol)&&Math.random()<r?new db("global",t):new T("global")};(function(){if(!z()._gpt_timer_&&n.GPT_jstiming){var e=eb();e.bb(function(){e.tick("load"),e.report()}),A("_gpt_timer_",e)}return z()._gpt_timer_})();var U=function(){this.c={},this.Y=k,this.b=I(),this.gb=this.b.info("Google service JS loaded"),va(window,ga(U.prototype.hb,this))};U.prototype.add=function(e){this.c[e.getName()]=e},U.prototype.find=function(e){var t=h;return e in this.c&&(t=this.c[e]),t},U.prototype.hb=function(){this.Y=g,this.b.info("Page load complete",h,h,this.gb)};var fb=function(e,t,n){e=k;try{e=t.top.document.URL===n.URL}catch(r){}return e?n.URL:n.referrer},V=function(){var e=z();return e.service_manager_instance||(e.service_manager_instance=new U)};A("enableServices",function(){var e=V(),n;for(n in e.c){var r=e.c[n];if(!t(r)){r.enable();var r=n,i=z()._gpt_timer_;i&&i.Ta(r)}}});var W=function(){S.call(this),this.Ja=g,this.ga=k,this.O=0,this.P="",this.ea=this.da=this.ca=this.D=e,this.Ka=this.fa=k,this.$={},this.N=k};u(W,S),m=W.prototype,m.oa=function(){if(this.Ja){if(!this.Ka){var e=document,t=document.createElement("script");t.async=g,t.type="text/javascript",t.src=this.n();try{var r=e.getElementsByTagName("script")[0];this.log.info("Fetching companion ads implementation",this),this.Ka=g,r.parentNode&&r.parentNode.insertBefore(t,r)}catch(i){this.log.error("Unable to fetch companion ads implementation",this)}}}else this.fa||(n.document.write('<script type="text/javascript" src="'+Ya(this.n())+'"></script>'),this.fa=g)},m.ob=function(){this.Ja=k},m.Rb=function(e){"boolean"==typeof e&&(this.ga=e)},m.Lb=function(e){if(this.ga){for(var t=this.Xa(),n=[],r=0;r<e.length;++r){var i=e[r];i in t?n.push(t[i]):H(this.log,"Cannot find slot with id "+i+".",this)}gb(this,n)}},m.La=function(){var e=googletag.pubads();if(!e.isEnabled())return k;var e=e.k(),t=this.k();if(e.length!=t.length)return k;for(var n=0;n<t.length;++n){for(var r=k,i=0;i<e.length;++i)if(t[n]===e[i]){r=g;break}if(!r)return k}return g},m.Ob=function(){this.ga&&gb(this,h)},m.Tb=function(t,n,r,i,s,o,u){this.N=k,this.O=0,this.P="",this.ea=this.da=this.ca=this.D=e,this.O=t,this.P=n,this.D=r,0==this.D.length&&(this.D=e);e:{t=i.split(","),n=[];for(r=0;r<t.length;++r){i=t[r].split("x");if(2!=i.length){this.log.error("The master ad size specified is invalid."),t=e;break e}i=[Number(i[0]),Number(i[1])];if(isNaN(i[0])||isNaN(i[1])){this.log.error("The master ad size specified is invalid."),t=e;break e}n.push(i)}t=n}this.ca=t,s!==e&&(this.da=s),o!==e&&(this.ea=o),u!==e&&(this.N=u)},m.xb=function(){return googletag.pubads().getCorrelator()},m.getVideoStreamCorrelator=function(){return googletag.pubads().getVideoStreamCorrelator()},m.Ub=function(e){this.O=e},m.Vb=function(e){this.P=e};var gb=function(e,t){var n=googletag.pubads();if(n.isEnabled()){if(e.N){if(!e.La()){H(e.log,"Persistent roadblock requested, but ad slots are incorrectly configured. All ad slots on page must have both pubads and companionAds services attached. Skipping refresh.");return}n.clearNoRefreshState(),n.clear()}n.Ma(t,e.O,e.P,e.D,e.ca,e.da,e.ea,e.N)}else e.log.error("Pubads service is not enabled, cannot use refresh feature.")};m=W.prototype,m.isSlotAPersistentRoadblock=function(e){var t=googletag.pubads();return t.isEnabled()?t.isSlotAPersistentRoadblock(e):(this.log.error("Pubads service is not enabled, cannot check whether slot is a persistent roadblock.  Content writing allowed."),k)},m.getName=function(){return"companion_ads"},m.n=function(){var e=document,t=h;try{t=e.location.protocol}catch(n){}return("https:"==t?"https:":"http:")+"//pagead2.googlesyndication.com/pagead/show_companion_ad.js"},m.Nb=function(){this.log.info("Companion ads implementation fetched.",this),this.fa=g},m.q=function(e){var t=e&&e.i().o();return t&&t in this.$&&e.B()&&this.isEnabled()&&!this.isSlotAPersistentRoadblock(e)?(e.Q(this.$[t]),$a(e)):k},m.I=function(e){this.q(e)},m.fillSlot=function(e,t){return e&&r(t)&&0<t.length?(this.$[e.i().toString()]=t,this.q(e)):k},A("companionAds",function(){var e=V(),t=e.find("companion_ads");return t||(t=new W,e.add(t)),t}),W.prototype.fillSlot=W.prototype.fillSlot,W.prototype.enableSyncLoading=W.prototype.ob,W.prototype.isSlotAPersistentRoadblock=W.prototype.isSlotAPersistentRoadblock,W.prototype.isRoadblockingSupported=W.prototype.La,W.prototype.onImplementationLoaded=W.prototype.Nb,W.prototype.notifyUnfilledSlots=W.prototype.Lb,W.prototype.refreshAllSlots=W.prototype.Ob,W.prototype.setRefreshUnfilledSlots=W.prototype.Rb,W.prototype.setXfpCorrelator=W.prototype.Ub,W.prototype.setXfpPreviousAdsToken=W.prototype.Vb,W.prototype.setVideoSessionInfo=W.prototype.Tb,W.prototype.getDisplayAdsCorrelator=W.prototype.xb,W.prototype.getVideoStreamCorrelator=W.prototype.getVideoStreamCorrelator;var X=function(){S.call(this),this.m={}};u(X,S),m=X.prototype,m.getName=function(){return"content"},m.q=function(e){var t=e&&e.i().o();return t in this.m&&this.isEnabled()&&e.B()&&!e.w?(e.Q(this.m[t]),$a(e)):k},m.oa=function(){for(var e=this.k(),t=0;t<e.length;++t)this.q(e[t])},m.I=function(e){this.q(e)},m.Q=function(e,t){e&&r(t)&&0<t.length&&(this.m[e.i().o()]=t,this.q(e))},A("content",function(){var e=V(),t=e.find("content");return t||(t=new X,e.add(t)),t}),X.prototype.setContent=X.prototype.Q;var hb=h,ib=Ka||La||Ja||"function"==typeof n.atob,Y=function(e,t,n){!r(e)||0>=e.length||!t||!n?I().error("Illegal slot name or size in PassbackSlot(). Name: "+e+"; size: "+t+"; service: "+n):(this.p=new Q(e,this[ca]||(this[ca]=++da),t),this.p.ha(n),this.ja=n)};Y.prototype.G=function(e){return this.p.G(e),this},Y.prototype.r=function(e,t){return this.p.r(e,t),this},Y.prototype.display=function(){jb(this.ja,this.p)},Y.prototype.setClickUrl=Y.prototype.G,Y.prototype.setTargeting=Y.prototype.r,Y.prototype.display=Y.prototype.display;var Z=function(){S.call(this),this.u=k,this.a=h,this.d={},this.U=[],this.ya=this.T="",this.xa=k,this.va=g,this.s=this.ua=k,this.f=g,this.R=this.J=this.wa=k,this.j=[],this.K=[],this.S=[],this.ta=[],this.V=this.sa=k,this.za=this.Aa="",this.v=[];var e=fb(V(),window,document);"108809006"==kb(e,"api_experiment")?this.X("108809006"):!(1e-4>Math.random())&&Math.random()<2*ra&&this.X(!(1e-4>Math.random())&&.5>Math.random()?"108809006":"108809005")};u(Z,S);var lb={adsense_ad_format:"google_ad_format",adsense_ad_types:"google_ad_type",adsense_allow_expandable_ads:"google_allow_expandable_ads",adsense_background_color:"google_color_bg",adsense_bid:"google_bid",adsense_border_color:"google_color_border",adsense_channel_ids:"google_ad_channel",adsense_content_section:"google_ad_section",adsense_cpm:"google_cpm",adsense_ed:"google_ed",adsense_encoding:"google_encoding",adsense_family_safe:"google_safe",adsense_feedback:"google_feedback",adsense_flash_version:"google_flash_version",adsense_font_face:"google_font_face",adsense_font_size:"google_font_size",adsense_hints:"google_hints",adsense_host:"google_ad_host",adsense_host_channel:"google_ad_host_channel",adsense_host_tier_id:"google_ad_host_tier_id",adsense_keyword_type:"google_kw_type",adsense_keywords:"google_kw",adsense_line_color:"google_line_color",adsense_link_color:"google_color_link",adsense_relevant_content:"google_contents",adsense_reuse_colors:"google_reuse_colors",adsense_targeting:"google_targeting",adsense_targeting_types:"google_targeting",adsense_test_mode:"google_adtest",adsense_text_color:"google_color_text",adsense_ui_features:"google_ui_features",adsense_ui_version:"google_ui_version",adsense_url_color:"google_color_url",alternate_ad_iframe_color:"google_alternate_color",alternate_ad_url:"google_alternate_ad_url",demographic_age:"google_cust_age",demographic_ch:"google_cust_ch",demographic_gender:"google_cust_gender",demographic_interests:"google_cust_interests",demographic_job:"google_cust_job",demographic_l:"google_cust_l",demographic_lh:"google_cust_lh",demographic_u_url:"google_cust_u_url",demographic_unique_id:"google_cust_id",document_language:"google_language",geography_override_city:"google_city",geography_override_country:"google_country",geography_override_region:"google_region",page_url:"google_page_url"};Z.prototype.oa=function(){if(this.f){if(!this.u){var e=document,t=e.createElement("script");V(),t.async=g,t.type="text/javascript",t.src=this.n(),(e=e.getElementsByTagName("head")[0]||e.getElementsByTagName("body")[0])?(this.log.info("Fetching GPT implementation",this),e.appendChild(t),this.u=g):this.log.error("Unable to fetch GPT implementation",this)}}else mb(this)},Z.prototype.getName=function(){return"publisher_ads"},Z.prototype.n=function(){var e=Za()?"https:":"http:";return 0<=Ba(this.v,"108809006")?e+"//partner.googleadservices.com/gpt/pubads_impl_19.js":e+"//partner.googleadservices.com/gampad/google_ads_gpt.js"};var mb=function(e){var t=V();!e.u&&!t.Y&&(t=document,e.u=g,t.write('<script type="text/javascript" src="'+Ya(e.n())+'"></script>'))};Z.prototype.Mb=function(){V();var e=z().impl;if(e&&e.pubads){this.a=e.pubads,this.log.info("GPT implementation fetched.",this),this.va||this.a.disableFetch(),this.J&&this.a.collapseEmptyDivs(this.R);if(this.s){this.f?this.a.enableAsyncSingleRequest():this.a.enableSingleRequest(),nb(this);for(var e=this.k(),t=0;t<e.length;++t)ob(this,e[t])}else this.f&&this.a.enableAsyncRendering();this.ua&&this.a.disableInitialLoad(),pb(this);if(0<this.j.length)for(t=0;t<this.j.length;++t)this.I(this.j[t]);if(0<this.K.length)for(t=0;t<this.K.length;++t)jb(this,this.K[t]);Ca(this.S,this.recordImpression,this),this.S=[],this.sa?this.refresh():Ca(this.ta,this.refresh,this)}else this.log.error("Unable to fetch pubads service implementation from "+this.n(),this)},Z.prototype.ba=function(e){this.f||(e.W=k),S.prototype.ba.call(this,e)},Z.prototype.I=function(e){if(V().Y&&!this.f)this.log.error("Attempting to display ad in sync mode after page load is complete.",this);else if(this.a){if(nb(this),this.s||ob(this,e))this.log.info("Calling fillslot"),this.a.fillSlot(e)}else if(this.f||this.u&&0==this.j.length){for(var t=k,n=0;n<this.j.length;++n)e===this.j[n]&&(t=g);t||(this.log.info("Delaying rendering of ad slot "+e.getName()+" pending loading of the GPT implementation",this,e),this.j.push(e))}else this.log.error("Skipping rendering of slot "+e.getName()+" due to missing GPT implementaition",this,e)};var ob=function(e,n){if(e.a&&e.a.addSlot(n)==h)return e.log.error("Unable to process name for slot "+n.getName(),e,n),k;for(var r=n.C(),i=0;i<r.length;++i)r[i]in lb?e.a.addAdSenseSlotAttribute(n,lb[r[i]],n.get(r[i])):H(e.log,"Ignoring unknown pubads attribute "+r[i]+" with value "+n.get(r[i])+" for slot "+n.getName(),e,n);if(t(e.a.addSlotTargeting)){var r=[],s;for(s in n.d)t(n.d[s])||r.push(s);for(s=0;s<r.length;++s)e.a.addSlotTargeting(n,r[s],r[s]in n.d?n.d[r[s]]:[])}return n.aa()&&t(e.a.fb)&&e.a.fb(n,n.aa()),g},nb=function(n){if(!n.xa){n.xa=g;for(var r=n.C(),i=0;i<r.length;++i)r[i]in lb?n.a.addAdSensePageAttribute(lb[r[i]],n.get(r[i])):H(n.log,"Ignoring unknown pubads attribute "+r[i]+" with value "+n.get(r[i]),n);n.a.addAdSensePageAttribute("google_tag_info","v2");for(var s in n.d)if(r=n.d[s],p(r))for(i=0;i<r.length;++i)n.a.addAttribute(s,r[i]);t(n.a.addPageCategoryExclusion)&&Ca(n.U,function(e){this.a.addPageCategoryExclusion(e)},n),t(n.a.setPublisherProvidedId)&&n.a.setPublisherProvidedId(n.ya),n.T&&n.a.setLocation(n.T),n.a.setCenterAds!==e&&n.a.setCenterAds(n.wa),n.a.setApiExperiment!==e?Ca(n.v,function(e){this.a.setApiExperiment(e)},n):0==n.v.length||H(n.log,"Ignoring forced experiments due to lack of support in the Pubads implementation. Experiments: "+n.v.join())}};m=Z.prototype,m.r=function(e,t){var n=[];r(t)?n.push(t):n=t;var i=[" targeting attribute ",e," with value ",n.join()," for service ",this.getName()].join("");return e&&r(e)?(this.d[e]=n,this.log.info("Setting"+i,this)):H(this.log,"Unable to set"+i,this),this},m.ra=function(e){if(r(e)&&!/^[\s\xa0]*$/.test(e==h?"":String(e))){var t=this.U;0<=Ba(t,e)||t.push(e),this.log.info("Setting page level ad category exclusion: "+e,this)}else H(this.log,"Invalid page level ad category exclusion label supplied",this);return this},m.qa=function(){return this.log.info("Clearing all page level ad category exclusions",this),this.U=[],this},m.Kb=function(){this.a?H(this.log,"Ignoring noFetch since the pubads service is already enabled",this):this.va=k},m.disableInitialLoad=function(){this.a?H(this.log,"Ignoring disableInitialLoad since the pubads service is already enabled",this):this.ua=g},m.enableSingleRequest=function(){return this.isEnabled()&&!this.s?H(this.log,"Ignoring change to single request mode since the service is already enabled",this):(this.log.info("Using single request mode to fetch ads",this),this.s=g),this.s},m.enableAsyncRendering=function(){return this.isEnabled()&&!this.f?H(this.log,"Ignoring change to async-rendering mode since the service is already enabled",this):(this.log.info("Using async-rendering mode to fetch ads",this),this.f=g),this.f},m.pb=function(){if(this.isEnabled()&&this.f)H(this.log,"Ignoring change to async-rendering mode since the service is already enabled",this);else{this.log.info("Using sync-rendering mode to fetch ads",this),this.f=k;for(var e=this.k(),t=0;t<e.length;++t)e[t].W=k}return!this.f},m.Pb=function(e){this.log.info("Setting centering to "+e,this),this.wa=e},m.setPublisherProvidedId=function(e){return this.isEnabled()?H(this.log,"Ignoring change to PPID since the service is already enabled. Not setting: "+e,this):(this.log.info("Setting PPID to "+e,this),this.ya=e),this},m.nb=function(e,t){return new Y(e,t,this)};var jb=function(e,n){mb(e),e.a?t(e.a.passback)?e.a.passback(n):e.log.error("The GPT impl does not yet support passbacks.",e,n):(e.log.info("Delaying passback of ad slot "+n.getName()+" pending loading of the GPT implementation",e,n),e.K.push(n))};m=Z.prototype,m.refresh=function(e){if(e&&!p(e))H(this.log,"Slots to refresh must be an array.",this);else{var t=h;if(e){for(var t=[],n=0;n<e.length;++n){var r=e[n];r instanceof Q?t.push(r):H(this.log,"Slot object at position "+n+" is of incorrect type.",this)}if(!t.length){this.log.error("No valid slot ids found, refresh aborted.",this);return}}this.a?(this.log.info("Refreshing ads",this),this.a.refresh(t)):(this.log.info("Refresh pushed on pending list until GPT implementation Javascript loads.",this),t?(e=this.ta,0<=Ba(e,t)||e.push(t)):this.sa=g)}},m.Ma=function(e,t,n,i,o,u,a,f){if(e&&!p(e))H(this.log,"Slots to refresh must be an array.",this);else if(t&&!s(t))H(this.log,"Correlator must be a number.",this);else if(n&&!r(n))H(this.log,"Pstok must be a string.",this);else if(i&&!r(i))H(this.log,"Video IU must be a string.",this);else if(o&&!p(o))H(this.log,"Video IU sizes must be an array.",this);else if(u&&!s(u))H(this.log,"Pod number must be a number.",this);else if(a&&!s(a))H(this.log,"Pod position must be a number.",this);else if(f&&"boolean"!=typeof f)H(this.log,"Persistent roadblocks only must be a boolean.",this);else if(this.a){var l=h;if(e){for(var l=[],c=0;c<e.length;++c){var d=e[c];d instanceof Q?l.push(d):H(this.log,"Slot object at position "+c+" is of incorrect type.",this)}if(!l.length){this.log.error("No valid slot ids found, refresh aborted.",this);return}}if(o)for(c=0;c<o.length;++c){e=o[c];if(!p(e)||2!=e.length){this.log.error("Video size array must have only two values, refresh aborted.",this);return}for(d=0;d<e.length;++d)if(!s(e[d])){this.log.error("Video size array must contain only numbers, refresh aborted.",this);return}}this.log.info("Refreshing ads",this),this.a.refresh(l,t,n,i,o,u,a,f)}else H(this.log,"The ads cannot be refreshed because the GPT implementation Javascript is not yet loaded.",this)},m.qb=function(){this.V=g,pb(this)},m.Sb=function(e,t){this.V=g,this.Aa=e,this.za=t,pb(this)},m.Ib=function(){return!this.a||this.a.getVideoContentInformation==h?h:this.a.getVideoContentInformation()};var pb=function(e){e.V&&e.a&&e.a.setVideoContentInformation&&e.a.setVideoContentInformation(e.Aa,e.za)};m=Z.prototype,m.getCorrelator=function(){return 0==this.k().length?"not_available":this.a?this.a.getCorrelator==h?"not_available":this.a.getCorrelator():"not_loaded"},m.getVideoStreamCorrelator=function(){if(!this.a||this.a.getVideoStreamCorrelator==h)return 0;var e=this.a.getVideoStreamCorrelator();return isNaN(e)?0:e},m.isAdRequestFinished=function(){return this.a?this.a.isAdRequestFinished!=h?this.a.isAdRequestFinished():h:k},m.isSlotAPersistentRoadblock=function(e){return this.a&&this.a.isSlotAPersistentRoadblock!=h?this.a.isSlotAPersistentRoadblock(e):k},m.collapseEmptyDivs=function(e){return this.J?H(this.log,"Ignoring subsequent call to set div collapse mode (already set)",this):this.isEnabled()?H(this.log,"Ignoring change to div collapse mode since the service is already enabled",this):(this.R=Boolean(e),this.log.info("Enabling collapsing of containers when there is no ad content. Collapse before ad fetch = "+this.R,this),this.J=g),this.J},m.clear=function(){return this.a?this.a.clearSlotContents!=h?(this.log.info("Clearing slot contents.",this),this.a.clearSlotContents()):(H(this.log,"The GPT implementation does not yet support clearing slots."),k):(H(this.log,"The slot contents cannot be cleared because the GPT implementation Javascript is not yet loaded.",this),k)},m.clearNoRefreshState=function(){this.a?this.a.clearNoRefreshState!=h?(this.log.info("Clearing no_refresh state.",this),this.a.clearNoRefreshState()):H(this.log,"The GPT implementation does not yet support clearNoRefreshState"):H(this.log,"The no_refresh state cannot be cleared because the GPT implementation Javascript is not yet loaded.",this)},m.clearSlotTargeting=function(e){this.a&&t(this.a.clearSlotTargeting)&&this.a.clearSlotTargeting(e)},m.Ga=function(e,n,r){this.a&&t(this.a.addSlotTargeting)&&this.a.addSlotTargeting(e,n,r)},m.recordImpression=function(e){this.a?t(this.a.recordImpression)?this.a.recordImpression(e):H(this.log,"The implementation does not support recordImpression, all impressions are recorded immediately.",this,e):this.S.push(e)},m.setLocation=function(t,r,i){var o="role:1 producer:12";if(r!==e){if(!s(t)||!s(r))return H(this.log,"Latitude and longitude are expected to be numbers"),this;o+=" latlng{ latitude_e7: "+Math.round(1e7*t)+" longitude_e7: "+Math.round(1e7*r)+"}";if(i!==e){if(isNaN(i))return H(this.log,"Radius is expected to be a number"),this;o+=" radius:"+Math.round(i)}}else 50<t.length&&(r=t.substring(0,50),H(this.log,"Location: "+t+" is longer than 50. Truncating it to"+r+"."),t=r),o+=' loc:"'+t+'"';if(ib)o=n.btoa(o);else{t=o,o=[];for(i=r=0;i<t.length;i++){for(var u=t.charCodeAt(i);255<u;)o[r++]=u&255,u>>=8;o[r++]=u}if(!ba(o))throw Error("encodeByteArray takes an array as a parameter");if(!hb){hb={};for(t=0;65>t;t++)hb[t]="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=".charAt(t)}t=hb,r=[];for(i=0;i<o.length;i+=3){var a=o[i],f=(u=i+1<o.length)?o[i+1]:0,l=i+2<o.length,c=l?o[i+2]:0,h=a>>2,a=(a&3)<<4|f>>4,f=(f&15)<<2|c>>6,c=c&63;l||(c=64,u||(f=64)),r.push(t[h],t[a],t[f],t[c])}o=r.join("")}return this.T="a "+o,this},m.getVersion=function(){return this.a?this.a.getVersion==h?"unversioned":this.a.getVersion():e},m.X=function(e){this.isEnabled()?H(this.log,"Ignoring experiment since the service is already enabled. Not setting: "+e,this):this.v.push(e)},A("pubads",function(){var e=V(),t=e.find("publisher_ads");return t||(t=new Z,e.add(t)),t}),Z.prototype.clear=Z.prototype.clear,Z.prototype.clearNoRefreshState=Z.prototype.clearNoRefreshState,Z.prototype.collapseEmptyDivs=Z.prototype.collapseEmptyDivs,Z.prototype.definePassback=Z.prototype.nb,Z.prototype.enableAsyncRendering=Z.prototype.enableAsyncRendering,Z.prototype.enableSingleRequest=Z.prototype.enableSingleRequest,Z.prototype.enableSyncRendering=Z.prototype.pb,Z.prototype.enableVideoAds=Z.prototype.qb,Z.prototype.forceExperiment=Z.prototype.X,Z.prototype.getCorrelator=Z.prototype.getCorrelator,Z.prototype.getVideoContent=Z.prototype.Ib,Z.prototype.getVideoStreamCorrelator=Z.prototype.getVideoStreamCorrelator,Z.prototype.isAdRequestFinished=Z.prototype.isAdRequestFinished,Z.prototype.isSlotAPersistentRoadblock=Z.prototype.isSlotAPersistentRoadblock,Z.prototype.noFetch=Z.prototype.Kb,Z.prototype.onGoogleAdsJsLoad=Z.prototype.Mb,Z.prototype.refresh=Z.prototype.refresh,Z.prototype.setLocation=Z.prototype.setLocation,Z.prototype.setTargeting=Z.prototype.r,Z.prototype.setCategoryExclusion=Z.prototype.ra,Z.prototype.clearCategoryExclusions=Z.prototype.qa,Z.prototype.setVideoContent=Z.prototype.Sb,Z.prototype.getVersion=Z.prototype.getVersion,Z.prototype.videoRefresh=Z.prototype.Ma,Z.prototype.setCentering=Z.prototype.Pb,Z.prototype.setPublisherProvidedId=Z.prototype.setPublisherProvidedId;var qb=/#|$/,kb=function(e,t){var n=e.search(qb),r;e:{r=0;for(var i=t.length;0<=(r=e.indexOf(t,r))&&r<n;){var s=e.charCodeAt(r-1);if(38==s||63==s)if(s=e.charCodeAt(r+i),!s||61==s||38==s||35==s)break e;r+=i+1}r=-1}if(0>r)return h;i=e.indexOf("&",r);if(0>i||i>n)i=n;return r+=t.length+1,decodeURIComponent(e.substr(r,i-r).replace(/\+/g," "))},rb=function(){var e=window,t=document;if(z()._pubconsole_disable_)return k;var n;n=document.cookie.split("google_pubconsole=");if(n=2==n.length?n[1].split(";")[0]:"")if(n=n.split("|"),0<n.length&&("1"==n[0]||"0"==n[0]))return g;return e=fb(V(),e,t),kb(e,"google_debug")!==h||kb(e,"google_console")!==h||kb(e,"google_force_console")!==h},sb=function(){if(rb()){var e=document,t=e.createElement("script");t.type="text/javascript",t.src=(Za()?"https:":"http:")+"//publisherconsole.appspot.com/js/loader.js",t.async=g,(e=e.getElementsByTagName("script")[0])&&e.parentNode&&e.parentNode.insertBefore(t,e)}};"complete"===document.readyState?sb():va(window,sb),A("disablePublisherConsole",function(){z()._pubconsole_disable_=g}),A("getVersion",function(){return"19"});var $=z().cmd;if(!$||p($)){var tb=z().cmd=new J;$&&0<$.length&&tb.push.apply(tb,$)}(function(){var a=document.getElementsByTagName("script");0<a.length&&(a=a[a.length-1],a.src&&0<=a.src.indexOf("/tag/js/gpt.js")&&a.innerHTML&&!a.googletag_executed&&(a.googletag_executed=g,eval(a.innerHTML)))})()}(),wpAdRequire.define("googletag",function(e){return function(){var t,n;return t||e.googletag}}(this)),function(){wpAdRequire.define("utils/isObject",[],function(){return function(e){return typeof e=="object"&&e!==null&&Object.prototype.toString.call(e)==="[object Object]"}})}(),function(){wpAdRequire.define("utils/extend",["utils/isObject"],function(e){function t(n,r,i){i=i||!1;for(var s in r)r.hasOwnProperty(s)&&(!i||!e(n[s])||!e(r[s])?n[s]=r[s]:n[s]=t(n[s],r[s],!0));return n}return t})}(),function(){wpAdRequire.define("utils/isArray",[],function(){return function(e){return typeof e=="object"&&e!==null&&Object.prototype.toString.call(e)==="[object Array]"}})}(),function(){wpAdRequire.define("utils/extendKeyvalues",["utils/isArray"],function(e){return function(t,n){for(var r in n)n.hasOwnProperty(r)&&(t.hasOwnProperty(r)?t[r]=e(t[r])?t[r]:[t[r]]:t[r]=[],n[r]=e(n[r])?n[r]:[n[r]],t[r]=t[r].concat(n[r]));return t}})}(),function(){wpAdRequire.define("utils/keyvalueIterator",["utils/isArray","utils/isObject"],function(e,t){return function(n,r){r=r||this;var i={},s,o,u,a;for(s in n)if(n.hasOwnProperty(s)){e(n[s])||(n[s]=[n[s]]),a=n[s].length;while(a--){o=n[s][a].call(r);if(o)if(t(o))for(u in o)o.hasOwnProperty(u)&&(o[u]=e(o[u])?o[u]:[o[u]],o[u].length&&o[u][0]!==!1&&(i[u]=i[u]||[],i[u]=i[u].concat(o[u])));else o=e(o)?o:[o],o.length&&o[0]!==!1&&(i[s]=i[s]||[],i[s]=i[s].concat(o))}}return i}})}(),function(){wpAdRequire.define("utils/addKeyvalues",["utils/isArray"],function(e){return function(t,n){for(var r in t)t.hasOwnProperty(r)&&n.setTargeting(r,e(t[r])?t[r]:[t[r]])}})}(),function(){wpAdRequire.define("Ad",["utils/extend","utils/extendKeyvalues","utils/isArray","utils/keyvalueIterator","utils/addKeyvalues"],function(e,t,n,r,i){function s(t){this.config=e({dfpSite:"/701/wpni.",where:undefined,size:null,what:null,pos:!1,posOverride:!1,interstitial:!1,onTheFly:!1},t,!0),this.config.pos==="interstitial"&&!this.config.interstitial&&(this.config.interstitial=!0,this.addInterstitialDiv()),t.hardcode||(this.keyvalues=this.buildKeyvalues())}return s.prototype={constructor:s,keyvaluesConfig:{pos:[function(){return[this.config.pos]}],dfpcomp:[function(){return window.dfpcomp?[window.dfpcomp]:!1}],onTheFly:[function(){var e={},t,n,r;if(this.config.onTheFly){t=this.config.onTheFly.split(";"),r=t.length;while(r--)n=t[r].split("="),n[0]&&n[1]&&(e[n[0]]=e[n[0]]||[],e[n[0]].push(n[1]))}return e}]},getSlug:function(){this.config.slug=document.getElementById("slug_"+this.config.pos),this.config.wpni_adi=document.getElementById("wpni_adi_"+this.config.pos)},getContainer:function(){return this.config.wpni_adi||this.config.slug},buildKeyvalues:function(){return r(this.keyvaluesConfig,this)},getKeyvalues:function(){return this.keyvalues},extendKeyvalues:function(e){this.keyvaluesConfig=t(this.keyvaluesConfig,e)},hardcode:function(){googletag.content().setContent(this.slot,this.hardcode)},addInterstitialDiv:function(){var e=document.createElement("div");e.id="slug_"+this.config.pos,e.style.display="none",document.body.insertBefore(e,document.body.firstChild)},buildGPTSlot:function(){return this.fullGPTSite=this.config.dfpSite+this.config.where,(this.config.interstitial?googletag.defineOutOfPageSlot(this.fullGPTSite,this.container.id):googletag.defineSlot(this.fullGPTSite,this.config.size,this.container.id)).addService(googletag.pubads())},getSlot:function(){return this.slot},slugDisplay:function(){var e=arguments[0]!==!1?"block":"none";this.config.slug&&(this.config.slug.style.display=e),this.config.wpni_adi&&(this.config.wpni_adi.style.display=e)},render:function(){this.slot?this.refresh():(this.getSlug(),this.container=this.getContainer(),this.slugDisplay(!0),this.config.hardcode?this.container.innerHTML=this.config.hardcode:(this.slot=this.buildGPTSlot(),i(this.keyvalues,this.slot),googletag.display(this.container.id)))},refresh:function(){googletag.pubads().refresh([this.slot])}},s})}(),function(){wpAdRequire.define("gptConfig",["utils/extend","utils/keyvalueIterator","utils/addKeyvalues"],function(e,t,n){return{init:function(r){return this.config=e({async:!0,sra:!0},r),this.pubservice=googletag.pubads(),this.keyvalues=t(this.keyvaluesConfig,this),n(this.keyvalues,this.pubservice),this.config.sra?this.pubservice.enableSingleRequest():this.pubservice.enableAsyncRendering(),googletag.enableServices(),this},keyvaluesConfig:{}}})}(),function(){wpAdRequire.define("utils/wp_meta_data",[],function(){return window.wp_meta_data||{}})}(),function(){wpAdRequire.define("utils/zoneBuilder",["utils/wp_meta_data"],function(e){return commercialNode=window.commercialNode||"politics",{contentType:{audiostory:"audio",blogstory:"blog",front:"front",graphicstory:"graphic",mediagallery:"photo",panostory:"pano",ugcphotostory:"ugc",videostory:"video"},zones:{contentType:function(){var t=this.getString(e.contentType);return t&&commercialNode!=="washingtonpost.com"&&this.contentType[t.toLowerCase()]||""},contentName:function(){return this.getString(e.contentName)},subsection:function(){return this.getString(e.subsection)}},getString:function(e){return e?typeof e=="string"?e:e[0]:""},validate:function(e){return e?(e=e.replace(/\s/g,"").replace(/^\/*|\/*$/g,"").replace(/[^0-9a-zA-Z_\.\-\/]/g,""),(/^[^a-z]/i.test(e)?"c":"")+e):!1},exec:function(){var e=this.zones,t=[this.validate(commercialNode)],n,r;for(n in e)e.hasOwnProperty(n)&&(r=this.validate(e[n].call(this)),r&&t.push(r));return this.executed=!0,t.join("/").toLowerCase()}}})}(),function(){wpAdRequire.define("utils/urlCheck",[],function(){return function(e,t){var n=parent.window.location.href||document.referrer,r=t&&typeof t=="object"?t:null,i=r!==null&&r.type==="variable"?new RegExp("[\\?&;]"+e+"=([^&#?]*)"):new RegExp(e),s=i.exec(n);return s===null?null:s[s.length-1]}})}(),function(){wpAdRequire.define("utils/estNowWithYear",[],function(){return function(){var e=new Date,t=e.getTime(),n=e.getDate(),r=(e.getDate()-e.getDay())%7,i=r<=0?r+7:r,s=e.getMonth()+1,o=(e.getTimezoneOffset()-(s<3||s>11?300:s>3&&s<11?240:s===3?n>i+7||n===i+7&&e.getHours()>=2?240:300:n>i||n===i&&e.getHours()>=2?300:240))*6e4,u=new Date(t+o),a=""+(u.getYear()<1900?u.getYear()+1900:u.getYear())+(u.getMonth()+1<10?"0"+(u.getMonth()+1):u.getMonth()+1)+(u.getDate()<10?"0"+u.getDate():u.getDate())+(u.getHours()<10?"0"+u.getHours():u.getHours())+(u.getMinutes()<10?"0"+u.getMinutes():u.getMinutes());return a.toString()}()})}(),function(){wpAdRequire.define("utils/templateBuilder",["utils/urlCheck","utils/isArray","utils/estNowWithYear"],function(e,t,n){return{demoAds:e("demoAds",{type:"variable"}),exec:function(e){if(!this.demoAds){this.template={};for(var t in e)e.hasOwnProperty(t)&&(e[t].id=t,this.checkFlight(e[t])&&this.addToTemplate(e[t]))}else this.template=this.demoAdsTemplate(this.demoAds);return this.template},checkFlight:function(e){var t;for(t in this.checks)if(this.checks.hasOwnProperty(t)&&e.hasOwnProperty(t)&&!this.checkProperty(t,e[t]))return!1;return!0},checkProperty:function(e,n){n=t(n)?n:[n];var r=n.length,i=0,s=!1;for(i;i<r;i++)this.checks[e](n[i])&&(s=!0);return s},addToTemplate:function(e){if(e.what){var t=e.what,n=t.length,r=0,i;for(r;r<n;r++)/^\!/.test(t[r])?(i=t[r].split(/\!/)[1],this.template[i]&&delete this.template[i]):this.template[t[r]]=e}},demoAdsTemplate:function(e){var t=e.split(";"),n=t.length,r={};while(n--)t[n]=this.posConverter(t[n]),r[t[n]]={id:"demoAds"};return r},posConverter:function(e){var t={ad1:"leaderboard",ad2:"leaderboard_2",ad3:"skyscraper",ad6:"flex_ss_bb_hp",ad7:"featurebar",ad14:"tiffany_tile",ad16:"flex_bb_hp",ad19:"336x35",ad20:"bigbox",ad43:"pushdown",ad44:"extra_bb",ad45:"deal"};return t.hasOwnProperty(e)?t[e]:e},checks:{test:function(e){return typeof e=="function"?e():e},where:function(e){var t=!0;return/^\!/.test(e)&&(t=!1,e=e.split("!")[1]),(new RegExp("^"+e)).test(commercialNode)?t:!1},when:function(e){return e=e.split("/"),e[0]<=n&&e[1]>=n}}}})}(),function(){wpAdRequire.define("utils/front",["utils/wp_meta_data"],function(e){return function(){return e.contentType?e.contentType[0]==="front"||e.contentType==="front":/^homepage/.test(commercialNode)?!0:window.commercialPageType&&window.commercialPageType==="front"?!0:!1}()})}(),function(){wpAdRequire.define("utils/allAds",[],function(){return/allAds/.test(location.search)})}(),function(){wpAdRequire.define("utils/debug",[],function(){return/debugadcode/i.test(location.search)})}(),function(){wpAdRequire.define("utils/no_interstitials",[],function(){return/no_interstitials/.test(location.search)})}(),function(){wpAdRequire.define("utils/flags",["utils/allAds","utils/debug","utils/front","utils/no_interstitials"],function(e,t,n,r){return{allAds:e,debug:t,front:n,no_interstitials:r}})}(),function(){wpAdRequire.define("utils/getCookie",[],function(){return function(e){var t=""+document.cookie,n=""+e+"=",r=null,i=0,s=0;return t.length>0&&(i=t.indexOf(n),i!==-1&&(i+=n.length,s=t.indexOf(";",i),s===-1&&(s=t.length),r=unescape(t.substring(i,s)))),r}})}(),function(){wpAdRequire.define("utils/setCookie",[],function(){return function(e,t,n,r,i,s){document.cookie=e+"="+escape(t)+(n?"; expires="+n:"")+(r?"; path="+r:"")+(i?"; domain="+i:"")+(s?"; secure":"")}})}(),function(){wpAdRequire.define("utils/showInterstitial",["utils/flags","utils/getCookie","utils/setCookie"],function(e,t,n){return function(){if(document.cookie&&!e.no_interstitials){var r=document.domain+"_pageview",i=t(r),s=!0,o=(new Date(parseInt((new Date).getTime(),10)+432e5)).toString();return i?(s=Number(i)%3?!1:!0,n(r,Number(i)+1,o,"/")):n(r,"1",o,"/"),s}return!1}()})}(),function(){wpAdRequire.define("wp/config",[],function(){return{flights:{defaults:{what:["leaderboard","leaderboard_2","flex","flex_re","flex_bb_hp","flex_ss_bb","flex_ss_tp","flex_ss_bb_hp","120x240","200x50","150x60","285x29","bigbox*","bigbox_vi","inline_bb","itb","skyscraper","grid_bigbox*","persistent_bb"]},homepage:{what:["!leaderboard"],where:["washingtonpost.com"]}},adTypes:{"120x240":{size:[[120,240]],keyvalues:{ad:["120x240"]}},"300x100":{size:[[300,100]]},"336x35":{size:[[336,35]],keyvalues:{ad:["336x35"],pos:["ad19"]}},"336x35_top":{size:[[336,35]],keyvalues:{ad:["336x35"]}},"336x60":{size:[[336,60]],keyvalues:{ad:["336x60"]}},"200x50":{size:[[200,50]],keyvalues:{ad:["200x50"]}},"150x60":{size:[[150,60]],keyvalues:{ad:["150x60"]}},"285x29":{size:[[285,29]],keyvalues:{ad:["285x29"]}},"600x130":{size:[[600,130]]},"88x31":{size:[[88,31]]},agoogleaday:{size:[[1,1]]},bigbox:{size:[[300,250]],keyvalues:{ad:["bb"],pos:["ad20"]}},deal:{size:[[1,1]],keyvalues:{ad:["deal"],pos:["ad45"]}},dealer_showcase:{size:[[1,1]]},extra_bb:{size:[[300,250]],keyvalues:{ad:["bb"],pos:["ad44"]}},featrent:{size:[[1,1]]},featurebar:{size:[[446,33]],keyvalues:{ad:["fb"],pos:["ad7"]}},flex:{size:[[336,850]],keyvalues:{ad:["hp"]}},flex_bb_hp:{size:[[300,250],[300,600],[336,850]],keyvalues:{ad:["hp","bb"],pos:["ad16"]}},flex_re:{size:[[300,250],[300,600]],keyvalues:{ad:["bb","tp"]}},flex_ss_bb:{size:[[160,600],[300,250]],keyvalues:{ad:["ss","bb"]}},flex_ss_bb_hp:{size:[[160,600],[300,250],[300,600],[336,850]],keyvalues:{ad:["ss","bb","hp"],pos:["ad6"]}},flex_ss_tp:{size:[[300,250],[300,600]],keyvalues:{ad:["bb","tp"]}},grid_bigbox:{size:[[300,250]]},inline_bb:{size:[[300,250]],keyvalues:{ad:["inline_bb"]}},interstitial:{size:[["N/A"]],keyvalues:{ad:["interstitial"]}},itb:{size:[[1,1]]},leaderboard:{size:[[728,90]],keyvalues:{ad:["lb"],pos:["ad1"]}},leaderboard_2:{size:[[728,90]],keyvalues:{ad:["lb"],pos:["ad2"]}},marketing:{size:[[1,1]]},mm_overlay:{size:[[1,1]]},nav_tile:{size:[[1,1]]},nn:{size:[[200,80]]},nn_footer:{size:[[200,30]],keyvalues:{ad:["nn_footer"]}},nn_hp:{size:[[190,20]],keyvalues:{ad:["nn_hp"]}},nn_rr:{size:[[200,80]],keyvalues:{ad:["nn_rr"]}},nn_sidebar:{size:[[200,30]],keyvalues:{ad:["nn_sidebar"]}},persistent_bb:{size:[[300,250]]},pptile:{size:[[300,60]]},promo:{size:[[200,60]]},pushdown:{size:[[1,1]],keyvalues:{pos:["ad43"]}},skyscraper:{size:[[160,600]],keyvalues:{ad:["ss"],pos:["ad3"]}},sponsor:{size:[[1,1]]},sponsor_links_bt:{size:[[1,1]]},sponsor_links_in:{size:[[1,1]]},sponsor_links_rr:{size:[[1,1]]},tiffany_tile:{size:[[200,60],[184,90]],keyvalues:{ad:["tiff"],pos:["ad14"]}},tooltile:{size:[[1,1]]},topjobs:{size:[[1,1]]}}}})}(),function(){wpAdRequire.define("utils/keywords",["utils/isArray","utils/wp_meta_data"],function(e,t){return function(){if(t.keywords)return e(t.keywords)?t.keywords.join(","):t.keywords;var n=document.getElementsByTagName("meta"),r=n.length,i;while(r--)if(n[r].getAttribute("name")==="keywords"){i=n[r].getAttribute("content");if(i)return i}return""}()})}(),function(){wpAdRequire.define("utils/wordMatch",["utils/isArray"],function(e){return function(t,n,r){r=r||!1,t=e(t)?t:[t];var i=[],s=r?"":"(|s|es|ed|ing|er)",o=t.length;if(o&&n){while(o--)i.push(t[o]+s);return i="\\b"+i.join("\\b|\\b")+"\\b",(new RegExp(i,"i")).test(n)}return!1}})}(),function(){wpAdRequire.define("keyvalues/exclusions",["utils/front","utils/keywords","utils/wordMatch"],function(e,t,n){return function(){var r=[],i={natural_disaster:["shell","exxon","citgo","bp","chevron","hess","sunoco","disaster","fire","explosion","oil","coal","death","dead","quake","earthquake","tsunami","tornado","hurricane","flood","bed bug","infestation"],human_disaster:["shoot","vatican","spanair","aground","rescue","attack","disaster","explosion","war","hostage","terror","terrorist","bomb","blast","mining","miner","violence","riot","crash","9/11","sept. 11","september 11"],financial_crisis:["corrupt","goldman","aig","foreclosure","enron","sec","mortgage","Insurance","health","bank","wall street","protest","labor strike","union strike","labor issue","union issue","teacher strike","teachers strike","election"],inappropriate:["gambling","sex","alcohol","pornography"]},s;if(!e)for(s in i)i.hasOwnProperty(s)&&n(i[s],t)&&r.push(s);return r}})}(),function(){wpAdRequire.define("keyvalues/front",["utils/front"],function(e){return function(){return e?["y"]:["n"]}})}(),function(){wpAdRequire.define("keyvalues/kw",["utils/urlCheck"],function(e){return function(){var t=e("test_ads",{type:"variable"});return t?["test_"+t]:!1}})}(),function(){wpAdRequire.define("keyvalues/pageId",["utils/wp_meta_data"],function(e){return function(){if(!e.page_id)return!1;var t=e.page_id.length;while(t--)e.page_id[t]=e.page_id[t].replace(/\./g,"_");return e.page_id}})}(),function(){wpAdRequire.define("keyvalues/poe",["utils/setCookie","utils/getCookie"],function(e,t){return function(){var n=window.location.hostname+"_poe";return t(n)?["no"]:(e(n,"true","","/","",""),["yes"])}})}(),function(){wpAdRequire.define("keyvalues/ref",[],function(){return function(){var e=[],t=document.referrer||"";return/facebook\.com|digg\.com|reddit\.com|myspace\.com|newstrust\.net|twitter\.com|delicious\.com|stumbleupon\.com/i.test(t)&&e.push("social"),location.search.match("wpisrc=")&&e.push("email"),e}})}(),function(){wpAdRequire.define("keyvalues/rs",["utils/getCookie"],function(e){return function(){var t=e("rsi_segs"),n=[],r,i;if(t){t=t.replace(/J05531_/gi,"j").replace(/D08734_/gi,"d").split("|"),i=t.length;for(r=0;r<i;r++)n.push(t[r])}return n}})}(),function(){wpAdRequire.define("keyvalues/u",["utils/getCookie","utils/wp_meta_data","utils/zoneBuilder"],function(e,t,n){return function(){var r=e("s_vi"),i=!1;return r&&(r=r.split(/\|/)[1],r&&(r=r.split(/\[/)[0].split(/-/),i="o*"+r[0]+","+r[1],window.TWP&&TWP.Data&&TWP.Data.Tracking&&TWP.Data.Tracking.props&&TWP.Data.Tracking.props.page_name&&(i+=","+TWP.Data.Tracking.props.page_name.replace(/ /g,"_").slice(0,100)),i+=",,,"+(t.contentType&&n.contentType[t.contentType.toString()]?n.contentType[t.contentType.toString()]:"article")+",abc")),[i]}})}(),function(){wpAdRequire.define("packages/desktop/keyvalues",["keyvalues/exclusions","keyvalues/front","keyvalues/kw","keyvalues/pageId","keyvalues/poe","keyvalues/ref","keyvalues/rs","keyvalues/u"],function(e,t,n,r,i,s,o,u){return{"!c":[e],front:[t],kw:[n],pageId:[r],poe:[i],ref:[s],rs:[o],u:[u]}})}(),function(){wpAdRequire.define("wp/keyvalues",["utils/extendKeyvalues","packages/desktop/keyvalues","utils/wp_meta_data","utils/wordMatch","utils/keywords","utils/getCookie"],function(e,t,n,r,i,s){return e(t,{articleId:[function(){var e=[],t;return n.contentType&&n.contentType[0]==="CompoundStory"&&(t=location.href.split("/"),e=[t[t.length-1].toLowerCase().split("_story")[0]]),e}],kw:[function(){var e=[],t={energy:["energy"],re:["builder","condo","home","homeowner","housing","mortgage","property","real estate","realtor","refinance","neighborhood"]},n;for(n in t)t.hasOwnProperty(n)&&r(t[n],i)&&e.push(n);return e}],WPATC:[function(){var e=s("WPATC"),t={},n,r,i;if(e){e=unescape(e).split(":"),n=e.length;while(n--)r=e[n].split("="),t[r[0]]?t[r[0]].push(r[1]):t[r[0]]=[r[1]]}return t}]})})}(),function(){wpAdRequire.define("overrides",[],function(){return{exec:function(e){var t,n,r;for(t in this.checks)if(this.checks.hasOwnProperty(t)&&e.config[t])for(n in this.checks[t])this.checks[t].hasOwnProperty(n)&&(r=new RegExp(n,"i"),r.test(e.config[t])&&this.checks[t][n].call(e));return e},checks:{}}})}(),function(){wpAdRequire.define("utils/reload",["utils/urlCheck"],function(e){return e("reload",{type:"variable"})==="true"})}(),function(){wpAdRequire.define("wp/overrides",["overrides","utils/reload"],function(e,t){return e.checks={pos:{leaderboard$:function(){this.keyvalues.lb_test_kv=this.keyvalues.lb_test_kv||[],this.keyvalues.lb_test_kv.push("true"),this.config.where==="washingtonpost.com"&&(this.config.where+="/lb")},featrent$:function(){window.jquery&&$("#wpni_adi_featrent").css({background:"none",padding:"0"})},"^tiffany_tile$":function(){this.config.where==="washingtonpost.com"&&(this.config.size=["184x90"])},flex_ss_bb_hp:function(){if(this.config.where==="lifestyle/home"||this.config.where==="lifestyle/home/front"||this.config.where==="lifestyle/home-garden")this.config.where+="/flex"},flex_bb_hp:function(){/washingtonpost\.com/.test(this.config.where)&&(this.config.where+="/hpflex")}},where:{"^politics$":function(){this.config.where+="/front"},"^washingtonpost.com$":function(){(this.config.pos==="leaderboard"||this.config.pos==="flex_bb_hp")&&t&&(this.config.where+="refresh");if(this.config.pos==="pushdown"){var e=doc.getElementById("wpni_adi_pushdown");e&&(e.style.backgroundImage="url(http://img.wpdigital.net/wp-adv/test/mstest/pushdown-ad-small.png)",e.style.backgroundPosition="-7px -100px")}}}},e})}(),function(){wpAdRequire.define("siteScript",["defaultSettings","googletag","Ad","gptConfig","utils/zoneBuilder","utils/templateBuilder","utils/extend","utils/extendKeyvalues","utils/front","utils/showInterstitial","utils/flags","wp/config","wp/keyvalues","wp/overrides"],function(e,t,n,r,i,s,o,u,a,f,l,c,h,p){return commercialNode=i.exec(),u(n.prototype.keyvaluesConfig,{ad:function(){if(c.adTypes[this.config.what].keyvalues&&c.adTypes[this.config.what].keyvalues.ad)return c.adTypes[this.config.what].keyvalues.ad},pos:function(){var e=c.adTypes[this.config.pos];if(e&&e.keyvalues&&e.keyvalues.pos)return e.keyvalues.pos}}),u(r.keyvaluesConfig,h),c.flights=o({interstitial:{what:["interstitial"],test:[f&&!a]}},c.flights),o(e,{dfpSite:"/701/wpni.",Ad:n,gptConfig:r.init({googletag:t,sra:!0}),flags:l,config:c,flights:s.exec(c.flights),overrides:p,cleanScriptTags:function(){return!1}})})}(),function(){wpAdRequire.define("utils/getScript",[],function(){return function(e,t){var n=document.createElement("script"),r=document.body||document.getElementsByTagName("head")[0]||!1;t=t||!1,r&&(n.type="text/"+(e.type||"javascript"),n.src=e.src||e,typeof t=="function"&&(n.onreadystatechange=n.onload=function(){var e=n.readyState;!t.done&&(!e||/loaded|complete/.test(e))&&(t.done=!0,t())}),r.appendChild(n))}})}(),function(){function e(e){if(e){var t=e.length,n=0;for(n;n<t;n++)placeAd2.apply(window,e[n])}}if(/no_ads/.test(location.search))return!1;wpAdRequire.require.config({baseUrl:"js",paths:{siteScript:"wp/main",googletag:"http://www.googletagservices.com/tag/js/gpt",jquery:"http://js.washingtonpost.com/wpost/js/combo/?token=20121010232000&c=true&m=true&context=eidos&r=/jquery-1.7.1.js",jqueryUI:"lib/jquery-ui.min"},shim:{googletag:{exports:"googletag"},jqueryUI:{deps:["jquery"],exports:"$"}}}),wpAdRequire.require(["siteScript","utils/getScript"],function(t,n){t.flags.debug&&n("js/debug.js"),placeAd2(commercialNode,"interstitial",!1,""),placeAd2=function(e,n,r,i){var s=n,o=!1,u,a;/\|/.test(n)&&(u=n.split(/\|/),n=u[0],o=u[1],s=u.join("_")),(t.flights&&t.flights[s]||t.flights[n+"*"])&&t.config.adTypes[n]||t.flags.allAds?t.adsOnPage[s]?t.adsOnPage[s].slot.refresh():(a=new t.Ad({templateSettings:t.config.adTypes[n],dfpSite:t.dfpSite,where:window.commercialNode,size:t.config.adTypes[n].size,what:n,pos:s,posOverride:o,hardcode:t.flights[s]&&t.flights[s].hardcode||!1,onTheFly:i}),t.overrides&&(a=t.overrides.exec(a)),a.render(),t.adsOnPage[s]=a):t.adsDisabledOnPage[s]=!0,t.debugQueue.push(s)},e(window.placeAd2Queue),window.wpAd=t})}(),wpAdRequire.define("main",function(){});
+
+var wpAdRequire;(function () { if (typeof wpAdRequire === 'undefined') {
+wpAdRequire = {};
+/**
+ * almond 0.2.5 Copyright (c) 2011-2012, The Dojo Foundation All Rights Reserved.
+ * Available via the MIT or new BSD license.
+ * see: http://github.com/jrburke/almond for details
+ */
+//Going sloppy to avoid 'use strict' string cost, but strict practices should
+//be followed.
+/*jslint sloppy: true */
+/*global setTimeout: false */
+
+var requirejs, require, define;
+(function (undef) {
+    var main, req, makeMap, handlers,
+        defined = {},
+        waiting = {},
+        config = {},
+        defining = {},
+        hasOwn = Object.prototype.hasOwnProperty,
+        aps = [].slice;
+
+    function hasProp(obj, prop) {
+        return hasOwn.call(obj, prop);
+    }
+
+    /**
+     * Given a relative module name, like ./something, normalize it to
+     * a real name that can be mapped to a path.
+     * @param {String} name the relative name
+     * @param {String} baseName a real name that the name arg is relative
+     * to.
+     * @returns {String} normalized name
+     */
+    function normalize(name, baseName) {
+        var nameParts, nameSegment, mapValue, foundMap,
+            foundI, foundStarMap, starI, i, j, part,
+            baseParts = baseName && baseName.split("/"),
+            map = config.map,
+            starMap = (map && map['*']) || {};
+
+        //Adjust any relative paths.
+        if (name && name.charAt(0) === ".") {
+            //If have a base name, try to normalize against it,
+            //otherwise, assume it is a top-level require that will
+            //be relative to baseUrl in the end.
+            if (baseName) {
+                //Convert baseName to array, and lop off the last part,
+                //so that . matches that "directory" and not name of the baseName's
+                //module. For instance, baseName of "one/two/three", maps to
+                //"one/two/three.js", but we want the directory, "one/two" for
+                //this normalization.
+                baseParts = baseParts.slice(0, baseParts.length - 1);
+
+                name = baseParts.concat(name.split("/"));
+
+                //start trimDots
+                for (i = 0; i < name.length; i += 1) {
+                    part = name[i];
+                    if (part === ".") {
+                        name.splice(i, 1);
+                        i -= 1;
+                    } else if (part === "..") {
+                        if (i === 1 && (name[2] === '..' || name[0] === '..')) {
+                            //End of the line. Keep at least one non-dot
+                            //path segment at the front so it can be mapped
+                            //correctly to disk. Otherwise, there is likely
+                            //no path mapping for a path starting with '..'.
+                            //This can still fail, but catches the most reasonable
+                            //uses of ..
+                            break;
+                        } else if (i > 0) {
+                            name.splice(i - 1, 2);
+                            i -= 2;
+                        }
+                    }
+                }
+                //end trimDots
+
+                name = name.join("/");
+            } else if (name.indexOf('./') === 0) {
+                // No baseName, so this is ID is resolved relative
+                // to baseUrl, pull off the leading dot.
+                name = name.substring(2);
+            }
+        }
+
+        //Apply map config if available.
+        if ((baseParts || starMap) && map) {
+            nameParts = name.split('/');
+
+            for (i = nameParts.length; i > 0; i -= 1) {
+                nameSegment = nameParts.slice(0, i).join("/");
+
+                if (baseParts) {
+                    //Find the longest baseName segment match in the config.
+                    //So, do joins on the biggest to smallest lengths of baseParts.
+                    for (j = baseParts.length; j > 0; j -= 1) {
+                        mapValue = map[baseParts.slice(0, j).join('/')];
+
+                        //baseName segment has  config, find if it has one for
+                        //this name.
+                        if (mapValue) {
+                            mapValue = mapValue[nameSegment];
+                            if (mapValue) {
+                                //Match, update name to the new value.
+                                foundMap = mapValue;
+                                foundI = i;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if (foundMap) {
+                    break;
+                }
+
+                //Check for a star map match, but just hold on to it,
+                //if there is a shorter segment match later in a matching
+                //config, then favor over this star map.
+                if (!foundStarMap && starMap && starMap[nameSegment]) {
+                    foundStarMap = starMap[nameSegment];
+                    starI = i;
+                }
+            }
+
+            if (!foundMap && foundStarMap) {
+                foundMap = foundStarMap;
+                foundI = starI;
+            }
+
+            if (foundMap) {
+                nameParts.splice(0, foundI, foundMap);
+                name = nameParts.join('/');
+            }
+        }
+
+        return name;
+    }
+
+    function makeRequire(relName, forceSync) {
+        return function () {
+            //A version of a require function that passes a moduleName
+            //value for items that may need to
+            //look up paths relative to the moduleName
+            return req.apply(undef, aps.call(arguments, 0).concat([relName, forceSync]));
+        };
+    }
+
+    function makeNormalize(relName) {
+        return function (name) {
+            return normalize(name, relName);
+        };
+    }
+
+    function makeLoad(depName) {
+        return function (value) {
+            defined[depName] = value;
+        };
+    }
+
+    function callDep(name) {
+        if (hasProp(waiting, name)) {
+            var args = waiting[name];
+            delete waiting[name];
+            defining[name] = true;
+            main.apply(undef, args);
+        }
+
+        if (!hasProp(defined, name) && !hasProp(defining, name)) {
+            throw new Error('No ' + name);
+        }
+        return defined[name];
+    }
+
+    //Turns a plugin!resource to [plugin, resource]
+    //with the plugin being undefined if the name
+    //did not have a plugin prefix.
+    function splitPrefix(name) {
+        var prefix,
+            index = name ? name.indexOf('!') : -1;
+        if (index > -1) {
+            prefix = name.substring(0, index);
+            name = name.substring(index + 1, name.length);
+        }
+        return [prefix, name];
+    }
+
+    /**
+     * Makes a name map, normalizing the name, and using a plugin
+     * for normalization if necessary. Grabs a ref to plugin
+     * too, as an optimization.
+     */
+    makeMap = function (name, relName) {
+        var plugin,
+            parts = splitPrefix(name),
+            prefix = parts[0];
+
+        name = parts[1];
+
+        if (prefix) {
+            prefix = normalize(prefix, relName);
+            plugin = callDep(prefix);
+        }
+
+        //Normalize according
+        if (prefix) {
+            if (plugin && plugin.normalize) {
+                name = plugin.normalize(name, makeNormalize(relName));
+            } else {
+                name = normalize(name, relName);
+            }
+        } else {
+            name = normalize(name, relName);
+            parts = splitPrefix(name);
+            prefix = parts[0];
+            name = parts[1];
+            if (prefix) {
+                plugin = callDep(prefix);
+            }
+        }
+
+        //Using ridiculous property names for space reasons
+        return {
+            f: prefix ? prefix + '!' + name : name, //fullName
+            n: name,
+            pr: prefix,
+            p: plugin
+        };
+    };
+
+    function makeConfig(name) {
+        return function () {
+            return (config && config.config && config.config[name]) || {};
+        };
+    }
+
+    handlers = {
+        require: function (name) {
+            return makeRequire(name);
+        },
+        exports: function (name) {
+            var e = defined[name];
+            if (typeof e !== 'undefined') {
+                return e;
+            } else {
+                return (defined[name] = {});
+            }
+        },
+        module: function (name) {
+            return {
+                id: name,
+                uri: '',
+                exports: defined[name],
+                config: makeConfig(name)
+            };
+        }
+    };
+
+    main = function (name, deps, callback, relName) {
+        var cjsModule, depName, ret, map, i,
+            args = [],
+            usingExports;
+
+        //Use name if no relName
+        relName = relName || name;
+
+        //Call the callback to define the module, if necessary.
+        if (typeof callback === 'function') {
+
+            //Pull out the defined dependencies and pass the ordered
+            //values to the callback.
+            //Default to [require, exports, module] if no deps
+            deps = !deps.length && callback.length ? ['require', 'exports', 'module'] : deps;
+            for (i = 0; i < deps.length; i += 1) {
+                map = makeMap(deps[i], relName);
+                depName = map.f;
+
+                //Fast path CommonJS standard dependencies.
+                if (depName === "require") {
+                    args[i] = handlers.require(name);
+                } else if (depName === "exports") {
+                    //CommonJS module spec 1.1
+                    args[i] = handlers.exports(name);
+                    usingExports = true;
+                } else if (depName === "module") {
+                    //CommonJS module spec 1.1
+                    cjsModule = args[i] = handlers.module(name);
+                } else if (hasProp(defined, depName) ||
+                           hasProp(waiting, depName) ||
+                           hasProp(defining, depName)) {
+                    args[i] = callDep(depName);
+                } else if (map.p) {
+                    map.p.load(map.n, makeRequire(relName, true), makeLoad(depName), {});
+                    args[i] = defined[depName];
+                } else {
+                    throw new Error(name + ' missing ' + depName);
+                }
+            }
+
+            ret = callback.apply(defined[name], args);
+
+            if (name) {
+                //If setting exports via "module" is in play,
+                //favor that over return value and exports. After that,
+                //favor a non-undefined return value over exports use.
+                if (cjsModule && cjsModule.exports !== undef &&
+                        cjsModule.exports !== defined[name]) {
+                    defined[name] = cjsModule.exports;
+                } else if (ret !== undef || !usingExports) {
+                    //Use the return value from the function.
+                    defined[name] = ret;
+                }
+            }
+        } else if (name) {
+            //May just be an object definition for the module. Only
+            //worry about defining if have a module name.
+            defined[name] = callback;
+        }
+    };
+
+    requirejs = require = req = function (deps, callback, relName, forceSync, alt) {
+        if (typeof deps === "string") {
+            if (handlers[deps]) {
+                //callback in this case is really relName
+                return handlers[deps](callback);
+            }
+            //Just return the module wanted. In this scenario, the
+            //deps arg is the module name, and second arg (if passed)
+            //is just the relName.
+            //Normalize module name, if it contains . or ..
+            return callDep(makeMap(deps, callback).f);
+        } else if (!deps.splice) {
+            //deps is a config object, not an array.
+            config = deps;
+            if (callback.splice) {
+                //callback is an array, which means it is a dependency list.
+                //Adjust args if there are dependencies
+                deps = callback;
+                callback = relName;
+                relName = null;
+            } else {
+                deps = undef;
+            }
+        }
+
+        //Support require(['a'])
+        callback = callback || function () {};
+
+        //If relName is a function, it is an errback handler,
+        //so remove it.
+        if (typeof relName === 'function') {
+            relName = forceSync;
+            forceSync = alt;
+        }
+
+        //Simulate async callback;
+        if (forceSync) {
+            main(undef, deps, callback, relName);
+        } else {
+            //Using a non-zero value because of concern for what old browsers
+            //do, and latest browsers "upgrade" to 4 if lower value is used:
+            //http://www.whatwg.org/specs/web-apps/current-work/multipage/timers.html#dom-windowtimers-settimeout:
+            //If want a value immediately, use require('id') instead -- something
+            //that works in almond on the global level, but not guaranteed and
+            //unlikely to work in other AMD implementations.
+            setTimeout(function () {
+                main(undef, deps, callback, relName);
+            }, 4);
+        }
+
+        return req;
+    };
+
+    /**
+     * Just drops the config on the floor, but returns req in case
+     * the config return value is used.
+     */
+    req.config = function (cfg) {
+        config = cfg;
+        if (config.deps) {
+            req(config.deps, config.callback);
+        }
+        return req;
+    };
+
+    define = function (name, deps, callback) {
+
+        //This module may not have dependencies
+        if (!deps.splice) {
+            //deps is not an array, so probably means
+            //an object literal or factory function for
+            //the value. Adjust args.
+            callback = deps;
+            deps = [];
+        }
+
+        if (!hasProp(defined, name) && !hasProp(waiting, name)) {
+            waiting[name] = [name, deps, callback];
+        }
+    };
+
+    define.amd = {
+        jQuery: true
+    };
+}());
+
+wpAdRequire.requirejs = requirejs;wpAdRequire.require = require;wpAdRequire.define = define;
+}
+}());
+wpAdRequire.define("lib/almond", function(){});
+
+/**
+ * Defaults required by all ad scripts
+ */
+(function(){
+
+  
+
+  wpAdRequire.define('defaultSettings',[],function(){
+
+    return {
+
+      //stores all ads on the page here
+      adsOnPage: {},
+
+      //stores debug info
+      debugQueue: [],
+
+      //stores all ads placements on the page that aren't currently open (for debugging).
+      adsDisabledOnPage: {},
+
+      //container for array of functions to execute on load
+      init: []
+
+    };
+
+  });
+
+})();
+(function(){
+
+  
+
+  wpAdRequire.define('utils/isObject',[],function(){
+
+    /**
+     * Checks if argument is an Object.
+     * @param {*} a The data type to check.
+     * @return {Boolean} true if argument is Object, false otherwise.
+     */
+    return function(a){
+      return typeof a === 'object' && a !== null && Object.prototype.toString.call(a) === '[object Object]';
+    };
+
+  });
+
+})();
+(function(){
+
+  
+
+  wpAdRequire.define('utils/extend',['utils/isObject'], function(isObject){
+
+    /**
+     * Merges one object into another - *Permanently overwrites the first argument.
+     * @param {Object} obj Object to be extended (the defaults).
+     * @param {Object} additions Object to be merged into and/or overwrite properties in the default Object.
+     * @param {Boolean} deep Do a deep merge if true, as run extend on all Child Objects.
+     * @return {Object} The merged Object.
+     */
+    function extend(obj, additions, deep){
+      deep = deep || false;
+      for(var key in additions){
+        if(additions.hasOwnProperty(key)){
+          if(!deep || (!isObject(obj[key]) || !isObject(additions[key]))){
+            obj[key] = additions[key];
+          } else{
+            obj[key] = extend(obj[key], additions[key], true);
+          }
+        }
+      }
+      return obj;
+    }
+
+    return extend;
+
+  });
+
+})();
+(function(){
+
+  
+
+  wpAdRequire.define('utils/isArray',[],function(){
+
+    /**
+     * Checks if argument is an Array.
+     * @param {*} a The data type to check.
+     * @return {Boolean} true if argument is Array, false otherwise.
+     */
+    return function(a){
+      return typeof a === 'object' && a !== null && Object.prototype.toString.call(a) === '[object Array]';
+    };
+
+  });
+
+})();
+(function(){
+
+  
+
+  wpAdRequire.define('utils/extendKeyvalues',['utils/isArray'], function(isArray){
+
+    /**
+     * Merges and extends one set of keyvalue functions into another as arrays of functions.
+     * @param {Object} kvs Object to be extended (the defaults).
+     * @param {Object} additions Object to be merged into the default Object, extending existing
+     *    keys, or creating new ones that didn't previously exist
+     * @return {Object} The merged Object containing arrays of functions assigned to keys.
+     */
+    return function(kvs, additions){
+      for(var key in additions){
+        if(additions.hasOwnProperty(key)){
+          if(!kvs.hasOwnProperty(key)){
+            kvs[key] = [];
+          } else {
+            kvs[key] = isArray(kvs[key]) ? kvs[key] : [kvs[key]];
+          }
+          additions[key] = isArray(additions[key]) ? additions[key] : [additions[key]];
+          kvs[key] = kvs[key].concat(additions[key]);
+        }
+      }
+      return kvs;
+    };
+
+  });
+
+})();
+(function(){
+
+  
+
+  wpAdRequire.define('utils/keyvalueIterator',['utils/isArray', 'utils/isObject'], function(isArray, isObject){
+
+   /**
+     * Loops through an Object of functions, executes them, assigns the [result] to a key (function name
+     * by default, override by returning as Object instead of Array).
+     * @param {Object} kvs The Object of functions, or Array of functions to iterate through.
+     * @param {Object} opt_context The context to call each function in.
+     * @return {Object} Object of key/value pairs based on function name : [executed function value]
+     */
+    return function(kvs, opt_context){
+      opt_context = opt_context || this;
+      var rv = {},
+        key, val, k, fnlen;
+
+      //loop through kvs
+      for(key in kvs){
+        if(kvs.hasOwnProperty(key)){
+
+          //function -> [function] if needed
+          if(!isArray(kvs[key])){
+            kvs[key] = [kvs[key]];
+          }
+
+          fnlen = kvs[key].length;
+
+          //loop through all functions associated with key, and add all results to Array rv[keyvalue Name]
+          while(fnlen--){
+            val = kvs[key][fnlen].call(opt_context);
+            if(val){
+              //if return value is object, use returned object's key and result as keyvalue pair
+              if(isObject(val)){
+                for(k in val){
+                  if(val.hasOwnProperty(k)){
+                    val[k] = isArray(val[k]) ? val[k] : [val[k]];
+                    if(val[k].length && val[k][0] !== false){
+                      rv[k] = rv[k] || [];
+                      rv[k] = rv[k].concat(val[k]);
+                    }
+                  }
+                }
+              //else use the original key (function name)
+              } else {
+                val = isArray(val) ? val : [val];
+                if(val.length && val[0] !== false){
+                  rv[key] = rv[key] || [];
+                  rv[key] = rv[key].concat(val);
+                }
+              }
+            }
+          }
+        }
+      }
+      return rv;
+    };
+
+  });
+
+})();
+(function(){
+
+  
+
+  wpAdRequire.define('utils/addKeyvalues',['utils/isArray'], function(isArray){
+
+    /**
+     * Assigns keyvalues to a the gpt publisher service, or a gpt ad slot
+     * @param {Object} map Key/Value mapping
+     * @param {Object} target GPT publisher service, or GPT ad slot
+     */
+    return function(map, target){
+      for(var key in map){
+        if(map.hasOwnProperty(key)){
+          target.setTargeting(key, isArray(map[key]) ? map[key] : [map[key]]);
+        }
+      }
+    };
+
+  });
+
+})();
+/*global googletag*/
+
+/**
+ * wpAd Ad object. Builds an individual ad
+ */
+(function(){
+
+  
+
+  wpAdRequire.define('Ad',[
+    'utils/extend',
+    'utils/extendKeyvalues',
+    'utils/isArray',
+    'utils/keyvalueIterator',
+    'utils/addKeyvalues'
+  ], function(extend, extendKeyvalues, isArray, keyvalueIterator, addKeyvalues){
+
+    function Ad(config){
+      this.config = extend({
+        'dfpSite': '/701/wpni.',
+        'where': undefined,
+        'size': null,
+        'what': null,
+        'pos': false,
+        'posOverride': false,
+        'interstitial': false,
+        'onTheFly': false
+      }, config, true);
+
+      if(this.config.pos === 'interstitial' && !this.config.interstitial){
+        this.config.interstitial = true;
+        this.addInterstitialDiv();
+      }
+
+      if(!config.hardcode){
+        this.keyvalues = this.buildKeyvalues();
+      }
+    }
+
+    Ad.prototype = {
+      constructor: Ad,
+
+      keyvaluesConfig: {
+        pos: [
+          function(){
+            return [this.config.pos];
+          }
+        ],
+        dfpcomp: [
+          function(){
+            return window.dfpcomp ? [window.dfpcomp] : false;
+          }
+        ],
+        onTheFly: [
+          function(){
+            var rv = {},
+              kvs, kv, len;
+            if(this.config.onTheFly){
+              kvs = this.config.onTheFly.split(';');
+              len = kvs.length;
+              while(len--){
+                kv = kvs[len].split('=');
+                if(kv[0] && kv[1]){
+                  rv[kv[0]] = rv[kv[0]] || [];
+                  rv[kv[0]].push(kv[1]);
+                }
+              }
+            }
+            return rv;
+          }
+        ]
+      },
+
+      getSlug: function(){
+        this.config.slug = document.getElementById('slug_' + this.config.pos);
+        this.config.wpni_adi = document.getElementById('wpni_adi_' + this.config.pos);
+      },
+
+      getContainer: function(){
+        return this.config.wpni_adi || this.config.slug;
+      },
+
+      buildKeyvalues: function(){
+        return keyvalueIterator(this.keyvaluesConfig, this);
+      },
+
+      getKeyvalues: function(){
+        return this.keyvalues;
+      },
+
+      extendKeyvalues: function(obj){
+        this.keyvaluesConfig = extendKeyvalues(this.keyvaluesConfig, obj);
+      },
+
+      hardcode: function(){
+        googletag.content().setContent(this.slot, this.hardcode);
+      },
+
+      addInterstitialDiv: function(){
+        var s = document.createElement('div');
+        s.id = 'slug_' + this.config.pos;
+        s.style.display = 'none';
+        document.body.insertBefore(s, document.body.firstChild);
+      },
+
+      buildGPTSlot: function(){
+        this.fullGPTSite = this.config.dfpSite + this.config.where;
+        return (!this.config.interstitial ?
+          googletag.defineSlot(this.fullGPTSite, this.config.size, this.container.id) :
+          googletag.defineOutOfPageSlot(this.fullGPTSite, this.container.id))
+            .addService(googletag.pubads());
+      },
+
+      getSlot: function(){
+        return this.slot;
+      },
+
+      slugDisplay: function(){
+        var display = arguments[0] !== false ? 'block' : 'none';
+        if(this.config.slug){
+          this.config.slug.style.display = display;
+        }
+        if(this.config.wpni_adi){
+          this.config.wpni_adi.style.display = display;
+        }
+      },
+
+      render: function(){
+        if(!this.slot){
+          this.getSlug();
+          this.container = this.getContainer();
+          this.slugDisplay(true);
+          if(!this.config.hardcode){
+            this.slot = this.buildGPTSlot();
+            addKeyvalues(this.keyvalues, this.slot);
+            googletag.display(this.container.id);
+          } else {
+            this.container.innerHTML = this.config.hardcode;
+          }
+        } else {
+          this.refresh();
+        }
+      },
+
+      refresh: function(){
+        googletag.pubads().refresh([this.slot]);
+      }
+
+    };
+
+    return Ad;
+
+  });
+
+})();
+/**
+ * this Initial setup
+ */
+(function(){
+
+  
+
+  wpAdRequire.define('gptConfig',[
+    'utils/extend',
+    'utils/keyvalueIterator',
+    'utils/addKeyvalues'
+  ], function(extend, keyvalueIterator, addKeyvalues){
+
+    return {
+
+      exec: function(config){
+        this.config = extend({
+          async: true,
+          sra: true
+        }, config);
+
+        this.pubservice = googletag.pubads();
+
+        this.keyvalues = keyvalueIterator(this.keyvaluesConfig, this);
+        addKeyvalues(this.keyvalues, this.pubservice);
+
+        if(this.config.sra){
+          this.pubservice.enableSingleRequest();
+        } else{
+          this.pubservice.enableAsyncRendering();
+        }
+
+        googletag.enableServices();
+      },
+
+      init: function(config){
+        var self = this;
+        googletag.cmd.push(function(){
+          self.exec.call(self, config);
+        });
+        return this;
+      },
+
+      /**
+       * Placeholder. Gets added in site script
+       */
+      keyvaluesConfig: {}
+
+    };
+
+  });
+
+})();
+(function(){
+
+  
+
+  wpAdRequire.define('utils/wp_meta_data',[],function(){
+    return window.wp_meta_data || {};
+  });
+
+})();
+(function(){
+
+  
+
+  wpAdRequire.define('utils/contentTypes',[],function(){
+    return {
+      audiostory: 'audio',
+      blogstory: 'blog',
+      front: 'front',
+      graphicstory: 'graphic',
+      mediagallery: 'photo',
+      panostory: 'pano',
+      ugcphotostory: 'ugc',
+      videostory: 'video'
+    };
+  });
+
+})();
+/**
+ * Dynamically extends commercialNode
+ */
+(function(){
+
+  
+
+  wpAdRequire.define('utils/zoneBuilder',['utils/wp_meta_data', 'utils/contentTypes'], function(wp_meta_data, contentTypes){
+
+    commercialNode = window.commercialNode || 'politics';
+
+    return {
+
+      contentType: contentTypes,
+
+      zones: {
+        contentType: function(){
+          var a = this.getString(wp_meta_data.contentType);
+          return a && commercialNode !== 'washingtonpost.com' && this.contentType[a.toLowerCase()] || '';
+        },
+
+        contentName: function(){
+          return this.getString(wp_meta_data.contentName);
+        },
+
+        subsection: function(){
+          return this.getString(wp_meta_data.subsection);
+        }
+      },
+
+      getString: function(a){
+        return a ? (typeof a === 'string' ? a : a[0]) : '';
+      },
+
+      validate: function(a){
+        if(!a){return false;}
+        a = a.replace(/\s/g, '').replace(/^\/*|\/*$/g, '').replace(/[^0-9a-zA-Z_\.\-\/]/g, '');
+        return (/^[^a-z]/i.test(a) ? 'c' : '') + a;
+      },
+
+      exec: function(){
+        var zones = this.zones,
+          cn = [this.validate(commercialNode)],
+          key, t;
+        for(key in zones){
+          if(zones.hasOwnProperty(key)){
+            t = this.validate(zones[key].call(this));
+            if(t){
+              cn.push(t);
+            }
+          }
+        }
+        this.executed = true;
+        return cn.join('/').toLowerCase();
+      }
+
+    };
+
+  });
+
+})();
+(function(){
+
+  
+
+  wpAdRequire.define('utils/urlCheck',[],function(){
+
+    /**
+     * Checks the URL for a value
+     * @param {String} arg Value to check for in the URL
+     * @param {Object} opt_variable Object with the format of {type: 'variable'} to return the value
+     *    after the = sign of the first argument. EG: 'test=123' would return '123'
+     * @return {Boolean|null|String} true for a match, null for no match, or String if opt_variable
+     *    and a match.
+     */
+    return function (arg, opt_variable) {
+      var loc = parent.window.location.href || document.referrer,
+        obj = (opt_variable && typeof opt_variable === 'object') ? opt_variable : null,
+        regex = (obj !== null && obj.type === 'variable') ? new RegExp("[\\?&;]" + arg + "=([^&#?]*)") : new RegExp(arg),
+        results = regex.exec(loc);
+      return (results === null) ? null : results[results.length - 1];
+    };
+
+  });
+
+})();
+(function(){
+
+  
+
+  wpAdRequire.define('utils/estNowWithYear',[],function(){
+
+    /**
+     * estNowWithYear for determining ad flights.
+     * @type {String}.
+     */
+    return (function () {
+      var a = new Date(),
+        e = a.getTime(),
+        t = a.getDate(),
+        // z = get date of the first sunday in the current month.
+        z = (a.getDate() - a.getDay()) % 7,
+        // s = if the current date is or before the first sunday of the current month, then the result will be 7 less than . This check returns the correct date of the first sunday of this month.
+        s = (z <= 0) ? z + 7 : z,
+        n = a.getMonth() + 1,
+        m = (a.getTimezoneOffset() - ((n < 3 || n > 11) ? 300 : (n > 3 && n < 11) ? 240 : (n === 3) ? (t > (s + 7) || (t === (s + 7) && a.getHours() >= 2)) ? 240 : 300 : (t > s || (t === s && a.getHours() >= 2)) ? 300 : 240)) * 60000,
+        b = new Date(e + m),
+        d = '' + ((b.getYear() < 1900) ? b.getYear() + 1900 : b.getYear()) + (((b.getMonth() + 1) < 10) ? "0" + (b.getMonth() + 1) : (b.getMonth() + 1)) + ((b.getDate() < 10) ? "0" + b.getDate() : b.getDate()) + ((b.getHours() < 10) ? "0" + b.getHours() : b.getHours()) + ((b.getMinutes() < 10) ? "0" + b.getMinutes() : b.getMinutes());
+      //window.estNowWithYear = d.toString();
+      return d.toString();
+    })();
+
+  });
+
+})();
+/**
+ * Checks and builds an ad template of open spots on the current page
+ */
+(function(){
+
+  
+
+  wpAdRequire.define('utils/templateBuilder',[
+    'utils/urlCheck',
+    'utils/isArray',
+    'utils/estNowWithYear'
+  ], function(urlCheck, isArray, estNowWithYear){
+
+    return {
+
+      demoAds: urlCheck('demoAds', {type: 'variable'}),
+
+      exec: function(json){
+        if(!this.demoAds){
+          this.template = {};
+          for(var key in json){
+            if(json.hasOwnProperty(key)){
+              json[key].id = key;
+              if(this.checkFlight(json[key])){
+                this.addToTemplate(json[key]);
+              }
+            }
+          }
+        } else {
+          this.template = this.demoAdsTemplate(this.demoAds);
+        }
+        return this.template;
+      },
+
+      checkFlight: function(template){
+        var key;
+        for(key in this.checks){
+          if(this.checks.hasOwnProperty(key) && template.hasOwnProperty(key)){
+            if(!this.checkProperty(key, template[key])){
+              return false;
+            }
+          }
+        }
+        return true;
+      },
+
+      checkProperty: function(prop, val){
+        val = isArray(val) ? val : [val];
+
+        var l = val.length,
+          i = 0,
+          check = false;
+
+        for(i;i<l;i++){
+          if(this.checks[prop](val[i])){
+            check = true;
+          }
+        }
+        return check;
+      },
+
+      addToTemplate: function(template){
+        if(template.what){
+          var pos = template.what, l = pos.length, i = 0, newPos;
+          for(i;i<l;i++){
+            if(/^\!/.test(pos[i])){
+              newPos = pos[i].split(/\!/)[1];
+              if(this.template[newPos]){
+                delete this.template[newPos];
+              }
+            } else {
+              this.template[pos[i]] = template;
+            }
+          }
+        }
+      },
+
+      demoAdsTemplate: function(adStr){
+        var ads = adStr.split(';'),
+          l = ads.length,
+          rv = {};
+        while(l--){
+          ads[l] = this.posConverter(ads[l]);
+          rv[ads[l]] = { id: 'demoAds' };
+        }
+        return rv;
+      },
+
+      posConverter: function(pos){
+        var convert = {
+          'ad1': 'leaderboard',
+          'ad2': 'leaderboard_2',
+          'ad3': 'skyscraper',
+          'ad6': 'flex_ss_bb_hp',
+          'ad7': 'featurebar',
+          'ad14': 'tiffany_tile',
+          'ad16': 'flex_bb_hp',
+          'ad19': '336x35',
+          'ad20': 'bigbox',
+          'ad43': 'pushdown',
+          'ad44': 'extra_bb',
+          'ad45': 'deal'
+        };
+        return convert.hasOwnProperty(pos) ? convert[pos] : pos;
+      },
+
+      //true/false checks:
+      checks: {
+        test: function(val){
+          return typeof val === 'function' ? val() : val;
+        },
+
+        where: function(where){
+          var open = true;
+          if(/^\!/.test(where)){
+            open = false;
+            where = where.split('!')[1];
+          }
+          return new RegExp('^' + where).test(commercialNode) ? open : false;
+        },
+
+        when: function (when) {
+          when = when.split('/');
+          return when[0] <= estNowWithYear && when[1] >= estNowWithYear;
+        }
+      }
+
+    };
+
+  });
+
+})();
+(function(){
+
+  
+
+  wpAdRequire.define('utils/front',['utils/wp_meta_data'], function(wp_meta_data){
+
+    return (function(){
+      if(wp_meta_data.contentType) {
+        return wp_meta_data.contentType[0] === 'front' || wp_meta_data.contentType === 'front';
+      }
+      if(/^homepage/.test(commercialNode)){
+        return true;
+      }
+      //non-methode pages:
+      return window.commercialPageType && window.commercialPageType === 'front' ? true : false;
+    })();
+
+  });
+
+})();
+(function(){
+
+  
+
+  wpAdRequire.define('utils/allAds',[],function(){
+    return (/allAds/.test(location.search));
+  });
+
+})();
+(function(){
+
+  
+
+  wpAdRequire.define('utils/debug',[],function(){
+    return (/debugadcode/i.test(location.search));
+  });
+
+})();
+(function(){
+
+  
+
+  wpAdRequire.define('utils/no_interstitials',[],function(){
+    return (/no_interstitials/.test(location.search));
+  });
+
+})();
+(function(){
+
+  
+
+  wpAdRequire.define('utils/flags',[
+    'utils/allAds',
+    'utils/debug',
+    'utils/front',
+    'utils/no_interstitials'
+  ], function(allAds, debug, front, no_interstitials){
+
+    return {
+      allAds: allAds,
+      debug: debug,
+      front: front,
+      no_interstitials: no_interstitials
+    };
+
+  });
+
+})();
+(function(){
+
+  
+
+  wpAdRequire.define('utils/getCookie',[],function(){
+
+    /**
+     * Reads a document cookie value.
+     * @param {String} name The name of the cookie to read.
+     * @return {String|null} The cookie value, or null if the cookie does not exist.
+     */
+    return function(name){
+      var cookie = '' + document.cookie,
+        search = '' + name + '=',
+        str = null,
+        offset = 0,
+        end = 0;
+      if(cookie.length > 0) {
+        offset = cookie.indexOf(search);
+        if(offset !== -1) {
+          offset += search.length;
+          end = cookie.indexOf(';', offset);
+          if(end === -1) {
+            end = cookie.length;
+          }
+          str = unescape(cookie.substring(offset, end));
+        }
+      }
+      return(str);
+    };
+
+  });
+
+})();
+(function(){
+
+  
+
+  wpAdRequire.define('utils/setCookie',[],function(){
+
+    /**
+     * Sets a document cookie
+     * @param {String} name Name of the cookie
+     * @param {String} val Value of the cookie
+     * @param {String} opt_expires Expires
+     * @param {String} opt_path Path
+     * @param {String} opt_domain Domain
+     * @param {Boolean} opt_secure Secure
+     */
+    return function (name, val, opt_expires, opt_path, opt_domain, opt_secure) {
+      document.cookie = name + "=" + escape(val) + (opt_expires ? "; expires=" + opt_expires : "") +
+        (opt_path ? "; path=" + opt_path : "") + (opt_domain ? "; domain=" + opt_domain : "") +
+        (opt_secure ? "; secure" : "");
+    };
+
+  });
+
+})();
+(function(){
+
+  
+
+  wpAdRequire.define('utils/showInterstitial',[
+    'utils/flags',
+    'utils/getCookie',
+    'utils/setCookie'
+  ], function(flags, getCookie, setCookie){
+
+    /**
+     * Determines whether this page should get an interstitial, based on every 3rd page (non-front)
+     * view via a cookie.
+     * @type {Boolean} true to render the interstitial, false to not.
+     */
+    return (function(){
+      if(document.cookie && !flags.no_interstitials){
+        var name = document.domain + '_pageview',
+          cookieVal = getCookie(name),
+          rv = true,
+          time = new Date(parseInt(new Date().getTime(), 10) + 432E5).toString();
+
+        if(cookieVal){
+          rv = Number(cookieVal)%3 ? false : true;
+          setCookie(name, Number(cookieVal) + 1, time, '/');
+        } else {
+          setCookie(name, '1', time, '/');
+        }
+
+        return rv;
+      }
+      return false;
+    })();
+
+  });
+
+})();
+/**
+ * Template of ad flights and available ad spots on washingtonpost.com (desktop)
+ */
+(function(){
+
+  
+
+  wpAdRequire.define('wp/config',[],function(){
+
+    return {
+      flights: {
+        defaults: {
+          what: [
+            'leaderboard',
+            'leaderboard_2',
+            'flex',
+            'flex_re',
+            'flex_bb_hp',
+            'flex_ss_bb',
+            'flex_ss_tp',
+            'flex_ss_bb_hp',
+            '120x240',
+            '200x50',
+            '150x60',
+            '285x29',
+            'bigbox*',
+            'bigbox_vi',
+            'inline_bb',
+            'itb',
+            'skyscraper',
+            'grid_bigbox*',
+            'persistent_bb'
+          ]
+        },
+        homepage: {
+          what: ['!leaderboard'],
+          where: ['washingtonpost.com']
+        }
+      },
+
+      adTypes: {
+        "120x240": { "size": [[120,240]], "keyvalues": { "ad": ["120x240"] } },
+        "300x100": { "size": [[300,100]] },
+        "336x35": { "size": [[336,35]], "keyvalues": { "ad": ["336x35"], "pos": ["ad19"] } },
+        "336x35_top": { "size": [[336,35]], "keyvalues": { "ad": ["336x35"] } },
+        "336x60": { "size": [[336,60]], "keyvalues": { "ad": ["336x60"] } },
+        "200x50": { "size": [[200,50]], "keyvalues": { "ad": ["200x50"] } },
+        "150x60": { "size": [[150,60]], "keyvalues": { "ad": ["150x60"] } },
+        "285x29": { "size": [[285,29]], "keyvalues": { "ad": ["285x29"] } },
+        "600x130": { "size": [[600,130]] },
+        "88x31": { "size": [[88,31]] },
+        "agoogleaday": { "size": [[1,1]] },
+        "bigbox": { "size": [[300,250]], "keyvalues": { "ad": ["bb"], "pos": ["ad20"] } },
+        "deal": { "size": [[1,1]], "keyvalues": { "ad": ["deal"], "pos": ["ad45"] } },
+        "dealer_showcase": { "size": [[1,1]] },
+        "extra_bb": { "size": [[300,250]], "keyvalues": { "ad": ["bb"], "pos": ["ad44"] } },
+        "featrent": { "size": [[1,1]] },
+        "featurebar": { "size": [[446,33]], "keyvalues": { "ad": ["fb"], "pos": ["ad7"] } },
+        "flex": { "size": [[336,850]], "keyvalues": { "ad": ["hp"] } },
+        "flex_bb_hp": { "size": [[300,250],[300,600],[336,850]], "keyvalues": { "ad": ["hp","bb"], "pos": ["ad16"] } },
+        "flex_re": { "size": [[300,250],[300,600]], "keyvalues": { "ad": ["bb","tp"] } },
+        "flex_ss_bb": { "size": [[160,600],[300,250]], "keyvalues": { "ad": ["ss","bb"] } },
+        "flex_ss_bb_hp": { "size": [[160,600],[300,250],[300,600],[336,850]], "keyvalues": { "ad": ["ss","bb","hp"], "pos": ["ad6"] } },
+        "flex_ss_tp": { "size": [[300,250],[300,600]], "keyvalues": { "ad": ["bb","tp"] } },
+        "grid_bigbox":  { "size": [[300,250]] },
+        "inline_bb": { "size": [[300,250]], "keyvalues": { "ad": ["inline_bb"] } },
+        "interstitial": { "size": [['N/A']], "keyvalues": { "ad": ["interstitial"] } },
+        "itb": { "size": [[1,1]] },
+        "leaderboard": { "size": [[728,90]], "keyvalues": { "ad": ["lb"], "pos": ["ad1"] } },
+        "leaderboard_2": { "size": [[728,90]], "keyvalues": { "ad": ["lb"], "pos": ["ad2"] } },
+        "marketing": { "size": [[1,1]] },
+        "mm_overlay": { "size": [[1,1]] },
+        "nav_tile": { "size": [[1,1]] },
+        "nn": { "size": [[200,80]] },
+        "nn_footer": { "size": [[200,30]], "keyvalues": { "ad": ["nn_footer"] } },
+        "nn_hp": { "size": [[190,20]], "keyvalues": { "ad": ["nn_hp"] } },
+        "nn_rr": { "size": [[200,80]], "keyvalues": { "ad": ["nn_rr"] } },
+        "nn_sidebar": { "size": [[200,30]], "keyvalues": { "ad": ["nn_sidebar"] } },
+        "persistent_bb": { "size": [[300,250]] },
+        "pptile": { "size": [[300,60]] },
+        "promo": { "size": [[200,60]] },
+        "pushdown": { "size": [[1,1]], "keyvalues": { "pos": ["ad43"] } },
+        "skyscraper": { "size": [[160,600]], "keyvalues": { "ad": ["ss"], "pos": ["ad3"] } },
+        "sponsor": { "size": [[1,1]] },
+        "sponsor_links_bt": { "size": [[1,1]] },
+        "sponsor_links_in": { "size": [[1,1]] },
+        "sponsor_links_rr": { "size": [[1,1]] },
+        "tiffany_tile": { "size": [[200,60], [184, 90]], "keyvalues": { "ad": ["tiff"], "pos": ["ad14"] } },
+        "tooltile": { "size": [[1,1]] },
+        "topjobs": { "size": [[1,1]] }
+      }
+    };
+
+  });
+
+})();
+(function(){
+
+  
+
+  wpAdRequire.define('utils/keywords',['utils/isArray', 'utils/wp_meta_data'], function(isArray, wp_meta_data){
+
+    /**
+     * A string of page keywords.
+     * @type {String}
+     */
+    return (function () {
+      if(wp_meta_data.keywords) {
+        return isArray(wp_meta_data.keywords) ? wp_meta_data.keywords.join(",") :
+          wp_meta_data.keywords;
+      } else {
+        //Pages where wp_meta_data.keywords is undefined.. there are plenty:
+        var meta = document.getElementsByTagName('meta'),
+          l = meta.length,
+          content;
+
+        while(l--) {
+          if(meta[l].getAttribute('name') === 'keywords') {
+            content = meta[l].getAttribute('content');
+            if(content){
+              return content;
+            }
+          }
+        }
+      }
+      return '';
+    })();
+
+  });
+
+})();
+(function(){
+
+  
+
+  wpAdRequire.define('utils/wordMatch',['utils/isArray'], function(isArray){
+
+    /**
+     * Checks each word in an array to see if that word (including variations) exists in a string.
+     * @param {Array|String} wordList A list of words to check for.
+     * @param {String} str String of words to check against.
+     * @param {Boolean} opt_noVariations Set to true to just check exact words, without variations.
+     * @return {Boolean} Returns true if a match is found, else returns false.
+     */
+    return function (wordList, str, opt_noVariations) {
+      opt_noVariations = opt_noVariations || false;
+      wordList = isArray(wordList) ? wordList : [wordList];
+      var regex = [],
+        variations = opt_noVariations ? '' : '(|s|es|ed|ing|er)',
+        l = wordList.length;
+      if(l && str){
+        while(l--) {
+          regex.push(wordList[l] + variations);
+        }
+
+        regex = '\\b' + regex.join('\\b|\\b') + '\\b';
+        return (new RegExp(regex, 'i').test(str));
+      }
+      return false;
+    };
+
+  });
+
+})();
+(function(){
+
+  
+
+  wpAdRequire.define('keyvalues/exclusions',[
+    'utils/front',
+    'utils/keywords',
+    'utils/wordMatch'
+  ], function(front, keywords, wordMatch){
+
+    return function(){
+      var rv = [],
+        obj = {
+          natural_disaster : ['shell', 'exxon', 'citgo', 'bp', 'chevron', 'hess', 'sunoco',
+            'disaster', 'fire', 'explosion', 'oil', 'coal', 'death', 'dead', 'quake', 'earthquake',
+            'tsunami', 'tornado', 'hurricane', 'flood','bed bug','infestation'],
+          human_disaster : ['shoot', 'vatican', 'spanair', 'aground', 'rescue', 'attack', 'disaster',
+            'explosion', 'war', 'hostage', 'terror', 'terrorist', 'bomb', 'blast', 'mining', 'miner',
+            'violence', 'riot', 'crash', '9/11', 'sept. 11', 'september 11'],
+          financial_crisis : ['corrupt', 'goldman', 'aig', 'foreclosure', 'enron', 'sec', 'mortgage',
+            'Insurance', 'health', 'bank', 'wall street', 'protest', 'labor strike', 'union strike',
+            'labor issue', 'union issue', 'teacher strike', 'teachers strike', 'election'],
+          inappropriate : ['gambling','sex','alcohol','pornography']
+        },
+        key;
+
+      if(!front) {
+        for(key in obj) {
+          if(obj.hasOwnProperty(key) && wordMatch(obj[key], keywords)) {
+            rv.push(key);
+          }
+        }
+      }
+
+      return rv;
+    };
+
+  });
+
+})();
+(function(){
+
+  
+
+  wpAdRequire.define('keyvalues/front',['utils/front'], function(front){
+
+    return function(){
+      return front ? ['y'] : ['n'];
+    };
+
+  });
+
+})();
+(function(){
+
+  
+
+  wpAdRequire.define('keyvalues/kw',['utils/urlCheck'], function(urlCheck){
+
+    return function(){
+      var param = urlCheck('test_ads', { type: 'variable' });
+      return param ? ['test_' + param] : false;
+    };
+
+  });
+
+})();
+(function(){
+
+  
+
+  wpAdRequire.define('keyvalues/pageId',['utils/wp_meta_data'], function(wp_meta_data){
+
+    return function(){
+      if(!wp_meta_data.page_id){
+        return false;
+      }
+      var l = wp_meta_data.page_id.length;
+      while(l--){
+        wp_meta_data.page_id[l] = wp_meta_data.page_id[l].replace(/\./g, '_');
+      }
+      return wp_meta_data.page_id;
+    };
+
+  });
+
+})();
+(function(){
+
+  
+
+  wpAdRequire.define('keyvalues/poe',[
+    'utils/setCookie',
+    'utils/getCookie'
+  ], function(setCookie, getCookie){
+
+    return function(){
+      var name = window.location.hostname + '_poe';
+      if(getCookie(name)){
+        return ['no'];
+      } else {
+        setCookie(name, 'true', '', '/', '','');
+        return ['yes'];
+      }
+    };
+
+  });
+
+})();
+(function(){
+
+  
+
+  wpAdRequire.define('keyvalues/ref',[],function(){
+
+    return function(){
+      var ref = [],
+        r = document.referrer || '';
+      if(/facebook\.com|digg\.com|reddit\.com|myspace\.com|newstrust\.net|twitter\.com|delicious\.com|stumbleupon\.com/i.test(r)) {
+        ref.push('social');
+      }
+      if(location.search.match('wpisrc=')) {
+        ref.push('email');
+      }
+      return ref;
+    };
+
+  });
+
+})();
+(function(){
+
+  
+
+  wpAdRequire.define('keyvalues/rs',['utils/getCookie'], function(getCookie){
+
+    return function(){
+      var cookie = getCookie('rsi_segs'),
+        rv = [],
+        i, l;
+      if(cookie){
+        cookie = cookie.replace(/J05531_/gi, 'j').replace(/D08734_/gi, 'd').split('|');
+        l = cookie.length;
+        for(i=0;i<l;i++){
+          rv.push(cookie[i]);
+        }
+      }
+      return rv;
+    };
+
+  });
+
+})();
+(function(){
+
+  
+
+  wpAdRequire.define('keyvalues/u',[
+    'utils/getCookie',
+    'utils/wp_meta_data',
+    'utils/zoneBuilder'
+  ], function(getCookie, wp_meta_data, zoneBuilder){
+
+    return function(){
+      var s_vi = getCookie('s_vi'),
+        rv = false;
+
+      //pass in s_vi cookie value:
+      if(s_vi) {
+        s_vi = s_vi.split(/\|/)[1];
+        if(s_vi) {
+          s_vi = s_vi.split(/\[/)[0].split(/-/);
+          rv = 'o*' + s_vi[0] + ',' + s_vi[1];
+
+          //get page name, replace spaces with underscores and then limit the string to 100 characters
+          if(window.TWP && TWP.Data && TWP.Data.Tracking && TWP.Data.Tracking.props && TWP.Data.Tracking.props.page_name){
+            rv += ',' + TWP.Data.Tracking.props.page_name.replace(/ /g, '_').slice(0, 100);
+          }
+
+          //",,,", then get page type and then need to append ",abc" to the end
+          rv += ',,,' + (wp_meta_data.contentType && zoneBuilder.contentType[wp_meta_data.contentType.toString()] ?
+            zoneBuilder.contentType[wp_meta_data.contentType.toString()] : 'article') + ',abc';
+        }
+      }
+
+      return [rv];
+    };
+
+  });
+
+})();
+(function(){
+
+  
+
+  wpAdRequire.define('packages/desktop/keyvalues',[
+    'keyvalues/exclusions',
+    'keyvalues/front',
+    'keyvalues/kw',
+    'keyvalues/pageId',
+    'keyvalues/poe',
+    'keyvalues/ref',
+    'keyvalues/rs',
+    'keyvalues/u'
+  ], function(exclusions, front, kw, pageId, poe, ref, rs, u){
+
+    /**
+     * Each key can take either a function, or an Array of functions that can assign multiple values
+     * to that particular key.
+     */
+    return {
+      '!c': [exclusions],
+      front: [front],
+      kw: [kw],
+      pageId: [pageId],
+      poe: [poe],
+      ref: [ref],
+      rs: [rs],
+      u: [u]
+    };
+
+  });
+
+})();
+/**
+* Extends universal desktop, page level keyvalues with wp desktop specific keyvalues
+*/
+(function(){
+
+  
+
+  wpAdRequire.define('wp/keyvalues',[
+    'utils/extendKeyvalues',
+    'packages/desktop/keyvalues',
+    'utils/wp_meta_data',
+    'utils/wordMatch',
+    'utils/keywords',
+    'utils/getCookie'
+  ], function(extendKeyvalues, kvs, wp_meta_data, wordMatch, keywords, getCookie){
+
+    return extendKeyvalues(kvs, {
+
+      articleId: [
+        function(){
+          var id = [], a;
+          if(wp_meta_data.contentType && wp_meta_data.contentType[0] === "CompoundStory") {
+            a = location.href.split("/");
+            id = [a[a.length - 1].toLowerCase().split("_story")[0]];
+          }
+          return id;
+        }
+      ],
+
+      kw: [
+        function(){
+          var rv = [],
+            categories = {
+              energy: ['energy'],
+              re: ['builder', 'condo', 'home', 'homeowner', 'housing', 'mortgage', 'property',
+                  'real estate', 'realtor', 'refinance', 'neighborhood']
+            },
+            key;
+
+          for(key in categories) {
+            if(categories.hasOwnProperty(key) && wordMatch(categories[key], keywords)) {
+              rv.push(key);
+            }
+          }
+          return rv;
+        }
+      ],
+
+      WPATC: [
+        function(){
+          var cookie = getCookie('WPATC'),
+            rv = {},
+            l, a, key;
+
+          if(cookie) {
+            cookie = unescape(cookie).split(':');
+            l = cookie.length;
+            while(l--) {
+              a = cookie[l].split('=');
+              if(rv[a[0]]) {
+                rv[a[0]].push(a[1]);
+              } else {
+                rv[a[0]] = [a[1]];
+              }
+            }
+          }
+
+          return rv;
+        }
+      ]
+
+    });
+
+  });
+
+})();
+/**
+ * Provides core functionality for overrides
+ */
+(function(){
+
+  
+
+  wpAdRequire.define('overrides',[],function(){
+
+    return {
+
+      /**
+       * Takes an Ad object (initially defined in Ad.js), modifies it with any specific overrides, then returns it
+       */
+      exec: function(ad) {
+        var key, check, r;
+        for(key in this.checks){
+          if(this.checks.hasOwnProperty(key) && ad.config[key]){
+            for(check in this.checks[key]){
+              if(this.checks[key].hasOwnProperty(check)){
+                r = new RegExp(check, 'i');
+                if(r.test(ad.config[key])){
+                  this.checks[key][check].call(ad);
+                }
+              }
+            }
+          }
+        }
+        return ad;
+      },
+
+      /**
+       * Placeholder. Define the checks in site specific overrides script
+       */
+      checks: {}
+
+    };
+
+  });
+
+})();
+(function(){
+
+  
+
+  wpAdRequire.define('utils/reload',['utils/urlCheck'], function(urlCheck){
+    return urlCheck('reload', { type: 'variable' }) === 'true';
+  });
+
+})();
+/**
+ * Overrides for standard configuration of ad spots for unique circumstances on washingtonpost.com (desktop)
+ */
+(function() {
+
+  
+
+  wpAdRequire.define('wp/overrides',['overrides', 'utils/reload'], function(overrides, reload) {
+
+    /**
+    * Object of checks for overrides
+    * keys of check functions will be evaluated as Regular Expressions.
+    * EG: key could = '^politics$'
+    */
+    overrides.checks = {
+      pos: {
+        'leaderboard$': function() {
+          if (this.config.where === 'washingtonpost.com') {
+            this.config.where += '/lb';
+          }
+        },
+        'featrent$': function() {
+          if (window.jquery) {
+            $('#wpni_adi_featrent').css({
+              background: 'none',
+              padding: '0'
+            });
+          }
+        },
+        '^tiffany_tile$': function() {
+          if (this.config.where === "washingtonpost.com") {
+            this.config.size = ['184x90'];
+          }
+        },
+        'flex_ss_bb_hp': function() {
+          if (this.config.where === 'lifestyle/home' ||
+            this.config.where === 'lifestyle/home/front' ||
+            this.config.where === 'lifestyle/home-garden') {
+            this.config.where += '/flex';
+          }
+        }
+      },
+      where: {
+        '^politics$': function() {
+          this.config.where += '/front';
+        },
+        '^washingtonpost.com$': function() {
+          if ((this.config.pos === 'leaderboard' || this.config.pos === 'flex_bb_hp') && reload) {
+            this.config.where += 'refresh';
+          }
+          if (this.config.pos === 'pushdown') {
+            var adi_push = document.getElementById('wpni_adi_pushdown');
+            if (adi_push) {
+              adi_push.style.backgroundImage = 'url(http://img.wpdigital.net/wp-adv/test/mstest/pushdown-ad-small.png)';
+              adi_push.style.backgroundPosition = '-7px -100px';
+            }
+          }
+        },
+        //this breaks.. need to look into this one
+        'washingtonpost\.com|personalpost|obituaries|weather|jobs\/search': function() {
+          this.keyvalues['!c'] = this.keyvalues['!c'] || [];
+          this.keyvalues['!c'].push('intrusive');
+        }
+      }
+    };
+
+    return overrides;
+
+  });
+
+})();
+
+/**
+ * washingtonpost.com site specific ad script (desktop)
+ */
+(function(){
+
+  
+
+  wpAdRequire.define('siteScript',[
+
+    'defaultSettings',
+    'Ad',
+    'gptConfig',
+    'utils/zoneBuilder',
+    'utils/templateBuilder',
+    'utils/extend',
+    'utils/extendKeyvalues',
+    'utils/front',
+    'utils/showInterstitial',
+    'utils/flags',
+    'wp/config',
+    'wp/keyvalues',
+    'wp/overrides'
+
+  ], function(
+
+    defaultSettings,
+    Ad,
+    gptConfig,
+    zoneBuilder,
+    templateBuilder,
+    extend,
+    extendKeyvalues,
+    front,
+    showInterstitial,
+    flags,
+    config,
+    kvs,
+    overrides
+
+  ){
+
+    //build commercialNode
+    commercialNode = zoneBuilder.exec();
+
+    //extend or add keyvalues at the ad level
+    //each key can accept a function, or an array of functions
+    extendKeyvalues(Ad.prototype.keyvaluesConfig, {
+      ad: function(){
+        if(config.adTypes[this.config.what].keyvalues && config.adTypes[this.config.what].keyvalues.ad){
+          return config.adTypes[this.config.what].keyvalues.ad;
+        }
+      },
+      pos: function(){
+        var c = config.adTypes[this.config.pos];
+        if(c && c.keyvalues && c.keyvalues.pos){
+          return c.keyvalues.pos;
+        }
+      }
+    });
+
+    //add page specific keyvalues
+    extendKeyvalues(gptConfig.keyvaluesConfig, kvs);
+
+    //Custom flight templates that require additional conditionals
+    config.flights = extend({
+      interstitial: {
+        what: ['interstitial'],
+        test: [showInterstitial && !front]
+      }
+    }, config.flights);
+
+    return extend(defaultSettings, {
+
+      constants: {
+        dfpSite: '/701/wpni.',
+        domain: 'washingtonpost.com'
+      },
+
+      //Ad builder
+      Ad: Ad,
+
+      //Initial GPT setup
+      gptConfig: gptConfig.init({
+        sra: false
+      }),
+
+      flags: flags,
+
+      config: config,
+
+      //determine open ad spots
+      flights: templateBuilder.exec(config.flights),
+
+      //overrides
+      overrides: overrides,
+
+      cleanScriptTags: function(){
+        // Found a call to this on a test page. Adding dummy function to prevent errors until we
+        // figure out what to do with this, as it won't be needed when we switch to GPT
+        return false;
+      }
+
+    });
+  });
+
+})();
+(function(){
+
+  
+
+  wpAdRequire.define('utils/getScript',[],function(){
+
+    /**
+     * Asynchronously append a JavaScript File to the <head>, with optional onload callback.
+     * @param {String|Object} url URL to the JavaScript file to be loaded.
+     * @param {Function} opt_callback Callback function to execute once the script has loaded.
+     */
+    return function(src, opt_callback) {
+      var s = document.createElement('script'),
+        target = document.body || document.getElementsByTagName('head')[0] || false;
+      opt_callback = opt_callback || false;
+      if(target){
+        s.type = 'text/' + (src.type || 'javascript');
+        s.src = src.src || src;
+        if(typeof opt_callback === 'function'){
+          s.onreadystatechange = s.onload = function() {
+            var state = s.readyState;
+            if (!opt_callback.done && (!state || /loaded|complete/.test(state))) {
+              opt_callback.done = true;
+              opt_callback();
+            }
+          };
+        }
+        target.appendChild(s);
+      }
+    };
+
+  });
+
+})();
+/*global placeAd2:true, placeAd2Queue */
+/*jshint indent:2*/
+
+/**
+ * Universal script that does adops initialisation and loads site specific ad script
+ */
+(function(){
+
+  
+
+  //no_ads flag test:
+  if(/no_ads/.test(location.search)){
+    return false;
+  }
+
+  var gptScript = document.createElement('script');
+  gptScript.src = 'http://www.googletagservices.com/tag/js/gpt.js';
+  gptScript.async = true;
+  document.getElementsByTagName('head')[0].appendChild(gptScript);
+
+  //configure requirejs;
+  wpAdRequire.require.config({
+    baseUrl: 'js',
+    paths: {
+      //remove from optimized script - just here for dev
+      'siteScript': 'wp/main',
+      'googletag': 'http://www.googletagservices.com/tag/js/gpt',
+      //'googletag': 'lib/gpt',
+      'jquery': 'http://js.washingtonpost.com/wpost/js/combo/?token=20121010232000&c=true&m=true&context=eidos&r=/jquery-1.7.1.js',
+      'jqueryUI': 'lib/jquery-ui.min'
+    },
+    shim: {
+      'googletag': {
+        exports: 'googletag'
+      },
+      'jqueryUI':{
+        deps: ['jquery'],
+        exports: '$'
+      }
+    }
+  });
+
+  //load dependencies:
+  wpAdRequire.require(['siteScript', 'utils/getScript'], function (wpAd, getScript){
+
+    if(wpAd.flags.debug){
+      getScript('js/debug.js');
+    }
+
+    //add to placeAd2queue
+    placeAd2(commercialNode, 'interstitial', false, '');
+
+    googletag.cmd.push(function(){
+
+      placeAd2 = function(where, what, del, onTheFly){
+
+        var pos = what,
+          posOverride = false,
+          posArray,
+          ad;
+
+        //determine pos value and potential posOverride
+        if(/\|/.test(what)){
+          posArray = what.split(/\|/);
+          what = posArray[0];
+          posOverride = posArray[1];
+          pos = posArray.join('_');
+        }
+
+        //if the ad type is legit, open and hasn't already been built/rendered on the page
+        if((wpAd.flights && wpAd.flights[pos] || wpAd.flights[what + '*']) && wpAd.config.adTypes[what] || wpAd.flags.allAds){
+          if(!wpAd.adsOnPage[pos]){
+
+            //build and store our new ad
+            ad = new wpAd.Ad({
+              templateSettings: wpAd.config.adTypes[what],
+              dfpSite: wpAd.constants.dfpSite,
+              where: where,
+              size: wpAd.config.adTypes[what].size,
+              what: what,
+              pos: pos,
+              posOverride: posOverride,
+              hardcode: wpAd.flights[pos] && wpAd.flights[pos].hardcode || false,
+              onTheFly: onTheFly
+            });
+
+            //overrides (the new hackbin)
+            if(wpAd.overrides){
+              ad = wpAd.overrides.exec(ad);
+            }
+
+            //display the gpt ad
+            ad.render();
+
+            //store for debugging
+            wpAd.adsOnPage[pos] = ad;
+
+          } else{
+            //refresh if ad/spot already rendered
+            wpAd.adsOnPage[pos].slot.refresh();
+          }
+
+        } else {
+          wpAd.adsDisabledOnPage[pos] = true;
+        }
+
+        //always create this queue. If we want to implement debug as bookmarklet, this will be referenced:
+        wpAd.debugQueue.push(pos);
+
+      };
+
+      //build and display queued up ads from previous placeAd2 calls
+      callPlaceAd2Queue(window.placeAd2Queue);
+
+    });
+
+
+    //expose wpAd to the window for debugging + external code to access/build off of.
+    window.wpAd = wpAd;
+
+  });
+
+  /**
+   * Calls queued up placeAd2 calls when placeAd2 is redefined above
+   */
+  function callPlaceAd2Queue(queue){
+    if(queue){
+      var l = queue.length,
+        i = 0;
+      for(i;i<l;i++){
+        placeAd2.apply(window, queue[i]);
+      }
+    }
+  }
+
+})();
+wpAdRequire.define("main", function(){});

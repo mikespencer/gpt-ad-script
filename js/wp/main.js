@@ -8,7 +8,6 @@
   define([
 
     'defaultSettings',
-    'googletag',
     'Ad',
     'gptConfig',
     'utils/zoneBuilder',
@@ -25,7 +24,6 @@
   ], function(
 
     defaultSettings,
-    googletag,
     Ad,
     gptConfig,
     zoneBuilder,
@@ -73,15 +71,16 @@
 
     return extend(defaultSettings, {
 
-      //network id
-      dfpSite: '/701/wpni.',
+      constants: {
+        dfpSite: '/701/wpni.',
+        domain: 'washingtonpost.com'
+      },
 
       //Ad builder
       Ad: Ad,
 
       //Initial GPT setup
       gptConfig: gptConfig.init({
-        googletag: googletag,
         sra: false
       }),
 

@@ -8,7 +8,6 @@
   define([
 
     'defaultSettings',
-    'googletag',
     'Ad',
     'gptConfig',
     'utils/zoneBuilder',
@@ -25,7 +24,6 @@
   ], function(
 
     defaultSettings,
-    googletag,
     Ad,
     gptConfig,
     zoneBuilder,
@@ -74,14 +72,16 @@
     return extend(defaultSettings, {
 
       //network id
-      dfpSite: '/701/roots.',
+      constants: {
+        dfpSite: '/701/roots.',
+        domain: 'theroot.com'
+      },
 
       //Ad builder
       Ad: Ad,
 
       //Initial GPT setup
       gptConfig: gptConfig.init({
-        googletag: googletag,
         sra: true
       }),
 

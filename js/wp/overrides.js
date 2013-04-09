@@ -49,7 +49,7 @@
             this.config.where += 'refresh';
           }
           if (this.config.pos === 'pushdown') {
-            var adi_push = doc.getElementById('wpni_adi_pushdown');
+            var adi_push = document.getElementById('wpni_adi_pushdown');
             if (adi_push) {
               adi_push.style.backgroundImage = 'url(http://img.wpdigital.net/wp-adv/test/mstest/pushdown-ad-small.png)';
               adi_push.style.backgroundPosition = '-7px -100px';

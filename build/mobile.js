@@ -6,21 +6,19 @@
 
   name: 'main',
 
-  include: ['almond'],
+  include: ['lib/almond'],
 
   //define mobile specific script output
   out: '../js/min/mobile.js',
 
   preserveLicenseComments: false,
 
-  //for testing
+  //for testing/debugging
   //optimize: 'none',
 
   namespace: "wpAdRequire",
 
   paths: {
-    //'googletag': 'http://www.googletagservices.com/tag/js/gpt',
-    'googletag': 'lib/gpt',
     'jquery': 'lib/jquery',
     'jqueryUI': 'lib/jquery-ui.min',
 
@@ -29,9 +27,6 @@
   },
 
   shim: {
-    'googletag': {
-      exports: 'googletag'
-    },
     'jqueryUI':{
       deps: ['jquery'],
       exports: '$'

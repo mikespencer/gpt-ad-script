@@ -8,7 +8,6 @@
   define([
 
     'defaultSettings',
-    'googletag',
     'Ad',
     'gptConfig',
     'utils/templateBuilder',
@@ -24,7 +23,6 @@
   ], function(
 
     defaultSettings,
-    googletag,
     Ad,
     gptConfig,
     templateBuilder,
@@ -42,7 +40,9 @@
     //extend or add keyvalues at the ad level
     //each key can accept a function, or an array of functions
     extendKeyvalues(Ad.prototype.keyvaluesConfig, {
+
       //none at the moment
+
     });
 
     //add page specific keyvalues
@@ -58,15 +58,16 @@
 
     return extend(defaultSettings, {
 
-      //network id
-      dfpSite: '/701/slate.',
+      constants: {
+        dfpSite: '/701/slate.',
+        domain: 'slate.com'
+      },
 
       //Ad builder
       Ad: Ad,
 
       //Initial GPT setup
       gptConfig: gptConfig.init({
-        googletag: googletag,
         sra: true
       }),
 

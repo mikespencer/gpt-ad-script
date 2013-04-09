@@ -13,7 +13,7 @@
 
     return {
 
-      init: function(config){
+      exec: function(config){
         this.config = extend({
           async: true,
           sra: true
@@ -31,7 +31,13 @@
         }
 
         googletag.enableServices();
+      },
 
+      init: function(config){
+        var self = this;
+        googletag.cmd.push(function(){
+          self.exec.call(self, config);
+        });
         return this;
       },
 
