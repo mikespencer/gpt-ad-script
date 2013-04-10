@@ -6,12 +6,12 @@
   'use strict';
 
   define([
-    'utils/extendKeyvalues',
+    'utils/merge',
     'packages/desktop/keyvalues',
     'root/keyvalues/articleId'
-  ], function(extendKeyvalues, kvs, articleId){
+  ], function(merge, kvs, articleId){
 
-    return extendKeyvalues(kvs, {
+    return merge(kvs, {
       articleId: [articleId]
     });
 

@@ -1,37 +1,31 @@
-(function(){
+define(function(){
 
-  'use strict';
+  /**
+   * Builds and returns a DOM iframe element.
+   * @param {Object} atts Attribute mapping for the iframe that will overwrite defaults.
+   * @return {Element} The constructed iframe DOM element.
+   */
+  return function (atts) {
+    var i = document.createElement('iframe'),
+      key;
 
-  define(function(){
+    atts = atts || {};
 
-    /**
-     * Builds and returns a DOM iframe element.
-     * @param {Object} atts Attribute mapping for the iframe that will overwrite defaults.
-     * @return {Element} The constructed iframe DOM element.
-     */
-    return function (atts) {
-      var i = document.createElement('iframe'),
-        key;
+    //default attributes
+    i.frameBorder = "0";
+    i.height = "0";
+    i.width = "0";
+    i.scrolling = "no";
+    i.marginHeight = "0";
+    i.marginWidth = "0";
 
-      atts = atts || {};
-
-      //default attributes
-      i.frameBorder = "0";
-      i.height = "0";
-      i.width = "0";
-      i.scrolling = "no";
-      i.marginHeight = "0";
-      i.marginWidth = "0";
-
-      for(key in atts) {
-        if(atts.hasOwnProperty(key)) {
-          i[key] = atts[key];
-        }
+    for(key in atts) {
+      if(atts.hasOwnProperty(key)) {
+        i[key] = atts[key];
       }
+    }
 
-      return i;
-    };
+    return i;
+  };
 
-  });
-
-})();
+});

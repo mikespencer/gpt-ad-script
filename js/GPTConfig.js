@@ -1,53 +1,47 @@
 /**
  * this Initial setup
  */
-(function(){
+define([
+  'utils/extend',
+  'utils/keyvalueIterator',
+  'utils/addKeyvalues'
+], function(extend, keyvalueIterator, addKeyvalues){
 
-  'use strict';
+  return {
 
-  define([
-    'utils/extend',
-    'utils/keyvalueIterator',
-    'utils/addKeyvalues'
-  ], function(extend, keyvalueIterator, addKeyvalues){
+    exec: function(config){
+      this.config = extend({
+        async: true,
+        sra: true
+      }, config);
 
-    return {
+      this.pubservice = googletag.pubads();
 
-      exec: function(config){
-        this.config = extend({
-          async: true,
-          sra: true
-        }, config);
+      this.keyvalues = keyvalueIterator(this.keyvaluesConfig, this);
+      addKeyvalues(this.keyvalues, this.pubservice);
 
-        this.pubservice = googletag.pubads();
+      if(this.config.sra){
+        this.pubservice.enableSingleRequest();
+      } else{
+        this.pubservice.enableAsyncRendering();
+      }
 
-        this.keyvalues = keyvalueIterator(this.keyvaluesConfig, this);
-        addKeyvalues(this.keyvalues, this.pubservice);
+      googletag.enableServices();
+    },
 
-        if(this.config.sra){
-          this.pubservice.enableSingleRequest();
-        } else{
-          this.pubservice.enableAsyncRendering();
-        }
+    init: function(config){
+      var self = this;
+      googletag.cmd.push(function(){
+        self.exec.call(self, config);
+      });
+      return this;
+    },
 
-        googletag.enableServices();
-      },
+    /**
+     * Placeholder. Gets added in site script
+     */
+    keyvaluesConfig: {}
 
-      init: function(config){
-        var self = this;
-        googletag.cmd.push(function(){
-          self.exec.call(self, config);
-        });
-        return this;
-      },
+  };
 
-      /**
-       * Placeholder. Gets added in site script
-       */
-      keyvaluesConfig: {}
-
-    };
-
-  });
-
-})();
+});

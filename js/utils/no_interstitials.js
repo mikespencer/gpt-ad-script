@@ -1,9 +1,3 @@
-(function(){
-
-  'use strict';
-
-  define(function(){
-    return (/no_interstitials/.test(location.search));
-  });
-
-})();
+define(function(){
+  return (/no_interstitials/.test(location.search));
+});

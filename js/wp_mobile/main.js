@@ -1,57 +1,51 @@
 /**
  * WP mobile web specific ad script
  */
-(function(){
+define([
+  'defaultSettings',
+  'Ad',
+  'gptConfig',
+  'wp_mobile/config',
+  'wp_mobile/keyvalues',
+  'utils/extend',
+  'utils/merge',
+  'utils/flags'
+], function(defaultSettings, Ad, gptConfig, config, kvs, extend, merge, flags){
 
-  'use strict';
+  //add page specific keyvalues
+  merge(gptConfig.keyvaluesConfig, kvs);
 
-  define([
-    'defaultSettings',
-    'Ad',
-    'gptConfig',
-    'wp_mobile/config',
-    'wp_mobile/keyvalues',
-    'utils/extend',
-    'utils/extendKeyvalues',
-    'utils/flags'
-  ], function(defaultSettings, Ad, gptConfig, config, kvs, extend, extendKeyvalues, flags){
+  //add mobile specific, ad level keyvalues
+  /*merge(Ad.prototype.keyvaluesConfig, {
 
-    //add page specific keyvalues
-    extendKeyvalues(gptConfig.keyvaluesConfig, kvs);
+  });*/
 
-    //add mobile specific, ad level keyvalues
-    /*extendKeyvalues(Ad.prototype.keyvaluesConfig, {
+  return extend(defaultSettings, {
 
-    });*/
+    //set network id
+    constants: {
+      dfpSite: '/701/mob.wp.',
+      domain: 'mob.wp'
+    },
 
-    return extend(defaultSettings, {
+    //Ad builder
+    Ad: Ad,
 
-      //set network id
-      constants: {
-        dfpSite: '/701/mob.wp.',
-        domain: 'mob.wp'
-      },
+    //Initial GPT setup
+    gptConfig: gptConfig.init({
+      sra: true
+    }),
 
-      //Ad builder
-      Ad: Ad,
+    config: config,
 
-      //Initial GPT setup
-      gptConfig: gptConfig.init({
-        sra: true
-      }),
+    flights: {
+      t: {
+        id: 'default'
+      }
+    },
 
-      config: config,
-
-      flights: {
-        t: {
-          id: 'default'
-        }
-      },
-
-      flags: flags
-
-    });
+    flags: flags
 
   });
 
-})();
+});

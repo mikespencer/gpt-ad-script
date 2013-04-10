@@ -1,71 +1,62 @@
 /**
  * Overrides for standard configuration of ad spots for unique circumstances on washingtonpost.com (desktop)
  */
-(function() {
+define(['overrides', 'utils/reload', 'utils/merge'], function(overrides, reload, merge) {
 
-  'use strict';
-
-  define(['overrides', 'utils/reload'], function(overrides, reload) {
-
-    /**
-    * Object of checks for overrides
-    * keys of check functions will be evaluated as Regular Expressions.
-    * EG: key could = '^politics$'
-    */
-    overrides.checks = {
-      pos: {
-        'leaderboard$': function() {
-          if (this.config.where === 'washingtonpost.com') {
-            this.config.where += '/lb';
-          }
-        },
-        'featrent$': function() {
-          if (window.jquery) {
-            $('#wpni_adi_featrent').css({
-              background: 'none',
-              padding: '0'
-            });
-          }
-        },
-        '^tiffany_tile$': function() {
-          if (this.config.where === "washingtonpost.com") {
-            this.config.size = ['184x90'];
-          }
-        },
-        'flex_ss_bb_hp': function() {
-          if (this.config.where === 'lifestyle/home' ||
-            this.config.where === 'lifestyle/home/front' ||
-            this.config.where === 'lifestyle/home-garden') {
-            this.config.where += '/flex';
+  /**
+   * Object of checks for overrides
+   */
+  overrides.checks = {
+    what: {
+      tiffany_tile: function(){
+        if (this.config.where === "washingtonpost.com") {
+          this.config.size = [[184,90]];
+        }
+      }
+    },
+    pos: {
+      leaderboard: function() {
+        if (this.config.where === 'washingtonpost.com') {
+          this.config.where += '/lb';
+          if(reload){
+            this.config.where += 'refresh';
           }
         }
       },
-      where: {
-        '^politics$': function() {
-          this.config.where += '/front';
-        },
-        '^washingtonpost.com$': function() {
-          if ((this.config.pos === 'leaderboard' || this.config.pos === 'flex_bb_hp') && reload) {
+      featrent: function() {
+        var adi_div = document.getElementById('wpni_adi_featrent');
+        if(adi_div){
+          adi_div.style.background = 'none';
+          adi_div.style.padding = '0';
+        }
+      },
+      flex_ss_bb_hp: function() {
+        if(this.config.where === 'washingtonpost.com'){
+          this.config.where += '/hpflex';
+          if(reload){
             this.config.where += 'refresh';
           }
-          if (this.config.pos === 'pushdown') {
-            var adi_push = document.getElementById('wpni_adi_pushdown');
-            if (adi_push) {
-              adi_push.style.backgroundImage = 'url(http://img.wpdigital.net/wp-adv/test/mstest/pushdown-ad-small.png)';
-              adi_push.style.backgroundPosition = '-7px -100px';
-            }
+        } else if (this.config.where === 'lifestyle/home' ||
+          this.config.where === 'lifestyle/home/front' ||
+          this.config.where === 'lifestyle/home-garden') {
+          this.config.where += '/flex';
+        }
+      },
+      pushdown: function(){
+        if(this.config.where === 'washingtonpost.com'){
+          var adi_push = document.getElementById('wpni_adi_pushdown');
+          if (adi_push) {
+            adi_push.style.backgroundImage = 'url(http://img.wpdigital.net/wp-adv/test/mstest/pushdown-ad-small.png)';
+            adi_push.style.backgroundPosition = '-7px -100px';
           }
-        },
-        //this breaks.. need to look into this one
-        'washingtonpost\.com|personalpost|obituaries|weather|jobs\/search': function() {
-          this.keyvalues['!c'] = this.keyvalues['!c'] || [];
-          this.keyvalues['!c'].push('intrusive');
         }
       }
-    };
+    },
+    where: {
+      // May not need this section..
+    }
+  };
 
-    return overrides;
+  return overrides;
 
-  });
-
-})();
+});

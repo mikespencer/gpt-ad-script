@@ -4,9 +4,9 @@
 
   mainConfigFile: '../js/main.js',
 
-  name: 'main',
+  name: 'lib/almond',
 
-  include: ['lib/almond'],
+  include: ['main'],
 
   //define mobile specific script output
   out: '../js/min/mobile.js',
@@ -16,7 +16,7 @@
   //for testing/debugging
   //optimize: 'none',
 
-  namespace: "wpAdRequire",
+  wrap: true,
 
   paths: {
     'jquery': 'lib/jquery',

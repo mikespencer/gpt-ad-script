@@ -6,13 +6,13 @@
   'use strict';
 
   define([
-    'utils/extendKeyvalues',
+    'utils/merge',
     'utils/contentTypes',
     'utils/wp_meta_data',
     'packages/desktop/keyvalues'
-  ], function(extendKeyvalues, contentTypes, wp_meta_data, kvs){
+  ], function(merge, contentTypes, wp_meta_data, kvs){
 
-    return extendKeyvalues(kvs, {
+    return merge(kvs, {
 
       articleId: [
         function() {

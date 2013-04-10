@@ -1,28 +1,22 @@
 /**
  * Defaults required by all ad scripts
  */
-(function(){
+define(function(){
 
-  'use strict';
+  return {
 
-  define(function(){
+    //stores all ads on the page here
+    adsOnPage: {},
 
-    return {
+    //stores debug info
+    debugQueue: [],
 
-      //stores all ads on the page here
-      adsOnPage: {},
+    //stores all ads placements on the page that aren't currently open (for debugging).
+    adsDisabledOnPage: {},
 
-      //stores debug info
-      debugQueue: [],
+    //container for array of functions to execute on load
+    init: []
 
-      //stores all ads placements on the page that aren't currently open (for debugging).
-      adsDisabledOnPage: {},
+  };
 
-      //container for array of functions to execute on load
-      init: []
-
-    };
-
-  });
-
-})();
+});

@@ -9,17 +9,15 @@
 
     /**
      * Object of checks for overrides
-     * keys of check functions will be evaluated as Regular Expressions.
-     * EG: key could = '^politics$'
      */
     overrides.checks = {
       pos: {
-        'leaderboard$': function(){
+        leaderboard: function(){
           if (this.config.where === "homepage") {
             this.config.where += '/lb' + (reload ? 'refresh' : '');
           }
         },
-        'rightflex$': function() {
+        rightflex: function() {
           if (this.config.where === "homepage") {
             this.config.where += '/hp' + (reload ? 'refresh' : '');
           }

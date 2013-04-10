@@ -3,16 +3,16 @@
   <head>
     <title>Test</title>
     <script>
-      var commercialNode = 'politics';
+      var commercialNode = 'washingtonpost.com';
     </script>
 
-    <script src="js/ads-sync.js"></script>
+    <script src="js/ads-sync.js" id="adScript" data-adops-site="wp"></script>
     <!--script src="js/min/wp.js" async></script-->
-    <script src="js/lib/require.js" data-main="js/main"></script>
+    <!--script src="js/lib/require.js" data-main="js/main"></script-->
 
     <script>
       var wp_meta_data = {
-        //contentType: ['BlogStory'],
+        contentType: ['CompoundStory'],
         page_id: ['thisIsThePageId'],
         keywords: ['energy', 'disaster', 'test', 'page']
       };
@@ -20,6 +20,18 @@
   </head>
   <body>
     <h1>GPT Test page</h1>
+    <div id="slug_tiffany_tile_2">
+      <script>
+        placeAd2(commercialNode, 'tiffany_tile|2', false, '');
+      </script>
+    </div>
+    <div id="slug_tiffany_tile">
+      <script>
+        placeAd2(commercialNode, 'tiffany_tile', false, '');
+      </script>
+    </div>
+
+
     <div id="slug_leaderboard">
       <script>
         placeAd2(commercialNode, 'leaderboard', false, '');

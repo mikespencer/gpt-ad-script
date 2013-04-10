@@ -1,0 +1,1 @@
+May be worth looking into combining utils/extend and utils/merge

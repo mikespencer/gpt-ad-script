@@ -1,18 +1,12 @@
-(function(){
+define(function(){
 
-  'use strict';
+  /**
+   * Checks if argument is an Object.
+   * @param {*} a The data type to check.
+   * @return {Boolean} true if argument is Object, false otherwise.
+   */
+  return function(a){
+    return typeof a === 'object' && a !== null && Object.prototype.toString.call(a) === '[object Object]';
+  };
 
-  define(function(){
-
-    /**
-     * Checks if argument is an Object.
-     * @param {*} a The data type to check.
-     * @return {Boolean} true if argument is Object, false otherwise.
-     */
-    return function(a){
-      return typeof a === 'object' && a !== null && Object.prototype.toString.call(a) === '[object Object]';
-    };
-
-  });
-
-})();
+});

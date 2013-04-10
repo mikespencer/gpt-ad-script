@@ -13,7 +13,7 @@
     'utils/zoneBuilder',
     'utils/templateBuilder',
     'utils/extend',
-    'utils/extendKeyvalues',
+    'utils/merge',
     'utils/front',
     'utils/showInterstitial',
     'utils/flags',
@@ -29,7 +29,7 @@
     zoneBuilder,
     templateBuilder,
     extend,
-    extendKeyvalues,
+    merge,
     front,
     showInterstitial,
     flags,
@@ -44,7 +44,7 @@
 
     //extend or add keyvalues at the ad level
     //each key can accept a function, or an array of functions
-    extendKeyvalues(Ad.prototype.keyvaluesConfig, {
+    merge(Ad.prototype.keyvaluesConfig, {
       ad: function(){
         if(config.adTypes[this.config.what].keyvalues && config.adTypes[this.config.what].keyvalues.ad){
           return config.adTypes[this.config.what].keyvalues.ad;
@@ -59,7 +59,7 @@
     });
 
     //add page specific keyvalues
-    extendKeyvalues(gptConfig.keyvaluesConfig, kvs);
+    merge(gptConfig.keyvaluesConfig, kvs);
 
     //Custom flight templates that require additional conditionals
     config.flights = extend({

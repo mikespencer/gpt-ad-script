@@ -1,13 +1,7 @@
-(function(){
+define(['utils/front'], function(front){
 
-  'use strict';
+  return function(){
+    return front ? ['y'] : ['n'];
+  };
 
-  define(['utils/front'], function(front){
-
-    return function(){
-      return front ? ['y'] : ['n'];
-    };
-
-  });
-
-})();
+});

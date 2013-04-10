@@ -12,7 +12,7 @@
     'gptConfig',
     'utils/templateBuilder',
     'utils/extend',
-    'utils/extendKeyvalues',
+    'utils/merge',
     'utils/front',
     'utils/showInterstitial',
     'utils/flags',
@@ -27,7 +27,7 @@
     gptConfig,
     templateBuilder,
     extend,
-    extendKeyvalues,
+    merge,
     front,
     showInterstitial,
     flags,
@@ -39,14 +39,14 @@
 
     //extend or add keyvalues at the ad level
     //each key can accept a function, or an array of functions
-    extendKeyvalues(Ad.prototype.keyvaluesConfig, {
+    merge(Ad.prototype.keyvaluesConfig, {
 
       //none at the moment
 
     });
 
     //add page specific keyvalues
-    extendKeyvalues(gptConfig.keyvaluesConfig, kvs);
+    merge(gptConfig.keyvaluesConfig, kvs);
 
     //Custom flight templates that require additional conditionals
     config.flights = extend({
