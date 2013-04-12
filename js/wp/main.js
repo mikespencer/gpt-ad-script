@@ -54,9 +54,6 @@ define([
     }
   });
 
-  //add page specific keyvalues
-  merge(gptConfig.keyvaluesConfig, kvs);
-
   //Custom flight templates that require additional conditionals
   config.flights = extend({
     interstitial: {
@@ -77,7 +74,8 @@ define([
 
     //Initial GPT setup
     gptConfig: gptConfig.init({
-      sra: true
+      sra: true,
+      keyvaluesConfig: kvs
     }),
 
     flags: flags,

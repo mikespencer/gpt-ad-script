@@ -1,66 +1,77 @@
 /**
 * Extends universal desktop, page level keyvalues with slate desktop specific keyvalues
 */
-(function(define){
+define([
+  'utils/merge',
+  'utils/contentTypes',
+  'utils/wp_meta_data',
+  'packages/desktop/keyvalues'
+], function(merge, contentTypes, wp_meta_data, kvs){
 
-  'use strict';
+  return merge(kvs, {
 
-  define([
-    'utils/merge',
-    'utils/contentTypes',
-    'utils/wp_meta_data',
-    'packages/desktop/keyvalues'
-  ], function(merge, contentTypes, wp_meta_data, kvs){
+    articleId: [
+      function() {
+        var href = location.href.split('/'),
+          title = href[href.length - 1].split(/\..*?\.htm/),
+          len, i, articleId = '';
 
-    return merge(kvs, {
-
-      articleId: [
-        function() {
-          var href = location.href.split('/'),
-            title = href[href.length - 1].split(/\..*?\.htm/),
-            len, i, articleId = '';
-
-          if (title[0]) {
-            title = title[0];
-            len = title.length;
-            if (len > 30) {
-              title = title.split('_');
-              for (i = 0; i < len; i++) {
-                if (title[i]) {
-                  articleId = articleId + title[i].slice(0, 1);
-                }
+        if (title[0]) {
+          title = title[0];
+          len = title.length;
+          if (len > 30) {
+            title = title.split('_');
+            for (i = 0; i < len; i++) {
+              if (title[i]) {
+                articleId = articleId + title[i].slice(0, 1);
               }
-            } else {
-              articleId = title;
+            }
+          } else {
+            articleId = title;
+          }
+        }
+        return articleId;
+      }
+    ],
+
+    crtg_content: [
+      function() {
+        var vals, temp, l, str = window.crtg_content, rv = {};
+        if(str){
+          vals = str.split(';');
+          l = vals.length;
+          while(l--){
+            temp = vals[l].split('=');
+            if(temp[0] && temp[1]){
+              rv[temp[0]] = [temp[1]];
             }
           }
-          return articleId;
         }
-      ],
+        return rv;
+      }
+    ],
 
-      amazon: [
-        function() {
-          return document.amzn_args || window.amzn_args || false;
+    amazon: [
+      function() {
+        return document.amzn_args || window.amzn_args || false;
+      }
+    ],
+
+    page: [
+      function() {
+        if (wp_meta_data.contentType && contentTypes[wp_meta_data.contentType[0]]) {
+          return [contentTypes[wp_meta_data.contentType[0]]];
         }
-      ],
+        return commercialNode !== 'homepage' ? ['article'] : ['front'];
+      }
+    ],
 
-      page: [
-        function() {
-          if (wp_meta_data.contentType && contentTypes[wp_meta_data.contentType[0]]) {
-            return [contentTypes[wp_meta_data.contentType[0]]];
-          }
-          return commercialNode !== 'homepage' ? ['article'] : ['front'];
-        }
-      ],
-
-      dept: [
-        function(){
-          return window.PStax ? [window.PStax] : [];
-        }
-      ]
-
-    });
+    dept: [
+      function(){
+        return window.PStax ? [window.PStax] : [];
+      }
+    ]
 
   });
 
-})(window.define);
+});

@@ -3,19 +3,26 @@
  */
 define([
   'utils/extend',
+  'utils/merge',
   'utils/keyvalueIterator',
-  'utils/addKeyvalues'
-], function(extend, keyvalueIterator, addKeyvalues){
+  'utils/addKeyvalues',
+  'utils/isObject'
+], function(extend, merge, keyvalueIterator, addKeyvalues, isObject){
 
   return {
 
     exec: function(config){
       this.config = extend({
         async: true,
-        sra: true
+        sra: true,
+        keyvaluesConfig: false
       }, config);
 
       this.pubservice = googletag.pubads();
+
+      if(isObject(this.config.keyvaluesConfig)){
+        this.keyvaluesConfig = merge(this.keyvaluesConfig, this.config.keyvaluesConfig);
+      }
 
       this.keyvalues = keyvalueIterator(this.keyvaluesConfig, this);
       addKeyvalues(this.keyvalues, this.pubservice);

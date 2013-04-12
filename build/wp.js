@@ -14,7 +14,7 @@
   preserveLicenseComments: false,
 
   //for testing/debugging
-  //optimize: 'none',
+  optimize: 'none',
 
   wrap: true,
 
