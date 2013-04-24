@@ -34,6 +34,11 @@ define(function(){
       mini_bb: {
         what: ['bigbox*'],
         where: ['life/mini']
+      },
+      ge_pushdown: {
+        what: ['pushdown'],
+        where: ['homepage'],
+        when: ['201304240000/201304242359']
       }
     },
 

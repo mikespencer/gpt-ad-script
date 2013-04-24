@@ -26,6 +26,8 @@
 
     return {
 
+      debugBoxes: {},
+
       cssURL: 'css/debug.css',
 
       init: function(queue){
@@ -51,9 +53,14 @@
           var ad = wpAd.adsOnPage[pos];
           if(ad.container){
             console.log(this);
-            var box = this.buildDebugBox(ad);
 
-            $(box).css({
+            if(this.debugBoxes[pos]){
+              this.removeBox(this.debugBoxes[pos]);
+            }
+
+            this.debugBoxes[pos] = this.buildDebugBox(ad);
+
+            $(this.debugBoxes[pos]).css({
               position: 'absolute',
               top: $(ad.container).offset().top + 'px',
               left: $(ad.container).offset().left + 'px'
@@ -83,6 +90,10 @@
             console.log.apply(console, arguments);
           }
         }catch(e){}
+      },
+
+      removeBox: function(box){
+        $(box).remove();
       },
 
       getTemplateId: function(ad){

@@ -5,11 +5,11 @@
  * Universal script that does adops initialisation and loads site specific ad script
  */
 
-//configure requirejs;
-require.config({
+// configure requirejs;
+/*require.config({
   baseUrl: 'js',
   paths: {
-    //remove from optimized script - just here for dev
+    // remove from optimized script - just here for dev
     'siteScript': 'wp/main',
     'jquery': 'http://js.washingtonpost.com/wpost/js/combo/?token=20121010232000&c=true&m=true&context=eidos&r=/jquery-1.7.1.js',
     'jqueryUI': 'lib/jquery-ui.min'
@@ -23,9 +23,10 @@ require.config({
       exports: '$'
     }
   }
-});
+});*/
 
-//load dependencies:
+// load dependencies:
+// "siteScript" is defined in the site specific build file (eg: build/slate.js)
 require(['siteScript', 'utils/getScript'], function (wpAd, getScript){
 
   var queue = placeAd2.queue || false;
@@ -35,7 +36,7 @@ require(['siteScript', 'utils/getScript'], function (wpAd, getScript){
     try{console.log('placeAd2 queue:', queue);}catch(e){}
   }
 
-  //add to placeAd2 queue
+  // add to placeAd2 queue
   placeAd2(commercialNode, 'interstitial', false, '');
 
   googletag.cmd.push(function(){
@@ -47,7 +48,7 @@ require(['siteScript', 'utils/getScript'], function (wpAd, getScript){
         posArray,
         ad;
 
-      //determine pos value and potential posOverride
+      // determine pos value and potential posOverride
       if(/\|/.test(what)){
         posArray = what.split(/\|/);
         what = posArray[0];
@@ -55,11 +56,12 @@ require(['siteScript', 'utils/getScript'], function (wpAd, getScript){
         pos = posArray.join('_');
       }
 
-      //if the ad type is legit, open and hasn't already been built/rendered on the page
-      if((wpAd.flights && wpAd.flights[pos] || wpAd.flights[what + '*']) && wpAd.config.adTypes[what] || wpAd.flags.allAds){
+      // if the ad type is legit, open and hasn't already been built/rendered on the page
+      if((wpAd.flights && wpAd.flights[pos] || wpAd.flights[what + '*']) &&
+         wpAd.config.adTypes[what] || wpAd.flags.allAds){
         if(!wpAd.adsOnPage[pos]){
 
-          //build and store our new ad
+          // build and store our new ad
           ad = new wpAd.Ad({
             templateSettings: wpAd.config.adTypes[what],
             dfpSite: wpAd.constants.dfpSite,
@@ -72,37 +74,37 @@ require(['siteScript', 'utils/getScript'], function (wpAd, getScript){
             onTheFly: onTheFly
           });
 
-          //overrides (the new hackbin)
+          // overrides (the new hackbin)
           if(wpAd.overrides){
             ad = wpAd.overrides.exec(ad);
           }
 
-          //display the gpt ad
+          // display the gpt ad
           ad.render();
 
-          //store for debugging
+          // store for debugging
           wpAd.adsOnPage[pos] = ad;
 
         } else{
-          //refresh if ad/spot already rendered
-          wpAd.adsOnPage[pos].slot.refresh();
+          // refresh if ad/spot already rendered
+          wpAd.adsOnPage[pos].refresh();
         }
 
       } else {
         wpAd.adsDisabledOnPage[pos] = true;
       }
 
-      //always create this queue. If we want to implement debug as bookmarklet, this will be referenced:
+      // always need to create this queue
       wpAd.debugQueue.push(pos);
 
     };
 
-    //build and display queued up ads from previous placeAd2 calls
+    // build and display queued up ads from previous placeAd2 calls
     callPlaceAd2Queue(queue);
 
   });
 
-  //expose wpAd to the window for debugging + external code to access/build off of.
+  // expose wpAd to the window for debugging + external code to access/build off of.
   window.wpAd = wpAd;
 
 });
