@@ -31,7 +31,11 @@ var wpAd, placeAd2, googletag = googletag || { cmd: [] };
 
   function displayAds(){
     $('div[id^="slug_"][data-ad-type]').hide().each(function(){
-      placeAd2(commercialNode, $(this).data('adType'), false, '');
+      var $this = $(this),
+          what = $this.data('adType'),
+          del = $this.data('adDelivery') || false,
+          otf = $this.data('adOnTheFly') || '';
+      placeAd2(commercialNode, what, del, otf);
     });
   }
 

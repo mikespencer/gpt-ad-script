@@ -126,13 +126,15 @@ define([
       if(!this.slot){
         this.getSlug();
         this.container = this.getContainer();
-        this.slugDisplay(true);
-        if(!this.config.hardcode){
-          this.slot = this.buildGPTSlot();
-          addKeyvalues(this.keyvalues, this.slot);
-          googletag.display(this.container.id);
-        } else {
-          this.container.innerHTML = this.config.hardcode;
+        if(this.container){
+          this.slugDisplay(true);
+          if(!this.config.hardcode){
+            this.slot = this.buildGPTSlot();
+            addKeyvalues(this.keyvalues, this.slot);
+            googletag.display(this.container.id);
+          } else {
+            this.container.innerHTML = this.config.hardcode;
+          }
         }
       } else {
         this.refresh();

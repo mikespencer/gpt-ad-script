@@ -84,7 +84,7 @@ var slate_public_url = "http://www.slate.com/";
     <!--script src="http://js.washingtonpost.com/wp-srv/ad/generic_ad.js"></script>
     <script src="http://js.washingtonpost.com/wp-srv/ad/slate.js"></script-->
 
-    <script src="js/scriptloader.js" id="adscriptloader" data-adops-site="slate"></script>
+    <!--script src="js/scriptloader.js" id="adscriptloader" data-adops-site="slate"></script-->
 
 
     <!-- Facebook OG -->
@@ -177,11 +177,14 @@ SG_Debug && SG_Debug.pagedebug && window.console && console.log && console.log('
                                 <!-- Note: both ads hidden by default. AdOps js determines which one will display -->
                                 <!-- leaderboard AD BEGIN-->
 
-                                <div id="slug_leaderboard" style="display:none;"><script type="text/javascript">placeAd2(commercialNode,"leaderboard",false,"");</script></div>
+                                <!--div id="slug_leaderboard" style="display:none;"><script type="text/javascript">placeAd2(commercialNode,"leaderboard",false,"");</script></div-->
+
+                                <div id="slug_leaderboard" data-ad-type="leaderboard"></div>
 
                                 <!-- leaderboard AD END-->
                                 <!-- tiffanytile AD BEGIN-->
-                                <div id="slug_tiffanytile" style="display:none;"><script type="text/javascript">placeAd2(commercialNode,"tiffanytile",false,"");</script></div>
+                                <!--div id="slug_tiffanytile" style="display:none;"><script type="text/javascript">placeAd2(commercialNode,"tiffanytile",false,"");</script></div-->
+                                <div id="slug_tiffanytile" data-ad-type="tiffanytile"></div>
                                 <!-- tiffanytile AD END-->
 
                             <!-- /sl-header-ad -->
@@ -248,9 +251,10 @@ SG_Debug && SG_Debug.pagedebug && window.console && console.log && console.log('
                 <div class="clearing"></div>
                 <div class="sl-nav-panel" style="display: none;"><div class="sl-nav-panel-inner"></div></div>
 <!--PUSHDOWN AD BEGIN-->
-                <div id="slug_pushdown" style="display:none;">
+                <!--div id="slug_pushdown" style="display:none;">
                     <script type="text/javascript">placeAd2(commercialNode,"pushdown",false,"");</script>
-                </div>
+                </div-->
+                <div id="slug_pushdown" data-ad-type="pushdown"></div>
 <!--PUSHDOWN AD END-->
                 <div class="sl-top-wedge-myslate"  style="display:none" ></div>
             </div>
@@ -669,9 +673,10 @@ function firePixel() {
             <!-- LEFT RAIL -->
             <div class="sl-toc-lr">
                 <!-- 120x90 AD BEGIN-->
-                <div id="slug_120x90" style="display:none;">
+                <!--div id="slug_120x90" style="display:none;">
                     <script type="text/javascript">placeAd2(commercialNode,'120x90',false,"");</script>
-                </div>
+                </div-->
+                <div id="slug_120x90" data-ad-type="120x90"></div>
                 <!-- 120x90 AD END-->
                 <div class="hpLeftRailTop parsys iparsys"><div class="blog_list section special_features"><div class="toc-lr-bl">
 	<div class="toc-lr-bl-head"></div>
@@ -1111,8 +1116,9 @@ Join David, Emily, and John in Boston</li>
 
 
                 <!-- 120x240bottom AD BEGIN-->
-                <div id="slug_120x240bottom" style="display:none;margin:5px auto;
-		text-align: center;"><script type="text/javascript">placeAd2(commercialNode,"120x240bottom",false,"");</script></div>
+                <!--div id="slug_120x240bottom" style="display:none;margin:5px auto;
+		text-align: center;"><script type="text/javascript">placeAd2(commercialNode,"120x240bottom",false,"");</script></div-->
+                <div id="slug_120x240bottom" data-ad-type="120x240bottom"></div>
                 <!-- 120x240top AD END-->
 
             </div>
@@ -1123,9 +1129,10 @@ Join David, Emily, and John in Boston</li>
       <div class="sl-toc-cntr">
 
         <!-- 120x90 AD BEGIN-->
-        <div id="slug_120x90" style="display:none;">
+        <!--div id="slug_120x90" style="display:none;">
             <script type="text/javascript">placeAd2(commercialNode,'120x90',false,"");</script>
-        </div>
+        </div-->
+        <div id="slug_120x90" data-ad-type="120x90"></div>
         <!-- 120x90 AD END-->
 
 
@@ -1435,11 +1442,12 @@ Join David, Emily, and John in Boston</li>
 
                                    <!--468x60 AD BEGIN-->
 									<li class="sl-toc-art-item-ad" id="slug_468x60" style="display:none;">
-										<div>
+										<!--div>
 										  <script type="text/javascript">
 											placeAd2(commercialNode,"468x60",false,"");
 										  </script>
-										</div>
+										</div-->
+                                        <div id="slug_468x60" data-ad-type="468x60"></div>
 									</li>
 									<!--468x60 AD END-->
 
@@ -10984,9 +10992,10 @@ $(document).ready(function() {
 
 
 	<!-- rightflex AD BEGIN-->
-	<div id="slug_rightflex" style="display:none;">
+	<!--div id="slug_rightflex" style="display:none;">
 		<script type="text/javascript">placeAd2(commercialNode,"rightflex",false,"");</script>
-	</div>
+	</div-->
+    <div id="slug_rightflex" data-ad-type="rightflex"></div>
 	<!-- rightflex AD END-->
 
 
@@ -11129,16 +11138,18 @@ $(document).ready(function() {
 
 
 <!--AGOOGLEADAY AD BEGIN-->
-    <div id="slug_agoogleaday" style="display:none;">
+    <!--div id="slug_agoogleaday" style="display:none;">
         <script type="text/javascript">placeAd2(commercialNode,"agoogleaday",false,"");</script>
-    </div>
+    </div-->
+    <div id="slug_agoogleaday" data-ad-type="agoogleaday"></div>
 <!--AGOOGLEADAY AD END-->
 
 
 <!-- 336x60 AD BEGIN-->
-<div id="slug_336x60" style="display:none;">
+<!--div id="slug_336x60" style="display:none;">
     <script type="text/javascript">placeAd2(commercialNode,'336x60',false,"");</script>
-</div>
+</div-->
+<div id="slug_336x60" data-ad-type="336x60"></div>
 <!-- 336x60 AD END-->
 </div>
 <div class="section most_read_and_commented">
@@ -11330,16 +11341,16 @@ $(document).ready(function() {
 
 
 <!-- mostread AD BEGIN-->
-<div id="slug_mostread" style="display:none;">
+<!--div id="slug_mostread" style="display:none;">
     <script type="text/javascript">placeAd2(commercialNode,'mostread',false,"");</script>
-</div>
+</div-->
+<div id="slug_mostread" data-ad-type="mostread"></div>
 <!-- mostread AD END-->
 
 
 
 <!-- 336x90 AD BEGIN-->
-<div id="slug_336x90" style="display:none;">
-    <script type="text/javascript">placeAd2(commercialNode,'336x90',false,"");</script>
+<div id="slug_336x90" data-ad-type="336x90">
 </div>
 <!-- 336x90 AD END-->
 
@@ -11447,9 +11458,10 @@ $(document).ready(function() {
 
 
 	<!-- 336x60|2 AD BEGIN-->
-	<div id="slug_336x60|2" style="display:none;">
+	<!--div id="slug_336x60|2" style="display:none;">
 		<script type="text/javascript">placeAd2(commercialNode,'336x60|2',false,"");</script>
-	</div>
+	</div-->
+    <div id="slug_336x60_2" data-ad-type="336x60|2"></div>
 	<!-- 336x60|2 AD END-->
 
 </div>
@@ -12014,6 +12026,7 @@ SG_Debug && SG_Debug.pagedebug && window.console && console.log && console.log('
 SG_Debug && SG_Debug.pagedebug && window.console && console.log && console.log('[' + (new Date()-SG_Debug.initialTime)/1000 + ']' + ' Bottom of footer-scripts-hook.jsp');
 </script>
 
+    <script src="js/scriptloader.js" id="adscriptloader" data-adops-site="slate"></script>
 
 
 

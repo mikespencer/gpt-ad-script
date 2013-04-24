@@ -30,7 +30,7 @@ define(['overrides', 'utils/reload', 'utils/merge'], function(overrides, reload,
           adi_div.style.padding = '0';
         }
       },
-      flex_ss_bb_hp: function() {
+      flex_bb_hp: function() {
         if(this.config.where === 'washingtonpost.com'){
           this.config.where += '/hpflex';
           if(reload){

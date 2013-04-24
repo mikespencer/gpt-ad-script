@@ -79,8 +79,6 @@ var slate_public_url = "http://www.slate.com/";
     <!-- Ad Ops -->
     <script>commercialNode = "news";</script>
 
-    <script src="js/scriptloader.js" id="adscriptloader" data-adops-site="slate"></script>
-
 
     <!-- Facebook OG -->
     <meta property="og:title" content="News and Politics" />
@@ -179,11 +177,13 @@ SG_Debug && SG_Debug.pagedebug && window.console && console.log && console.log('
                                 <!-- Note: both ads hidden by default. AdOps js determines which one will display -->
                                 <!-- leaderboard AD BEGIN-->
 
-                                <div id="slug_leaderboard" style="display:none;"><script type="text/javascript">placeAd2(commercialNode,"leaderboard",false,"");</script></div>
+                                <!--div id="slug_leaderboard" style="display:none;"><script type="text/javascript">placeAd2(commercialNode,"leaderboard",false,"");</script></div-->
+                                <div id="slug_leaderboard" data-ad-type="leaderboard"></div>
 
                                 <!-- leaderboard AD END-->
                                 <!-- tiffanytile AD BEGIN-->
-                                <div id="slug_tiffanytile" style="display:none;"><script type="text/javascript">placeAd2(commercialNode,"tiffanytile",false,"");</script></div>
+                                <!--div id="slug_tiffanytile" style="display:none;"><script type="text/javascript">placeAd2(commercialNode,"tiffanytile",false,"");</script></div-->
+                                <div id="slug_tiffanytile" data-ad-type="tiffanytile"></div>
                                 <!-- tiffanytile AD END-->
 
                             <!-- /sl-header-ad -->
@@ -243,9 +243,10 @@ SG_Debug && SG_Debug.pagedebug && window.console && console.log && console.log('
                 <div class="clearing"></div>
                 <div class="sl-nav-panel" style="display: none;"><div class="sl-nav-panel-inner"></div></div>
 <!--PUSHDOWN AD BEGIN-->
-                <div id="slug_pushdown" style="display:none;">
+                <!--div id="slug_pushdown" style="display:none;">
                     <script type="text/javascript">placeAd2(commercialNode,"pushdown",false,"");</script>
-                </div>
+                </div-->
+                <div id="slug_pushdown" data-ad-type="pushdown"></div>
 <!--PUSHDOWN AD END-->
                 <div class="sl-top-wedge-myslate"  ></div>
             </div>
@@ -410,9 +411,10 @@ SG_Debug && SG_Debug.pagedebug && window.console && console.log && console.log('
       <div class="sl-toc-cntr">
 
         <!-- 120x90 AD BEGIN-->
-        <div id="slug_120x90" style="display:none;">
+        <!--div id="slug_120x90" style="display:none;">
             <script type="text/javascript">placeAd2(commercialNode,'120x90',false,"");</script>
-        </div>
+        </div-->
+        <div id="slug_120x90" data-ad-type="120x90"></div>
         <!-- 120x90 AD END-->
 
 
@@ -1586,9 +1588,10 @@ $(document).ready(function() {
 
 
 	<!-- rightflex AD BEGIN-->
-	<div id="slug_rightflex" style="display:none;">
+	<!--div id="slug_rightflex" style="display:none;">
 		<script type="text/javascript">placeAd2(commercialNode,"rightflex",false,"");</script>
-	</div>
+	</div-->
+    <div id="slug_rightflex" data-ad-type="rightflex"></div>
 	<!-- rightflex AD END-->
 
 
@@ -1691,16 +1694,18 @@ $(document).ready(function() {
 
 
 <!--AGOOGLEADAY AD BEGIN-->
-    <div id="slug_agoogleaday" style="display:none;">
+    <!--div id="slug_agoogleaday" style="display:none;">
         <script type="text/javascript">placeAd2(commercialNode,"agoogleaday",false,"");</script>
-    </div>
+    </div-->
+    <div id="slug_agoogleaday" data-ad-type="agoogleaday"></div>
 <!--AGOOGLEADAY AD END-->
 
 
 <!-- 336x60 AD BEGIN-->
-<div id="slug_336x60" style="display:none;">
+<!--div id="slug_336x60" style="display:none;">
     <script type="text/javascript">placeAd2(commercialNode,'336x60',false,"");</script>
-</div>
+</div-->
+<div id="slug_336x60" data-ad-type="336x60"></div>
 <!-- 336x60 AD END-->
 </div>
 <div class="todays_video section">
@@ -1962,17 +1967,19 @@ $(document).ready(function() {
 
 
 <!-- mostread AD BEGIN-->
-<div id="slug_mostread" style="display:none;">
+<!--div id="slug_mostread" style="display:none;">
     <script type="text/javascript">placeAd2(commercialNode,'mostread',false,"");</script>
-</div>
+</div-->
+<div id="slug_mostread" data-ad-type="mostread"></div>
 <!-- mostread AD END-->
 
 
 
 <!-- 336x90 AD BEGIN-->
-<div id="slug_336x90" style="display:none;">
+<!--div id="slug_336x90" style="display:none;">
     <script type="text/javascript">placeAd2(commercialNode,'336x90',false,"");</script>
-</div>
+</div-->
+<div id="slug_336x90" data-ad-type="336x90"></div>
 <!-- 336x90 AD END-->
 
 
@@ -2641,9 +2648,10 @@ $(document).ready(function() {
 
 
 	<!-- 336x60|2 AD BEGIN-->
-	<div id="slug_336x60|2" style="display:none;">
+	<!--div id="slug_336x60|2" style="display:none;">
 		<script type="text/javascript">placeAd2(commercialNode,'336x60|2',false,"");</script>
-	</div>
+	</div-->
+    <div id="slug_336x60_3" data-ad-type="336x60|2"></div>
 	<!-- 336x60|2 AD END-->
 
 </div>
@@ -3042,6 +3050,7 @@ SG_Debug && SG_Debug.pagedebug && window.console && console.log && console.log('
 SG_Debug && SG_Debug.pagedebug && window.console && console.log && console.log('[' + (new Date()-SG_Debug.initialTime)/1000 + ']' + ' Bottom of footer-scripts-hook.jsp');
 </script>
 
+    <script src="js/scriptloader.js" id="adscriptloader" data-adops-site="slate"></script>
 
 
 

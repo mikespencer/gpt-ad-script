@@ -57,8 +57,9 @@ require(['siteScript', 'utils/getScript'], function (wpAd, getScript){
       }
 
       // if the ad type is legit, open and hasn't already been built/rendered on the page
-      if((wpAd.flights && wpAd.flights[pos] || wpAd.flights[what + '*']) &&
-         wpAd.config.adTypes[what] || wpAd.flags.allAds){
+      if(wpAd.config.adTypes[what] &&
+         ((wpAd.flights && wpAd.flights[pos] || wpAd.flights[what + '*']) || wpAd.flags.allAds)){
+
         if(!wpAd.adsOnPage[pos]){
 
           // build and store our new ad
