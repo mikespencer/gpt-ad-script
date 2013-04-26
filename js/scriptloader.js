@@ -22,13 +22,6 @@ var wpAd, placeAd2, googletag = googletag || { cmd: [] };
     return 'js/min/' + (site && siteScripts[site] ? siteScripts[site] : siteScripts.wp);
   }
 
-  // Initially, use placeAd2 to store each ad spots data until all dependencies have been loaded and
-  // placeAd2 is redefined to actually render each ad.
-  w.placeAd2 = function(){
-    placeAd2.queue = placeAd2.queue || [];
-    placeAd2.queue.push(arguments);
-  };
-
   function displayAds(){
     $('div[id^="slug_"][data-ad-type]').hide().each(function(){
       var $this = $(this),
@@ -60,21 +53,24 @@ var wpAd, placeAd2, googletag = googletag || { cmd: [] };
     }
   }
 
-  function init(){
-    // get site specific ad script
-    loadScript(getSiteScript());
+  // Initially, use placeAd2 to store each ad spots data until all dependencies have been loaded and
+  // placeAd2 is redefined to actually render each ad.
+  w.placeAd2 = function(){
+    placeAd2.queue = placeAd2.queue || [];
+    placeAd2.queue.push(arguments);
+  };
 
-    // get GPT services
-    loadScript('http://www.googletagservices.com/tag/js/gpt.js');
+  // get site specific ad script
+  loadScript(getSiteScript());
 
-    // make sure jQuery is defined, then display ads
-    if(w.jQuery){
-      displayAds();
-    } else{
-      loadScript('http://js.washingtonpost.com/wpost/js/combo/?token=20121010232000&c=true&m=true&context=eidos&r=/jquery-1.7.1.js', displayAds);
-    }
+  // get GPT services
+  loadScript('http://www.googletagservices.com/tag/js/gpt.js');
+
+  // make sure jQuery is defined, then display ads
+  if(w.jQuery){
+    displayAds();
+  } else{
+    loadScript('http://js.washingtonpost.com/wpost/js/combo/?token=20121010232000&c=true&m=true&context=eidos&r=/jquery-1.7.1.js', displayAds);
   }
-
-  init();
 
 })(window, document);
