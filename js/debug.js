@@ -2,7 +2,7 @@
  * Debug info for adops
  * For now this will do for basic dubug functionality
  */
-(function(w, d, wpAd){
+(function(w, d){
 
   'use strict';
 
@@ -52,7 +52,6 @@
         if(wpAd.adsOnPage[pos]){
           var ad = wpAd.adsOnPage[pos];
           if(ad.container){
-            console.log(this);
 
             if(this.debugBoxes[pos]){
               this.removeBox(this.debugBoxes[pos]);
@@ -229,4 +228,4 @@
     return obj;
   }
 
-})(window, document, wpAd);
+})(window, document);

@@ -1,30 +1,6 @@
 /*global placeAd2:true, placeAd2Queue */
 /*jshint indent:2*/
 
-/**
- * Universal script that does adops initialisation and loads site specific ad script
- */
-
-// configure requirejs;
-/*require.config({
-  baseUrl: 'js',
-  paths: {
-    // remove from optimized script - just here for dev
-    'siteScript': 'wp/main',
-    'jquery': 'http://js.washingtonpost.com/wpost/js/combo/?token=20121010232000&c=true&m=true&context=eidos&r=/jquery-1.7.1.js',
-    'jqueryUI': 'lib/jquery-ui.min'
-  },
-  shim: {
-    'googletag': {
-      exports: 'googletag'
-    },
-    'jqueryUI':{
-      deps: ['jquery'],
-      exports: '$'
-    }
-  }
-});*/
-
 // load dependencies:
 // "siteScript" is defined in the site specific build file (eg: build/slate.js)
 require(['siteScript', 'utils/getScript'], function (wpAd, getScript){

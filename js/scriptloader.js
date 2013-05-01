@@ -10,6 +10,8 @@ var wpAd, placeAd2, googletag = googletag || { cmd: [] };
     return false;
   }
 
+  var baseURL = 'js/min/';
+
   function getSiteScript(){
     var siteScripts = {
       'wp': 'wp.js',
@@ -19,16 +21,17 @@ var wpAd, placeAd2, googletag = googletag || { cmd: [] };
     },
     script = d.getElementById('adscriptloader'),
     site = script && script.getAttribute('data-adops-site');
-    return 'js/min/' + (site && siteScripts[site] ? siteScripts[site] : siteScripts.wp);
+    return site && siteScripts[site] ? siteScripts[site] : siteScripts.wp;
   }
 
   function displayAds(){
     $('div[id^="slug_"][data-ad-type]').hide().each(function(){
       var $this = $(this),
+          where = $this.data('adWhere') || commercialNode,
           what = $this.data('adType'),
           del = $this.data('adDelivery') || false,
           otf = $this.data('adOnTheFly') || '';
-      placeAd2(commercialNode, what, del, otf);
+      placeAd2(where, what, del, otf);
     });
   }
 
@@ -61,7 +64,7 @@ var wpAd, placeAd2, googletag = googletag || { cmd: [] };
   };
 
   // get site specific ad script
-  loadScript(getSiteScript());
+  loadScript(baseURL + getSiteScript());
 
   // get GPT services
   loadScript('http://www.googletagservices.com/tag/js/gpt.js');
