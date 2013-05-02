@@ -12,7 +12,7 @@ define([
 
     articleId: [
       function() {
-        var href = location.href.split('/'),
+        var href = location.href.split(/\?/)[0].split('/'),
           title = href[href.length - 1].split(/\..*?\.htm/),
           len, i, articleId = '';
 

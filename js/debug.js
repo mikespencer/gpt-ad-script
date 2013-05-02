@@ -7,7 +7,7 @@
   'use strict';
 
   var jq = 'http://js.washingtonpost.com/wpost/js/combo/?token=20121010232000&c=true&m=true&context=eidos&r=/jquery-1.7.1.js',
-    jqui = '/js/lib/jquery-ui.min.js';
+    jqui = 'js/lib/jquery-ui.min.js';
 
   if(!w.jQuery){
     getScript(jq, function(){
