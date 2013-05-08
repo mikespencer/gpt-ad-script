@@ -1,8 +1,8 @@
 define([
-  'utils/front',
+  'utils/flags',
   'utils/keywords',
   'utils/wordMatch'
-], function(front, keywords, wordMatch){
+], function(flags, keywords, wordMatch){
 
   return function(){
     var rv = [],
@@ -20,7 +20,7 @@ define([
       },
       key;
 
-    if(!front) {
+    if(!flags.front) {
       for(key in obj) {
         if(obj.hasOwnProperty(key) && wordMatch(obj[key], keywords)) {
           rv.push(key);

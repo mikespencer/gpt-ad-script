@@ -10,7 +10,8 @@ var wpAd, placeAd2, googletag = googletag || { cmd: [] };
     return false;
   }
 
-  var baseURL = 'js/min/';
+  var $ = w.jQuery || w.$ || undefined,
+      baseURL = 'js/min/';
 
   function getSiteScript(){
     var siteScripts = {
@@ -24,7 +25,10 @@ var wpAd, placeAd2, googletag = googletag || { cmd: [] };
     return site && siteScripts[site] ? siteScripts[site] : siteScripts.wp;
   }
 
-  function displayAds(){
+  function displayAds($){
+    if(!$ && w.console){
+      try{console.log('jQuery undefined');}catch(e){}
+    }
     $('div[id^="slug_"][data-ad-type]').hide().each(function(){
       var $this = $(this),
           where = $this.data('adWhere') || commercialNode,
@@ -70,10 +74,12 @@ var wpAd, placeAd2, googletag = googletag || { cmd: [] };
   loadScript('http://www.googletagservices.com/tag/js/gpt.js');
 
   // make sure jQuery is defined, then display ads
-  if(w.jQuery){
-    displayAds();
+  if($){
+    displayAds($);
   } else{
-    loadScript('http://js.washingtonpost.com/wpost/js/combo/?token=20121010232000&c=true&m=true&context=eidos&r=/jquery-1.7.1.js', displayAds);
+    loadScript('http://js.washingtonpost.com/wpost/js/combo/?token=201210102320000&c=true&m=true&context=eidos&r=/jquery-1.7.1.js', function(){
+      displayAds(w.jQuery);
+    });
   }
 
 })(window, document);

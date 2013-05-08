@@ -12,9 +12,6 @@ define([
   'utils/flags'
 ], function(defaultSettings, Ad, gptConfig, config, kvs, extend, merge, flags){
 
-  //add page specific keyvalues
-  merge(gptConfig.keyvaluesConfig, kvs);
-
   //add mobile specific, ad level keyvalues
   /*merge(Ad.prototype.keyvaluesConfig, {
 
@@ -33,8 +30,11 @@ define([
 
     //Initial GPT setup
     gptConfig: gptConfig.init({
-      sra: true
+      sra: true,
+      keyvaluesConfig: kvs
     }),
+
+    flags: flags,
 
     config: config,
 
@@ -42,9 +42,7 @@ define([
       t: {
         id: 'default'
       }
-    },
-
-    flags: flags
+    }
 
   });
 

@@ -10,7 +10,6 @@ define([
   'utils/templateBuilder',
   'utils/extend',
   'utils/merge',
-  'utils/front',
   'utils/showInterstitial',
   'utils/flags',
   'wp/config',
@@ -26,7 +25,6 @@ define([
   templateBuilder,
   extend,
   merge,
-  front,
   showInterstitial,
   flags,
   config,
@@ -48,9 +46,7 @@ define([
     },
     pos: function(){
       var c = config.adTypes[this.config.pos];
-      if(c && c.keyvalues && c.keyvalues.pos){
-        return c.keyvalues.pos;
-      }
+      return c && c.keyvalues && c.keyvalues.pos || false;
     }
   });
 
@@ -58,7 +54,7 @@ define([
   config.flights = extend({
     interstitial: {
       what: ['interstitial'],
-      test: [showInterstitial && !front]
+      test: [showInterstitial && !flags.front]
     }
   }, config.flights);
 

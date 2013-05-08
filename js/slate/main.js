@@ -9,7 +9,6 @@ define([
   'utils/templateBuilder',
   'utils/extend',
   'utils/merge',
-  'utils/front',
   'utils/showInterstitial',
   'utils/flags',
   'slate/config',
@@ -25,7 +24,6 @@ define([
   templateBuilder,
   extend,
   merge,
-  front,
   showInterstitial,
   flags,
   config,
@@ -49,7 +47,7 @@ define([
   config.flights = extend({
     interstitial: {
       what: ['interstitial'],
-      test: [showInterstitial && !front]
+      test: [showInterstitial && !flags.front]
     }
   }, config.flights);
 
