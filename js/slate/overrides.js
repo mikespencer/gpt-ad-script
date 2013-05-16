@@ -1,7 +1,7 @@
 /**
  * Overrides for standard configuration of ad spots for unique circumstances on slate.com (desktop)
  */
-define(['utils/reload', 'utils/merge'], function(reload, merge){
+define(['utils/reload'], function(reload){
 
   /**
    * Object of checks for overrides
