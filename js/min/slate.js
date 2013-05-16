@@ -646,7 +646,7 @@ define('utils/keyvalueIterator',['utils/isArray', 'utils/isObject'], function(is
   };
 
 });
-define('utils/addKeyvalues',['utils/isArray'], function(isArray){
+define('utils/setTargeting',['utils/isArray'], function(isArray){
 
   /**
    * Assigns keyvalues to a the gpt publisher service, or a gpt ad slot
@@ -672,8 +672,8 @@ define('Ad',[
   'utils/merge',
   'utils/isArray',
   'utils/keyvalueIterator',
-  'utils/addKeyvalues'
-], function(extend, merge, isArray, keyvalueIterator, addKeyvalues){
+  'utils/setTargeting'
+], function(extend, merge, isArray, keyvalueIterator, setTargeting){
 
   function Ad(config){
     this.config = extend({
@@ -744,12 +744,14 @@ define('Ad',[
         }
       }
     },
-    getSlug: function(){
+
+    findSlugs: function(){
       this.config.slug = document.getElementById('slug_' + this.config.pos);
       this.config.wpni_adi = document.getElementById('wpni_adi_' + this.config.pos);
     },
 
     getContainer: function(){
+      this.findSlugs();
       return this.config.wpni_adi || this.config.slug;
     },
 
@@ -761,8 +763,12 @@ define('Ad',[
       return this.keyvalues;
     },
 
-    merge: function(obj){
-      this.keyvaluesConfig = merge(this.keyvaluesConfig, obj);
+    addKeyvaluesConfig: function(obj){
+      merge(this.keyvaluesConfig, obj);
+    },
+
+    addKeyvalues: function(obj){
+      merge(this.keyvalues, obj);
     },
 
     hardcode: function(){
@@ -800,13 +806,13 @@ define('Ad',[
 
     render: function(){
       if(!this.slot){
-        this.getSlug();
         this.container = this.getContainer();
         if(this.container){
           this.slugDisplay(true);
           if(!this.config.hardcode){
+            this.overridesExec();
             this.slot = this.buildGPTSlot();
-            addKeyvalues(this.keyvalues, this.slot);
+            setTargeting(this.keyvalues, this.slot);
             googletag.display(this.container.id);
           } else {
             this.container.innerHTML = this.config.hardcode;
@@ -833,9 +839,9 @@ define('gptConfig',[
   'utils/extend',
   'utils/merge',
   'utils/keyvalueIterator',
-  'utils/addKeyvalues',
+  'utils/setTargeting',
   'utils/isObject'
-], function(extend, merge, keyvalueIterator, addKeyvalues, isObject){
+], function(extend, merge, keyvalueIterator, setTargeting, isObject){
 
   return {
 
@@ -853,7 +859,7 @@ define('gptConfig',[
       }
 
       this.keyvalues = keyvalueIterator(this.keyvaluesConfig, this);
-      addKeyvalues(this.keyvalues, this.pubservice);
+      setTargeting(this.keyvalues, this.pubservice);
 
       if(this.config.sra){
         this.pubservice.enableSingleRequest();
@@ -1614,7 +1620,7 @@ define('utils/reload',['utils/urlCheck'], function(urlCheck){
 /**
  * Overrides for standard configuration of ad spots for unique circumstances on slate.com (desktop)
  */
-define('slate/overrides',['utils/reload'], function(reload){
+define('slate/overrides',['utils/reload', 'utils/merge'], function(reload, merge){
 
   /**
    * Object of checks for overrides
@@ -1625,10 +1631,14 @@ define('slate/overrides',['utils/reload'], function(reload){
         if (this.config.where === "homepage") {
           this.config.where += '/lb' + (reload ? 'refresh' : '');
         }
+
+        this.addKeyvalues({
+          someCustomKV: ['im_a_leaderboard']
+        });
+
       },
       rightflex: function() {
         if (this.config.where === "homepage") {
-          console.log(this, this.config)
           this.config.where += '/hp' + (reload ? 'refresh' : '');
         }
       }
@@ -1823,7 +1833,7 @@ require(['gpt', 'siteScript', 'utils/getScript'], function (googletag, wpAd, get
           //  ad = wpAd.overrides.exec(ad);
           //}
 
-          ad.overridesExec();
+          //ad.overridesExec();
 
           // display the gpt ad
           ad.render();

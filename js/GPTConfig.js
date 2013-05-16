@@ -5,9 +5,9 @@ define([
   'utils/extend',
   'utils/merge',
   'utils/keyvalueIterator',
-  'utils/addKeyvalues',
+  'utils/setTargeting',
   'utils/isObject'
-], function(extend, merge, keyvalueIterator, addKeyvalues, isObject){
+], function(extend, merge, keyvalueIterator, setTargeting, isObject){
 
   return {
 
@@ -25,7 +25,7 @@ define([
       }
 
       this.keyvalues = keyvalueIterator(this.keyvaluesConfig, this);
-      addKeyvalues(this.keyvalues, this.pubservice);
+      setTargeting(this.keyvalues, this.pubservice);
 
       if(this.config.sra){
         this.pubservice.enableSingleRequest();

@@ -56,7 +56,7 @@ require(['gpt', 'siteScript', 'utils/getScript'], function (googletag, wpAd, get
           //  ad = wpAd.overrides.exec(ad);
           //}
 
-          ad.overridesExec();
+          //ad.overridesExec();
 
           // display the gpt ad
           ad.render();
