@@ -5,27 +5,25 @@
 
   'use strict';
 
-  define(['overrides', 'utils/reload'], function(overrides, reload){
+  define(['utils/reload'], function(reload){
 
     /**
      * Object of checks for overrides
      * keys of check functions will be evaluated as Regular Expressions.
      * EG: key could = '^politics$'
      */
-    overrides.checks = {
+    return {
       pos: {
-      	
+
       },
       where: {
-		'homepage': function() {
-			if (reload) {
-				this.config.where += '/refresh';
-			};
-		}
+        'homepage': function() {
+          if (reload) {
+            this.config.where += '/refresh';
+          }
+        }
       }
     };
-
-    return overrides;
 
   });
 

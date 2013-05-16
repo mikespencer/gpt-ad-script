@@ -5,7 +5,7 @@ define([
   'utils/merge',
   'utils/contentTypes',
   'utils/wp_meta_data',
-  'packages/desktop/keyvalues'
+  'keyvalues/desktop'
 ], function(merge, contentTypes, wp_meta_data, kvs){
 
   return merge(kvs, {

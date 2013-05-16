@@ -7,7 +7,7 @@
 
   define([
     'utils/merge',
-    'packages/desktop/keyvalues',
+    'keyvalues/desktop',
     'root/keyvalues/articleId'
   ], function(merge, kvs, articleId){
 

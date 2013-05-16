@@ -51,6 +51,9 @@ define([
     }
   }, config.flights);
 
+  //overrides config
+  extend(Ad.prototype.overrides, overrides);
+
   //ad refresh on gallery pages
   window.wpniAds = window.wpniAds || {};
   window.wpniAds.gallery = galleryRefresh;
@@ -76,10 +79,7 @@ define([
     config: config,
 
     //determine open ad spots
-    flights: templateBuilder.exec(config.flights),
-
-    //overrides
-    overrides: overrides
+    flights: templateBuilder.exec(config.flights)
 
   });
 });

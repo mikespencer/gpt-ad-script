@@ -21,12 +21,16 @@
   paths: {
     'jquery': 'lib/jquery',
     'jqueryUI': 'lib/jquery-ui.min',
+    'gpt': 'lib/gpt',
 
-    //define mobile site specific script here:
+    //define wp site specific script here:
     'siteScript': 'wp_mobile/main'
   },
 
   shim: {
+    'gpt': {
+      exports: 'googletag'
+    },
     'jqueryUI':{
       deps: ['jquery'],
       exports: '$'

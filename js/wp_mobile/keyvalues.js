@@ -3,7 +3,7 @@
  */
 define([
   'utils/merge',
-  'packages/mobile/keyvalues'
+  'keyvalues/mobile'
 ], function(merge, kvs){
 
   return merge(kvs, {

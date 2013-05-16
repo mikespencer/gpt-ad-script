@@ -1,12 +1,12 @@
 /**
  * Overrides for standard configuration of ad spots for unique circumstances on washingtonpost.com (desktop)
  */
-define(['overrides', 'utils/reload', 'utils/merge'], function(overrides, reload, merge) {
+define(['utils/reload', 'utils/merge'], function(reload, merge) {
 
   /**
    * Object of checks for overrides
    */
-  overrides.checks = {
+  return {
     what: {
       tiffany_tile: function(){
         if (this.config.where === "washingtonpost.com") {
@@ -56,7 +56,5 @@ define(['overrides', 'utils/reload', 'utils/merge'], function(overrides, reload,
       // May not need this section..
     }
   };
-
-  return overrides;
 
 });

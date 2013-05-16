@@ -21,7 +21,7 @@ var wpAd, placeAd2, googletag = googletag || { cmd: [] };
       'wp_mobile': 'mobile.js'
     },
     script = d.getElementById('adscriptloader'),
-    site = script && script.getAttribute('data-adops-site');
+    site = script && script.getAttribute('data-ad-site');
     return site && siteScripts[site] ? siteScripts[site] : siteScripts.wp;
   }
 
@@ -71,7 +71,7 @@ var wpAd, placeAd2, googletag = googletag || { cmd: [] };
   loadScript(baseURL + getSiteScript());
 
   // get GPT services
-  loadScript('http://www.googletagservices.com/tag/js/gpt.js');
+  //loadScript('http://www.googletagservices.com/tag/js/gpt.js');
 
   // make sure jQuery is defined, then display ads
   if($){

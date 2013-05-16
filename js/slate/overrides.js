@@ -1,12 +1,12 @@
 /**
  * Overrides for standard configuration of ad spots for unique circumstances on slate.com (desktop)
  */
-define(['overrides', 'utils/reload'], function(overrides, reload){
+define(['utils/reload'], function(reload){
 
   /**
    * Object of checks for overrides
    */
-  overrides.checks = {
+  return {
     pos: {
       leaderboard: function(){
         if (this.config.where === "homepage") {
@@ -23,7 +23,5 @@ define(['overrides', 'utils/reload'], function(overrides, reload){
 
     }
   };
-
-  return overrides;
 
 });

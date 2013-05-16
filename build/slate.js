@@ -14,19 +14,23 @@
   preserveLicenseComments: false,
 
   //for testing/debugging
-  //optimize: 'none',
+  optimize: 'none',
 
   wrap: true,
 
   paths: {
     'jquery': 'lib/jquery',
     'jqueryUI': 'lib/jquery-ui.min',
+    'gpt': 'lib/gpt',
 
     //define wp site specific script here:
     'siteScript': 'slate/main'
   },
 
   shim: {
+    'gpt': {
+      exports: 'googletag'
+    },
     'jqueryUI':{
       deps: ['jquery'],
       exports: '$'

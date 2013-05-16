@@ -68,6 +68,18 @@ define([
       ]
     },
 
+    overrides: {
+      //placeholder
+    },
+
+    overridesExec: function(){
+      var key, check, r;
+      for(key in this.overrides){
+        if(this.overrides.hasOwnProperty(key) && this.config[key] && this.overrides[key][this.config[key]]){
+          this.overrides[key][this.config[key]].call(this);
+        }
+      }
+    },
     getSlug: function(){
       this.config.slug = document.getElementById('slug_' + this.config.pos);
       this.config.wpni_adi = document.getElementById('wpni_adi_' + this.config.pos);

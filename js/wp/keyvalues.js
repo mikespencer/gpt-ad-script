@@ -3,7 +3,7 @@
  */
 define([
   'utils/merge',
-  'packages/desktop/keyvalues',
+  'keyvalues/desktop',
   'utils/wp_meta_data',
   'utils/wordMatch',
   'utils/keywords',

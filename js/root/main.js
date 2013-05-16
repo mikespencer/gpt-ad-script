@@ -69,6 +69,9 @@
       }
     }, config.flights);
 
+    //overrides config
+    extend(Ad.prototype.overrides, overrides);
+
     return extend(defaultSettings, {
 
       //network id
@@ -91,9 +94,6 @@
 
       //determine open ad spots
       flights: templateBuilder.exec(config.flights),
-
-      //overrides
-      overrides: overrides,
 
       cleanScriptTags: function(){
         // Found a call to this on a test page. Adding dummy function to prevent errors until we

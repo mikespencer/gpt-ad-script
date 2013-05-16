@@ -3,7 +3,7 @@
 
 // load dependencies:
 // "siteScript" is defined in the site specific build file (eg: build/slate.js)
-require(['siteScript', 'utils/getScript'], function (wpAd, getScript){
+require(['gpt', 'siteScript', 'utils/getScript'], function (googletag, wpAd, getScript){
 
   var queue = placeAd2.queue || false;
 
@@ -52,9 +52,11 @@ require(['siteScript', 'utils/getScript'], function (wpAd, getScript){
           });
 
           // overrides (the new hackbin)
-          if(wpAd.overrides){
-            ad = wpAd.overrides.exec(ad);
-          }
+          //if(wpAd.overrides){
+          //  ad = wpAd.overrides.exec(ad);
+          //}
+
+          ad.overridesExec();
 
           // display the gpt ad
           ad.render();
