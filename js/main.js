@@ -5,7 +5,13 @@
 // "siteScript" is defined in the site specific build file (eg: build/slate.js)
 require(['gpt', 'siteScript', 'utils/getScript'], function (googletag, wpAd, getScript){
 
-  var queue = placeAd2.queue || false;
+  var queue = placeAd2.queue || [];
+
+  //make sure these are defined:
+  wpAd.adsOnPage = wpAd.adsOnPage || {};
+  wpAd.adsDisabledOnPage = wpAd.adsDisabledOnPage || {};
+  wpAd.debugQueue = wpAd.debugQueue || [];
+  wpAd.init = wpAd.init || {};
 
   if(wpAd.flags.debug){
     getScript('js/debug.js');
@@ -50,13 +56,6 @@ require(['gpt', 'siteScript', 'utils/getScript'], function (googletag, wpAd, get
             hardcode: wpAd.flights[pos] && wpAd.flights[pos].hardcode || false,
             onTheFly: onTheFly
           });
-
-          // overrides (the new hackbin)
-          //if(wpAd.overrides){
-          //  ad = wpAd.overrides.exec(ad);
-          //}
-
-          //ad.overridesExec();
 
           // display the gpt ad
           ad.render();

@@ -70,7 +70,7 @@ define([
 
     //Initial GPT setup
     gptConfig: gptConfig.init({
-      sra: true,
+      sra: false,
       keyvaluesConfig: kvs
     }),
 

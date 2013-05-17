@@ -99,10 +99,12 @@ define([
       return this.keyvalues;
     },
 
+    // Use this to add functions to keyvaluesConfig (BEFORE keyvalues are generated via keyvaluesConfig functions)
     addKeyvaluesConfig: function(obj){
       merge(this.keyvaluesConfig, obj);
     },
 
+    // Use this to add keyvalue pairs AFTER keyvaluesConfig functions have executed
     addKeyvalues: function(obj){
       merge(this.keyvalues, obj);
     },

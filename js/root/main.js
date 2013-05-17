@@ -59,7 +59,7 @@
     });
 
     //add page specific keyvalues
-    merge(gptConfig.keyvaluesConfig, kvs);
+    //merge(gptConfig.keyvaluesConfig, kvs);
 
     //Custom flight templates that require additional conditionals
     config.flights = extend({
@@ -85,7 +85,8 @@
 
       //Initial GPT setup
       gptConfig: gptConfig.init({
-        sra: true
+        sra: false,
+        keyvaluesConfig: kvs
       }),
 
       flags: flags,
