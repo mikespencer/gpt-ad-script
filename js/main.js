@@ -19,7 +19,9 @@ require(['gpt', 'siteScript', 'utils/getScript'], function (googletag, wpAd, get
   }
 
   // add to placeAd2 queue
-  placeAd2(commercialNode, 'interstitial', false, '');
+  //placeAd2(commercialNode, 'interstitial', false, '');
+
+  queue.push([commercialNode, 'interstitial', false, '']);
 
   googletag.cmd.push(function(){
 

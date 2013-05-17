@@ -3,15 +3,16 @@
  */
 var wpAd, placeAd2, googletag = googletag || { cmd: [] };
 
-(function(w, d){
+(function(w, d, $){
   'use strict';
+
+  $ = $ || w.$ || undefined;
+
+  var baseURL = 'js/min/';
 
   if(/no_ads/.test(location.search)){
     return false;
   }
-
-  var $ = w.jQuery || w.$ || undefined,
-      baseURL = 'js/min/';
 
   function getSiteScript(){
     var siteScripts = {
@@ -26,17 +27,22 @@ var wpAd, placeAd2, googletag = googletag || { cmd: [] };
   }
 
   function displayAds($){
-    if(!$ && w.console){
+    if($){
+      //$(function(){
+        $('div[id^="slug_"][data-ad-type]').hide().each(function(){
+          var $this = $(this),
+              where = $this.data('adWhere') || w.commercialNode,
+              what = $this.data('adType'),
+              del = $this.data('adDelivery') || false,
+              otf = $this.data('adOnTheFly') || '';
+          if(what){
+            placeAd2(where, what, del, otf);
+          }
+        });
+     // });
+    } else if(w.console){
       try{console.log('jQuery undefined');}catch(e){}
     }
-    $('div[id^="slug_"][data-ad-type]').hide().each(function(){
-      var $this = $(this),
-          where = $this.data('adWhere') || commercialNode,
-          what = $this.data('adType'),
-          del = $this.data('adDelivery') || false,
-          otf = $this.data('adOnTheFly') || '';
-      placeAd2(where, what, del, otf);
-    });
   }
 
   function loadScript(src, opt_callback) {
@@ -62,9 +68,10 @@ var wpAd, placeAd2, googletag = googletag || { cmd: [] };
 
   // Initially, use placeAd2 to store each ad spots data until all dependencies have been loaded and
   // placeAd2 is redefined to actually render each ad.
-  w.placeAd2 = function(){
+  placeAd2 = function(){
     placeAd2.queue = placeAd2.queue || [];
-    placeAd2.queue.push(arguments);
+    //convert args to an Array and add to queue:
+    placeAd2.queue.push(Array.prototype.slice.call(arguments));
   };
 
   // get site specific ad script
@@ -82,4 +89,4 @@ var wpAd, placeAd2, googletag = googletag || { cmd: [] };
     });
   }
 
-})(window, document);
+})(window, document, window.jQuery);
