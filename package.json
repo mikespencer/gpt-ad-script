@@ -1,0 +1,7 @@
+{
+  "name": "gpt-ad-scripts",
+  "preferGlobal": false,
+  "dependencies": {
+    "requirejs": "*"
+  }
+}

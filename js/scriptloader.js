@@ -4,6 +4,7 @@
 var wpAd, placeAd2, googletag = googletag || { cmd: [] };
 
 (function(w, d, $){
+
   'use strict';
 
   $ = $ || w.$ || undefined;
@@ -27,27 +28,27 @@ var wpAd, placeAd2, googletag = googletag || { cmd: [] };
   }
 
   function displayAds($){
-    if($){
+    if ($) {
       //$(function(){
-        $('div[id^="slug_"][data-ad-type]').hide().each(function(){
-          var $this = $(this),
-              where = $this.data('adWhere') || w.commercialNode,
-              what = $this.data('adType'),
-              del = $this.data('adDelivery') || false,
-              otf = $this.data('adOnTheFly') || '';
-          if(what){
-            placeAd2(where, what, del, otf);
-          }
-        });
-     // });
-    } else if(w.console){
+      $('div[id^="slug_"][data-ad-type]').hide().each(function () {
+        var $this = $(this);
+        var where = $this.data('adWhere') || w.commercialNode;
+        var what = $this.data('adType');
+        var del = $this.data('adDelivery') || false;
+        var otf = $this.data('adOnTheFly') || '';
+        if (what) {
+          placeAd2(where, what, del, otf);
+        }
+      });
+      // });
+    } else if (w.console) {
       try{console.log('jQuery undefined');}catch(e){}
     }
   }
 
   function loadScript(src, opt_callback) {
-    var s = d.createElement('script'),
-      target = d.body || d.getElementsByTagName('head')[0] || false;
+    var s = d.createElement('script');
+    var target = d.body || d.getElementsByTagName('head')[0] || false;
     opt_callback = opt_callback || false;
     if(target){
       s.type = 'text/' + (src.type || 'javascript');
@@ -68,7 +69,7 @@ var wpAd, placeAd2, googletag = googletag || { cmd: [] };
 
   // Initially, use placeAd2 to store each ad spots data until all dependencies have been loaded and
   // placeAd2 is redefined to actually render each ad.
-  placeAd2 = function(){
+  placeAd2 = function () {
     placeAd2.queue = placeAd2.queue || [];
     //convert args to an Array and add to queue:
     placeAd2.queue.push(Array.prototype.slice.call(arguments));
@@ -81,9 +82,9 @@ var wpAd, placeAd2, googletag = googletag || { cmd: [] };
   //loadScript('http://www.googletagservices.com/tag/js/gpt.js');
 
   // make sure jQuery is defined, then display ads
-  if($){
+  if ($) {
     displayAds($);
-  } else{
+  } else {
     loadScript('http://js.washingtonpost.com/wpost/js/combo/?token=201210102320000&c=true&m=true&context=eidos&r=/jquery-1.7.1.js', function(){
       displayAds(w.jQuery);
     });

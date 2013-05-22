@@ -11,18 +11,18 @@ define(function(){
       str = null,
       offset = 0,
       end = 0;
-    if(cookie.length > 0) {
+    if (cookie.length > 0) {
       offset = cookie.indexOf(search);
-      if(offset !== -1) {
+      if (offset !== -1) {
         offset += search.length;
         end = cookie.indexOf(';', offset);
-        if(end === -1) {
+        if (end === -1) {
           end = cookie.length;
         }
         str = unescape(cookie.substring(offset, end));
       }
     }
-    return(str);
+    return str;
   };
 
 });

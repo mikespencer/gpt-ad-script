@@ -1,0 +1,5 @@
+tricks:
+- watchdog.tricks.ShellCommandTrick:
+    patterns: ['*.js']
+    ignore_patterns: ['*.min.js']
+    shell_command: 'make build_js'
