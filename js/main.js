@@ -3,7 +3,7 @@
 
 // load dependencies:
 // "siteScript" is defined in the site specific build file (eg: build/slate.js)
-require(['gpt', 'siteScript', 'utils/getScript'], function (googletag, wpAd, getScript){
+require(['gpt', 'siteScript', 'utils/isObject', 'utils/getScript'], function (googletag, wpAd, isObject, getScript){
 
   var queue = placeAd2.queue || [];
 
@@ -25,38 +25,45 @@ require(['gpt', 'siteScript', 'utils/getScript'], function (googletag, wpAd, get
 
   googletag.cmd.push(function(){
 
-    placeAd2 = function(where, what, del, onTheFly){
+    placeAd2 = function(){
 
-      var pos = what,
+      var config = arguments.length === 1 && isObject(arguments[0]) ? arguments[0] : {
+          //for backwards compat with legacy inline placeAd2 calls
+          where: arguments[0],
+          what: arguments[1],
+          onTheFly: arguments[3]
+        },
+        pos = config.what,
         posOverride = false,
         posArray,
         ad;
 
       // determine pos value and potential posOverride
-      if(/\|/.test(what)){
-        posArray = what.split(/\|/);
-        what = posArray[0];
+      if(/\|/.test(config.what)){
+        posArray = config.what.split(/\|/);
+        config.what = posArray[0];
         posOverride = posArray[1];
         pos = posArray.join('_');
       }
 
       // if the ad type is legit, open and hasn't already been built/rendered on the page
-      if(wpAd.config.adTypes[what] &&
-         ((wpAd.flights && wpAd.flights[pos] || wpAd.flights[what + '*']) || wpAd.flags.allAds)){
+      if(wpAd.config.adTypes[config.what] &&
+         ((wpAd.flights && wpAd.flights[pos] || wpAd.flights[config.what + '*']) || wpAd.flags.allAds)){
 
         if(!wpAd.adsOnPage[pos]){
 
           // build and store our new ad
           ad = new wpAd.Ad({
-            templateSettings: wpAd.config.adTypes[what],
+            templateSettings: wpAd.config.adTypes[config.what],
             dfpSite: wpAd.constants.dfpSite,
-            where: window.commercialNode,
-            size: wpAd.config.adTypes[what].size,
-            what: what,
+            //where: window.commercialNode,
+            where: config.where,
+            size: wpAd.config.adTypes[config.what].size,
+            what: config.what,
             pos: pos,
             posOverride: posOverride,
             hardcode: wpAd.flights[pos] && wpAd.flights[pos].hardcode || false,
-            onTheFly: onTheFly
+            onTheFly: config.onTheFly
           });
 
           // display the gpt ad
@@ -65,7 +72,7 @@ require(['gpt', 'siteScript', 'utils/getScript'], function (googletag, wpAd, get
           // store for debugging
           wpAd.adsOnPage[pos] = ad;
 
-        } else{
+        } else {
           // refresh if ad/spot already rendered
           wpAd.adsOnPage[pos].refresh();
         }
