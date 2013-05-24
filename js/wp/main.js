@@ -35,7 +35,7 @@ define([
 
   //build commercialNode
   commercialNode = zoneBuilder.exec();
-
+  console.log(commercialNode);
   //extend or add keyvalues at the ad level
   //each key can accept a function, or an array of functions
   merge(Ad.prototype.keyvaluesConfig, {

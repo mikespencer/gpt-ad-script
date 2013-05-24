@@ -56,8 +56,8 @@ require(['gpt', 'siteScript', 'utils/isObject', 'utils/getScript'], function (go
           ad = new wpAd.Ad({
             templateSettings: wpAd.config.adTypes[config.what],
             dfpSite: wpAd.constants.dfpSite,
-            //where: window.commercialNode,
-            where: config.where,
+            where: window.commercialNode,
+            //where: config.where,
             size: wpAd.config.adTypes[config.what].size,
             what: config.what,
             pos: pos,
