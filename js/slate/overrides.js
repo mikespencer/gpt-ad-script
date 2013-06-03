@@ -1,7 +1,7 @@
 /**
  * Overrides for standard configuration of ad spots for unique circumstances on slate.com (desktop)
  */
-define(['utils/reload'], function(reload){
+define(['utils'], function(utils){
 
   /**
    * Object of checks for overrides
@@ -10,7 +10,7 @@ define(['utils/reload'], function(reload){
     pos: {
       leaderboard: function(){
         if (this.config.where === "homepage") {
-          this.config.where += '/lb' + (reload ? 'refresh' : '');
+          this.config.where += '/lb' + (utils.flags.reload ? 'refresh' : '');
         }
 
         //add custom keyvalues like this
@@ -21,7 +21,7 @@ define(['utils/reload'], function(reload){
       },
       rightflex: function() {
         if (this.config.where === "homepage") {
-          this.config.where += '/hp' + (reload ? 'refresh' : '');
+          this.config.where += '/hp' + (utils.flags.reload ? 'refresh' : '');
         }
       }
     },

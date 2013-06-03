@@ -1,11 +1,7 @@
-define([
-  'utils/getCookie',
-  'utils/wp_meta_data',
-  'utils/zoneBuilder'
-], function(getCookie, wp_meta_data, zoneBuilder){
+define(['utils','zoneBuilder'], function(utils, zoneBuilder){
 
   return function(){
-    var s_vi = getCookie('s_vi'),
+    var s_vi = utils.getCookie('s_vi'),
       rv = false;
 
     //pass in s_vi cookie value:
@@ -21,8 +17,8 @@ define([
         }
 
         //",,,", then get page type and then need to append ",abc" to the end
-        rv += ',,,' + (wp_meta_data.contentType && zoneBuilder.contentType[wp_meta_data.contentType.toString()] ?
-          zoneBuilder.contentType[wp_meta_data.contentType.toString()] : 'article') + ',abc';
+        rv += ',,,' + (utils.wp_meta_data.contentType && zoneBuilder.contentType[utils.wp_meta_data.contentType.toString()] ?
+          zoneBuilder.contentType[utils.wp_meta_data.contentType.toString()] : 'article') + ',abc';
       }
     }
 

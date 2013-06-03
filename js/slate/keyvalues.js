@@ -2,13 +2,12 @@
 * Extends universal desktop, page level keyvalues with slate desktop specific keyvalues
 */
 define([
-  'utils/merge',
-  'utils/contentTypes',
-  'utils/wp_meta_data',
+  'utils',
+  'zoneBuilder',
   'keyvalues/desktop'
-], function(merge, contentTypes, wp_meta_data, kvs){
+], function(utils, zoneBuilder, kvs){
 
-  return merge(kvs, {
+  return utils.merge(kvs, {
 
     articleId: [
       function() {
@@ -59,8 +58,8 @@ define([
 
     page: [
       function() {
-        if (wp_meta_data.contentType && contentTypes[wp_meta_data.contentType[0]]) {
-          return [contentTypes[wp_meta_data.contentType[0]]];
+        if (utils.wp_meta_data.contentType && zoneBuilder.contentTypes[utils.wp_meta_data.contentType[0]]) {
+          return [zoneBuilder.contentTypes[utils.wp_meta_data.contentType[0]]];
         }
         return commercialNode !== 'homepage' ? ['article'] : ['front'];
       }

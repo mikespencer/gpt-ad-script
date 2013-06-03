@@ -1,18 +1,12 @@
 /**
  * this Initial setup
  */
-define([
-  'utils/extend',
-  'utils/merge',
-  'utils/keyvalueIterator',
-  'utils/setTargeting',
-  'utils/isObject'
-], function(extend, merge, keyvalueIterator, setTargeting, isObject){
+define(['utils'], function(utils){
 
   return {
 
     exec: function(config){
-      this.config = extend({
+      this.config = utils.extend({
         async: true,
         sra: true,
         keyvaluesConfig: false
@@ -20,12 +14,12 @@ define([
 
       this.pubservice = googletag.pubads();
 
-      if(isObject(this.config.keyvaluesConfig)){
-        this.keyvaluesConfig = merge(this.keyvaluesConfig, this.config.keyvaluesConfig);
+      if(utils.isObject(this.config.keyvaluesConfig)){
+        this.keyvaluesConfig = utils.merge(this.keyvaluesConfig, this.config.keyvaluesConfig);
       }
 
-      this.keyvalues = keyvalueIterator(this.keyvaluesConfig, this);
-      setTargeting(this.keyvalues, this.pubservice);
+      this.keyvalues = utils.keyvalueIterator(this.keyvaluesConfig, this);
+      utils.setTargeting(this.keyvalues, this.pubservice);
 
       if(this.config.sra){
         this.pubservice.enableSingleRequest();

@@ -3,7 +3,7 @@
 
 // load dependencies:
 // "siteScript" is defined in the site specific build file (eg: build/slate.js)
-require(['gpt', 'siteScript', 'utils/isObject', 'utils/getScript'], function (googletag, wpAd, isObject, getScript){
+require(['gpt', 'siteScript', 'utils'], function (googletag, wpAd, utils){
 
   var queue = placeAd2.queue || [];
 
@@ -14,7 +14,7 @@ require(['gpt', 'siteScript', 'utils/isObject', 'utils/getScript'], function (go
   wpAd.init = wpAd.init || {};
 
   if(wpAd.flags.debug){
-    getScript('js/debug.js');
+    utils.getScript('js/debug.js');
     try{console.log('placeAd2 queue:', queue);}catch(e){}
   }
 
@@ -27,7 +27,7 @@ require(['gpt', 'siteScript', 'utils/isObject', 'utils/getScript'], function (go
 
     placeAd2 = function(){
 
-      var config = arguments.length === 1 && isObject(arguments[0]) ? arguments[0] : {
+      var config = arguments.length === 1 && utils.isObject(arguments[0]) ? arguments[0] : {
           //for backwards compat with legacy inline placeAd2 calls
           where: arguments[0],
           what: arguments[1],

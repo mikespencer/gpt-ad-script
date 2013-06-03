@@ -1,14 +1,11 @@
-define([
-  'utils/setCookie',
-  'utils/getCookie'
-], function(setCookie, getCookie){
+define(['utils'], function(utils){
 
   return function(){
     var name = window.location.hostname + '_poe';
-    if(getCookie(name)){
+    if(utils.getCookie(name)){
       return ['no'];
     } else {
-      setCookie(name, 'true', '', '/', '','');
+      utils.setCookie(name, 'true', '', '/', '','');
       return ['yes'];
     }
   };

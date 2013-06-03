@@ -5,19 +5,17 @@ define([
   'defaultSettings',
   'Ad',
   'gptConfig',
+  'utils',
   'wp_mobile/config',
-  'wp_mobile/keyvalues',
-  'utils/extend',
-  'utils/merge',
-  'utils/flags'
-], function(defaultSettings, Ad, gptConfig, config, kvs, extend, merge, flags){
+  'wp_mobile/keyvalues'
+], function(defaultSettings, Ad, gptConfig, utils, config, kvs){
 
   //add mobile specific, ad level keyvalues
   /*merge(Ad.prototype.keyvaluesConfig, {
 
   });*/
 
-  return extend(defaultSettings, {
+  return utils.extend(defaultSettings, {
 
     //set network id
     constants: {
@@ -34,7 +32,7 @@ define([
       keyvaluesConfig: kvs
     }),
 
-    flags: flags,
+    flags: utils.flags,
 
     config: config,
 

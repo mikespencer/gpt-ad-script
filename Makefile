@@ -16,7 +16,7 @@ install: $(VIRTUALENV_LOC)
 watch:
 	$(ACTIVATE); watchmedo tricks tricks.yml
 
-build_js: wp.min.js slate.min.js
+build_js: wp.min.js slate.min.js wp_mobile.min.js
 
 %.min.js: js/%/main.js
 	$(R_JS) -o build/$(basename $(basename $@)).js out=js/min/$@

@@ -1,7 +1,7 @@
-define(['utils/getCookie'], function(getCookie){
+define(['utils'], function(utils){
 
   return function(){
-    var cookie = getCookie('rsi_segs'),
+    var cookie = utils.getCookie('rsi_segs'),
       rv = [],
       i, l;
     if(cookie){

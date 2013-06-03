@@ -15,10 +15,10 @@ var wpAd, placeAd2, googletag = googletag || { cmd: [] };
 
   function getSiteScript(){
     var siteScripts = {
-      'wp': 'wp.js',
-      'theroot': 'root.js',
-      'slate': 'slate.js',
-      'wp_mobile': 'mobile.js'
+      'wp': 'wp.min.js',
+      'theroot': 'root.min.js',
+      'slate': 'slate.min.js',
+      'wp_mobile': 'wp_mobile.min.js'
     },
     script = d.getElementById('adscriptloader'),
     site = script && script.getAttribute('data-ad-site');

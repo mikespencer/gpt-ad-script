@@ -1,7 +1,7 @@
 /**
  * Overrides for standard configuration of ad spots for unique circumstances on washingtonpost.com (desktop)
  */
-define(['utils/reload', 'utils/merge'], function(reload, merge) {
+define(['utils'], function(utils) {
 
   /**
    * Object of checks for overrides
@@ -18,7 +18,7 @@ define(['utils/reload', 'utils/merge'], function(reload, merge) {
       leaderboard: function() {
         if (this.config.where === 'washingtonpost.com') {
           this.config.where += '/lb';
-          if(reload){
+          if(utils.flags.reload){
             this.config.where += 'refresh';
           }
         }
@@ -33,7 +33,7 @@ define(['utils/reload', 'utils/merge'], function(reload, merge) {
       flex_bb_hp: function() {
         if(this.config.where === 'washingtonpost.com'){
           this.config.where += '/hpflex';
-          if(reload){
+          if(utils.flags.reload){
             this.config.where += 'refresh';
           }
         } else if (this.config.where === 'lifestyle/home' ||

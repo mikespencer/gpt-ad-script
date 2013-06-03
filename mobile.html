@@ -6,9 +6,6 @@
       var commercialNode = 'politics';
     </script>
 
-    <script src="js/scriptloader.js"></script>
-    <script src="js/lib/require.js" data-main="js/main"></script>
-
     <!--script src="js/lib/require.js" data-main="js/main" id="adscriptloader" data-ad-site="wp_mobile"></script-->
     <script>
       var wp_meta_data = {
@@ -19,11 +16,9 @@
   </head>
   <body>
 
-    <div id="slug_t" style="display:none;">
-      <script>
-        placeAd2(commercialNode, 't', false, '');
-      </script>
-    </div>
+    <div id="slug_t" data-ad-type="t"></div>
+
+    <script src="js/scriptloader.js" id="adscriptloader" data-ad-site="wp_mobile" async></script>
 
   </body>
 </html>

@@ -1,14 +1,14 @@
-define(['utils/wp_meta_data'], function(wp_meta_data){
+define(['utils'], function(utils){
 
   return function(){
-    if(!wp_meta_data.page_id){
+    if(!utils.wp_meta_data.page_id){
       return false;
     }
-    var l = wp_meta_data.page_id.length;
+    var l = utils.wp_meta_data.page_id.length;
     while(l--){
-      wp_meta_data.page_id[l] = wp_meta_data.page_id[l].replace(/\./g, '_');
+      utils.wp_meta_data.page_id[l] = utils.wp_meta_data.page_id[l].replace(/\./g, '_');
     }
-    return wp_meta_data.page_id;
+    return utils.wp_meta_data.page_id;
   };
 
 });

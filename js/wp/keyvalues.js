@@ -1,16 +1,9 @@
 /**
  * Extends universal desktop, page level keyvalues with wp desktop specific keyvalues
  */
-define([
-  'utils/merge',
-  'keyvalues/desktop',
-  'utils/wp_meta_data',
-  'utils/wordMatch',
-  'utils/keywords',
-  'utils/getCookie'
-], function(merge, kvs, wp_meta_data, wordMatch, keywords, getCookie){
+define(['keyvalues/desktop', 'utils'], function(kvs, utils){
 
-  return merge(kvs, {
+  return utils.merge(kvs, {
 
     '!c': [
       function(){
@@ -22,7 +15,7 @@ define([
     articleId: [
       function(){
         var id = [], a;
-        if(wp_meta_data.contentType && wp_meta_data.contentType[0] === "CompoundStory") {
+        if(utils.wp_meta_data.contentType && utils.wp_meta_data.contentType[0] === "CompoundStory") {
           a = location.href.split("/");
           id = [a[a.length - 1].toLowerCase().split("_story")[0]];
         }
@@ -41,7 +34,7 @@ define([
           key;
 
         for(key in categories) {
-          if(categories.hasOwnProperty(key) && wordMatch(categories[key], keywords)) {
+          if(categories.hasOwnProperty(key) && utils.wordMatch(categories[key], utils.keywords)) {
             rv.push(key);
           }
         }
@@ -51,7 +44,7 @@ define([
 
     WPATC: [
       function(){
-        var cookie = getCookie('WPATC'),
+        var cookie = utils.getCookie('WPATC'),
           rv = {},
           l, a, key;
 

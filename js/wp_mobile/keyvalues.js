@@ -2,11 +2,11 @@
  * Extends Universal, page level keyvalues with wp mobile specific keyvalues
  */
 define([
-  'utils/merge',
+  'utils',
   'keyvalues/mobile'
-], function(merge, kvs){
+], function(utils, kvs){
 
-  return merge(kvs, {
+  return utils.merge(kvs, {
     forecast: function(){
       return ['1'];
     },

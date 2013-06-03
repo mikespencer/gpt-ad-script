@@ -1,7 +1,7 @@
-define(['utils/flags'], function(flags){
+define(['utils'], function(utils){
 
   return function(){
-    return flags.front ? ['y'] : ['n'];
+    return utils.flags.front ? ['y'] : ['n'];
   };
 
 });

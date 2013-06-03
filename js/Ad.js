@@ -3,16 +3,10 @@
 /**
  * wpAd Ad object. Builds an individual ad
  */
-define([
-  'utils/extend',
-  'utils/merge',
-  'utils/isArray',
-  'utils/keyvalueIterator',
-  'utils/setTargeting'
-], function(extend, merge, isArray, keyvalueIterator, setTargeting){
+define(['utils'], function(utils){
 
   function Ad(config){
-    this.config = extend({
+    this.config = utils.extend({
       'dfpSite': '/701/wpni.',
       'where': undefined,
       'size': null,
@@ -92,7 +86,7 @@ define([
     },
 
     buildKeyvalues: function(){
-      return keyvalueIterator(this.keyvaluesConfig, this);
+      return utils.keyvalueIterator(this.keyvaluesConfig, this);
     },
 
     getKeyvalues: function(){
@@ -101,12 +95,12 @@ define([
 
     // Use this to add functions to keyvaluesConfig (BEFORE keyvalues are generated via keyvaluesConfig functions)
     addKeyvaluesConfig: function(obj){
-      merge(this.keyvaluesConfig, obj);
+      utils.merge(this.keyvaluesConfig, obj);
     },
 
     // Use this to add keyvalue pairs AFTER keyvaluesConfig functions have executed
     addKeyvalues: function(obj){
-      merge(this.keyvalues, obj);
+      utils.merge(this.keyvalues, obj);
     },
 
     hardcode: function(){
@@ -150,7 +144,7 @@ define([
           if(!this.config.hardcode){
             this.overridesExec();
             this.slot = this.buildGPTSlot();
-            setTargeting(this.keyvalues, this.slot);
+            utils.setTargeting(this.keyvalues, this.slot);
             googletag.display(this.container.id);
           } else {
             this.container.innerHTML = this.config.hardcode;

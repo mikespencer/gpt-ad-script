@@ -1,7 +1,7 @@
-define(['utils/urlCheck'], function(urlCheck){
+define(['utils'], function(utils){
 
   return function(){
-    var param = urlCheck('test_ads', { type: 'variable' });
+    var param = utils.urlCheck('test_ads', { type: 'variable' });
     return param ? ['test_' + param] : false;
   };
 

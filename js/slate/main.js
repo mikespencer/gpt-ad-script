@@ -6,11 +6,8 @@ define([
   'defaultSettings',
   'Ad',
   'gptConfig',
-  'utils/templateBuilder',
-  'utils/extend',
-  'utils/merge',
-  'utils/showInterstitial',
-  'utils/flags',
+  'utils',
+  'templateBuilder',
   'slate/config',
   'slate/keyvalues',
   'slate/overrides',
@@ -21,11 +18,8 @@ define([
   defaultSettings,
   Ad,
   gptConfig,
+  utils,
   templateBuilder,
-  extend,
-  merge,
-  showInterstitial,
-  flags,
   config,
   kvs,
   overrides,
@@ -35,7 +29,7 @@ define([
 
   //extend or add keyvalues at the ad level
   //each key can accept a function, or an array of functions
-  merge(Ad.prototype.keyvaluesConfig, {
+  utils.merge(Ad.prototype.keyvaluesConfig, {
     ad: function(){
       if(config.adTypes[this.config.what].keyvalues && config.adTypes[this.config.what].keyvalues.ad){
         return config.adTypes[this.config.what].keyvalues.ad;
@@ -44,21 +38,21 @@ define([
   });
 
   //Custom flight templates that require additional conditionals
-  config.flights = extend({
+  config.flights = utils.extend({
     interstitial: {
       what: ['interstitial'],
-      test: [showInterstitial && !flags.front]
+      test: [utils.showInterstitial && !utils.flags.front]
     }
   }, config.flights);
 
   //overrides config
-  extend(Ad.prototype.overrides, overrides);
+  utils.extend(Ad.prototype.overrides, overrides);
 
   //ad refresh on gallery pages
   window.wpniAds = window.wpniAds || {};
   window.wpniAds.gallery = galleryRefresh;
 
-  return extend(defaultSettings, {
+  return utils.extend(defaultSettings, {
 
     constants: {
       dfpSite: '/701/slate.',
@@ -74,7 +68,7 @@ define([
       keyvaluesConfig: kvs
     }),
 
-    flags: flags,
+    flags: utils.flags,
 
     config: config,
 
