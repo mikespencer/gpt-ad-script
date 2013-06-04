@@ -18,10 +18,10 @@ require(['gpt', 'siteScript', 'utils'], function (googletag, wpAd, utils){
     try{console.log('placeAd2 queue:', queue);}catch(e){}
   }
 
-  // add to placeAd2 queue
-  //placeAd2(commercialNode, 'interstitial', false, '');
-
-  queue.push([commercialNode, 'interstitial', false, '']);
+  //Insert interstitial at the beginnig of the queue
+  queue.unshift([{
+    what: 'interstitial'
+  }]);
 
   googletag.cmd.push(function(){
 
