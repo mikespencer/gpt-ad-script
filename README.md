@@ -1,5 +1,3 @@
-May be worth looking into combining utils/extend and utils/merge
-
 To run optimizer:
 
     node build/r.js -o build/slate.js
@@ -8,4 +6,6 @@ To run optimizer:
 
 To setup dependencies, use `make install`.
 
-To build scripts, use `build_js`.
+To build scripts, use `make build_js`.
+
+To update GPT, use `make gpt`.
