@@ -4,7 +4,7 @@
 define([
   'modules/defaultSettings',
   'modules/Ad',
-  'modules/gptConfig',
+  'modules/GPTConfig',
   'modules/utils',
   'modules/wp_mobile/config',
   'modules/wp_mobile/keyvalues'

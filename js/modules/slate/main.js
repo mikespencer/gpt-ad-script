@@ -5,7 +5,7 @@ define([
 
   'modules/defaultSettings',
   'modules/Ad',
-  'modules/gptConfig',
+  'modules/GPTConfig',
   'modules/utils',
   'modules/templateBuilder',
   'modules/slate/config',

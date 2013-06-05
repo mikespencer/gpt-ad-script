@@ -29,7 +29,7 @@ gpt:
 	curl --silent --create-dirs -o $(GPT_LOCAL) $(GPT_URL)
 
 %.min.js: js/modules/%/main.js
-	$(R_JS) -o build/$(basename $(basename $@)).js out=js/min/$@
+	$(R_JS) -o build/$(basename $(basename $@)).js
 
 $(VIRTUALENV_LOC):
 	$(VIRTUALENV) $(VIRTUALENV_LOC) --no-site-packages

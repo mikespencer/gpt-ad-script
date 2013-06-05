@@ -2,14 +2,12 @@
 
   baseUrl: "../js/",
 
-  mainConfigFile: '../js/modules/main.js',
-
   name: 'lib/almond',
 
   include: ['modules/main'],
 
   //define mobile specific script output
-  out: '../js/min/wp_mobile.js',
+  out: '../js/min/wp_mobile.min.js',
 
   preserveLicenseComments: false,
 
