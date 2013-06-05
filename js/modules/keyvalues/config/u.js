@@ -1,4 +1,4 @@
-define(['modules/utils','modules/zoneBuilder'], function(utils, zoneBuilder){
+define(['utils','zoneBuilder'], function(utils, zoneBuilder){
 
   return function(){
     var s_vi = utils.getCookie('s_vi'),

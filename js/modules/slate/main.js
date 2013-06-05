@@ -3,15 +3,15 @@
  */
 define([
 
-  'modules/defaultSettings',
-  'modules/Ad',
-  'modules/GPTConfig',
-  'modules/utils',
-  'modules/templateBuilder',
-  'modules/slate/config',
-  'modules/slate/keyvalues',
-  'modules/slate/overrides',
-  'modules/slate/galleryRefresh'
+  'defaultSettings',
+  'Ad',
+  'GPTConfig',
+  'utils',
+  'templateBuilder',
+  'slate/config',
+  'slate/keyvalues',
+  'slate/overrides',
+  'slate/galleryRefresh'
 
 ], function(
 

@@ -1,4 +1,4 @@
-define(['modules/utils'], function(utils){
+define(['utils'], function(utils){
 
   return function(){
     if(!utils.wp_meta_data.page_id){

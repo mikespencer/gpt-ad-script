@@ -1,7 +1,7 @@
 /**
  * Dynamically extends commercialNode
  */
-define(['modules/utils'], function(utils){
+define(['utils'], function(utils){
 
   commercialNode = window.commercialNode || 'politics';
 

@@ -1,7 +1,7 @@
 /**
  * Overrides for standard configuration of ad spots for unique circumstances on slate.com (desktop)
  */
-define(['modules/utils'], function(utils){
+define(['utils'], function(utils){
 
   /**
    * Object of checks for overrides

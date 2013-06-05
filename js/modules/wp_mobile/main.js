@@ -2,12 +2,12 @@
  * WP mobile web specific ad script
  */
 define([
-  'modules/defaultSettings',
-  'modules/Ad',
-  'modules/GPTConfig',
-  'modules/utils',
-  'modules/wp_mobile/config',
-  'modules/wp_mobile/keyvalues'
+  'defaultSettings',
+  'Ad',
+  'GPTConfig',
+  'utils',
+  'wp_mobile/config',
+  'wp_mobile/keyvalues'
 ], function(defaultSettings, Ad, gptConfig, utils, config, kvs){
 
   //add mobile specific, ad level keyvalues

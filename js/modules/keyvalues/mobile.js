@@ -1,6 +1,6 @@
 define([
-  'modules/keyvalues/config/kw',
-  'modules/keyvalues/config/poe'
+  'keyvalues/config/kw',
+  'keyvalues/config/poe'
 ], function(kw, poe){
 
   /**

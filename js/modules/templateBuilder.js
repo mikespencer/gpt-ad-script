@@ -1,7 +1,7 @@
 /**
  * Checks and builds an ad template of open spots on the current page
  */
-define(['modules/utils'], function(utils){
+define(['utils'], function(utils){
 
   return {
 

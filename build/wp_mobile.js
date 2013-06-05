@@ -1,12 +1,12 @@
 ({
 
-  baseUrl: "../js/",
+  baseUrl: "../js/modules",
 
-  name: 'lib/almond',
+  name: '../lib/almond',
 
-  include: ['modules/main'],
+  include: ['main'],
 
-  //define mobile specific script output
+  //define wp specific script output
   out: '../js/min/wp_mobile.min.js',
 
   preserveLicenseComments: false,
@@ -17,21 +17,15 @@
   wrap: true,
 
   paths: {
-    'jquery': 'lib/jquery',
-    'jqueryUI': 'lib/jquery-ui.min',
-    'gpt': 'lib/gpt',
+    'gpt': '../lib/gpt',
 
     //define wp site specific script here:
-    'siteScript': 'modules/wp_mobile/main'
+    'siteScript': 'wp_mobile/main'
   },
 
   shim: {
     'gpt': {
       exports: 'googletag'
-    },
-    'jqueryUI':{
-      deps: ['jquery'],
-      exports: '$'
     }
   }
 

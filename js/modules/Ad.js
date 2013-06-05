@@ -3,7 +3,7 @@
 /**
  * wpAd Ad object. Builds an individual ad
  */
-define(['modules/utils'], function(utils){
+define(['utils'], function(utils){
 
   function Ad(config){
     this.config = utils.extend({

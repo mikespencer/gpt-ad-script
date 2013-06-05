@@ -1,7 +1,7 @@
 /**
  * Extends universal desktop, page level keyvalues with wp desktop specific keyvalues
  */
-define(['modules/keyvalues/desktop', 'modules/utils'], function(kvs, utils){
+define(['keyvalues/desktop', 'utils'], function(kvs, utils){
 
   return utils.merge(kvs, {
 

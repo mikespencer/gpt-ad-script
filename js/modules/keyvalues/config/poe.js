@@ -1,4 +1,4 @@
-define(['modules/utils'], function(utils){
+define(['utils'], function(utils){
 
   return function(){
     var name = window.location.hostname + '_poe';

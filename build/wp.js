@@ -1,10 +1,10 @@
 ({
 
-  baseUrl: "../js/",
+  baseUrl: "../js/modules",
 
-  name: 'lib/almond',
+  name: '../lib/almond',
 
-  include: ['modules/main'],
+  include: ['main'],
 
   //define wp specific script output
   out: '../js/min/wp.min.js',
@@ -17,21 +17,15 @@
   wrap: true,
 
   paths: {
-    'jquery': 'lib/jquery',
-    'jqueryUI': 'lib/jquery-ui.min',
-    'gpt': 'lib/gpt',
+    'gpt': '../lib/gpt',
 
     //define wp site specific script here:
-    'siteScript': 'modules/wp/main'
+    'siteScript': 'wp/main'
   },
 
   shim: {
     'gpt': {
       exports: 'googletag'
-    },
-    'jqueryUI':{
-      deps: ['jquery'],
-      exports: '$'
     }
   }
 

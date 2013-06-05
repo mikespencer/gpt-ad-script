@@ -1,4 +1,4 @@
-define(['modules/utils'], function(utils){
+define(['utils'], function(utils){
 
   return function(){
     var cookie = utils.getCookie('rsi_segs'),

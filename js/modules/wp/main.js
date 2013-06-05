@@ -3,15 +3,15 @@
  */
 define([
 
-  'modules/defaultSettings',
-  'modules/Ad',
-  'modules/GPTConfig',
-  'modules/utils',
-  'modules/zoneBuilder',
-  'modules/templateBuilder',
-  'modules/wp/config',
-  'modules/wp/keyvalues',
-  'modules/wp/overrides'
+  'defaultSettings',
+  'Ad',
+  'GPTConfig',
+  'utils',
+  'zoneBuilder',
+  'templateBuilder',
+  'wp/config',
+  'wp/keyvalues',
+  'wp/overrides'
 
 ], function(
 

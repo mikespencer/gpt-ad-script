@@ -3,7 +3,7 @@
 
 // load dependencies:
 // "siteScript" is defined in the site specific build file (eg: build/slate.js)
-require(['gpt', 'siteScript', 'modules/utils', 'modules/jquery'], function (gpt, wpAd, utils, $){
+require(['gpt', 'siteScript', 'utils', 'jquery'], function (gpt, wpAd, utils, $){
 
   var queue = placeAd2.queue || [];
 

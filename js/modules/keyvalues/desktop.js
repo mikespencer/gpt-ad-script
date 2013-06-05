@@ -1,12 +1,12 @@
 define([
-  'modules/keyvalues/config/exclusions',
-  'modules/keyvalues/config/front',
-  'modules/keyvalues/config/kw',
-  'modules/keyvalues/config/pageId',
-  'modules/keyvalues/config/poe',
-  'modules/keyvalues/config/ref',
-  'modules/keyvalues/config/rs',
-  'modules/keyvalues/config/u'
+  'keyvalues/config/exclusions',
+  'keyvalues/config/front',
+  'keyvalues/config/kw',
+  'keyvalues/config/pageId',
+  'keyvalues/config/poe',
+  'keyvalues/config/ref',
+  'keyvalues/config/rs',
+  'keyvalues/config/u'
 ], function(exclusions, front, kw, pageId, poe, ref, rs, u){
 
   /**

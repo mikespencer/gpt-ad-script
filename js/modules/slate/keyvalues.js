@@ -2,8 +2,8 @@
 * Extends universal desktop, page level keyvalues with slate desktop specific keyvalues
 */
 define([
-  'modules/utils',
-  'modules/keyvalues/desktop'
+  'utils',
+  'keyvalues/desktop'
 ], function(utils, kvs){
 
   return utils.merge(kvs, {
