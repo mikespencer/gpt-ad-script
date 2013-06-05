@@ -1,7 +1,9 @@
 {
   "name": "gpt-ad-scripts",
+  "version": "2.0.0",
   "preferGlobal": false,
   "dependencies": {
-    "requirejs": "*"
+    "requirejs": "*",
+    "uglify-js": "*"
   }
 }
