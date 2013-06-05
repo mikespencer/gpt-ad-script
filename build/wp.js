@@ -7,7 +7,7 @@
   include: ['modules/main'],
 
   //define wp specific script output
-  out: '../js/min/wp.js',
+  out: '../js/min/wp.min.js',
 
   preserveLicenseComments: false,
 

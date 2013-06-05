@@ -7,7 +7,7 @@
   include: ['modules/main'],
 
   //define mobile specific script output
-  out: '../js/min/wp_mobile.js',
+  out: '../js/min/wp_mobile.min.js',
 
   preserveLicenseComments: false,
 
