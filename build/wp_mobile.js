@@ -2,8 +2,6 @@
 
   baseUrl: "../js/",
 
-  mainConfigFile: '../js/modules/main.js',
-
   name: 'lib/almond',
 
   include: ['modules/main'],

@@ -3,7 +3,7 @@
 
 // load dependencies:
 // "siteScript" is defined in the site specific build file (eg: build/slate.js)
-require(['gpt', 'siteScript', 'modules/utils'], function (gpt, wpAd, utils){
+require(['gpt', 'siteScript', 'modules/utils', 'modules/jquery'], function (gpt, wpAd, utils, $){
 
   var queue = placeAd2.queue || [];
 
@@ -14,11 +14,18 @@ require(['gpt', 'siteScript', 'modules/utils'], function (gpt, wpAd, utils){
   wpAd.init = wpAd.init || {};
 
   if(wpAd.flags.debug){
-    utils.getScript('js/debug.js');
+    //utils.getScript('js/debug.js');
+    $.ajax({
+      url: 'js/debug.js',
+      cache: true,
+      dataType: 'script',
+      crossDomain: true,
+      timeout: 2000
+    });
     try{console.log('placeAd2 queue:', queue);}catch(e){}
   }
 
-  //Insert interstitial at the beginnig of the queue
+  //Insert interstitial at the beginning of placeAd2.queue
   queue.unshift([{
     what: 'interstitial'
   }]);

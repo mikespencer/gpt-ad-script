@@ -2,20 +2,31 @@
  * Debug info for adops
  * For now this will do for basic dubug functionality
  */
-(function(w, d){
+(function(w, d, $){
 
   'use strict';
 
-  var jq = 'http://js.washingtonpost.com/wpost/js/combo/?token=20121010232000&c=true&m=true&context=eidos&r=/jquery-1.7.1.js',
-    jqui = 'js/lib/jquery-ui.min.js';
-
-  if(!w.jQuery){
-    getScript(jq, function(){
-      getScript(jqui, init);
-    });
-  } else{
-    getScript(jqui, init);
+  if(!$){
+    return false;
   }
+
+  var jqui = 'js/lib/jquery-ui.min.js';
+
+  $.ajax({
+    url: jqui,
+    cache: true,
+    dataType: 'script',
+    crossDomain: true,
+    timeout: 4000,
+    success: function(){
+      init();
+    },
+    error: function(err){
+      try{
+        w.console.log('ADOPS DEBUG: jQuery UI failed to load', err);
+      } catch(e){}
+    }
+  });
 
   function init(){
     var queue = wpAd.debugQueue || [];
@@ -228,4 +239,4 @@
     return obj;
   }
 
-})(window, document);
+})(window, document, window.jQuery);

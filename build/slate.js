@@ -2,14 +2,12 @@
 
   baseUrl: "../js/",
 
-  mainConfigFile: '../js/modules/main.js',
-
   name: 'lib/almond',
 
   include: ['modules/main'],
 
   //define wp specific script output
-  out: '../js/min/slate.js',
+  out: '../js/min/slate.min.js',
 
   preserveLicenseComments: false,
 
