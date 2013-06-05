@@ -1,5 +1,4 @@
 /*global placeAd2:true, placeAd2Queue */
-/*jshint indent:2*/
 
 // load dependencies:
 // "siteScript" is defined in the site specific build file (eg: build/slate.js)
@@ -14,13 +13,8 @@ require(['gpt', 'siteScript', 'utils', 'jquery'], function (gpt, wpAd, utils, $)
   wpAd.init = wpAd.init || {};
 
   if(wpAd.flags.debug){
-    //utils.getScript('js/debug.js');
-    $.ajax({
-      url: 'js/debug.js',
-      cache: true,
-      dataType: 'script',
-      crossDomain: true,
-      timeout: 2000
+    utils.ajax({
+      url: 'js/debug.js'
     });
     try{console.log('placeAd2 queue:', queue);}catch(e){}
   }

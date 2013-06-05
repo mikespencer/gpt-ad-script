@@ -1,4 +1,4 @@
-define(function(){
+define(['jquery'], function($){
 
   var utils = {
 
@@ -28,6 +28,35 @@ define(function(){
       i.style.display = 'none';
       i.style.border = '0';
       document.body.appendChild(i);
+    },
+
+    /**
+     * AJAX in a script, or if !$, fallback on utils.getScript
+     * @param {Object} config Object of $.ajax config settings
+     */
+    ajax: function(config){
+      if(!config.url){return;}
+      if($){
+        config = $.extend(true, {
+          dataType: 'script',
+          cache: true,
+          crossDomain: true,
+          timeout: 2000,
+          success: function(){
+            if(utils.flags.debug && window.console && window.console.log){
+              window.console.log('ADOPS DEBUG: AJAX request successful for', config.url);
+            }
+          },
+          error: function(err){
+            if(utils.flags.debug && window.console && window.console.log){
+              window.console.log('ADOPS DEBUG: AJAX error for', config.url, err);
+            }
+          }
+        }, config);
+        $.ajax(config);
+      } else {
+        utils.getScript(config.url, config.success);
+      }
     },
 
     /**
@@ -77,6 +106,7 @@ define(function(){
      * @return {Object} The merged Object.
      */
     extend: function(obj, additions, deep){
+      $.extend(obj, additions, deep);
       deep = deep || false;
       for(var key in additions){
         if(additions.hasOwnProperty(key)){
