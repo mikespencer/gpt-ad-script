@@ -106,7 +106,6 @@ define(['jquery'], function($){
      * @return {Object} The merged Object.
      */
     extend: function(obj, additions, deep){
-      $.extend(obj, additions, deep);
       deep = deep || false;
       for(var key in additions){
         if(additions.hasOwnProperty(key)){
