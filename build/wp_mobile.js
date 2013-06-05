@@ -2,11 +2,11 @@
 
   baseUrl: "../js/",
 
-  mainConfigFile: '../js/main.js',
+  mainConfigFile: '../js/modules/main.js',
 
   name: 'lib/almond',
 
-  include: ['main'],
+  include: ['modules/main'],
 
   //define mobile specific script output
   out: '../js/min/wp_mobile.js',
@@ -24,7 +24,7 @@
     'gpt': 'lib/gpt',
 
     //define wp site specific script here:
-    'siteScript': 'wp_mobile/main'
+    'siteScript': 'modules/wp_mobile/main'
   },
 
   shim: {
