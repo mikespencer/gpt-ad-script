@@ -10,7 +10,7 @@
     return false;
   }
 
-  var jqui = 'js/lib/jquery-ui.min.js';
+  var jqui = 'http://js.washingtonpost.com/wp-srv/ad/loaders/latest/js/lib/jquery-ui.min.js';
 
   $.ajax({
     url: jqui,
@@ -39,7 +39,7 @@
 
       debugBoxes: {},
 
-      cssURL: 'css/debug.css',
+      cssURL: 'http://css.wpdigital.net/wp-srv/ad/loaders/latest/css/debug.css',
 
       init: function(queue){
         var l = queue.length,

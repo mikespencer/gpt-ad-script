@@ -14,7 +14,7 @@ require(['gpt', 'siteScript', 'utils', 'jquery'], function (gpt, wpAd, utils, $)
 
   if(wpAd.flags.debug){
     utils.ajax({
-      url: 'js/debug.js'
+      url: 'http://js.washingtonpost.com/wp-srv/ad/loaders/latest/js/debug.js'
     });
     try{console.log('placeAd2 queue:', queue);}catch(e){}
   }

@@ -1,1 +1,1 @@
-javascript:(function(d){var s=d.createElement('script');s.src='js/debug.js';d.body.appendChild(s);})(document);
+javascript:(function(d){var s=d.createElement('script');s.src='http://js.washingtonpost.com/wp-srv/ad/loaders/latest/js/debug.js';d.body.appendChild(s);})(document);
