@@ -58,10 +58,13 @@ define(['utils'], function(utils){
           if(/^\!/.test(pos[i])){
             newPos = pos[i].split(/\!/)[1];
             if(this.template[newPos]){
-              delete this.template[newPos];
+              //delete this.template[newPos];
+              this.template[newPos] = false;
+              try{console.log('disabling ' + newPos)}catch(e){}
             }
           } else {
             this.template[pos[i]] = template;
+            try{console.log('enabling ' + pos[i])}catch(e){}
           }
         }
       }
