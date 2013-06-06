@@ -7,8 +7,6 @@ var wpAd, placeAd2, googletag = googletag || { cmd: [] };
 
   'use strict';
 
-  console.log('testing');
-
   if(/no_ads/.test(location.search)){
     return false;
   }
