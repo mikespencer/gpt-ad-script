@@ -55,8 +55,8 @@ define(['utils'], function(utils){
       if(template.what){
         var pos = template.what, l = pos.length, i = 0, newPos;
         for(i;i<l;i++){
-          if(/^\!/.test(pos[i])){
-            newPos = pos[i].replace(/^\!/, '');
+          if(pos[i].charAt(0) === '!'){
+            newPos = pos[i].substr(1);
             if(this.template[newPos]){
               delete this.template[newPos];
             }
@@ -104,9 +104,9 @@ define(['utils'], function(utils){
 
       where: function(where){
         var open = true;
-        if(/^\!/.test(where)){
+        if(where.charAt(0) === '!'){
           open = false;
-          where = where.split('!')[1];
+          where = where.substr(1);
         }
         return new RegExp('^' + where).test(commercialNode) ? open : false;
       },
