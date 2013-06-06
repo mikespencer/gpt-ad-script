@@ -1,11 +1,13 @@
 /**
- * TESTING - Script loader for adops. Defines, loads and executes necessary ad dependencies based on site.
+ * Script loader for adops. Defines, loads and executes necessary ad dependencies based on site.
  */
 var wpAd, placeAd2, googletag = googletag || { cmd: [] };
 
 (function(w, d, $){
 
   'use strict';
+
+  console.log('testing');
 
   if(/no_ads/.test(location.search)){
     return false;
