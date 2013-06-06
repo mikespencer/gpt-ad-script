@@ -56,15 +56,12 @@ define(['utils'], function(utils){
         var pos = template.what, l = pos.length, i = 0, newPos;
         for(i;i<l;i++){
           if(/^\!/.test(pos[i])){
-            newPos = pos[i].split(/\!/)[1];
+            newPos = pos[i].replace(/^\!/, '');
             if(this.template[newPos]){
-              //delete this.template[newPos];
-              this.template[newPos] = false;
-              try{console.log('disabling ' + newPos)}catch(e){}
+              delete this.template[newPos];
             }
           } else {
             this.template[pos[i]] = template;
-            try{console.log('enabling ' + pos[i])}catch(e){}
           }
         }
       }
