@@ -10,6 +10,8 @@ To build scripts, use `make build_js`.
 
 To update GPT, use `make gpt`.
 
+To update update loader.min.js, use `make build_loader`
+
 Current live location of this repo for reference:
 http://js.washingtonpost.com/wp-srv/ad/loaders/latest/
 
@@ -18,5 +20,6 @@ and to add live remote (change the "spencerm" part):
 
 
 TODO:
-- Need to either update uglifyjs on server OR update command to work with v1 in Makefile.
-- Seems to be caching issues when pushing live...
+
+*  Need to either update uglifyjs on server OR update command to work with v1 in Makefile.
+*  Seems to be caching issues when pushing live...
