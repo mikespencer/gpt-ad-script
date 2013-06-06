@@ -23,7 +23,7 @@ watch:
 build_js: gpt wp.min.js slate.min.js wp_mobile.min.js build_loader
 
 build_loader:
-	$(UGLIFYJS) js/loader.js -c -m -o js/min/loader.min.js
+	$(UGLIFYJS) -nc -o js/min/loader.min.js js/loader.js
 
 gpt:
 	curl --silent --create-dirs -o $(GPT_LOCAL) $(GPT_URL)
