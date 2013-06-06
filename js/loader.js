@@ -41,7 +41,6 @@ var wpAd, placeAd2, googletag = googletag || { cmd: [] };
     if(script && siteScripts[script]){
       if(debug && hasConsole){
         w.console.log('ADOPS DEBUG: Loading site script:', siteScripts[script]);
-        w.console.log('TEST');
       }
       return siteScripts[script];
     } else if(hasConsole){
