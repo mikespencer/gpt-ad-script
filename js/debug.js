@@ -22,9 +22,9 @@
       init();
     },
     error: function(err){
-      try{
+      if(w.console && w.console.log){
         w.console.log('ADOPS DEBUG: jQuery UI failed to load', err);
-      } catch(e){}
+      }
     }
   });
 
