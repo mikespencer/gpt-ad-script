@@ -1,5 +1,5 @@
 /**
- * Script loader for adops. Defines, loads and executes necessary ad dependencies based on site.
+ * TESTING - Script loader for adops. Defines, loads and executes necessary ad dependencies based on site.
  */
 var wpAd, placeAd2, googletag = googletag || { cmd: [] };
 
