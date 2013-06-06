@@ -16,6 +16,7 @@ require(['gpt', 'siteScript', 'utils', 'jquery'], function (gpt, wpAd, utils, $)
     debug();
   } else if($ && $.fn && $.fn.bind){
     $('body').bind('keypress.wpAd', function(e){
+      //ctrl+f9 = 63244
       if(e.keyCode === 63244){
         debug();
         $('body').unbind('keypress.wpAd');
