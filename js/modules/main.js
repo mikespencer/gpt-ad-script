@@ -13,16 +13,27 @@ require(['gpt', 'siteScript', 'utils', 'jquery'], function (gpt, wpAd, utils, $)
   wpAd.init = wpAd.init || {};
 
   if(wpAd.flags.debug){
-    utils.ajax({
-      url: 'http://js.washingtonpost.com/wp-srv/ad/loaders/latest/js/debug.js'
+    debug();
+  } else if($ && $.fn && $.fn.bind){
+    $('body').bind('keypress.wpAd', function(e){
+      if(e.keyCode === 63244){
+        debug();
+        $('body').unbind('keypress.wpAd');
+      }
     });
-    try{console.log('placeAd2 queue:', queue);}catch(e){}
   }
 
   //Insert interstitial at the beginning of placeAd2.queue
   queue.unshift([{
     what: 'interstitial'
   }]);
+
+  function debug(){
+    utils.ajax({
+      url: 'http://js.washingtonpost.com/wp-srv/ad/loaders/latest/js/debug.js'
+    });
+    try{console.log('placeAd2 queue:', queue);}catch(e){}
+  }
 
   googletag.cmd.push(function(){
 
@@ -96,6 +107,7 @@ require(['gpt', 'siteScript', 'utils', 'jquery'], function (gpt, wpAd, utils, $)
   window.wpAd = wpAd;
 
 });
+
 
 /**
  * Calls queued up placeAd2 calls when placeAd2 is redefined above
