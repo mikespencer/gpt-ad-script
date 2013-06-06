@@ -20,7 +20,7 @@ install: $(VIRTUALENV_LOC) gpt
 watch:
 	$(ACTIVATE); watchmedo tricks tricks.yml
 
-build_js: wp.min.js slate.min.js wp_mobile.min.js build_loader
+build_js: gpt wp.min.js slate.min.js wp_mobile.min.js build_loader
 
 build_loader:
 	$(UGLIFYJS) js/loader.js -c -m -o js/min/loader.min.js
