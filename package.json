@@ -4,6 +4,6 @@
   "preferGlobal": false,
   "dependencies": {
     "requirejs": "*",
-    "uglify-js": "1.3.4"
+    "uglify-js": "*"
   }
 }
