@@ -12,7 +12,7 @@ require(['gpt', 'siteScript', 'utils', 'jquery'], function (gpt, wpAd, utils, $)
   wpAd.debugQueue = wpAd.debugQueue || [];
   wpAd.init = wpAd.init || {};
 
-  if(wpAd.flags.debug){
+  if(utils.flags.debug){
     debug();
   } else if($ && $.fn && $.fn.bind){
     $('body').bind('keypress.wpAd', function(e){
@@ -61,7 +61,7 @@ require(['gpt', 'siteScript', 'utils', 'jquery'], function (gpt, wpAd, utils, $)
 
       // if the ad type is legit, open and hasn't already been built/rendered on the page
       if(wpAd.config.adTypes[config.what] &&
-         ((wpAd.flights && wpAd.flights[pos] || wpAd.flights[config.what + '*']) || wpAd.flags.allAds)){
+         ((wpAd.flights && wpAd.flights[pos] || wpAd.flights[config.what + '*']) || utils.flags.allAds)){
 
         if(!wpAd.adsOnPage[pos]){
 
@@ -103,6 +103,9 @@ require(['gpt', 'siteScript', 'utils', 'jquery'], function (gpt, wpAd, utils, $)
     callPlaceAd2Queue(queue);
 
   });
+
+  // expose utils for use in external ads, etc.
+  wpAd.utils = utils;
 
   // expose wpAd to the window for debugging + external code to access/build off of.
   window.wpAd = wpAd;

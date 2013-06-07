@@ -32,10 +32,9 @@ define([
       keyvaluesConfig: kvs
     }),
 
-    flags: utils.flags,
-
     config: config,
 
+    //simulate what templatBuilder would return, without the cost of including/executing it
     flights: {
       t: {
         id: 'default'

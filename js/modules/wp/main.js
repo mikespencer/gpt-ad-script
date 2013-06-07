@@ -71,8 +71,6 @@ define([
       keyvaluesConfig: kvs
     }),
 
-    flags: utils.flags,
-
     config: config,
 
     //determine open ad spots
