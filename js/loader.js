@@ -40,11 +40,11 @@ var wpAd, placeAd2, googletag = googletag || { cmd: [] };
 
     if(script && siteScripts[script]){
       if(debug && hasConsole){
-        w.console.log('ADOPS DEBUG: Loading site script:', siteScripts[script]);
+        w.console.log('--ADOPS DEBUG-- Loading site script:', siteScripts[script]);
       }
       return siteScripts[script];
     } else if(hasConsole){
-      w.console.log('ADOPS DEBUG: Could not find attribute "data-ad-site" or a corresponding value. Defaulting to wp.min.js.');
+      w.console.log('--ADOPS DEBUG-- Could not find attribute "data-ad-site" or a corresponding value. Defaulting to wp.min.js.');
     }
 
     return siteScripts.wp;
@@ -94,12 +94,12 @@ var wpAd, placeAd2, googletag = googletag || { cmd: [] };
       timeout: 4000,
       error: function(err){
         if(hasConsole){
-          w.console.log('ADOPS DEBUG: AdOps site script failed to load:', err);
+          w.console.log('--ADOPS DEBUG-- AdOps site script failed to load:', err);
         }
       },
       success: function(){
         if(debug && hasConsole){
-          w.console.log('ADOPS DEBUG:', scriptURL, 'loaded');
+          w.console.log('--ADOPS DEBUG--', scriptURL, 'loaded');
         }
       }
     });

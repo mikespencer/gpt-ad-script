@@ -13,12 +13,12 @@ require(['gpt', 'siteScript', 'utils', 'jquery'], function (gpt, wpAd, utils, $)
   wpAd.init = wpAd.init || {};
 
   if(utils.flags.debug){
-    debug();
+    utils.debug(queue);
   } else if($ && $.fn && $.fn.bind){
     $('body').bind('keypress.wpAd', function(e){
-      //ctrl+f9 = 63244
+      //CHROME: ctrl+f9 = 63244
       if(e.keyCode === 63244){
-        debug();
+        utils.debug(queue);
         $('body').unbind('keypress.wpAd');
       }
     });
@@ -28,13 +28,6 @@ require(['gpt', 'siteScript', 'utils', 'jquery'], function (gpt, wpAd, utils, $)
   queue.unshift([{
     what: 'interstitial'
   }]);
-
-  function debug(){
-    utils.ajax({
-      url: 'http://js.washingtonpost.com/wp-srv/ad/loaders/latest/js/debug.js'
-    });
-    try{console.log('placeAd2 queue:', queue);}catch(e){}
-  }
 
   googletag.cmd.push(function(){
 
@@ -100,7 +93,7 @@ require(['gpt', 'siteScript', 'utils', 'jquery'], function (gpt, wpAd, utils, $)
     };
 
     // build and display queued up ads from previous placeAd2 calls
-    callPlaceAd2Queue(queue);
+    utils.execPlaceAd2Queue(queue);
 
   });
 
@@ -111,17 +104,3 @@ require(['gpt', 'siteScript', 'utils', 'jquery'], function (gpt, wpAd, utils, $)
   window.wpAd = wpAd;
 
 });
-
-
-/**
- * Calls queued up placeAd2 calls when placeAd2 is redefined above
- */
-function callPlaceAd2Queue(queue){
-  if(queue){
-    var l = queue.length,
-      i = 0;
-    for(i;i<l;i++){
-      placeAd2.apply(window, queue[i]);
-    }
-  }
-}

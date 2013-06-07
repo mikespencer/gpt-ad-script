@@ -14,7 +14,6 @@ define(['jquery'], function($){
       document.getElementsByTagName('head')[0].appendChild(l);
     },
 
-
     /**
      * Appends a tracking pixel to the <body>.
      * @param {String} url A URL to the tracking pixel.
@@ -43,13 +42,13 @@ define(['jquery'], function($){
           crossDomain: true,
           timeout: 2000,
           success: function(){
-            if(utils.flags.debug && window.console && window.console.log){
-              window.console.log('ADOPS DEBUG: AJAX request successful for', config.url);
+            if(utils.flags.debug){
+              utils.log('AJAX request successful for', config.url);
             }
           },
           error: function(err){
-            if(utils.flags.debug && window.console && window.console.log){
-              window.console.log('ADOPS DEBUG: AJAX error for', config.url, err);
+            if(utils.flags.debug){
+              utils.log('AJAX error for', config.url, err);
             }
           }
         }, config);
@@ -79,6 +78,19 @@ define(['jquery'], function($){
     },
 
     /**
+     * Loads debugging script.
+     * @param {Array} queue Array of arguments queued up to be passed to placeAd2.
+     */
+    debug: function(queue){
+      utils.ajax({
+        url: 'http://js.washingtonpost.com/wp-srv/ad/loaders/latest/js/debug.js'
+      });
+      if(queue){
+        utils.log('placeAd2 queue:', queue);
+      }
+    },
+
+    /**
      * estNowWithYear for determining ad flights.
      * @type {String}.
      */
@@ -97,6 +109,20 @@ define(['jquery'], function($){
       //window.estNowWithYear = d.toString();
       return d.toString();
     })(),
+
+    /**
+     * Calls queued up placeAd2 calls (when placeAd2 is redefined).
+     * @param {Array} queue Array of arguments (Array's or Object's) to pass to each placeAd2 call.
+     */
+    execPlaceAd2Queue: function(queue){
+      if(queue){
+        var l = queue.length,
+          i = 0;
+        for(i;i<l;i++){
+          placeAd2.apply(window, queue[i]);
+        }
+      }
+    },
 
     /**
      * Merges one object into another - *Permanently overwrites the first argument.
@@ -249,6 +275,16 @@ define(['jquery'], function($){
         }
       }
       return rv;
+    },
+
+    /**
+     * Safety function for console.log. Takes any type/number of arguments.
+     */
+    log: function(){
+      if(window.console && typeof window.console.log === 'function'){
+        var args = ['--ADOPS DEBUG--'].concat(Array.prototype.slice.call(arguments));
+        window.console.log.apply(window.console, args);
+      }
     },
 
     /**

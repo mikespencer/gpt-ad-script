@@ -22,9 +22,7 @@
       init();
     },
     error: function(err){
-      if(w.console && w.console.log){
-        w.console.log('ADOPS DEBUG: jQuery UI failed to load', err);
-      }
+      wpAd.utils.log('jQuery UI failed to load', err);
     }
   });
 
@@ -84,22 +82,14 @@
               }
             });
 
-            this.log('--ADOPS DEBUG--', 'RENDERED:', pos, ad);
+            wpAd.utils.log('RENDERED:', pos, ad);
 
           } else {
-            this.log('--ADOPS DEBUG--', 'Could not find container for', pos, ad);
+            wpAd.utils.log('Could not find container for', pos, ad);
           }
         } else{
-          this.log('--ADOPS DEBUG--', 'DISABLED:', pos);
+          wpAd.utils.log('DISABLED:', pos);
         }
-      },
-
-      log: function(){
-        try{
-          if(w.console){
-            console.log.apply(console, arguments);
-          }
-        }catch(e){}
       },
 
       removeBox: function(box){
