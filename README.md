@@ -25,3 +25,7 @@ and to add live remote (change the "spencerm" part):
 ###NOTES:
 
 +  You can debug the page by using `?debugAdCode`, the bookmarklet, or in Chrome just press `ctrl+f9`.
+
+###TEMPLATES THAT NEED TO BE MADE FRIENDLY IFRAME COMPATIBLE
+
++  Custom Cover
