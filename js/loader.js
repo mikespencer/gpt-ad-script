@@ -35,7 +35,7 @@ var wpAd, placeAd2, googletag = googletag || { cmd: [] };
       'slate': 'slate.min.js',
       'wp_mobile': 'wp_mobile.min.js'
     },
-    $target = $('script[data-ad-site]:first');
+    $target = $('script[data-ad-site]:first'),
     script = $target.data('adSite') || $target.attr('data-ad-site');
 
     if(script && siteScripts[script]){
