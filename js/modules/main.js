@@ -55,7 +55,6 @@ require(['gpt', 'siteScript', 'utils', 'jquery'], function (gpt, wpAd, utils, $)
       // if the ad type is legit, open and hasn't already been built/rendered on the page
       if(wpAd.config.adTypes[config.what] &&
          ((wpAd.flights && wpAd.flights[pos] || wpAd.flights[config.what + '*']) || utils.flags.allAds)){
-
         if(!wpAd.adsOnPage[pos]){
 
           // build and store our new ad

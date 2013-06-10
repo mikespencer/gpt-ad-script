@@ -12,8 +12,7 @@ var wpAd, placeAd2, googletag = googletag || { cmd: [] };
   }
 
   //base url for site scripts
-  //var baseURL = 'js/min/',
-  var baseURL = 'http://js.washingtonpost.com/wp-srv/ad/loaders/latest/js/min/',
+  var baseURL = /localhost/.test(d.domain) ? 'js/min/' : 'http://js.washingtonpost.com/wp-srv/ad/loaders/latest/js/min/',
 
     //safety check for console
     hasConsole = w.console && typeof w.console.log === 'function',
@@ -32,7 +31,7 @@ var wpAd, placeAd2, googletag = googletag || { cmd: [] };
   function getSiteScript(){
     var siteScripts = {
       'wp': 'wp.min.js',
-      'theroot': 'root.min.js',
+      'theroot': 'theroot.min.js',
       'slate': 'slate.min.js',
       'wp_mobile': 'wp_mobile.min.js'
     },
