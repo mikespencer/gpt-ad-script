@@ -11,8 +11,7 @@
     return false;
   }
 
-  //var jqui = 'http://js.washingtonpost.com/wp-srv/ad/loaders/latest/js/lib/jquery-ui.min.js';
-  var jqui = 'js/lib/jquery-ui.min.js';
+  var jqui = 'http://js.washingtonpost.com/wp-srv/ad/loaders/latest/js/lib/jquery-ui.min.js';
 
   $.ajax({
     url: jqui,
