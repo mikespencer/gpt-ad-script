@@ -7,6 +7,7 @@
   'use strict';
 
   if(!$){
+    wpAd.utils.log('$ is ', $);
     return false;
   }
 
@@ -28,12 +29,12 @@
 
   function init(){
     var queue = wpAd.debugQueue || [];
-    wpAd.debugQueue = debug(w.jQuery).init(queue);
+    wpAd.debugQueue = debugSetup().init(queue);
   }
 
-  function debug($){
+  function debugSetup(){
 
-    return {
+    var debug = {
 
       debugBoxes: {},
 
@@ -43,18 +44,17 @@
         var l = queue.length,
           i = 0;
 
-        //addCSS(this.cssURL);
         var link = d.createElement('link');
-        link.href = this.cssURL;
+        link.href = debug.cssURL;
         link.type = 'text/css';
         link.rel = 'stylesheet';
         d.body.insertBefore(link, d.body.firstChild);
 
         for(i;i<l;i++){
-          this.exec.call(this, queue[i]);
+          debug.exec(queue[i]);
         }
 
-        return { push: $.proxy(this.exec, this) };
+        return { push: debug.exec };
       },
 
       exec: function(pos){
@@ -62,13 +62,13 @@
           var ad = wpAd.adsOnPage[pos];
           if(ad.container){
 
-            if(this.debugBoxes[pos]){
-              this.removeBox(this.debugBoxes[pos]);
+            if(debug.debugBoxes[pos]){
+              debug.removeBox(debug.debugBoxes[pos]);
             }
 
-            this.debugBoxes[pos] = this.buildDebugBox(ad);
+            debug.debugBoxes[pos] = debug.buildDebugBox(ad);
 
-            $(this.debugBoxes[pos]).css({
+            $(debug.debugBoxes[pos]).css({
               position: 'absolute',
               top: $(ad.container).offset().top + 'px',
               left: $(ad.container).offset().left + 'px'
@@ -102,13 +102,13 @@
       },
 
       buildDebugBox: function(ad){
-        return $(document.createElement('div')).addClass('ad-debug-box').html(this.content(ad)).prependTo('body')[0];
+        return $(document.createElement('div')).addClass('ad-debug-box').html(debug.content(ad)).prependTo('body')[0];
       },
 
       title: function(ad){
         return '<div class="ad-debug-section">' +
           '<div class="ad-debug-bold large">' + ad.config.pos + '</div>' +
-          '<div>Template: ' + this.getTemplateId(ad) + '</div>' +
+          '<div>Template: ' + debug.getTemplateId(ad) + '</div>' +
         '</div>';
       },
 
@@ -166,10 +166,13 @@
       },
 
       content: function(ad){
-        return this.title(ad) + this.where(ad) + this.sizes(ad) + this.keyvalueList(ad);
+        return debug.title(ad) + debug.where(ad) + debug.sizes(ad) + debug.keyvalueList(ad);
       }
 
     };
+
+    return debug;
+
   }
 
 

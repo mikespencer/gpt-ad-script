@@ -12,6 +12,7 @@ var wpAd, placeAd2, googletag = googletag || { cmd: [] };
   }
 
   //base url for site scripts
+  //var baseURL = 'http://js.washingtonpost.com/wp-srv/ad/loaders/latest/js/min/',
   var baseURL = /localhost/.test(d.domain) ? 'js/min/' : 'http://js.washingtonpost.com/wp-srv/ad/loaders/latest/js/min/',
 
     //safety check for console

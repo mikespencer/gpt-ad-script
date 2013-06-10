@@ -83,7 +83,7 @@ define(['jquery'], function($){
      */
     debug: function(queue){
       utils.ajax({
-        url: 'http://js.washingtonpost.com/wp-srv/ad/loaders/latest/js/debug.js'
+        url: /localhost/.test(document.domain) ? 'js/debug.js' : 'http://js.washingtonpost.com/wp-srv/ad/loaders/latest/debug.js'
       });
       if(queue){
         utils.log('placeAd2 queue:', queue);
