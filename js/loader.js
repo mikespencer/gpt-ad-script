@@ -1,7 +1,7 @@
 /**
  * Script loader for adops. Defines, loads and executes necessary ad dependencies based on site.
  */
-var wpAd, placeAd2, googletag = googletag || { cmd: [] };
+var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
 
 (function(w, d, $){
 
@@ -86,6 +86,8 @@ var wpAd, placeAd2, googletag = googletag || { cmd: [] };
    */
   function init(){
     var scriptURL = baseURL + getSiteScript();
+    //store our version of jQuery
+    wpAd.$ = $;
     // get site specific ad script
     $.ajax({
       url: scriptURL,
@@ -134,12 +136,21 @@ var wpAd, placeAd2, googletag = googletag || { cmd: [] };
   }
 
 
-  // make sure jQuery is defined, then display ads
-  if ($) {
+  // make sure jQuery is defined and up to date, then display ads
+  if ($ && $.fn.jquery >= '1.7.1') {
     init();
+
+  //else if no jquery at all, load it - use noConflict() to not affect site's $ object
+  } else if(!$){
+    loadScript(jQueryURL, function(){
+      $ = window.jQuery.noConflict();
+      init();
+    });
+
+  //else jquery must be out of date - use noConflict(true) to not affect site's $ or jQuery objects
   } else {
     loadScript(jQueryURL, function(){
-      $ = w.jQuery;
+      $ = window.jQuery.noConflict(true);
       init();
     });
   }

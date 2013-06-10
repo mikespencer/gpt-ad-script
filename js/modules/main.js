@@ -100,6 +100,6 @@ require(['gpt', 'siteScript', 'utils', 'jquery'], function (gpt, wpAd, utils, $)
   wpAd.utils = utils;
 
   // expose wpAd to the window for debugging + external code to access/build off of.
-  window.wpAd = wpAd;
+  window.wpAd = utils.extend(wpAd, window.wpAd);
 
 });
