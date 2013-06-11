@@ -32,4 +32,4 @@ and to add live remote (change the "spencerm" part):
 
 ##NOTES:
 
-+  You can debug the page by using `?debugAdCode`, the bookmarklet, or in Chrome just press `ctrl+f9`.
++  You can debug the page by using `?debugAdCode`, the bookmarklet, or just press `ctrl+f9`.

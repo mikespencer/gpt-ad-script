@@ -15,11 +15,11 @@ require(['gpt', 'siteScript', 'utils', 'jquery'], function (gpt, wpAd, utils, $)
   if(utils.flags.debug){
     utils.debug(queue);
   } else if($ && $.fn && $.fn.bind){
-    $('body').bind('keypress.wpAd', function(e){
-      //CHROME: ctrl+f9 = 63244
-      if(e.keyCode === 63244){
+    $('body').bind('keydown.wpAd', function(e){
+      //if ctrl+f9 pressed
+      if(e.ctrlKey && e.which === 120){
         utils.debug(queue);
-        $('body').unbind('keypress.wpAd');
+        $('body').unbind('keydown.wpAd');
       }
     });
   }

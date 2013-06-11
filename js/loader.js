@@ -86,8 +86,10 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
    */
   function init(){
     var scriptURL = baseURL + getSiteScript();
+
     //store our version of jQuery
     wpAd.$ = $;
+
     // get site specific ad script
     $.ajax({
       url: scriptURL,
@@ -136,8 +138,39 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
   }
 
 
+  /**
+   * Checks version strings and returns true if 'thisVer' is more recent than or equal to 'minVer'
+   * @param {String} thisVer The version to check
+   * @param {String} minVer Minimum version to check against
+   * @return {Boolean} true if the current version is OK, false if it is not
+   */
+  function versionChecker(thisVer, minVer){
+    if(!thisVer || !minVer){
+      return false;
+    }
+
+    thisVer = thisVer.split('.');
+    minVer = minVer.split('.');
+
+    for(var i=0;i<minVer.length;i++){
+      if(typeof thisVer[i] !== 'undefined' && parseInt(thisVer[i], 10) < parseInt(minVer[i], 10)){
+        return false;
+      }
+    }
+    return true;
+  }
+
+
+  /**
+   * We have to be very careful about overwriting a given page's jQuery. This is messy, but effective.
+   * These following series of checks attempts to normalises jQuery and makes sure that we are using
+   * version >= 1.7.1, without overwriting the current page's $ or jQuery (if exists) objects.
+   * Our jQuery will be stored in wpAd.$ once init() is called. We should always try to reference
+   * wpAd.$ in future.
+   */
+
   // make sure jQuery is defined and up to date, then display ads
-  if ($ && $.fn.jquery >= '1.7.1') {
+  if ($ && $.fn && versionChecker($.fn.jquery, '1.7.1')) {
     init();
 
   //else if no jquery at all, load it - use noConflict() to not affect site's $ object
