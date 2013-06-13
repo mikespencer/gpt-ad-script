@@ -149,12 +149,20 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
       return false;
     }
 
+    var _test, _min;
+
     thisVer = thisVer.split('.');
     minVer = minVer.split('.');
 
     for(var i=0;i<minVer.length;i++){
-      if(typeof thisVer[i] !== 'undefined' && parseInt(thisVer[i], 10) < parseInt(minVer[i], 10)){
-        return false;
+      if(thisVer[i] !== 'undefined'){
+
+        _test = parseInt(thisVer[i], 10);
+        _min = parseInt(minVer[i], 10);
+
+        if(_test !== _min){
+          return _test > _min;
+        }
       }
     }
     return true;
