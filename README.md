@@ -25,8 +25,6 @@ and to add live remote (change the "spencerm" part):
 
 ####DFP TEMPLATES THAT NEED TO BE MADE FRIENDLY IFRAME COMPATIBLE
 
-+  WP - Slate Custom Cover 4.0
-+  WP - Slate Custom Cover Video Only
 +  WP - Wrapper
 +  WP - Sidecar
 
