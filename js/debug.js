@@ -139,7 +139,8 @@
               '<ul>',
 
           //important to use "clone", as "extend" will permanently overwrite first argument
-          keyvalues = extend(clone(wpAd.gptConfig.keyvalues), ad.keyvalues),
+          //keyvalues = extend(clone(wpAd.gptConfig.keyvalues), ad.keyvalues),
+          keyvalues = $.extend(clone(wpAd.gptConfig.keyvalues), ad.keyvalues),
           sortedKeys = [],
           key, l, i;
 

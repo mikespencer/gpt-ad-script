@@ -1,4 +1,4 @@
-define(['jquery'], function($){
+define(['jQuery'], function($){
 
   var utils = {
 

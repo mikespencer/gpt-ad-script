@@ -2,7 +2,7 @@
 
 // load dependencies:
 // "siteScript" is defined in the site specific build file (eg: build/slate.js)
-require(['gpt', 'siteScript', 'utils', 'jquery'], function (gpt, wpAd, utils, $){
+require(['gpt', 'siteScript', 'utils', 'jQuery'], function (gpt, wpAd, utils, $){
 
   var queue = placeAd2.queue || [];
 
@@ -15,11 +15,11 @@ require(['gpt', 'siteScript', 'utils', 'jquery'], function (gpt, wpAd, utils, $)
   if(utils.flags.debug){
     utils.debug(queue);
   } else if($ && $.fn && $.fn.bind){
-    $('body').bind('keydown.wpAd', function(e){
+    $(document).bind('keydown.wpAd', function(e){
       //if ctrl+f9 pressed
       if(e.ctrlKey && e.which === 120){
         utils.debug(queue);
-        $('body').unbind('keydown.wpAd');
+        $(document).unbind('keydown.wpAd');
       }
     });
   }
