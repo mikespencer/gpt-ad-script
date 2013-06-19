@@ -149,9 +149,8 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
    * Once jQuery is defined, this is called. Ajax's in site specific script and builds placeAd2.queue.
    */
   function init(){
-    console.time('timer');
     var scriptURL = baseURL + getSiteScript();
-    console.timeEnd('timer');
+
     //store our version of jQuery
     wpAd.$ = $;
 
