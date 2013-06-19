@@ -22,11 +22,69 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
     debug = !!(/debugadcode/i.test(location.search)),
 
     //URL for jQuery to load if not already defined on the page
-    jQueryURL = 'http://js.washingtonpost.com/wpost/js/combo/?token=201210102320000&c=true&m=true&context=eidos&r=/jquery-1.7.1.js';
+    jQueryURL = 'http://js.washingtonpost.com/wpost/js/combo/?token=201210102320000&c=true&m=true&context=eidos&r=/jquery-1.7.1.js',
+
+    //device detection
+    device = (function(ua){
+
+      var mobileKey,
+        tabletKey,
+
+        //width settings:
+        mobileThreshold = 768,
+        thisWidth = w.innerWidth || w.screen && w.screen.width,
+        isMobileWidth = thisWidth < mobileThreshold,
+
+        //set default mobile/tablet flags to false:
+        isMobile = false,
+        isTablet = false,
+
+        //mobile tests:
+        mobile = {
+          iOS: (/iphone|ipad|ipod/i).test(ua),
+          Android: (/android/i).test(ua),
+          BlackBerry: (/blackberry/i).test(ua),
+          Windows: (/iemobile/i).test(ua),
+          FirefoxOS: (/mozilla/i).test(ua) && (/mobile/i).test(ua)
+        },
+
+        //tablet tests:
+        tablet = {
+          iPad: (/ipad/i).test(ua)
+        };
+
+      //check if mobile:
+      for(mobileKey in mobile){
+        if(mobile.hasOwnProperty(mobileKey) && mobile[mobileKey]){
+          isMobile = true;
+          break;
+        }
+      }
+
+      //check if tablet:
+      for(tabletKey in tablet){
+        if(tablet.hasOwnProperty(tabletKey) && tablet[tabletKey]){
+          tablet = true;
+          break;
+        }
+      }
+
+      return {
+        mobile: mobile,
+        tablet: tablet,
+        isMobile: isMobile,
+        isTablet: isTablet,
+        width: thisWidth,
+        isMobileWidth: isMobileWidth
+      };
+
+    })(navigator.userAgent);
 
 
   /**
    * Determines the site specific script to load based on this script tag's data-ad-site attribute.
+   * Also checks for data-ad-page-type for responsive pages, and loads appropriate script based on
+   * our device object (above).
    * @return {String} File name of site script to load.
    */
   function getSiteScript(){
@@ -37,7 +95,13 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
       'wp_mobile': 'wp_mobile.min.js'
     },
     $target = $('script[data-ad-site]:first'),
-    script = $target.data('adSite') || $target.attr('data-ad-site');
+    responsive = $target.data('adPageType') === 'responsive',
+    script = $target.data('adSite');
+
+    //if responsive page and mobile device, update script reference to mobile version
+    if(responsive && device.isMobile && device.isMobileWidth){
+      script += /_mobile$/.test(script) ? '' : '_mobile';
+    }
 
     if(script && siteScripts[script]){
       if(debug && hasConsole){
@@ -85,10 +149,14 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
    * Once jQuery is defined, this is called. Ajax's in site specific script and builds placeAd2.queue.
    */
   function init(){
+    console.time('timer');
     var scriptURL = baseURL + getSiteScript();
-
+    console.timeEnd('timer');
     //store our version of jQuery
     wpAd.$ = $;
+
+    //store device info
+    wpAd.device = device;
 
     // get site specific ad script
     $.ajax({
