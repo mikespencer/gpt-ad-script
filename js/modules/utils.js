@@ -386,6 +386,7 @@ define(['jQuery'], function($){
   };
 
 
+
   /**
    * Various flags from query string params, JavaScript vars, cookies, etc., can be stored here
    * @type {Object}
