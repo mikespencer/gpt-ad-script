@@ -16,25 +16,56 @@
   -o-box-shadow: $a $b $c $d $e
   box-shadow: $a $b $c $d $e
 
+@mixin cursor-grabbing
+  cursor: -webkit-grabbing
+  cursor: -moz-grabbing
+
+@mixin cursor-grab
+  cursor: -webkit-grab
+  cursor: -moz-grab
+
+$border: 1px solid #000
+
 body .ad-debug-box
   width: 300px
   background-color: #fa0
-  border: 1px solid #000
+  border: $border
   color: #000
+  padding: 12px
   font-family: sans-serif
   font-size: 12px
   position: absolute
   text-align: left
+  cursor: auto
   top: 0
-  cursor: move
   line-height: 20px
   z-index: 999999999
   opacity: 0.95
   @include shadow(0, 0, 7px, 1px, #333)
   @include transition(box-shadow 0.2s)
 
-  .ad-debug-bold
-    font-weight: bold
+  .ad-debug-handle
+    cursor: move
+    padding: 8px
+    background: url(http://img.wpdigital.net/wp-srv/ad/loaders/latest/css/background.png) repeat top left transparent
+    position: absolute
+    @include cursor-grab
+
+  .ad-debug-handle.right
+    right: 0
+    border-left: $border
+
+  .ad-debug-handle.left
+    left: 0
+    border-right: $border
+
+  .ad-debug-handle.top
+    top: 0
+    border-bottom: $border
+
+  .ad-debug-handle.bottom
+    bottom: 0
+    border-top: $border
 
   .ad-debug-section
     margin: 10px
@@ -50,6 +81,53 @@ body .ad-debug-box
   ul
     padding-left: 16px
 
+
+.ad-debug-bold
+  font-weight: bold
+
+.hidden
+  display: none
+
 body .ad-debug-box.dragging
   @include shadow(0, 0, 14px, 3px, #333)
   @include transform(scale(1.03, 1.03))
+  @include cursor-grabbing
+  .ad-debug-handle
+    @include cursor-grabbing
+
+body .ad-debug-console
+  background-color: #eee
+  border-bottom: $border
+  color: #000
+  font-size: 14px
+  line-height: normal
+  font-family: sans-serif
+  @include shadow(0, 0, 10px, 1px, #333)
+
+  .pad5
+    padding: 5px
+
+  .button
+    color: #369
+    cursor: pointer
+
+  .ad-debug-console-title
+    font-weight: bold
+    font-size: 18px
+
+  .ad-console-box, a.ad-console-box, a.ad-console-box:hover, a.ad-console-box:visited, a.ad-console-box:active
+    display: block
+    padding: 10px
+    border-top: 1px dashed #000
+    text-decoration: none
+    color: #000
+
+  .green
+    background-color: #97DE98
+
+  .orange
+    background-color: #F5A869
+
+  .grey
+    background-color: #ccc
+    color: #666

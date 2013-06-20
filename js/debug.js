@@ -38,7 +38,7 @@
 
       debugBoxes: {},
 
-      cssURL: 'http://css.wpdigital.net/wp-srv/ad/loaders/latest/css/debug.css',
+      cssURL: (/localhost/i.test(d.domain) ? '' : 'http://css.wpdigital.net/wp-srv/ad/loaders/latest/') + 'css/debug.css',
 
       init: function(queue){
         var l = queue.length,
@@ -50,6 +50,20 @@
         link.rel = 'stylesheet';
         d.body.insertBefore(link, d.body.firstChild);
 
+        debug.$debugConsole = $(debug.buildDebugConsole()).prependTo('body');
+
+        $('.button', debug.$debugConsole).on('click', function(){
+          $('span', this).toggleClass('hidden');
+          $('.ad-debug-console-inner').toggleClass('hidden');
+        });
+
+        $(document).bind('keydown.wpAd', function(e){
+          //if ctrl+f9 pressed
+          if(e.ctrlKey && e.which === 120){
+            $('.ad-debug-box, .ad-debug-console').toggleClass('hidden');
+          }
+        });
+
         for(i;i<l;i++){
           debug.exec(queue[i]);
         }
@@ -58,6 +72,7 @@
       },
 
       exec: function(pos){
+
         if(wpAd.adsOnPage[pos]){
           var ad = wpAd.adsOnPage[pos];
           if(ad.container){
@@ -73,6 +88,7 @@
               top: $(ad.container).offset().top + 'px',
               left: $(ad.container).offset().left + 'px'
             }).draggable({
+              handle: 'div.ad-debug-handle',
               stack: 'div.ad-debug-box',
               start: function(){
                 $(this).addClass('dragging');
@@ -83,12 +99,22 @@
             });
 
             wpAd.utils.log('RENDERED:', pos, ad);
+            $('.ad-debug-console-inner').append('<a href="#' + pos + '" class="ad-console-box green">' +
+              debug.debugConsoleAd('Rendered', ad, pos) +
+            '</a>');
+            $('#slug_' + pos).prepend('<a name="' + pos + '"></a>')
 
           } else {
             wpAd.utils.log('Could not find container for', pos, ad);
+            $('.ad-debug-console-inner').append('<div class="ad-console-box orange">' +
+              debug.debugConsoleAd('Could not find container for', ad, pos) +
+            '</div>');
           }
         } else{
           wpAd.utils.log('DISABLED:', pos);
+          $('.ad-debug-console-inner').append('<div class="ad-console-box grey">' +
+            debug.debugConsoleAd('Disabled', false, pos) +
+          '</div>');
         }
       },
 
@@ -101,15 +127,54 @@
         return t ? t.id : 'unknown';
       },
 
+      buildDebugConsole: function(){
+        return '<div class="ad-debug-console">' +
+          '<div class="ad-debug-console-title pad5">AdOps Debug Console</div>' +
+          '<div class="ad-debug-console-hide ad-debug-bold button pad5">' +
+            '<span class="show">-- Show --</span>' +
+            '<span class="hide hidden">-- Hide --</span>' +
+          '</div>' +
+          '<div class="ad-debug-console-inner hidden"></div>' +
+        '</div>';
+      },
+
       buildDebugBox: function(ad){
         return $(document.createElement('div')).addClass('ad-debug-box').html(debug.content(ad)).prependTo('body')[0];
       },
 
+      dragHandles: function(_class){
+        return '<div class="ad-debug-handle top left"></div>' +
+          '<div class="ad-debug-handle top right"></div>' +
+          '<div class="ad-debug-handle bottom left"></div>' +
+          '<div class="ad-debug-handle bottom right"></div>';
+      },
+
       title: function(ad){
-        return '<div class="ad-debug-section">' +
+        return '<div class="ad-debug-section no-top-margin">' +
           '<div class="ad-debug-bold large">' + ad.config.pos + '</div>' +
           '<div>Template: ' + debug.getTemplateId(ad) + '</div>' +
         '</div>';
+      },
+
+      debugConsoleAd: function(verb, ad, pos){
+        var code = '<div class="ad-debug-console-ad">' +
+          '<div>' + (verb ? '<span class="ad-debug-bold">' + verb + ': </span>' : '') + pos + '</div>';
+        if(ad){
+          code += '<div><span class="ad-debug-bold">Sizes: </span>' + debug.sizesToString(ad) + '</div>';
+          code += '<div><span class="ad-debug-bold">Template: </span>' + debug.getTemplateId(ad) + '</div>';
+        }
+        code += '</div>';
+        return code;
+      },
+
+      sizesToString: function(ad){
+        var sizes = [],
+          l = wpAd.config.adTypes[ad.config.what].size.length,
+          i = 0;
+        for(i;i<l;i++){
+          sizes.push(wpAd.config.adTypes[ad.config.what].size[i].join('x'));
+        }
+        return sizes.join(', ');
       },
 
       sizes: function(ad){
@@ -167,7 +232,7 @@
       },
 
       content: function(ad){
-        return debug.title(ad) + debug.where(ad) + debug.sizes(ad) + debug.keyvalueList(ad);
+        return debug.title(ad) + debug.where(ad) + debug.sizes(ad) + debug.keyvalueList(ad) + debug.dragHandles();
       }
 
     };
