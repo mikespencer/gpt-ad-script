@@ -100,31 +100,22 @@
 
             wpAd.utils.log('RENDERED:', pos, ad);
             $('.ad-debug-console-inner').append('<a href="#' + pos + '" class="ad-console-box green">' +
-              debug.debugConsoleAd('Rendered', ad, pos) +
+              debug.debugConsoleAdContents('Rendered', ad, pos) +
             '</a>');
             $('#slug_' + pos).prepend('<a name="' + pos + '"></a>')
 
           } else {
             wpAd.utils.log('Could not find container for', pos, ad);
             $('.ad-debug-console-inner').append('<div class="ad-console-box orange">' +
-              debug.debugConsoleAd('Could not find container for', ad, pos) +
+              debug.debugConsoleAdContents('Could not find container for', ad, pos) +
             '</div>');
           }
         } else{
           wpAd.utils.log('DISABLED:', pos);
           $('.ad-debug-console-inner').append('<div class="ad-console-box grey">' +
-            debug.debugConsoleAd('Disabled', false, pos) +
+            debug.debugConsoleAdContents('Disabled', false, pos) +
           '</div>');
         }
-      },
-
-      removeBox: function(box){
-        $(box).remove();
-      },
-
-      getTemplateId: function(ad){
-        var t = (w.wpAd.flights[ad.config.pos] || wpAd.flights[ad.config.what + '*']);
-        return t ? t.id : 'unknown';
       },
 
       buildDebugConsole: function(){
@@ -136,6 +127,24 @@
           '</div>' +
           '<div class="ad-debug-console-inner hidden"></div>' +
         '</div>';
+      },
+
+      debugConsoleAdContents: function(verb, ad, pos){
+        var code = '<div>' + (verb ? '<span class="ad-debug-bold">' + verb + ': </span>' : '') + pos + '</div>';
+        if(ad){
+          code += '<div><span class="ad-debug-bold">Sizes: </span>' + debug.sizesToString(ad) + '</div>';
+          code += '<div><span class="ad-debug-bold">Template: </span>' + debug.getTemplateId(ad) + '</div>';
+        }
+        return code;
+      },
+
+      removeBox: function(box){
+        $(box).remove();
+      },
+
+      getTemplateId: function(ad){
+        var t = (w.wpAd.flights[ad.config.pos] || wpAd.flights[ad.config.what + '*']);
+        return t ? t.id : 'unknown';
       },
 
       buildDebugBox: function(ad){
@@ -154,17 +163,6 @@
           '<div class="ad-debug-bold large">' + ad.config.pos + '</div>' +
           '<div>Template: ' + debug.getTemplateId(ad) + '</div>' +
         '</div>';
-      },
-
-      debugConsoleAd: function(verb, ad, pos){
-        var code = '<div class="ad-debug-console-ad">' +
-          '<div>' + (verb ? '<span class="ad-debug-bold">' + verb + ': </span>' : '') + pos + '</div>';
-        if(ad){
-          code += '<div><span class="ad-debug-bold">Sizes: </span>' + debug.sizesToString(ad) + '</div>';
-          code += '<div><span class="ad-debug-bold">Template: </span>' + debug.getTemplateId(ad) + '</div>';
-        }
-        code += '</div>';
-        return code;
       },
 
       sizesToString: function(ad){
