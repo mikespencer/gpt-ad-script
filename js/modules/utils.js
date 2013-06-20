@@ -439,7 +439,7 @@ define(['jQuery'], function($){
    * view via a cookie.
    * @type {Boolean} true to render the interstitial, false to not.
    */
-  utils.showInterstitial = (function(){
+  utils.flags.showInterstitial = (function(){
     if(document.cookie && !utils.flags.no_interstitials){
       var name = document.domain + '_pageview',
         cookieVal = utils.getCookie(name),

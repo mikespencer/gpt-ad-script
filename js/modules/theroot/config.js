@@ -11,6 +11,7 @@ define(function() {
           '45x45',
           'bigbox',
           'flex',
+          'interstitial',
           'leaderboard',
           'midarticleflex',
           'tiffanytile'
@@ -52,7 +53,7 @@ define(function() {
       'bigbox': { 'size': [[300,250]], 'keyvalues': { 'ad': ['bb'] } },
       'flex': { 'size': [[300,250],[336,850],[160,600]], 'keyvalues': { 'ad': ['bb','hp','ss'] } },
       'headerTile': { 'size': [[234,60],[290,60],[300,45]], 'keyvalues': { 'ad': ['tiff'] } },
-      'interstitial': { 'size': [['N/A']], 'keyvalues': { 'ad': ['interstitial'] } },
+      'interstitial': { 'size': [['N/A']] },
       'leaderboard': { 'size': [[728,90]], 'keyvalues': { 'ad': ['lb'] } },
       'midarticleflex': { 'size': [[300,250],[446,33]], 'keyvalues': { 'ad': ['bb'] } },
       'rightbigbox': { 'size': [[300,250]], 'keyvalues': { 'ad': ['bb'] } },

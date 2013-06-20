@@ -45,12 +45,12 @@ define([
   });
 
   //Custom flight templates that require additional conditionals
-  config.flights = utils.extend({
+  /*config.flights = utils.extend({
     interstitial: {
       what: ['interstitial'],
       test: [utils.showInterstitial && !utils.flags.front]
     }
-  }, config.flights);
+  }, config.flights);*/
 
   //overrides config
   utils.extend(Ad.prototype.overrides, overrides);

@@ -15,6 +15,14 @@ define(['utils'], function(utils) {
       }
     },
     pos: {
+      //determines if page gets a full page interstitial
+      interstitial: function(){
+        if(utils.flags.showInterstitial && !utils.flags.front){
+          this.addKeyvalues({
+            ad: ['interstitial']
+          });
+        }
+      },
       leaderboard: function() {
         if (this.config.where === 'washingtonpost.com') {
           this.config.where += '/lb';
