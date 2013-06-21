@@ -53,8 +53,22 @@
         debug.$debugConsole = $(debug.buildDebugConsole()).prependTo('body');
 
         $('.button', debug.$debugConsole).on('click', function(){
+          var oldHeight = $('div.ad-debug-console').outerHeight(),
+              height, offset;
+
           $('span', this).toggleClass('hidden');
-          $('.ad-debug-console-inner').toggleClass('hidden');
+          $('div.ad-debug-console-inner').toggleClass('hidden');
+
+          height = $('div.ad-debug-console').outerHeight();
+          offset = height > oldHeight ? height : 0 - oldHeight;
+
+          $('div.ad-debug-box').each(function(){
+            var $this = $(this),
+                csstop = $this.offset().top;
+            $this.css({
+              top: (csstop + offset) + 'px'
+            });
+          });
         });
 
         $(document).bind('keydown.wpAd', function(e){
