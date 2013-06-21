@@ -117,7 +117,7 @@
               debug.debugConsoleAdContents('Rendered', ad, pos) +
             '</a>').on('click', function(e){
               var $this = $(this),
-                  $target = $('#slug_' + $this.attr('href').replace('#','')), count = 9, i;
+                  $target = $('#slug_' + $this.attr('href').replace('#','')), i;
               $target.addClass('ad-debug-highlight-ad')
               i = setTimeout(function(){
                 $target.removeClass('ad-debug-highlight-ad');
@@ -181,7 +181,7 @@
       },
 
       title: function(ad){
-        return '<div class="ad-debug-section no-top-margin">' +
+        return '<div class="ad-debug-section">' +
           '<div class="ad-debug-bold large">' + ad.config.pos + '</div>' +
           '<div>Template: ' + debug.getTemplateId(ad) + '</div>' +
         '</div>';
