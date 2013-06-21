@@ -42,10 +42,11 @@ define(function(){
         where: ['homepage'],
         when: ['201304240000/201304242359']
       },
+      //21605
       volvo: {
         what: ['pushdown','468x60'],
         where: ['homepage'],
-        when: ['201306210000/201306212359']
+        when: ['201306210000/201306222359']
       }
     },
 
