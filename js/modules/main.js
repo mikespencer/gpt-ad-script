@@ -77,6 +77,11 @@ require(['gpt', 'siteScript', 'utils', 'jQuery'], function (gpt, wpAd, utils, $)
           // store for debugging
           wpAd.adsOnPage[pos] = ad;
 
+          //interstitial fix
+          if(pos === 'interstitial'){
+            ad.slugDisplay(false);
+          }
+
         } else {
           // refresh if ad/spot already rendered
           wpAd.adsOnPage[pos].refresh();
