@@ -129,7 +129,7 @@
           } else {
             wpAd.utils.log('Could not find container for', pos, ad);
             $('.ad-debug-console-inner').append('<div class="ad-console-box orange">' +
-              debug.debugConsoleAdContents('Could not find container for', ad, pos) +
+              debug.debugConsoleAdContents('UNIT DID NOT RENDER - Could not find element matching #slug_' + pos + ' for', ad, pos) +
             '</div>');
           }
         } else{
