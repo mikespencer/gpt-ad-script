@@ -111,6 +111,9 @@ define(['utils'], function(utils){
       var s = document.createElement('div');
       s.id = 'slug_' + this.config.pos;
       s.style.display = 'none';
+      s.style.lineHeight = '0px';
+      s.style.width = '0px';
+      s.style.height = '0px';
       document.body.insertBefore(s, document.body.firstChild);
     },
 
@@ -140,9 +143,7 @@ define(['utils'], function(utils){
       if(!this.slot){
         this.container = this.getContainer();
         if(this.container){
-          if(this.config.pos !== 'interstitial'){
-            this.slugDisplay(true);
-          }
+          this.slugDisplay(true);
           if(!this.config.hardcode){
             this.overridesExec();
             this.slot = this.buildGPTSlot();
