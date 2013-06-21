@@ -113,10 +113,18 @@
             });
 
             wpAd.utils.log('RENDERED:', pos, ad);
-            $('.ad-debug-console-inner').append('<a href="#' + pos + '" class="ad-console-box green">' +
+            $('<a href="#' + pos + '" class="ad-console-box green">' +
               debug.debugConsoleAdContents('Rendered', ad, pos) +
-            '</a>');
-            $('#slug_' + pos).prepend('<a name="' + pos + '"></a>')
+            '</a>').on('click', function(e){
+              var $this = $(this),
+                  $target = $('#slug_' + $this.attr('href').replace('#','')), count = 9, i;
+              $target.addClass('ad-debug-highlight-ad')
+              i = setTimeout(function(){
+                $target.removeClass('ad-debug-highlight-ad');
+              }, 2000);
+            }).appendTo('.ad-debug-console-inner');
+
+            $('#slug_' + pos).prepend('<a name="' + pos + '"></a>');
 
           } else {
             wpAd.utils.log('Could not find container for', pos, ad);
