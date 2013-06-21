@@ -47,7 +47,14 @@ define(function(){
         what: ['pushdown','468x60'],
         where: ['homepage'],
         when: ['201306210000/201306222359']
+      },
+      //21626
+      cadillac: {
+        what: ['468x60'],
+        where: ['homepage'],
+        when: ['201306250000/201306252359']
       }
+
     },
 
     adTypes: {
