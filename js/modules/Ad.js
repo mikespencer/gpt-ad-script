@@ -143,7 +143,9 @@ define(['utils'], function(utils){
       if(!this.slot){
         this.container = this.getContainer();
         if(this.container){
-          this.slugDisplay(true);
+          if(this.config.pos !== 'interstitial'){
+            this.slugDisplay(true);
+          }
           if(!this.config.hardcode){
             this.overridesExec();
             this.slot = this.buildGPTSlot();
