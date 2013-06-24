@@ -9,6 +9,8 @@ To setup dependencies, use `make install`.
 
 To build scripts, use `make build_js`.
 
+To watch scripts and build on change/save, use `make watch`.
+
 To update GPT, use `make gpt`.
 
 To update update loader.min.js, use `make build_loader`
@@ -21,8 +23,7 @@ and to add live remote (change the "spencerm" part):
 
 ##TODO:
 
-+  Seems to be caching issues when pushing live...
-+  Look in to getting rid of utils.merge(Ad.prototype.keyvaluesConfig, {ad:function(){...}, etc...}) out of each main.js file and moving it to it's own module (site/adLevelKeyvalues.js or better yet have one function that passes in config and keep it in keyvalues/config/adLevelKeyvalues.js or something...)
++  Seems to be caching issues when pushing live... Temporarily fixed for now by manually flushing each *.min.js url
 +  Let's see if we can get uglifyjs updated to version 2 on the server so that we can utilise source maps. Optimizer requires uglifyjs2 in order to generate source maps. I think this would be very useful/important for our debugging.
 
 ##NOTES:
