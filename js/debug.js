@@ -97,9 +97,13 @@
 
             debug.debugBoxes[pos] = debug.buildDebugBox(ad);
 
+            //a little hacky, but prevents any debug box overlaying the console
+            var top = $(ad.container).offset().top;
+            top = top < 60 ? 60 : top;
+
             $(debug.debugBoxes[pos]).css({
               position: 'absolute',
-              top: $(ad.container).offset().top + 'px',
+              top: top + 'px',
               left: $(ad.container).offset().left + 'px'
             }).draggable({
               handle: 'div.ad-debug-handle',

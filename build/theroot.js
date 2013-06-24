@@ -10,9 +10,10 @@
   out: '../js/min/theroot.min.js',
 
   preserveLicenseComments: false,
+  //generateSourceMaps: true,
 
-  //for testing/debugging
-  //optimize: 'none',
+  //for testing/debugging - need to install on server
+  //optimize: 'uglify2',
 
   wrap: true,
 
