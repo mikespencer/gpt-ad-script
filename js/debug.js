@@ -121,7 +121,7 @@
               $target.addClass('ad-debug-highlight-ad')
               i = setTimeout(function(){
                 $target.removeClass('ad-debug-highlight-ad');
-              }, 2000);
+              }, 1750);
             }).appendTo('.ad-debug-console-inner');
 
             $('#slug_' + pos).prepend('<a name="' + pos + '"></a>');

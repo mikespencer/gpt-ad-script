@@ -90,7 +90,10 @@ body .ad-debug-box
 
 .ad-debug-highlight-ad
   border: 1px solid #f00
-  @include shadow(0, 0, 10px, 1px, #000)
+  @include shadow(0, 0, 10px, 2px, #000)
+  @include transition(box-shadow 0.15s)
+  @include transform(scale(1.09, 1.09))
+
 
 body .ad-debug-box.dragging
   @include shadow(0, 0, 14px, 3px, #333)
