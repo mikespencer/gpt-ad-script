@@ -1,8 +1,7 @@
 define(['utils'], function(utils){
 
   return function(){
-    var param = utils.urlCheck('test_ads', { type: 'variable' });
-    return param ? ['test_' + param] : false;
+    return utils.flags.test_ads ? ['test_' + utils.flags.test_ads] : false;
   };
 
 });
