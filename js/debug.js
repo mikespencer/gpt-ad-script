@@ -121,19 +121,24 @@
               debug.debugConsoleAdContents('Rendered', ad, pos) +
             '</a>').on('click', function(e){
               var $this = $(this),
-                  $target = $('#slug_' + $this.attr('href').replace('#','')), i;
+                  name = $this.attr('href').replace('#',''),
+                  $wpni_adi = $('#wpni_adi_' + name),
+                  $slug = $('#slug_' + name),
+                  $target = $wpni_adi.length ? $wpni_adi : $slug,
+                  i;
               $target.addClass('ad-debug-highlight-ad')
               i = setTimeout(function(){
                 $target.removeClass('ad-debug-highlight-ad');
               }, 1750);
             }).appendTo('.ad-debug-console-inner');
 
-            $('#slug_' + pos).prepend('<a name="' + pos + '"></a>');
+
+            ($('#wpni_adi_' + pos).length ? $('#wpni_adi_' + pos) : $('#slug_' + pos)).prepend('<a name="' + pos + '"></a>');
 
           } else {
             wpAd.utils.log('Could not find container for', pos, ad);
             $('.ad-debug-console-inner').append('<div class="ad-console-box orange">' +
-              debug.debugConsoleAdContents('UNIT DID NOT RENDER - Could not find element matching #slug_' + pos + ' for', ad, pos) +
+              debug.debugConsoleAdContents('UNIT DID NOT RENDER - Could not find element matching #slug_' + pos + ' or #wpni_adi_' + pos + ' for', ad, pos) +
             '</div>');
           }
         } else{
