@@ -52,7 +52,7 @@
 
         debug.$debugConsole = $(debug.buildDebugConsole()).prependTo('body');
 
-        $('.button', debug.$debugConsole).on('click', function(){
+        $('.console-button', debug.$debugConsole).on('click', function(){
           var oldHeight = $('div.ad-debug-console').outerHeight(),
               height, offset;
 
@@ -146,10 +146,12 @@
 
       buildDebugConsole: function(){
         return '<div class="ad-debug-console">' +
-          '<div class="ad-debug-console-title pad5">AdOps Debug Console</div>' +
-          '<div class="ad-debug-console-hide ad-debug-bold button pad5">' +
-            '<span class="show">-- Show --</span>' +
-            '<span class="hide hidden">-- Hide --</span>' +
+          '<div class="console-button">' +
+            '<div class="ad-debug-console-title pad5">AdOps Debug Console</div>' +
+            '<div class="ad-debug-console-hide ad-debug-bold pad5">' +
+              '<span class="show blue">-- Show --</span>' +
+              '<span class="hide blue hidden">-- Hide --</span>' +
+            '</div>' +
           '</div>' +
           '<div class="ad-debug-console-inner hidden"></div>' +
         '</div>';
