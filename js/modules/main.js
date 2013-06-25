@@ -24,6 +24,11 @@ require(['gpt', 'siteScript', 'utils', 'jQuery'], function (gpt, wpAd, utils, $)
     });
   }
 
+  //dcnode commercialNode override functionality:
+  if(utils.flags.dcnode){
+    window.commercialNode = utils.flags.dcnode;
+  }
+
   //Insert interstitial at the beginning of placeAd2.queue
   queue.unshift([{
     what: 'interstitial'

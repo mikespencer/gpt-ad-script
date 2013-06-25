@@ -11,7 +11,9 @@ define([
   'templateBuilder',
   'wp/config',
   'wp/keyvalues',
-  'wp/overrides'
+  'wp/overrides',
+  'wp/hpRefresh',
+  'criteo'
 
 ], function(
 
@@ -23,7 +25,9 @@ define([
   templateBuilder,
   config,
   kvs,
-  overrides
+  overrides,
+  hpRefresh,
+  criteo
 
 ){
 
@@ -56,6 +60,10 @@ define([
   utils.extend(Ad.prototype.overrides, overrides);
 
   return utils.extend(defaultSettings, {
+
+    criteo: criteo.exec(),
+
+    hpRefresh: hpRefresh.exec(),
 
     constants: {
       dfpSite: '/701/wpni.',

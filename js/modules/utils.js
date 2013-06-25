@@ -405,7 +405,13 @@ define(['jQuery'], function($){
       return window.commercialPageType && window.commercialPageType === 'front' ? true : false;
     })(),
     no_interstitials: (/no_interstitials/i.test(location.search)),
-    reload: (/reload\=true/.test(location.search))
+    reload: (/reload\=true/.test(location.search)),
+    test_ads: utils.urlCheck('test_ads', {
+      type: 'variable'
+    }),
+    dcnode: utils.urlCheck('dcnode', {
+      type: 'variable'
+    })
   };
 
   /**
