@@ -17,8 +17,7 @@ define(['utils','zoneBuilder'], function(utils, zoneBuilder){
         }
 
         //",,,", then get page type and then need to append ",abc" to the end
-        rv += ',,,' + (utils.wp_meta_data.contentType && zoneBuilder.contentType[utils.wp_meta_data.contentType.toString()] ?
-          zoneBuilder.contentType[utils.wp_meta_data.contentType.toString()] : 'article') + ',abc';
+        rv += ',,,' + (zoneBuilder.contentType[utils._toString(utils.wp_meta_data.contentType).toLowerCase()] || 'article') + ',abc';
       }
     }
 

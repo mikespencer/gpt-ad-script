@@ -32,7 +32,13 @@ define([
 ){
 
   //build commercialNode
-  commercialNode = zoneBuilder.exec();
+  window.commercialNode = zoneBuilder.exec();
+
+  //extend with wp specific flags:
+  utils.extend(utils.flags, {
+    homepage: !!(/^washingtonpost\.com/.test(window.commercialNode)),
+    test_env: !!(/prodprev\.|qaprev\.|devprev\./i.test(window.location.host))
+  });
 
   //extend or add keyvalues at the ad level
   //each key can accept a function, or an array of functions

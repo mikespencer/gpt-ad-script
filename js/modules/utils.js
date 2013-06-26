@@ -278,7 +278,7 @@ define(['jQuery'], function($){
     },
 
     /**
-     * Safety function for console.log. Takes any type/number of arguments.
+     * Safety function for console.log. Takes any type/number of arguments, like console.log.
      */
     log: function(){
       if(window.console && typeof window.console.log === 'function'){
@@ -335,6 +335,32 @@ define(['jQuery'], function($){
           target.setTargeting(key, utils.isArray(map[key]) ? map[key] : [map[key]]);
         }
       }
+    },
+
+    /**
+     * Transforms the argument to an Array.
+     * @param {*} arg Argument to transform to an Array.
+     * @return {Array} Returns arg as an Array, or if arg is undefined, empty [].
+     */
+    toArray: function(arg){
+      if(typeof arg === 'undefined'){
+        return [];
+      }
+      return utils.isArray(arg) ? arg : [arg];
+    },
+
+    /**
+     * Transforms argument to a string, with optional delimeter for Arrays
+     * @param {*} arg Value to convert to a String
+     * @param {String} opt_delim Optional delimeter for Arrays
+     * @return {String|undefined} arg converted to a String, or '' if arg === undefined.
+     */
+    _toString: function(arg, opt_delim){
+      if(typeof arg === 'undefined'){
+        return '';
+      }
+      opt_delim = opt_delim || ',';
+      return utils.isArray(arg) ? arg.join(opt_delim) : String(arg);
     },
 
     /**

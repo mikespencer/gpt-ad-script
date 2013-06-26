@@ -14,11 +14,11 @@ define(['keyvalues/desktop', 'utils', 'zoneBuilder'], function(kvs, utils, zoneB
 
     author: [
       function(){
-        var author = utils.wp_meta_data.author,
+        var author = utils.toArray(utils.wp_meta_data.author),
           rv = [],
-          l, i;
-        if(author){
-          l = author.length;
+          l = author.length,
+          i;
+        if(l){
           for(i=0;i<l;i++){
             if(author[i]){
               rv.push(author[i].replace(/[^\w\s]/gi, '').replace(/\s/g,"_").toLowerCase());
@@ -31,12 +31,14 @@ define(['keyvalues/desktop', 'utils', 'zoneBuilder'], function(kvs, utils, zoneB
 
     articleId: [
       function(){
-        var id = [], a;
-        if(utils.wp_meta_data.contentType && utils.wp_meta_data.contentType[0] === "CompoundStory") {
-          a = location.href.split("/");
-          id = [a[a.length - 1].toLowerCase().split("_story")[0]];
+        var contentType = utils._toString(utils.wp_meta_data.contentType),
+          id = false,
+          filename;
+        if(contentType.toLowerCase() === 'compoundstory'){
+          filename = location.href.replace(/\?.*/, '').split('/').pop();
+          id = filename.toLowerCase().split('_story')[0];
         }
-        return id;
+        return id ? [id] : false;
       }
     ],
 
@@ -73,7 +75,7 @@ define(['keyvalues/desktop', 'utils', 'zoneBuilder'], function(kvs, utils, zoneB
 
     page: [
       function(){
-        return utils.wp_meta_data.contentType && zoneBuilder.contentType[utils.wp_meta_data.contentType.toString().toLowerCase()] || ['article'];
+        return zoneBuilder.contentType[utils._toString(utils.wp_meta_data.contentType).toLowerCase()] || ['article'];
       }
     ],
 
