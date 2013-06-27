@@ -82,6 +82,8 @@
           debug.exec(queue[i]);
         }
 
+        setCookie('adops_debug_enabled', 'true', 356);
+
         return { push: debug.exec };
       },
 
@@ -315,18 +317,11 @@
     return temp;
   }
 
-  function extend(obj, additions, deep){
-    deep = deep || false;
-    for(var key in additions){
-      if(additions.hasOwnProperty(key)){
-        if(!deep || (!isObject(obj[key]) || !isObject(additions[key]))){
-          obj[key] = additions[key];
-        } else{
-          obj[key] = extend(obj[key], additions[key], true);
-        }
-      }
-    }
-    return obj;
+  function setCookie(name, value, exdays){
+    var exdate = new Date(), c_value;
+    exdate.setDate(exdate.getDate() + exdays);
+    c_value = escape(value) + (!exdays ? '' : '; expires=' + exdate.toUTCString());
+    document.cookie = name + '=' + c_value;
   }
 
 })(window, document, (wpAd.$ || window.jQuery));

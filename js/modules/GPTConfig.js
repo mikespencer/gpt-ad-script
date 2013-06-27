@@ -7,8 +7,7 @@ define(['utils'], function(utils){
 
     exec: function(config){
       this.config = utils.extend({
-        async: true,
-        sra: true,
+        sra: false,
         keyvaluesConfig: false
       }, config);
 
