@@ -82,7 +82,7 @@
           debug.exec(queue[i]);
         }
 
-        setCookie('adops_debug_enabled', 'true', 356);
+        setCookie('adops_debug_enabled', 'true', 365);
 
         return { push: debug.exec };
       },
