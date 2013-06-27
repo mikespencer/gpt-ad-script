@@ -356,9 +356,6 @@ define(['jQuery'], function($){
      * @return {String|undefined} arg converted to a String, or '' if arg === undefined.
      */
     _toString: function(arg, opt_delim){
-      if(typeof arg === 'undefined'){
-        return '';
-      }
       opt_delim = opt_delim || ',';
       return utils.isArray(arg) ? arg.join(opt_delim) : String(arg);
     },

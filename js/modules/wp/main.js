@@ -65,6 +65,7 @@ define([
   //overrides config
   utils.extend(Ad.prototype.overrides, overrides);
 
+  //this is wpAd
   return utils.extend(defaultSettings, {
 
     criteo: criteo.exec(),
@@ -97,4 +98,5 @@ define([
     }
 
   });
+
 });

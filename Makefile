@@ -21,7 +21,7 @@ watch:
 	$(ACTIVATE); watchmedo tricks tricks.yml
 
 watch_css:
-	sass --style compressed --watch css/sass/debug.sass:css/debug.css
+	compass watch
 
 build_js: gpt wp.min.js slate.min.js wp_mobile.min.js theroot.min.js build_loader
 

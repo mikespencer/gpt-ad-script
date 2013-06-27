@@ -1,0 +1,27 @@
+/* _mixins.sass */
+
+@mixin transition($args...)
+  -moz-transition: $args
+  -webkit-transition: $args
+  -o-transition: $args
+  transition: $args
+
+@mixin transform($args...)
+  -moz-transform: $args
+  -webkit-transform: $args
+  -o-transform: $args
+  transform: $args
+
+@mixin shadow($a, $b, $c, $d, $e)
+  -moz-box-shadow: $a $b $c $d $e
+  -webkit-box-shadow: $a $b $c $d $e
+  -o-box-shadow: $a $b $c $d $e
+  box-shadow: $a $b $c $d $e
+
+@mixin cursor-grabbing
+  cursor: -webkit-grabbing
+  cursor: -moz-grabbing
+
+@mixin cursor-grab
+  cursor: -webkit-grab
+  cursor: -moz-grab

@@ -11,15 +11,17 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
     return false;
   }
 
-  //base url for site scripts
-  //var baseURL = 'http://js.washingtonpost.com/wp-srv/ad/loaders/latest/js/min/',
-  var baseURL = /localhost/.test(d.domain) ? 'js/min/' : 'http://js.washingtonpost.com/wp-srv/ad/loaders/latest/js/min/',
+  //Test for referencing local versions of files for testing
+  var localhost = /localhost/.test(d.domain),
+
+    //debugging flag
+    debug = !!(/debugadcode/i.test(location.search)),
 
     //safety check for console
     hasConsole = w.console && typeof w.console.log === 'function',
 
-    //debugging flag
-    debug = !!(/debugadcode/i.test(location.search)),
+    //base url for site scripts
+    baseURL = localhost ? 'js/min/' : 'http://js.washingtonpost.com/wp-srv/ad/loaders/latest/js/min/',
 
     //URL for jQuery to load if not already defined on the page
     jQueryURL = 'http://js.washingtonpost.com/wpost/js/combo/?token=201210102320000&c=true&m=true&context=eidos&r=/jquery-1.7.1.js',
@@ -87,32 +89,44 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
    * our device object (above).
    * @return {String} File name of site script to load.
    */
-  function getSiteScript(){
+  function getSiteInfo(){
     var siteScripts = {
-      'wp': 'wp.min.js',
-      'theroot': 'theroot.min.js',
-      'slate': 'slate.min.js',
-      'wp_mobile': 'wp_mobile.min.js'
-    },
-    $target = $('script[data-ad-site]:first'),
-    responsive = $target.data('adPageType') === 'responsive',
-    script = $target.data('adSite');
+        'wp': 'wp.min.js',
+        'theroot': 'theroot.min.js',
+        'slate': 'slate.min.js',
+        'wp_mobile': 'wp_mobile.min.js'
+      },
+      $target = $('script[data-ad-site]:first'),
+      responsive = $target.data('adPageType') === 'responsive',
+      site = $target.data('adSite'),
+      script = siteScripts[site];
+
+    //set some default fallbacks
+    if(!siteScripts[site]){
+      if(hasConsole){
+        w.console.log('--ADOPS DEBUG-- Could not find attribute "data-ad-site" or a corresponding value. Defaulting to wp.min.js.');
+      }
+      site = 'wp';
+      script = siteScripts.wp;
+    }
 
     //if responsive page and mobile device, update script reference to mobile version
     if(responsive && device.isMobile && device.isMobileWidth){
-      script += /_mobile$/.test(script) ? '' : '_mobile';
-    }
-
-    if(script && siteScripts[script]){
+      site += /_mobile$/.test(site) ? '' : '_mobile';
       if(debug && hasConsole){
-        w.console.log('--ADOPS DEBUG-- Loading site script:', siteScripts[script]);
+        w.console.log('--ADOPS DEBUG-- Resposive page detected. Attempting to use script:', script);
       }
-      return siteScripts[script];
-    } else if(hasConsole){
-      w.console.log('--ADOPS DEBUG-- Could not find attribute "data-ad-site" or a corresponding value. Defaulting to wp.min.js.');
     }
 
-    return siteScripts.wp;
+    if(debug && hasConsole){
+      w.console.log('--ADOPS DEBUG-- Loading site script:', script);
+    }
+
+    //return siteScripts.wp;
+    return {
+      script: script,
+      site: site
+    }
   }
 
   /**
@@ -132,6 +146,20 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
   }
 
   /**
+   * Load site specific CSS
+   * @param {String} site Name of site. Should match name of CSS file
+   */
+  function loadSiteCSS(site){
+    if(site){
+      $('<link />').attr({
+        type: 'text/css',
+        rel: 'stylesheet',
+        href: (localhost ? 'css/' : 'http://css.wpdigital.net/wp-srv/ad/loaders/latest/css/') + site + '.css'
+      }).appendTo('head');
+    }
+  }
+
+  /**
    * The placeAd2 function that will "actually" build ad calls is not defined at this point. This is
    * a placeholder that stores the arguments for each placeAd2 call in the placeAd2.queue Array as a
    * series of Arrays. placeAd2.queue is looped through once placeAd2 and it's dependencies are
@@ -144,18 +172,20 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
     placeAd2.queue.push(Array.prototype.slice.call(arguments));
   };
 
-
   /**
    * Once jQuery is defined, this is called. Ajax's in site specific script and builds placeAd2.queue.
    */
   function init(){
-    var scriptURL = baseURL + getSiteScript();
+    var siteInfo = getSiteInfo(),
+      scriptURL = baseURL + siteInfo.script;
 
     //store our version of jQuery
     wpAd.$ = $;
 
     //store device info
     wpAd.device = device;
+
+    loadSiteCSS(siteInfo.site);
 
     // get site specific ad script
     $.ajax({

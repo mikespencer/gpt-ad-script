@@ -15,6 +15,7 @@ define([
 
   });*/
 
+  //this is wpAd
   return utils.extend(defaultSettings, {
 
     //set network id

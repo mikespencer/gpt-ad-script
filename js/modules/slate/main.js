@@ -52,6 +52,7 @@ define([
   window.wpniAds = window.wpniAds || {};
   window.wpniAds.gallery = galleryRefresh;
 
+  //this is wpAd
   return utils.extend(defaultSettings, {
 
     constants: {
@@ -74,4 +75,5 @@ define([
     flights: templateBuilder.exec(config.flights)
 
   });
+
 });

@@ -1,34 +1,18 @@
-@mixin transition($args...)
-  -moz-transition: $args
-  -webkit-transition: $args
-  -o-transition: $args
-  transition: $args
+@import vars
+@import mixins
 
-@mixin transform($args...)
-  -moz-transform: $args
-  -webkit-transform: $args
-  -o-transform: $args
-  transform: $args
-
-@mixin shadow($a, $b, $c, $d, $e)
-  -moz-box-shadow: $a $b $c $d $e
-  -webkit-box-shadow: $a $b $c $d $e
-  -o-box-shadow: $a $b $c $d $e
-  box-shadow: $a $b $c $d $e
-
-@mixin cursor-grabbing
-  cursor: -webkit-grabbing
-  cursor: -moz-grabbing
-
-@mixin cursor-grab
-  cursor: -webkit-grab
-  cursor: -moz-grab
-
+//colours
 $border: 1px solid #000
+$green: #97DE98
+$orange: #F5A869
+$yellow: #fa0
+$blue: #369
+$grey: #ccc
+$shadow-colour: #333
 
 body .ad-debug-box
   width: 300px
-  background-color: #fa0
+  background-color: $yellow
   border: $border
   color: #000
   padding: 12px
@@ -41,13 +25,13 @@ body .ad-debug-box
   line-height: 20px
   z-index: 999999999
   opacity: 0.95
-  @include shadow(0, 0, 7px, 1px, #333)
+  @include shadow(0, 0, 7px, 1px, $shadow-colour)
   @include transition(box-shadow 0.2s)
 
   .ad-debug-handle
     cursor: move
     padding: 8px
-    background: url(http://img.wpdigital.net/wp-srv/ad/loaders/latest/css/background.png) repeat top left transparent
+    background: url($img_base + 'debug_drag_background.png') repeat top left transparent
     position: absolute
     @include cursor-grab
 
@@ -95,7 +79,7 @@ body .ad-debug-box
 
 
 body .ad-debug-box.dragging
-  @include shadow(0, 0, 14px, 3px, #333)
+  @include shadow(0, 0, 14px, 3px, $shadow-colour)
   @include transform(scale(1.03, 1.03))
   @include cursor-grabbing
   .ad-debug-handle
@@ -109,7 +93,7 @@ body .ad-debug-console
   line-height: normal
   font-family: sans-serif
   text-align: left
-  @include shadow(0, 0, 10px, 1px, #333)
+  @include shadow(0, 0, 10px, 1px, $shadow-colour)
 
   .pad5
     padding: 5px
@@ -129,14 +113,14 @@ body .ad-debug-console
     color: #000
 
   .green
-    background-color: #97DE98
+    background-color: $green
 
   .orange
-    background-color: #F5A869
+    background-color: $orange
 
   .blue
-    color: #369
+    color: $blue
 
   .grey
-    background-color: #ccc
-    color: #666
+    background-color: $grey
+    color: $grey/2.5
