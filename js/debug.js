@@ -82,7 +82,9 @@
           debug.exec(queue[i]);
         }
 
-        setCookie('adops_debug_enabled', 'true', 365);
+        if(window.localStorage){
+          window.localStorage.setItem('adops_debug_enabled', true);
+        }
 
         return { push: debug.exec };
       },
@@ -315,13 +317,6 @@
       }
     }
     return temp;
-  }
-
-  function setCookie(name, value, exdays){
-    var exdate = new Date(), c_value;
-    exdate.setDate(exdate.getDate() + exdays);
-    c_value = escape(value) + (!exdays ? '' : '; expires=' + exdate.toUTCString());
-    document.cookie = name + '=' + c_value;
   }
 
 })(window, document, (wpAd.$ || window.jQuery));

@@ -14,8 +14,8 @@ require(['gpt', 'siteScript', 'utils', 'jQuery'], function (gpt, wpAd, utils, $)
 
   if(utils.flags.debug){
     utils.debug(queue);
-  } else if($ && $.fn && $.fn.bind && utils.getCookie('adops_debug_enabled')){
-    $(document).bind('keydown.wpAd', function(e){
+  } else if($ && $.fn && $.fn.on && window.localStorage && localStorage.getItem('adops_debug_enabled')){
+    $(document).on('keydown.wpAd', function(e){
       //if ctrl+f9 pressed
       if(e.ctrlKey && e.which === 120){
         utils.debug(queue);
@@ -23,6 +23,7 @@ require(['gpt', 'siteScript', 'utils', 'jQuery'], function (gpt, wpAd, utils, $)
       }
     });
   }
+
 
   //dcnode commercialNode override functionality:
   if(utils.flags.dcnode){
