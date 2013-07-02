@@ -71,7 +71,7 @@
           });
         });
 
-        $(document).bind('keydown.wpAd', function(e){
+        $(document).on('keydown.wpAd', function(e){
           //if ctrl+f9 pressed
           if(e.ctrlKey && e.which === 120){
             $('.ad-debug-box, .ad-debug-console').toggleClass('hidden');
