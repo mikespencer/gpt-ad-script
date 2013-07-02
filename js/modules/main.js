@@ -19,7 +19,7 @@ require(['gpt', 'siteScript', 'utils', 'jQuery'], function (gpt, wpAd, utils, $)
       //if ctrl+f9 pressed
       if(e.ctrlKey && e.which === 120){
         utils.debug(queue);
-        $(document).unbind('keydown.wpAd');
+        $(document).off('keydown.wpAd');
       }
     });
   }
