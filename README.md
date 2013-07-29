@@ -1,3 +1,5 @@
+#Development
+
 To run optimizer:
 
     node build/r.js -o build/slate.js
@@ -19,7 +21,102 @@ Current live location of this repo for reference:
 http://js.washingtonpost.com/wp-srv/ad/loaders/latest/
 
 and to add live remote (change the "spencerm" part):
-`git remote add live ssh://spencerm@ads.wpprivate.com/data/git/wp-ad-loaders.git`
+`git remote add live ssh://spencerm@ads.wpprivate.com/data/git/wp-ad-loaders.git
+
+
+
+
+#Implementation
+
+
+##Traditional Implementation (inline placeAd2)
+
+
+
+###Ad Script
+
+Simply replace the following existing ad scripts in the `<head></head>` of the page, below where commercialNode is defined:
+
+    <script src="http://js.washingtonpost.com/wp-srv/ad/generic_ad.js">
+    <script src="http://js.washingtonpost.com/wp-srv/ad/(wp/slate/root).js">
+
+With:
+
+    <script src="http://js.washingtonpost.com/wp-srv/ad/loaders/latest/js/min/loader.min.js" data-ad-site="[SITE]"></script>
+
+Where `[SITE]` can be either `wp`, `slate`, `theroot` or `wp_mobile`.
+
+If the page is a **responsive** page (needs potential for desktop and mobile ad calls), add the attribute `data-ad-page-type="responsive"` to the above script tag. **Do not add an async attribute to this script tag**. A placeAd2 placeholder function needs to be defined immediately to prevent errors using this method. All other scripts are loaded asynchronously from this script.
+
+
+
+###Ad Spot Coding:
+
+Each placeAd2 call can remain unchanged on the page.
+
+    <script>
+      placeAd2(commercialNode, [pos value]:String, [delivery type]:String|false, [on the fly keyvalues]:String);
+    </script>
+
+
+
+
+##Preferred Implementation (full asyc, data attributes)
+
+
+
+###Ad Script
+
+Completely **remove** old ad scripts:
+
+    <script src="http://js.washingtonpost.com/wp-srv/ad/generic_ad.js">
+    <script src="http://js.washingtonpost.com/wp-srv/ad/(wp/slate/root).js">
+
+Place the following script at/towards the bottom of the page:
+
+    <script src="http://js.washingtonpost.com/wp-srv/ad/loaders/latest/js/min/loader.min.js" data-ad-site="[SITE]" async></script>
+
+Where `[SITE]` can be either `wp`, `slate`, `theroot` or `wp_mobile`.
+
+If the page is a **responsive** page (needs potential for desktop and mobile ad calls), add the attribute `data-ad-page-type="responsive"` to the above script tag.
+
+
+
+###Ad Spot Coding
+
+Inline placeAd2 calls are no longer needed using this method (but, placeAd2 can be called **after** the above ad script has loaded if needed for ad spot refreshes, etc).
+
+Most basic ad spot syntax, placed in the position the ad is supposed to render, before the ad script is loaded:
+
+    <div id="slug_[POS]" data-ad-type="[POS]"></div>
+
+Where `[POS]` should be the pos value of the ad (leaderboard, bigbox, pushdown, etc.).
+
+####Additional ad spots of the same type on a given page
+
+    <div id="slug_[POS]_2" data-ad-type="[POS]|2"></div>
+    <div id="slug_[POS]_3" data-ad-type="[POS]|3"></div>
+    <div id="slug_[POS]_4" data-ad-type="[POS]|4"></div>
+
+Etc...
+
+
+
+####Additional attributes
+
+The following attributes can be added to the `#slug_[POS]` element (ad spot) to further customise the ad call if needed (just like the arguments in placeAd2):
+
+commercialNode override example:
+
+    data-ad-where="politics"
+
+On the fly keyvalues example:
+
+    data-ad-on-the-fly="newKeyvalue=1"
+
+There is currently only one delivery type for our GPT ads at this time...
+
+
 
 ##TODO:
 
