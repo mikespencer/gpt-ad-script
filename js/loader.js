@@ -110,6 +110,7 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
       script = siteScripts.wp;
     }
 
+
     //if responsive page and mobile device, update script reference to mobile version
     if(responsive && device.isMobile && device.isMobileWidth){
       site += /_mobile$/.test(site) ? '' : '_mobile';
@@ -126,7 +127,7 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
     return {
       script: script,
       site: site
-    }
+    };
   }
 
   /**

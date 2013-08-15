@@ -24,6 +24,29 @@ and to add live remote (change the "spencerm" part):
 `git remote add live ssh://spencerm@ads.wpprivate.com/data/git/wp-ad-loaders.git
 
 
+#Development with Grunt.js
+
+To install dependencies, use `npm install && bower install`.
+
+To build all necessary files, use `grunt build`.
+
+To update GPT, use `grunt build_gpt`.
+
+To build JavaScript (includes jshint tests), use `grunt build_js`.
+
+To build CSS, use `grunt build_css`.
+
+To watch for changes, use `grunt watch`.
+
+To start a server at http://localhost:5000 and watch for changes with livereload enabled, use `grunt server`.
+
+To run Qunit tests, use `grunt test`.
+
+Using `grunt`, will do all of the above.
+
+For more information and a list of commands, use `grunt -h`.
+
+For more information on Grunt.js [click here](http://gruntjs.com/)
 
 
 #Implementation

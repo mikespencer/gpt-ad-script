@@ -130,12 +130,11 @@
                   $slug = $('#slug_' + name),
                   $target = $wpni_adi.length ? $wpni_adi : $slug,
                   i;
-              $target.addClass('ad-debug-highlight-ad')
+              $target.addClass('ad-debug-highlight-ad');
               i = setTimeout(function(){
                 $target.removeClass('ad-debug-highlight-ad');
               }, 1750);
             }).appendTo('.ad-debug-console-inner');
-
 
             ($('#wpni_adi_' + pos).length ? $('#wpni_adi_' + pos) : $('#slug_' + pos)).prepend('<a name="' + pos + '"></a>');
 

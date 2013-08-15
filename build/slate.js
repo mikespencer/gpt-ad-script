@@ -14,7 +14,6 @@
 
   //for testing/debugging - need to install on server
   //optimize: 'uglify2',
-  optimize: 'none',
 
   wrap: true,
 

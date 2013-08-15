@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="eng">
+  <head>
+    <title>Qunit Tests</title>
+
+    <link rel="stylesheet" type="text/css" src="../bower_components/qunit/qunit/qunit.css" />
+
+    <script>
+      var commercialNode = 'news';
+      var wp_meta_data = {
+        author: ['test author'],
+        page_id: ['123456789'],
+        contentType: ['blog']
+      }
+    </script>
+
+  </head>
+  <body>
+
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+
+    <div id="slug_leaderboard" data-ad-type="leaderboard"></div>
+    <div id="slug_rightflex" data-ad-type="rightflex"></div>
+
+    <script src="../bower_components/jquery/jquery.js"></script>
+
+    <script src="../js/min/loader.min.js" data-ad-site="slate"></script>
+
+    <script src="../bower_components/qunit/qunit/qunit.js"></script>
+    <script src="slate_tests.js"></script>
+
+  </body>
+</html>
