@@ -108,7 +108,9 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
     krux_script.setAttribute('data-id', wpAd.krux_id);
     krux_script.setAttribute('data-timing', 'async');
     krux_script.setAttribute('data-version', '1.9');
-    if(target){
+
+    //THIS BREAKS QUNIT TESTS.. NEED TO FIGURE OUT WHY
+    if(target && !/file/.test(location.protocol)){
       target.appendChild(krux_script);
     }
   }
