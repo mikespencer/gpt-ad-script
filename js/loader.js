@@ -82,6 +82,36 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
 
     })(navigator.userAgent);
 
+  /**
+   * Custom function with special attributes for loading Krux's script
+   * @param {String} id Krux id (site specific). Defaults to wp.
+   */
+  function loadKrux(id){
+    //default fallback value (wp)
+    wpAd.krux_id = id || 'IbWIJ0xh';
+
+    if(!window.Krux){
+      window.Krux=function(){
+        window.Krux.q.push(arguments);
+      };
+      window.Krux.q=[];
+    }
+
+    var krux_script = document.createElement('script'),
+      target = document.getElementsByTagName('head')[0] || document.body;
+    krux_script.src = (!localhost ?
+                       'http://js.washingtonpost.com/wp-srv/ad/loaders/latest/' : '') + 'js/lib/krux.js';
+
+    krux_script.type = 'text/javascript';
+    //krux_script.async = true;
+    krux_script.className = 'kxct';
+    krux_script.setAttribute('data-id', wpAd.krux_id);
+    krux_script.setAttribute('data-timing', 'async');
+    krux_script.setAttribute('data-version', '1.9');
+    if(target){
+      target.appendChild(krux_script);
+    }
+  }
 
   /**
    * Determines the site specific script to load based on this script tag's data-ad-site attribute.
@@ -109,7 +139,6 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
       site = 'wp';
       script = siteScripts.wp;
     }
-
 
     //if responsive page and mobile device, update script reference to mobile version
     if(responsive && device.isMobile && device.isMobileWidth){
@@ -182,6 +211,13 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
 
     //store our version of jQuery
     wpAd.$ = $;
+
+    //LOAD KRUX ASAP
+    if(siteInfo.site === 'wp' && !/kidspost/i.test(commercialNode)){
+      loadKrux('IbWIJ0xh');
+    } else if(siteInfo.site === 'slate'){
+      loadKrux('IemEj7lF');
+    }
 
     //store device info
     wpAd.device = device;

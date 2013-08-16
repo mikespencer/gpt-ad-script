@@ -1,4 +1,4 @@
-//@import "compass/reset/utilities"
+@import "compass/reset/utilities"
 @import vars
 @import mixins
 
@@ -11,8 +11,10 @@ $blue: #369
 $grey: #ccc
 $shadow-colour: #333
 
+.ad-debug-box, .ad-debug-console
+  @include nested-reset
+
 body .ad-debug-box
-  //@include nested-reset
   width: 300px
   background-color: $yellow
   border: $border
@@ -67,12 +69,11 @@ body .ad-debug-box
   ul
     padding-left: 16px
 
+  .ad-debug-bold
+    font-weight: bold
 
-.ad-debug-bold
-  font-weight: bold
-
-.hidden
-  display: none
+  .hidden
+    display: none
 
 .ad-debug-highlight-ad
   border: 1px solid #f00
@@ -86,6 +87,7 @@ body .ad-debug-box.dragging
   @include cursor-grabbing
   .ad-debug-handle
     @include cursor-grabbing
+
 
 body .ad-debug-console
   background-color: #eee
@@ -126,3 +128,9 @@ body .ad-debug-console
   .grey
     background-color: $grey
     color: $grey/2.5
+
+  .ad-debug-bold
+    font-weight: bold
+
+  .hidden
+    display: none

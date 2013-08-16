@@ -1,9 +1,8 @@
 venv
 .DS_Store
 .sass-cache
-.sass-cache/*
 bower_components
 node_modules
 *.pyc
 js/min/*
-css/.sass-cache/*
+css/.sass-cache

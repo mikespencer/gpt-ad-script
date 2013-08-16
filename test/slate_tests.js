@@ -35,7 +35,7 @@
     equal(typeof placeAd2, 'function', 'placeAd2 is defined');
   });
 
-  module('leaderboard ad placement and kvs tests')
+  module('leaderboard ad placement and kvs tests');
 
   test('leaderboard ad loaded', function(){
     ok(wpAd.adsOnPage.leaderboard, 'leadboard ok');
