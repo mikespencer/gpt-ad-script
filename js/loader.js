@@ -291,7 +291,7 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
     minVer = minVer.split('.');
 
     for(var i=0;i<minVer.length;i++){
-      if(thisVer[i] !== 'undefined'){
+      if(typeof thisVer[i] !== 'undefined'){
 
         _test = parseInt(thisVer[i], 10);
         _min = parseInt(minVer[i], 10);
