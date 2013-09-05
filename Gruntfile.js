@@ -8,8 +8,11 @@ var sys = require('sys');
 var exec = require('child_process').exec;
 
 module.exports = function (grunt) {
-  // load all grunt tasks
+  // load all grunt tasks:
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+
+  // display build times:
+  require('time-grunt')(grunt);
 
   grunt.initConfig({
     clean: {
@@ -160,8 +163,17 @@ module.exports = function (grunt) {
       ]
     },
     open: {
-      server: {
+      slate: {
         path: 'http://localhost:<%= connect.options.port %>/slate.html'
+      },
+      wp_mobile: {
+        path: 'http://localhost:<%= connect.options.port %>/mobile_homepage.html'
+      },
+      wp: {
+        path: 'http://localhost:<%= connect.options.port %>/index.html'
+      },
+      theroot: {
+        path: 'http://localhost:<%= connect.options.port %>/theroot.html'
       }
     },
     qunit: {
@@ -200,7 +212,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('server', [
     'connect:livereload',
-    'open',
+    'open:wp_mobile',
     'watch'
   ]);
 

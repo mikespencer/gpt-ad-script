@@ -166,6 +166,11 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
    * data attributes.
    */
   function displayAds(){
+
+    if(!window.commercialNode){
+      window.commercialNode = $('.page').attr('data-adkey');
+    }
+
     $('*[id^="slug_"][data-ad-type]').hide().each(function(){
       var $this = $(this);
       placeAd2({
@@ -242,9 +247,18 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
         if(debug && hasConsole){
           w.console.log('--ADOPS DEBUG--', scriptURL, 'loaded');
         }
+
+        //commercialNode fallback for mobile:
+        window.commercialNode = window.commercialNode || $('.page').attr('data-adkey');
+
+        displayAds();
       }
     });
-    displayAds();
+
+    //commercialNode fallback for mobile:
+    //window.commercialNode = window.commercialNode || $('.page').attr('data-adkey');
+
+    //displayAds();
   }
 
   /**

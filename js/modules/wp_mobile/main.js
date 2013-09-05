@@ -6,14 +6,28 @@ define([
   'Ad',
   'GPTConfig',
   'utils',
+  'zoneBuilder',
+  'templateBuilder',
   'wp_mobile/config',
   'wp_mobile/keyvalues'
-], function(defaultSettings, Ad, gptConfig, utils, config, kvs){
+], function(
+  defaultSettings,
+  Ad,
+  gptConfig,
+  utils,
+  zoneBuilder,
+  templateBuilder,
+  config,
+  kvs
+){
 
   //add mobile specific, ad level keyvalues
   /*merge(Ad.prototype.keyvaluesConfig, {
 
   });*/
+
+  //build commercialNode
+  window.commercialNode = zoneBuilder.exec();
 
   //this is wpAd
   return utils.extend(defaultSettings, {
@@ -35,12 +49,14 @@ define([
 
     config: config,
 
-    //simulate what templatBuilder would return, without the cost of including/executing it
-    flights: {
+    flights: templateBuilder.exec(config.flights)
+
+    // simulate what templatBuilder would return, without the cost of including/executing it
+    /*flights: {
       t: {
         id: 'default'
       }
-    }
+    }*/
 
   });
 
