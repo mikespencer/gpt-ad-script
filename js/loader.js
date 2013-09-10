@@ -3,7 +3,7 @@
  */
 var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
 
-(function(w, d, $){
+(function($){
 
   'use strict';
 
@@ -11,14 +11,36 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
     return false;
   }
 
+  // Borrowed from HTML5BP: https://github.com/h5bp/html5-boilerplate/blob/master/js/plugins.js
+  // Avoid `console` errors in browsers that lack a console.
+  window.console = (function() {
+    var method;
+    var noop = function () {};
+    var methods = [
+      'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
+      'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
+      'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
+      'timeStamp', 'trace', 'warn'
+    ];
+    var length = methods.length;
+    var console = (window.console = window.console || {});
+
+    while (length--) {
+      method = methods[length];
+
+      // Only stub undefined methods.
+      if (!console[method]) {
+        console[method] = noop;
+      }
+    }
+    return console;
+  }());
+
   //Test for referencing local versions of files for testing
-  var localhost = /localhost/.test(d.domain),
+  var localhost = /localhost/.test(document.domain),
 
     //debugging flag
     debug = !!(/debugadcode/i.test(location.search)),
-
-    //safety check for console
-    hasConsole = w.console && typeof w.console.log === 'function',
 
     //base url for site scripts
     baseURL = localhost ? 'js/min/' : 'http://js.washingtonpost.com/wp-srv/ad/loaders/latest/js/min/',
@@ -43,7 +65,7 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
 
         //width settings:
         mobileThreshold = 768,
-        thisWidth = w.innerWidth || w.screen && w.screen.width,
+        thisWidth = window.innerWidth || window.screen && window.screen.width,
         isMobileWidth = thisWidth < mobileThreshold,
 
         //set default mobile/tablet flags to false:
@@ -145,9 +167,7 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
 
     //set some default fallbacks
     if(!siteScripts[site]){
-      if(hasConsole){
-        w.console.log('--ADOPS DEBUG-- Could not find attribute "data-ad-site" or a corresponding value. Defaulting to wp.min.js.');
-      }
+      console.log('--ADOPS DEBUG-- Could not find attribute "data-ad-site" or a corresponding value. Defaulting to wp.min.js.');
       site = 'wp';
       script = siteScripts.wp;
     }
@@ -155,13 +175,13 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
     //if responsive page and mobile device, update script reference to mobile version
     if(responsive && device.isMobile && device.isMobileWidth){
       site += /_mobile$/.test(site) ? '' : '_mobile';
-      if(debug && hasConsole){
-        w.console.log('--ADOPS DEBUG-- Resposive page detected. Attempting to use script:', script);
+      if(debug){
+        console.log('--ADOPS DEBUG-- Resposive page detected. Attempting to use script:', script);
       }
     }
 
-    if(debug && hasConsole){
-      w.console.log('--ADOPS DEBUG-- Loading site script:', script);
+    if(debug){
+      console.log('--ADOPS DEBUG-- Loading site script:', script);
     }
 
     //return siteScripts.wp;
@@ -179,7 +199,7 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
     $('*[id^="slug_"][data-ad-type]').hide().each(function(){
       var $this = $(this);
       placeAd2({
-        where: $this.data('adWhere') || w.commercialNode,
+        where: $this.data('adWhere') || window.commercialNode,
         what: $this.data('adType'),
         del: $this.data('adDelivery'),
         otf: $this.data('adOnTheFly')
@@ -253,13 +273,11 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
       crossDomain: true,
       timeout: 4000,
       error: function(err){
-        if(hasConsole){
-          w.console.log('--ADOPS DEBUG-- AdOps site script failed to load:', err);
-        }
+        console.log('--ADOPS DEBUG-- AdOps site script failed to load:', err);
       },
       success: function(){
-        if(debug && hasConsole){
-          w.console.log('--ADOPS DEBUG--', scriptURL, 'loaded');
+        if(debug){
+          console.log('--ADOPS DEBUG--', scriptURL, 'loaded');
         }
 
         displayAds();
@@ -274,8 +292,8 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
    * @param {Function} opt_callback Optional callback function once the script has loaded.
    */
   function loadScript(src, opt_callback) {
-    var s = d.createElement('script');
-    var target = d.body || d.getElementsByTagName('head')[0] || false;
+    var s = document.createElement('script');
+    var target = document.body || document.getElementsByTagName('head')[0] || false;
     opt_callback = opt_callback || false;
     if(target){
       s.type = 'text/' + (src.type || 'javascript');
@@ -353,4 +371,4 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
     });
   }
 
-})(window, document, window.jQuery);
+})(window.jQuery);
