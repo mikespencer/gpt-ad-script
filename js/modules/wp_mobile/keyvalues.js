@@ -7,7 +7,7 @@ define([
 ], function(utils, kvs){
 
   return utils.merge(kvs, {
-    forecast: function(){
+    /*forecast: function(){
       return ['1'];
     },
     csit: function(){
@@ -21,7 +21,7 @@ define([
     },
     u: function(){
       return [''];
-    }
+    }*/
   });
 
 });
