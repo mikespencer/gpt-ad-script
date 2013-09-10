@@ -1,10 +1,10 @@
 define([
   'keyvalues/config/kw',
   'keyvalues/config/poe',
+  'keyvalues/config/exclusions',
   'keyvalues/config/khost',
   'keyvalues/config/kuid',
-  'keyvalues/config/ksg',
-  'keyvalues/config/exclusions'
+  'keyvalues/config/ksg'
 ], function(kw, poe, exclusions, khost, kuid, ksg){
 
   /**
