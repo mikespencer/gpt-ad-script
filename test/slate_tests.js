@@ -53,6 +53,20 @@
     equal(wpAd.adsOnPage.leaderboard.keyvalues.ad[0], 'lb', 'leadboard kv ad ok');
   });
 
+  module('placeAd2 rightflex', {
+    setup: function(){
+      placeAd2(commercialNode, 'rightflex', false, '');
+    }
+  });
+
+  test('rightflex loaded', function(){
+    ok(wpAd.adsOnPage.rightflex, 'rightflex loaded');
+  });
+
+  test('rightflex ad slot created', function(){
+    ok(wpAd.adsOnPage.rightflex.slot, 'rightflex ad slot ok');
+  });
+
   module('gpt config and page level keyvalues tests');
 
   test('gpt config ok', function(){

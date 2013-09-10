@@ -26,6 +26,15 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
     //URL for jQuery to load if not already defined on the page
     jQueryURL = 'http://js.washingtonpost.com/wpost/js/combo/?token=201210102320000&c=true&m=true&context=eidos&r=/jquery-1.7.1.js',
 
+    //Config loading of site specific CSS or not.
+    //I'm currently doing this to prevent needlessly loading empty files
+    loadCSS = {
+      wp: true,
+      theroot: false,
+      slate: false,
+      wp_mobile: false
+    },
+
     //device detection
     device = (function(ua){
 
@@ -109,8 +118,9 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
     krux_script.setAttribute('data-timing', 'async');
     krux_script.setAttribute('data-version', '1.9');
 
-    //THIS BREAKS QUNIT TESTS.. NEED TO FIGURE OUT WHY
     if(target && !/file/.test(location.protocol)){
+    //THIS BREAKS QUNIT TESTS.. NEED TO FIGURE OUT WHY
+    //if(target){
       target.appendChild(krux_script);
     }
   }
@@ -166,11 +176,6 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
    * data attributes.
    */
   function displayAds(){
-
-    if(!window.commercialNode){
-      window.commercialNode = $('.page').attr('data-adkey');
-    }
-
     $('*[id^="slug_"][data-ad-type]').hide().each(function(){
       var $this = $(this);
       placeAd2({
@@ -187,7 +192,7 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
    * @param {String} site Name of site. Should match name of CSS file
    */
   function loadSiteCSS(site){
-    if(site){
+    if(site && loadCSS[site]){
       $('<link />').attr({
         type: 'text/css',
         rel: 'stylesheet',
@@ -216,11 +221,20 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
     var siteInfo = getSiteInfo(),
       scriptURL = baseURL + siteInfo.script;
 
+    //expose site info
+    wpAd.siteInfo = siteInfo;
+
     //store our version of jQuery
     wpAd.$ = $;
 
+    //mobile commercialNode fix
+    if(!window.commercialNode && wpAd.siteInfo.site === 'wp_mobile'){
+      window.commercialNode = $('.page').attr('data-adkey') || '';
+      window.commercialNode = window.commercialNode.replace(/^mob\.wp\./, '');
+    }
+
     //LOAD KRUX ASAP
-    if(siteInfo.site === 'wp' && !/kidspost/i.test(commercialNode)){
+    if((siteInfo.site === 'wp' || siteInfo.site === 'wp_mobile') && !/kidspost/i.test(commercialNode)){
       loadKrux('IbWIJ0xh');
     } else if(siteInfo.site === 'slate'){
       loadKrux('IemEj7lF');
@@ -248,17 +262,10 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
           w.console.log('--ADOPS DEBUG--', scriptURL, 'loaded');
         }
 
-        //commercialNode fallback for mobile:
-        window.commercialNode = window.commercialNode || $('.page').attr('data-adkey');
-
         displayAds();
       }
     });
 
-    //commercialNode fallback for mobile:
-    //window.commercialNode = window.commercialNode || $('.page').attr('data-adkey');
-
-    //displayAds();
   }
 
   /**

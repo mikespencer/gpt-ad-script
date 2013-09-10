@@ -1,7 +1,10 @@
 define([
   'keyvalues/config/kw',
-  'keyvalues/config/poe'
-], function(kw, poe){
+  'keyvalues/config/poe',
+  'keyvalues/config/khost',
+  'keyvalues/config/kuid',
+  'keyvalues/config/ksg'
+], function(kw, poe, khost, kuid, ksg){
 
   /**
    * Each key can take either a function, or an Array of functions that can assign multiple values
@@ -9,7 +12,10 @@ define([
    */
   return {
     kw: [kw],
-    poe: [poe]
+    poe: [poe],
+    khost: [khost],
+    kuid: [kuid],
+    ksg: [ksg]
   };
 
 });

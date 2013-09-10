@@ -22,6 +22,7 @@ module.exports = function (grunt) {
     uglify: {
       options: {
         banner: '/* <%= grunt.template.today("yyyy-mm-dd") %> */\n',
+        report: 'gzip',
         sourceMap: 'js/min/loader.map.js'
       },
       loader: {
@@ -38,6 +39,9 @@ module.exports = function (grunt) {
       },
       src: {
         src: ['js/modules/**/*.js', 'js/*.js']
+      },
+      libs: {
+        src: ['js/lib/krux.js']
       },
       qunit: {
         src: ['test/**/*.js']
@@ -155,6 +159,7 @@ module.exports = function (grunt) {
       build_js: [
         'jshint:src',
         'jshint:gruntfile',
+        'jshint:libs',
         'requirejs:wp',
         'requirejs:wp_mobile',
         'requirejs:slate',

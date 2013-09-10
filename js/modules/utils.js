@@ -401,7 +401,7 @@ define(['jQuery'], function($){
     },
 
     /**
-     * wp_meta_data Object safetly check
+     * wp_meta_data Object safety check
      * @type {Object}
      */
     wp_meta_data: window.wp_meta_data || {}
