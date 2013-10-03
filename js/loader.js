@@ -158,7 +158,8 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
         'wp': 'wp.min.js',
         'theroot': 'theroot.min.js',
         'slate': 'slate.min.js',
-        'wp_mobile': 'wp_mobile.min.js'
+        'wp_mobile': 'wp_mobile.min.js',
+        'slate_mobile': 'slate_mobile.min.js'
       },
       $target = $('script[data-ad-site]:first'),
       responsive = $target.data('adPageType') === 'responsive',

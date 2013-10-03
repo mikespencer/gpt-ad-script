@@ -97,6 +97,15 @@ module.exports = function (grunt) {
             'siteScript': 'wp_mobile/main'
           }
         }
+      },
+      slate_mobile: {
+        options: {
+          out: 'js/min/slate_mobile.min.js',
+          paths: {
+            'gpt': '../lib/gpt',
+            'siteScript': 'slate_mobile/main'
+          }
+        }
       }
     },
     compass: {
@@ -164,6 +173,7 @@ module.exports = function (grunt) {
         'requirejs:wp_mobile',
         'requirejs:slate',
         'requirejs:theroot',
+        'requirejs:slate_mobile',
         'uglify:loader'
       ]
     },
