@@ -54,7 +54,8 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
       wp: true,
       theroot: false,
       slate: false,
-      wp_mobile: false
+      wp_mobile: false,
+      slate_mobile: false
     },
 
     //device detection
