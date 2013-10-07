@@ -23,6 +23,11 @@ define(function(){
           [1,1]
         ]
       },
+      'mobBigbox': {
+        'size': [
+          [300, 250]
+        ]
+      },
       't': {
         'size': [
           [300,50],
