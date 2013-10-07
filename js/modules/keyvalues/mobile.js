@@ -5,8 +5,9 @@ define([
   'keyvalues/config/khost',
   'keyvalues/config/kuid',
   'keyvalues/config/ksg',
-  'keyvalues/config/pageId'
-], function(kw, poe, exclusions, khost, kuid, ksg, pageId){
+  'keyvalues/config/pageId',
+  'keyvalues/config/ref'
+], function(kw, poe, exclusions, khost, kuid, ksg, pageId, ref){
 
   /**
    * Each key can take either a function, or an Array of functions that can assign multiple values
@@ -19,7 +20,8 @@ define([
     khost: [khost],
     kuid: [kuid],
     ksg: [ksg],
-    pageId: [pageId]
+    pageId: [pageId],
+    ref: [ref]
   };
 
 });
