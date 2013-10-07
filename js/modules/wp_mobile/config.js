@@ -23,7 +23,7 @@ define(function(){
           [1,1]
         ]
       },
-      'mobBigbox': {
+      'mob_bigbox': {
         'size': [
           [300, 250]
         ]
