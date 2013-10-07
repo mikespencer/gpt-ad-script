@@ -5,7 +5,7 @@ define(function(){
   return {
     flights: {
       defaults: {
-        what: ['b', 'fixedBottom', 't', 'm']
+        what: ['b', 'fixedBottom', 't', 'm', 'halfpage']
       }
     },
     adTypes: {
@@ -29,6 +29,11 @@ define(function(){
       'm': {
         'size': [
           [300, 250]
+        ]
+      },
+      'halfpage': {
+        'size': [
+          [300, 600]
         ]
       }
     }
