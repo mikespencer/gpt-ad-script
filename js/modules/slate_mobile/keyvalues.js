@@ -7,21 +7,7 @@ define([
 ], function(utils, kvs){
 
   return utils.merge(kvs, {
-    /*forecast: function(){
-      return ['1'];
-    },
-    csit: function(){
-      return ['1'];
-    },
-    dw: function(){
-      return ['1'];
-    },
-    loc: function(){
-      return [''];
-    },
-    u: function(){
-      return [''];
-    }*/
+    //Slate mobile web specific page level keyvalues here
   });
 
 });
