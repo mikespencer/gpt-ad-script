@@ -5,7 +5,7 @@ define(function(){
   return {
     flights: {
       defaults: {
-        what: ['b', 'fixedBottom', 't']
+        what: ['b', 'fixedBottom', 'mob_enterprise', 't']
       }
     },
     adTypes: {
@@ -24,6 +24,11 @@ define(function(){
         ]
       },
       'mob_bigbox': {
+        'size': [
+          [300, 250]
+        ]
+      },
+      'mob_enterprise': {
         'size': [
           [300, 250]
         ]
