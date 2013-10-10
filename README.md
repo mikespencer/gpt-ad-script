@@ -146,6 +146,16 @@ There is currently only one delivery type for our GPT ads at this time...
 +  Seems to be caching issues when pushing live... Temporarily fixed for now by manually flushing each *.min.js url
 +  Let's see if we can get uglifyjs updated to version 2 on the server so that we can utilise source maps. Optimizer requires uglifyjs2 in order to generate source maps. I think this would be very useful/important for our debugging.
 
++  **FOR WP LAUNCH**
+    +  subscribe promos
+    +  county sponsor stuff
+    +  vi delivery using data-ad-type="vi" attribute
+    +  hackbin --> overrides
+    +  brand connect tracking
+    +  wpplus pixels
+
+
+
 ##NOTES:
 
 +  You can debug the page by using `?debugAdCode`, the bookmarklet, or just press `ctrl+F9`.

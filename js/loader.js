@@ -115,7 +115,7 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
     })(navigator.userAgent);
 
   /**
-   * Custom function with special attributes for loading Krux's script
+   * Custom function with special attributes for loading Krux's script (unique circumstances)
    * @param {String} id Krux id (site specific). Defaults to wp.
    */
   function loadKrux(id){
