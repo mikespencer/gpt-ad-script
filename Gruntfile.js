@@ -187,6 +187,9 @@ module.exports = function (grunt) {
       wp: {
         path: 'http://localhost:<%= connect.options.port %>/index.html'
       },
+      wp_article: {
+        path: 'http://localhost:<%= connect.options.port %>/article.html'
+      },
       theroot: {
         path: 'http://localhost:<%= connect.options.port %>/theroot.html'
       }
@@ -227,7 +230,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('server', [
     'connect:livereload',
-    'open:wp_mobile',
+    'open:wp_article',
     'watch'
   ]);
 

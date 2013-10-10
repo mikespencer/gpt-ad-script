@@ -226,16 +226,14 @@
       },
 
       where: function(ad){
-        return '<div class="ad-debug-section">' +
+        return ad.fullGPTSite ? '<div class="ad-debug-section">' +
           '<div class="ad-debug-bold">Where:</div>' +
           '<div>' + ad.fullGPTSite + '</div>' +
-        '</div>';
+        '</div>' : '';
       },
 
       keyvalueList: function(ad){
-        var list = '<div class="ad-debug-section">' +
-            '<div class="ad-debug-bold">Keyvalues: </div>' +
-              '<ul>',
+        var list = '<div class="ad-debug-section">',
 
           //important to use "clone", as "extend" will permanently overwrite first argument
           //keyvalues = extend(clone(wpAd.gptConfig.keyvalues), ad.keyvalues),
@@ -243,26 +241,39 @@
           sortedKeys = [],
           key, l, i;
 
-        for(key in keyvalues){
-          if(keyvalues.hasOwnProperty(key) && keyvalues[key].length){
-            sortedKeys.push(key);
+
+        if(ad.keyvalues){
+
+          list += '<div class="ad-debug-bold">Keyvalues: </div>' +
+              '<ul>';
+
+          for(key in keyvalues){
+            if(keyvalues.hasOwnProperty(key) && keyvalues[key].length){
+              sortedKeys.push(key);
+            }
           }
+          //sort alphabetically, ignoring case
+          sortedKeys.sort(function(a, b){
+            a = a.toLowerCase();
+            b = b.toLowerCase();
+            return a < b ? -1 : a > b ? 1 : 0;
+          });
+
+          l = sortedKeys.length;
+
+          for(i=0;i<l;i++){
+            list += '<li><span class="ad-debug-bold">' + sortedKeys[i] + ': </span>' + keyvalues[sortedKeys[i]].toString().replace(/\,/g, ', ') + '</li>';
+          }
+
+          list += '</ul></div>';
+
+        //hardcoded ad call support:
+        } else if(ad.config.hardcode){
+          list += '<div class="ad-debug-bold">Hardcoded:</div>' +
+            '<textarea cols="36" rows="12">' + ad.config.hardcode.toString() + '</textarea>';
         }
 
-        //sort alphabetically, ignoring case
-        sortedKeys.sort(function(a, b){
-          a = a.toLowerCase();
-          b = b.toLowerCase();
-          return a < b ? -1 : a > b ? 1 : 0;
-        });
-
-        l = sortedKeys.length;
-
-        for(i=0;i<l;i++){
-          list += '<li><span class="ad-debug-bold">' + sortedKeys[i] + ': </span>' + keyvalues[sortedKeys[i]].toString().replace(/\,/g, ', ') + '</li>';
-        }
-
-        return list + '</ul></div>';
+        return list;
       },
 
       content: function(ad){

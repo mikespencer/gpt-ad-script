@@ -3,7 +3,7 @@
 /**
  * wpAd Ad object. Builds an individual ad
  */
-define(['utils'], function(utils){
+define(['jQuery', 'utils'], function($, utils){
 
   /**
    * Constructor
@@ -221,7 +221,8 @@ define(['utils'], function(utils){
             utils.setTargeting(this.keyvalues, this.slot);
             googletag.display(this.container.id);
           } else {
-            this.container.innerHTML = this.config.hardcode;
+            var hc = typeof this.config.hardcode === 'function' ? this.config.hardcode() : this.config.hardcode;
+            $(this.container).append(hc);
           }
         }
       } else {

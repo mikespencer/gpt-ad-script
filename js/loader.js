@@ -203,8 +203,8 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
       placeAd2({
         where: $this.data('adWhere') || window.commercialNode,
         what: $this.data('adType'),
-        del: $this.data('adDelivery'),
-        otf: $this.data('adOnTheFly')
+        delivery: $this.data('adDelivery'),
+        onTheFly: $this.data('adOnTheFly')
       });
     });
   }
@@ -258,7 +258,7 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
     //LOAD KRUX ASAP
     if((siteInfo.site === 'wp' || siteInfo.site === 'wp_mobile') && !/kidspost/i.test(commercialNode)){
       loadKrux('IbWIJ0xh');
-    } else if(siteInfo.site === 'slate'){
+    } else if(siteInfo.site === 'slate' || siteInfo.site === 'slate_mobile'){
       loadKrux('IemEj7lF');
     }
 

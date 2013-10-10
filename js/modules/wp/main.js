@@ -13,7 +13,8 @@ define([
   'wp/keyvalues',
   'wp/overrides',
   'wp/hpRefresh',
-  'criteo'
+  'wp/textlinks',
+  'criteo',
 
 ], function(
 
@@ -27,6 +28,7 @@ define([
   kvs,
   overrides,
   hpRefresh,
+  textlinks,
   criteo
 
 ){
@@ -69,6 +71,8 @@ define([
   return utils.extend(defaultSettings, {
 
     criteo: criteo.exec(),
+
+    textlinks: textlinks,
 
     hpRefresh: hpRefresh.exec(),
 

@@ -2,7 +2,7 @@
 
 // load dependencies:
 // "siteScript" is defined in the site specific build file (eg: build/slate.js)
-require(['gpt', 'siteScript', 'utils', 'jQuery'], function (gpt, wpAd, utils, $){
+require(['gpt', 'siteScript', 'utils', 'jQuery', 'vi'], function (gpt, wpAd, utils, $, vi){
 
   var queue = placeAd2.queue || [];
 
@@ -43,6 +43,7 @@ require(['gpt', 'siteScript', 'utils', 'jQuery'], function (gpt, wpAd, utils, $)
           //for backwards compat with legacy inline placeAd2 calls
           where: arguments[0],
           what: arguments[1],
+          delivery: arguments[2],
           onTheFly: arguments[3]
         },
         pos = config.what,
@@ -61,33 +62,41 @@ require(['gpt', 'siteScript', 'utils', 'jQuery'], function (gpt, wpAd, utils, $)
       // if the ad type is legit, open and hasn't already been built/rendered on the page
       if(wpAd.config.adTypes[config.what] &&
          ((wpAd.flights && wpAd.flights[pos] || wpAd.flights[config.what + '*']) || utils.flags.allAds)){
-        if(!wpAd.adsOnPage[pos]){
 
-          // build and store our new ad
-          ad = new wpAd.Ad({
-            templateSettings: wpAd.config.adTypes[config.what],
-            dfpSite: wpAd.constants.dfpSite,
-            where: window.commercialNode,
-            //where: config.where,
-            size: wpAd.config.adTypes[config.what].size,
-            what: config.what,
-            pos: pos,
-            posOverride: posOverride,
-            hardcode: wpAd.flights[pos] && wpAd.flights[pos].hardcode || false,
-            onTheFly: config.onTheFly
-          });
+        //viewable impression delivery
+        if(typeof config.delivery === 'string' && config.delivery.toLowerCase() === 'vi'){
 
-          // display the gpt ad
-          ad.render();
+          vi.exec('**VI**', config.what, config);
 
-          // store for debugging
-          wpAd.adsOnPage[pos] = ad;
-
+        //normal delivery
         } else {
-          // refresh if ad/spot already rendered
-          wpAd.adsOnPage[pos].refresh();
-        }
+          if(!wpAd.adsOnPage[pos]){
 
+            // build and store our new ad
+            ad = new wpAd.Ad({
+              templateSettings: wpAd.config.adTypes[config.what],
+              dfpSite: wpAd.constants.dfpSite,
+              where: window.commercialNode,
+              //where: config.where,
+              size: wpAd.config.adTypes[config.what].size,
+              what: config.what,
+              pos: pos,
+              posOverride: posOverride,
+              hardcode: wpAd.flights[pos] && wpAd.flights[pos].hardcode || false,
+              onTheFly: config.onTheFly
+            });
+
+            // display the gpt ad
+            ad.render();
+
+            // store for debugging
+            wpAd.adsOnPage[pos] = ad;
+
+          } else {
+            // refresh if ad/spot already rendered
+            wpAd.adsOnPage[pos].refresh();
+          }
+        }
       } else {
         wpAd.adsDisabledOnPage[pos] = true;
       }

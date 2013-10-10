@@ -208,6 +208,34 @@ define(['jQuery'], function($){
 
     /**
      * Checks if argument is an Array.
+     * @param {Object} atts Object of attributes to be applied to the iframe. Extends defaults.
+     * @return {Iframe DOM Element}
+     */
+    iframeBuilder: function (atts) {
+      var i = document.createElement('iframe'),
+        key;
+
+      atts = atts || {};
+
+      //defaults
+      i.frameBorder = '0';
+      i.height = '0';
+      i.width = '0';
+      i.scrolling = 'no';
+      i.marginHeight = '0';
+      i.marginWidth = '0';
+
+      for(key in atts) {
+        if(atts.hasOwnProperty(key)) {
+          i[key] = atts[key];
+        }
+      }
+
+      return i;
+    },
+
+    /**
+     * Checks if argument is an Array.
      * @param {*} a The data type to check.
      * @return {Boolean} true if argument is Array, false otherwise.
      */

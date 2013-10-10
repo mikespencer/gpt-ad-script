@@ -8,18 +8,18 @@ define(['utils'], function(utils){
     demoAds: utils.urlCheck('demoAds', {type: 'variable'}),
 
     exec: function(json){
-      if(!this.demoAds){
-        this.template = {};
-        for(var key in json){
-          if(json.hasOwnProperty(key)){
-            json[key].id = key;
-            if(this.checkFlight(json[key])){
-              this.addToTemplate(json[key]);
-            }
+      this.template = {};
+      for(var key in json){
+        if(json.hasOwnProperty(key)){
+          json[key].id = key;
+          if(this.checkFlight(json[key])){
+            this.addToTemplate(json[key]);
           }
         }
-      } else {
-        this.template = this.demoAdsTemplate(this.demoAds);
+      }
+      if(this.demoAds){
+        this.template = this.demoAdsTemplate(this.demoAds, this.template);
+        console.log('TEMPLATE:', this.template);
       }
       return this.template;
     },
@@ -67,13 +67,13 @@ define(['utils'], function(utils){
       }
     },
 
-    demoAdsTemplate: function(adStr){
+    demoAdsTemplate: function(adStr, template){
       var ads = adStr.split(';'),
         l = ads.length,
         rv = {};
       while(l--){
         ads[l] = this.posConverter(ads[l]);
-        rv[ads[l]] = { id: 'demoAds' };
+        rv[ads[l]] = template[ads[l]] || { id: 'demoAds'};
       }
       return rv;
     },
@@ -98,6 +98,7 @@ define(['utils'], function(utils){
 
     //true/false checks:
     checks: {
+
       test: function(val){
         return typeof val === 'function' ? val() : val;
       },
