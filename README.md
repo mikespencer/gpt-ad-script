@@ -67,21 +67,31 @@ With:
 
     <script src="http://js.washingtonpost.com/wp-srv/ad/loaders/latest/js/min/loader.min.js" data-ad-site="[SITE]"></script>
 
-Where `[SITE]` can be either `wp`, `slate`, `theroot` or `wp_mobile`.
+Where `[SITE]` can be either `wp`, `slate`, `theroot`, `slate_mobile` or `wp_mobile`.
 
-If the page is a **responsive** page (needs potential for desktop and mobile ad calls), add the attribute `data-ad-page-type="responsive"` to the above script tag. **Do not add an async attribute to this script tag**. A placeAd2 placeholder function needs to be defined immediately to prevent errors using this method. All other scripts are loaded asynchronously from this script.
+If the page is a **responsive** page (needs potential for desktop and mobile ad calls), add the attribute `data-ad-page-type="responsive"` to the above script tag and use the desktop version of the script for `[SITE]`. **Do not add an async attribute to this script tag**. A placeAd2 placeholder function needs to be defined immediately to prevent errors using this method. All other scripts are loaded asynchronously from this script.
 
 
 
 ###Ad Spot Coding:
 
-Each placeAd2 call can remain unchanged on the page.
+Each placeAd2 call can remain unchanged on the page for backwards compatibility:
 
     <script>
       placeAd2(commercialNode, [pos value]:String, [delivery type]:String|false, [on the fly keyvalues]:String);
     </script>
 
 
+Although, the new implementation of placeAd2 is preferred:
+
+    <script>
+      placeAd2({
+        where: commercialNode (OPTIONAL),
+        what: [pos value]:String,
+        delivery: [delivery type]:String (OPTIONAL - use "vi" for ads to be rendered on view. Still in dev),
+        onTheFly: [on the fly keyvalues]:String (OPTIONAL)
+      });
+    </script>
 
 
 ##Preferred Implementation (full asyc, data attributes)
@@ -99,9 +109,9 @@ Place the following script at/towards the bottom of the page:
 
     <script src="http://js.washingtonpost.com/wp-srv/ad/loaders/latest/js/min/loader.min.js" data-ad-site="[SITE]" async></script>
 
-Where `[SITE]` can be either `wp`, `slate`, `theroot` or `wp_mobile`.
+Where `[SITE]` can be either `wp`, `slate`, `theroot`, `slate_mobile` or `wp_mobile`.
 
-If the page is a **responsive** page (needs potential for desktop and mobile ad calls), add the attribute `data-ad-page-type="responsive"` to the above script tag.
+If the page is a **responsive** page (needs potential for desktop and mobile ad calls), add the attribute `data-ad-page-type="responsive"` to the above script tag and use the desktop version of the script for `[SITE]`.
 
 
 
@@ -124,7 +134,6 @@ Where `[POS]` should be the pos value of the ad (leaderboard, bigbox, pushdown, 
 Etc...
 
 
-
 ####Additional attributes
 
 The following attributes can be added to the `#slug_[POS]` element (ad spot) to further customise the ad call if needed (just like the arguments in placeAd2):
@@ -137,8 +146,13 @@ On the fly keyvalues example:
 
     data-ad-on-the-fly="newKeyvalue=1"
 
-There is currently only one delivery type for our GPT ads at this time...
+####In Development (doesn't work... yet)
 
+There is currently only one delivery type for our GPT ads at this time... However, once developed:
+
+    data-ad-delivery="vi"
+
+This example would deliver the ad as a "viewable impression" (only once it is in view).
 
 
 ##TODO:
@@ -158,4 +172,4 @@ There is currently only one delivery type for our GPT ads at this time...
 
 ##NOTES:
 
-+  You can debug the page by using `?debugAdCode`, the bookmarklet, or just press `ctrl+F9`.
++  You can debug the page by using `?debugAdCode`, the bookmarklet, or just press `ctrl+F9`. `ctrl+F9` will only work in a particular browser on a domain once you have used one of the other two methods to debug the page. This is to try to prevent users "accidently" pressing ctrl+f9 and getting our debug boxes.
