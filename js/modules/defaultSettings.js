@@ -15,7 +15,10 @@ define(function(){
     adsDisabledOnPage: {},
 
     //container for array of functions to execute on load
-    init: []
+    init: [],
+
+    //array to store deferred functions
+    deferred: []
 
   };
 

@@ -50,6 +50,7 @@ require(['gpt', 'siteScript', 'utils', 'jQuery', 'viewable'], function (gpt, wpA
         },
         pos = config.what,
         posOverride = false,
+        vi = typeof config.delivery === 'string' && config.delivery.toLowerCase() === 'vi',
         posArray,
         ad;
 
@@ -66,7 +67,7 @@ require(['gpt', 'siteScript', 'utils', 'jQuery', 'viewable'], function (gpt, wpA
          ((wpAd.flights && wpAd.flights[pos] || wpAd.flights[config.what + '*']) || utils.flags.allAds)){
 
         //viewable impression delivery
-        if(typeof config.delivery === 'string' && config.delivery.toLowerCase() === 'vi'){
+        if(vi){
 
           //set to call placeAd2 to actually render when in view
           //first, set some css so we can find its position on the page
@@ -125,7 +126,10 @@ require(['gpt', 'siteScript', 'utils', 'jQuery', 'viewable'], function (gpt, wpA
       }
 
       // always need to create this queue
-      wpAd.debugQueue.push(pos);
+      // unless its a viewable impression, in which case it is not "disabled", so we hold off on this
+      if(!vi){
+        wpAd.debugQueue.push(pos);
+      }
 
     };
 
@@ -139,5 +143,15 @@ require(['gpt', 'siteScript', 'utils', 'jQuery', 'viewable'], function (gpt, wpA
 
   // expose wpAd to the window for debugging + external code to access/build off of.
   window.wpAd = utils.extend(wpAd, window.wpAd);
+
+  //execute deferred functions
+  if(wpAd.deferred.length){
+    $(window).load(function(){
+      var l = wpAd.deferred.length;
+      for(var i = 0; i < l; i++){
+        wpAd.deferred[i]();
+      }
+    });
+  }
 
 });

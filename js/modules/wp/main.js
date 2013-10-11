@@ -70,16 +70,18 @@ define([
   //overrides config
   utils.extend(Ad.prototype.overrides, overrides);
 
-
-  //deferred
-  $(window).load(function(){
-    wpPlus.exec(kvs)
-  });
-
   //this is wpAd
   return utils.extend(defaultSettings, {
 
     criteo: criteo.exec(),
+
+    //Array of deferred functions to execute on $(window).load
+    deferred: [
+      wpPlus.exec
+    //, brandconnect
+    //, subscribe promos
+    //, etc
+    ],
 
     textlinks: textlinks,
 
@@ -99,6 +101,7 @@ define([
       keyvaluesConfig: kvs
     }),
 
+    //ad spots and flights
     config: config,
 
     //determine open ad spots

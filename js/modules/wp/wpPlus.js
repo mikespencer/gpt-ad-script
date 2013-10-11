@@ -1,7 +1,10 @@
 define(['utils'], function(utils){
 
 
-  return {
+  //leveraging wpAd.gptConfig.keyvalues in this file:
+  var wpAd = window.wpAd || {};
+
+  var _this = {
 
     config: {
       'local/education': [
@@ -113,7 +116,6 @@ define(['utils'], function(utils){
     },
 
     addScriptPixel: function(pixel){
-      var _this = this;
       utils.ajax({
         url: pixel,
         dataType: 'script',
@@ -131,66 +133,58 @@ define(['utils'], function(utils){
 
     //21368-CW
     //21369-CW
-    deVals: function(kv_fns){
+    deVals: function(){
+      var de = wpAd.gptConfig && wpAd.gptConfig.keyvalues && wpAd.gptConfig.keyvalues.de || [],
+        l = de.length,
+        pixl;
 
-      var de = null, l, pixl;
-
-      if(kv_fns.de && kv_fns.de[0]){
-        de = kv_fns.de[0]();
-      }
-
-      if(de){
-        l = de.length;
-        while(l--){
-          pixl = this.deConfig[de[l]] ? this.deConfig[de[l]].length : 0;
-          while(pixl--){
-            this.addScriptPixel(deConfig[de[l]][pixl]);
-          }
+      while(l--){
+        pixl = _this.deConfig[de[l]] ? _this.deConfig[de[l]].length : 0;
+        while(pixl--){
+          _this.addScriptPixel(deConfig[de[l]][pixl]);
         }
       }
     },
 
-    //passing in kv_fns (keyvalue functions) here to utilise for de values and author values, for example
-    exec: function(kv_fns){
+    exec: function(){
       var videoPage = utils.wp_meta_data.contentType && utils.wp_meta_data.contentType.toString() === 'VideoStory',
         where, check, l, config;
 
       //20951 - CW - WP+ pixel for wp sitewide
-      this.addScriptPixel('http://pixel.mathtag.com/event/js?mt_id=193782&mt_adid=109699&v1=&v2=&v3=&s1=&s2=&s3=');
+      _this.addScriptPixel('http://pixel.mathtag.com/event/js?mt_id=193782&mt_adid=109699&v1=&v2=&v3=&s1=&s2=&s3=');
 
       for(where in config){
-        if(this.config.hasOwnProperty(where)){
+        if(_this.config.hasOwnProperty(where)){
           check = new RegExp('^' + where);
           if(check.test(window.commercialNode)){
-            l = this.config[where].length;
+            l = _this.config[where].length;
             while(l--){
-              this.addScriptPixel(this.config[where][l]);
+              _this.addScriptPixel(_this.config[where][l]);
             }
           }
         }
       }
 
-      this.deVals(kv_fns);
+      _this.deVals();
 
       if(!videoPage){
         //21549-wp sitewide, non-video
         utils.addPixel('http://search.spotxchange.com/track/tag/7067.4067/img');
         //21498-ezra klein pages, non-video
+        var authors = wpAd.gptConfig && wpAd.gptConfig.keyvalues && wpAd.gptConfig.keyvalues.author || [];
+        var authorsLen = authors.length;
 
-        var authors = kv_fns.author && kv_fns.author[0] && kv_fns.author[0]() || [];
-        var alen = authors.length;
-
-        while(alen--){
-          if(authors[alen] === 'ezra_klein'){
-            this.addScriptPixel('http://pixel.mathtag.com/event/js?mt_id=235978&mt_adid=109699&v1=&v2=&v3=&s1=&s2=&s3=');
+        while(authorsLen--){
+          if(authors[authorsLen] === 'ezra_klein'){
+            _this.addScriptPixel('http://pixel.mathtag.com/event/js?mt_id=235978&mt_adid=109699&v1=&v2=&v3=&s1=&s2=&s3=');
             break;
           }
         }
-
       }
-
     }
 
   };
+
+  return _this;
 
 });
