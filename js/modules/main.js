@@ -2,9 +2,11 @@
 
 // load dependencies:
 // "siteScript" is defined in the site specific build file (eg: build/slate.js)
-require(['gpt', 'siteScript', 'utils', 'jQuery', 'vi'], function (gpt, wpAd, utils, $, vi){
+require(['gpt', 'siteScript', 'utils', 'jQuery', 'viewable'], function (gpt, wpAd, utils, $, vi){
 
   var queue = placeAd2.queue || [];
+
+  $.fn.viewable = vi;
 
   //make sure these are defined:
   wpAd.adsOnPage = wpAd.adsOnPage || {};
@@ -66,7 +68,28 @@ require(['gpt', 'siteScript', 'utils', 'jQuery', 'vi'], function (gpt, wpAd, uti
         //viewable impression delivery
         if(typeof config.delivery === 'string' && config.delivery.toLowerCase() === 'vi'){
 
-          vi.exec('**VI**', config.what, config);
+          //set to call placeAd2 to actually render when in view
+          //first, set some css so we can find its position on the page
+          $('#slug_' + pos).css({
+            width: wpAd.config.adTypes[config.what].size[0][0] + 'px',
+            height: wpAd.config.adTypes[config.what].size[0][1] + 'px',
+            display: 'block'
+          //call the viewable method
+          }).viewable({
+            //on view:
+            offset: 10,
+            interval: 300,
+            callback: function(){
+              //reset above css
+              $(this).css({
+                height: '',
+                width: '',
+                display: ''
+              });
+              //render the ad
+              placeAd2({what: pos});
+            }
+          });
 
         //normal delivery
         } else {

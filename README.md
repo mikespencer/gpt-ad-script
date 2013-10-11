@@ -88,7 +88,7 @@ Although, the new implementation of placeAd2 is preferred:
       placeAd2({
         where: commercialNode (OPTIONAL),
         what: [pos value]:String,
-        delivery: [delivery type]:String (OPTIONAL - use "vi" for ads to be rendered on view. Still in dev),
+        delivery: [delivery type]:String (OPTIONAL - use "vi" for ads to be rendered on view),
         onTheFly: [on the fly keyvalues]:String (OPTIONAL)
       });
     </script>
@@ -146,13 +146,10 @@ On the fly keyvalues example:
 
     data-ad-on-the-fly="newKeyvalue=1"
 
-####In Development (doesn't work... yet)
-
-There is currently only one delivery type for our GPT ads at this time... However, once developed:
+This example will deliver the ad as a "viewable impression" (only once it is in view).
 
     data-ad-delivery="vi"
 
-This example would deliver the ad as a "viewable impression" (only once it is in view).
 
 
 ##TODO:
@@ -163,11 +160,8 @@ This example would deliver the ad as a "viewable impression" (only once it is in
 +  **FOR WP LAUNCH**
     +  subscribe promos
     +  county sponsor stuff
-    +  vi delivery using data-ad-type="vi" attribute
     +  hackbin --> overrides
     +  brand connect tracking
-    +  wpplus pixels
-
 
 
 ##NOTES:

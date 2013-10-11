@@ -175,8 +175,12 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
     }
 
     //if responsive page and mobile device, update script reference to mobile version
-    if(responsive && device.isMobile && device.isMobileWidth){
+    if(responsive &&
+       ((typeof window.mobileMode === 'function' && window.mobileMode()) ||
+        (device.isMobile && device.isMobileWidth))){
+
       site += /_mobile$/.test(site) ? '' : '_mobile';
+
       if(debug){
         console.log('--ADOPS DEBUG-- Resposive page detected. Attempting to use script:', script);
       }
@@ -358,10 +362,11 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
   if ($ && $.fn && versionChecker($.fn.jquery, '1.7.1')) {
     init();
 
-  //else if no jquery at all, load it - use noConflict() to not affect site's $ object
+  //else if no jquery at all, load it - can use noConflict() to not affect site's $ object
   } else if(!$){
     loadScript(jQueryURL, function(){
-      $ = window.jQuery.noConflict();
+      //$ = window.jQuery.noConflict();
+      $ = window.jQuery;
       init();
     });
 

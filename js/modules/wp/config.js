@@ -355,7 +355,7 @@ define(['utils', 'wp/textlinks'], function(utils, textlinks){
       "featrent": { "size": [[1,1]] },
       "featurebar": { "size": [[446,33]], "keyvalues": { "ad": ["fb"], "pos": ["ad7"] } },
       "flex": { "size": [[336,850]], "keyvalues": { "ad": ["hp"] } },
-      "flex_bb_hp": { "size": [[300,250],[300,600],[336,850]], "keyvalues": { "ad": ["hp","bb"], "pos": ["ad16"] } },
+      "flex_bb_hp": { "size": [[300,250],[300,600]], "keyvalues": { "ad": ["hp","bb"], "pos": ["ad16"] } },
       "flex_re": { "size": [[300,250],[300,600]], "keyvalues": { "ad": ["bb","tp"] } },
       "flex_ss_bb": { "size": [[160,600],[300,250]], "keyvalues": { "ad": ["ss","bb"] } },
       "flex_ss_bb_hp": { "size": [[160,600],[300,250],[300,600],[336,850]], "keyvalues": { "ad": ["ss","bb","hp"], "pos": ["ad6"] } },

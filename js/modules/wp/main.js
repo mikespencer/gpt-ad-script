@@ -2,7 +2,7 @@
  * washingtonpost.com site specific ad script (desktop)
  */
 define([
-
+  'jQuery',
   'defaultSettings',
   'Ad',
   'GPTConfig',
@@ -14,10 +14,11 @@ define([
   'wp/overrides',
   'wp/hpRefresh',
   'wp/textlinks',
-  'criteo',
+  'wp/wpPlus',
+  'criteo'
 
 ], function(
-
+  $,
   defaultSettings,
   Ad,
   gptConfig,
@@ -29,6 +30,7 @@ define([
   overrides,
   hpRefresh,
   textlinks,
+  wpPlus,
   criteo
 
 ){
@@ -64,8 +66,15 @@ define([
     }
   }, config.flights);*/
 
+
   //overrides config
   utils.extend(Ad.prototype.overrides, overrides);
+
+
+  //deferred
+  $(window).load(function(){
+    wpPlus.exec(kvs)
+  });
 
   //this is wpAd
   return utils.extend(defaultSettings, {

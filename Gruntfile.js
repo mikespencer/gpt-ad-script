@@ -55,6 +55,7 @@ module.exports = function (grunt) {
         include: ['main'],
         preserveLicenseComments: false,
         //optimize: 'uglify2',
+        optimize: 'none',
         //generateSourceMaps: true,
         shim: {
           'gpt': {
@@ -188,7 +189,7 @@ module.exports = function (grunt) {
         path: 'http://localhost:<%= connect.options.port %>/index.html'
       },
       wp_article: {
-        path: 'http://localhost:<%= connect.options.port %>/article.html'
+        path: 'http://localhost:<%= connect.options.port %>/article_placeAd2.html'
       },
       theroot: {
         path: 'http://localhost:<%= connect.options.port %>/theroot.html'
