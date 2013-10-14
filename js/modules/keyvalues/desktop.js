@@ -28,7 +28,7 @@ define([
     khost: [khost],
     kuid: [kuid],
     ksg: [ksg],
-    rs: [rs],
+    //rs: [rs],
     u: [u]
   };
 

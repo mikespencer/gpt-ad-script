@@ -2,7 +2,6 @@
  * washingtonpost.com site specific ad script (desktop)
  */
 define([
-  'jQuery',
   'defaultSettings',
   'Ad',
   'GPTConfig',
@@ -18,7 +17,6 @@ define([
   'criteo'
 
 ], function(
-  $,
   defaultSettings,
   Ad,
   gptConfig,
