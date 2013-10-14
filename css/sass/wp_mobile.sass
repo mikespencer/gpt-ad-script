@@ -3,15 +3,21 @@
 @import vars
 @import "compass/css3/box-shadow"
 
-.ad-fixed-bottom
+//.ad-fixed-bottom
+#slug_fixedBottom
   position: fixed
   bottom: 0
   left: 0
   width: 100%
-  background-color: white
-  +box-shadow(#000 0 0 10px)
+  height: 50px
+  background-color: #eee
+  text-align: center
+  z-index: 1000000
+  padding-top: 1px
+//  +box-shadow(#000 0 0 10px)
+  +box-shadow(#eee 0 -1px 2px)
 
-.ad-fixed-bottom > iframe
-  display: block
-  width: 300px
-  margin: 0 auto
+//.ad-fixed-bottom > iframe
+//  display: block
+//  width: 300px
+//  margin: 0 auto
