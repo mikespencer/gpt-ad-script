@@ -12,6 +12,9 @@ define(['utils'], function(utils) {
         if (this.config.where === "washingtonpost.com") {
           this.config.size = [[184,90]];
         }
+        //important to disable carousel
+        window.wpTiles = window.wpTiles || {};
+        window.wpTiles.hasTiff = true;
       }
     },
     pos: {

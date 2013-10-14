@@ -330,12 +330,13 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
       return false;
     }
 
-    var _test, _min;
+    var _test, _min, len, i;
 
     thisVer = thisVer.split('.');
     minVer = minVer.split('.');
+    len = minVer.length;
 
-    for(var i=0;i<minVer.length;i++){
+    for(i=0;i<len;i++){
       if(typeof thisVer[i] !== 'undefined'){
 
         _test = parseInt(thisVer[i], 10);
