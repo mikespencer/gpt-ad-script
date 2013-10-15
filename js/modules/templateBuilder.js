@@ -119,7 +119,6 @@ define(['utils'], function(utils){
                  when[1] >= utils.estNowWithYear.substr(0, when[1].length);
         } else {
           var now = utils.estNowWithYear.substr(0, when.length);
-          console.log('NOW:', now, 'WHEN:', when, when === now);
           return when === now;
         }
       }
