@@ -33,6 +33,9 @@ define(['utils'], function(utils) {
             this.config.where += 'refresh';
           }
         }
+        this.addKeyvalues({
+          del: ['js']
+        });
       },
       featrent: function() {
         var adi_div = document.getElementById('wpni_adi_featrent');
@@ -52,6 +55,14 @@ define(['utils'], function(utils) {
           this.config.where === 'lifestyle/home-garden') {
           this.config.where += '/flex';
         }
+        this.addKeyvalues({
+          del: ['js']
+        });
+      },
+      flex_ss_bb_hp: function(){
+        this.addKeyvalues({
+          del: ['js']
+        });
       },
       pushdown: function(){
         if(this.config.where === 'washingtonpost.com'){
