@@ -57,21 +57,27 @@ define([
 
 
   //add listener to hide/show fixed ad based on orientation. Hide for landscape, show for portrait.
-  if(_wpAd.flights.fixedBottom){
-    window.addEventListener('orientationchange', function() {
-      //landscape
-      if(window.innerWidth > window.innerHeight){
-        $('#slug_fixedBottom').css({
-          display: 'none'
-        });
-      //portrait
-      } else {
-        $('#slug_fixedBottom').css({
-          display: 'block'
-        });
-      }
-    }, false);
-  }
+  window.addEventListener('orientationchange', function() {
+    //if page loaded in landscape, fixedBotton will be disabled.
+    //rebuild the flights object and make placeAd2 call.
+    if(!_wpAd.flights.fixedBottom){
+      window.wpAd.flights = templateBuilder.exec(config.flights);
+      window.placeAd2({
+        what: 'fixedBottom'
+      });
+    }
+    //landscape
+    if(window.innerWidth > window.innerHeight){
+      $('#slug_fixedBottom').css({
+        display: 'none'
+      });
+    //portrait
+    } else {
+      $('#slug_fixedBottom').css({
+        display: 'block'
+      });
+    }
+  }, false);
 
   return _wpAd;
 
