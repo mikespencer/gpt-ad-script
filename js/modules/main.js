@@ -16,7 +16,7 @@ require(['gpt', 'siteScript', 'utils', 'jQuery', 'viewable'], function (gpt, wpA
 
   if(utils.flags.debug){
     utils.debug(queue);
-  } else if($ && $.fn && $.fn.on && window.localStorage && localStorage.getItem('adops_debug_enabled')){
+  } else if($ && $.fn && $.fn.on/* && window.localStorage && localStorage.getItem('adops_debug_enabled')*/){
     $(document).on('keydown.wpAd', function(e){
       //if ctrl+f9 pressed
       if(e.ctrlKey && e.which === 120){
