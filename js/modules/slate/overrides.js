@@ -21,6 +21,10 @@ define(['utils'], function(utils){
           this.config.where += '/lb' + (utils.flags.reload ? 'refresh' : '');
         }
 
+        this.addKeyvalues({
+          del: ['js']
+        });
+
         //add custom keyvalues like this
         /*this.addKeyvalues({
           someCustomKV: ['im_a_leaderboard']
@@ -30,6 +34,9 @@ define(['utils'], function(utils){
         if (this.config.where === "homepage") {
           this.config.where += '/hp' + (utils.flags.reload ? 'refresh' : '');
         }
+        this.addKeyvalues({
+          del: ['js']
+        });
       }
     },
     where: {
