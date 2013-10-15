@@ -113,8 +113,15 @@ define(['utils'], function(utils){
       },
 
       when: function (when) {
-        when = when.split('/');
-        return when[0] <= utils.estNowWithYear && when[1] >= utils.estNowWithYear;
+        if(/\//.test(when)){
+          when = when.split('/');
+          return when[0] <= utils.estNowWithYear.substr(0, when[0].length) &&
+                 when[1] >= utils.estNowWithYear.substr(0, when[1].length);
+        } else {
+          var now = utils.estNowWithYear.substr(0, when.length);
+          console.log('NOW:', now, 'WHEN:', when, when === now);
+          return when === now;
+        }
       }
     }
 

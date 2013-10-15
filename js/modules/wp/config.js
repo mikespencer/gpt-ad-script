@@ -106,7 +106,7 @@ define(['utils', 'wp/textlinks'], function(utils, textlinks){
       featured_agent: {
         what : ['sponsor_agent'],
         where : ['realestate/front'],
-        when : ['201301110000/201312312359']
+        when : ['2013']
       },
       sponsor_spots_re: {
         what: ['sponsor_community','sponsor_condo','sponsor_new_home_builder'],
@@ -178,7 +178,7 @@ define(['utils', 'wp/textlinks'], function(utils, textlinks){
       },
       serviceAlley_rev2: {
         what: ['marketing'],
-        when: ['201307160000/201312312359'],
+        when: ['2013'],
         where: ['blogs/front','local/front','local/trafficandcommuting/front','local/dc-politics/front','local/md-politics/front','local/virginia_politics/front','business/local-business/front','lifestyle/home/front','lifestyle/home_garden','metro/front','metro/traffic','metro/dc/front','metro/md/front','metro/va/front','metro/transportation','metro/local-tools','business/localbusiness/front','artsandliving/homeandgarden/front','realestate','realestate/neighborhoods/front','rentals'],
         hardcode: function () {
           var digit = Math.floor(Math.random()*4+1);
@@ -192,7 +192,7 @@ define(['utils', 'wp/textlinks'], function(utils, textlinks){
       //18875-CD
       re300x100: {
         what: ['300x100', '336x60'],
-        when: ['201307160000/201312312359'],
+        when: ['2013'],
         where: ['realestate']
       },
       //RICH P
@@ -219,7 +219,7 @@ define(['utils', 'wp/textlinks'], function(utils, textlinks){
       lf336: {
         what: ['336x35_top'],
         where: ['realestate/front'],
-        when: ['201301010000/201312312359']
+        when: ['2013']
       },
       //20406-LB
       moneygrab: {
@@ -237,13 +237,13 @@ define(['utils', 'wp/textlinks'], function(utils, textlinks){
       custom_magazine_3: {
         what: ['marketing_2'],
         where: ['lifestyle/magazine/front'],
-        when: ['201306140000/201312312359'],
+        when: ['2013'],
         hardcode: '<a href="http://www.washingtonpost.com/wp-adv/alm/2013/DCLegalLeaders.html" target="_blank"><img src="http://www.washingtonpost.com/wp-adv/legal/2013/2013LegalLeaders.jpg" width="300" height="250" border="0" alt="Check Out Our Video!" style="display:block"/></a><a href="http://www.washingtonpost.com/wp-adv/2013/privateschools" target="_blank"><img src="http://img.wpdigital.net/wp-adv/2013/privateschools/tiles/privateschoolstile3.300x250.3.jpg" width="300" height="250" border="0" alt="Click Here for More!" style="display:block;margin-top:10px;"/></a>'
       },
       //22261-SP
       cap_one_tile: {
         what: ['88x31'],
-        when: ['201310010000/201312312359']
+        when: ['2013']
       },
       //GOG-RESPONSIVE
       gog_responsive: {
@@ -267,7 +267,7 @@ define(['utils', 'wp/textlinks'], function(utils, textlinks){
       //21949
       business_navtile: {
         'what': ['navtile_business'],
-        'when': ['201308270000/201310312359']
+        'when': ['201310']
       },
       //22303-CD
       'navtile_tech': {
@@ -277,7 +277,7 @@ define(['utils', 'wp/textlinks'], function(utils, textlinks){
       //more tiles
       tile_openings: {
         'what': ['navtile_lifestyle', 'navtile_world'],
-        'when': ['201308270000/201312312359']
+        'when': ['2013']
       },
       //22235-JH
       trendex_sponsor_logo: {
