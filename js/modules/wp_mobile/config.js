@@ -5,7 +5,13 @@ define(function(){
   return {
     flights: {
       defaults: {
-        what: ['b', 'fixedBottom', 'mob_enterprise', 't']
+        what: ['b', 'mob_enterprise', 't']
+      },
+      fixedBottom: {
+        what: ['fixedBottom'],
+        test: function(){
+          return window.innerHeight > window.innerWidth;
+        }
       }
     },
     adTypes: {

@@ -2,6 +2,7 @@
  * WP mobile web specific ad script
  */
 define([
+  'jQuery',
   'defaultSettings',
   'Ad',
   'GPTConfig',
@@ -11,6 +12,7 @@ define([
   'wp_mobile/config',
   'wp_mobile/keyvalues'
 ], function(
+  $,
   defaultSettings,
   Ad,
   gptConfig,
@@ -30,7 +32,7 @@ define([
   window.commercialNode = zoneBuilder.exec();
 
   //this is wpAd
-  return utils.extend(defaultSettings, {
+  var _wpAd = utils.extend(defaultSettings, {
 
     //set network id
     constants: {
@@ -51,13 +53,26 @@ define([
 
     flights: templateBuilder.exec(config.flights)
 
-    // simulate what templatBuilder would return, without the cost of including/executing it
-    /*flights: {
-      t: {
-        id: 'default'
-      }
-    }*/
-
   });
+
+
+  //add listener to hide/show fixed ad based on orientation. Hide for landscape, show for portrait.
+  if(_wpAd.flights.fixedBottom){
+    window.addEventListener('orientationchange', function() {
+      //landscape
+      if(window.innerWidth > window.innerHeight){
+        $('#slug_fixedBottom').css({
+          display: 'none'
+        });
+      //portrait
+      } else {
+        $('#slug_fixedBottom').css({
+          display: 'block'
+        });
+      }
+    }, false);
+  }
+
+  return _wpAd;
 
 });
