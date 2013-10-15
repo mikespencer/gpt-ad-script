@@ -92,6 +92,10 @@ require(['gpt', 'siteScript', 'utils', 'jQuery', 'viewable'], function (gpt, wpA
             }
           });
 
+          if(utils.flags.debug){
+            console.log('ADOPS DEBUG:' + pos + ' added to vi queue');
+          }
+
         //normal delivery
         } else {
           if(!wpAd.adsOnPage[pos]){

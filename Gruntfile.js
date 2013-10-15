@@ -134,7 +134,7 @@ module.exports = function (grunt) {
       },
       tests: {
         files: ['test/**/*'],
-        tasks: ['test']
+        tasks: ['concurrent:qunit']
       },
       livereload: {
         options: {
@@ -166,6 +166,10 @@ module.exports = function (grunt) {
     },
     //faster buld time:
     concurrent: {
+      build_all: [
+        'build_js',
+        'build_css'
+      ],
       build_js: [
         'jshint:src',
         'jshint:gruntfile',
@@ -176,6 +180,11 @@ module.exports = function (grunt) {
         'requirejs:theroot',
         'requirejs:slate_mobile',
         'uglify:loader'
+      ],
+      qunit: [
+        'qunit:wp_article',
+        'qunit:wp_mobile',
+        'qunit:slate'
       ]
     },
     open: {
@@ -196,7 +205,10 @@ module.exports = function (grunt) {
       }
     },
     qunit: {
-      all: ['test/**/*.html']
+      all: ['test/**/*.html'],
+      wp_article: ['test/wp_article_tests.html'],
+      wp_mobile: ['test/wp_mobile_tests.html'],
+      slate: ['test/slate_tests.html']
     }
   });
 
@@ -211,8 +223,9 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:js',
     'build_gpt',
-    'build_js',
-    'build_css',
+    //'build_js',
+    //'build_css',
+    'concurrent:build_all',
     'test'
   ]);
 
@@ -226,7 +239,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'jshint:qunit',
-    'qunit'
+    'concurrent:qunit'
   ]);
 
   grunt.registerTask('server', [

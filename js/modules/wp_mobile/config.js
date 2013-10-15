@@ -10,6 +10,7 @@ define(function(){
       fixedBottom: {
         what: ['fixedBottom'],
         test: function(){
+          //render only if device is in portrait orientation
           return window.innerHeight > window.innerWidth;
         }
       }

@@ -11,6 +11,7 @@ define([
   'templateBuilder',
   'wp_mobile/config',
   'wp_mobile/keyvalues'
+
 ], function(
   $,
   defaultSettings,
