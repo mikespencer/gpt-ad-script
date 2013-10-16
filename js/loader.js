@@ -260,9 +260,9 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
     }
 
     //LOAD KRUX ASAP
-    if((siteInfo.site === 'wp' || siteInfo.site === 'wp_mobile') && !/kidspost/i.test(commercialNode)){
+    if(/^wp/.test(siteInfo.site) && !/kidspost/i.test(commercialNode)){
       loadKrux('IbWIJ0xh');
-    } else if(siteInfo.site === 'slate' || siteInfo.site === 'slate_mobile'){
+    } else if(/^slate/.test(siteInfo.site)){
       loadKrux('IemEj7lF');
     }
 

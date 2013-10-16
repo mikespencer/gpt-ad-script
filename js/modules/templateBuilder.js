@@ -19,7 +19,6 @@ define(['utils'], function(utils){
       }
       if(this.demoAds){
         this.template = this.demoAdsTemplate(this.demoAds, this.template);
-        console.log('TEMPLATE:', this.template);
       }
       return this.template;
     },
