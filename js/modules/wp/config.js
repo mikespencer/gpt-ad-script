@@ -49,6 +49,17 @@ define(['utils', 'wp/textlinks'], function(utils, textlinks){
         where: ['washingtonpost.com']
       },
 
+      //22337-AL
+      postlive_wonkblog_nyc: {
+        what: ['!leaderboard'],
+        where: ['postlive/conferences/wonkblog-nyc/front']
+      },
+      //22337-AL
+      postlive: {
+        what: ['!88x31'],
+        where: ['postlive']
+      },
+
       //Quigo Textlinks Begin:
       sponsor_links_in: {
         what: ['sponsor_links_in'],
