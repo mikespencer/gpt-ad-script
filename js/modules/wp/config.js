@@ -54,11 +54,6 @@ define(['utils', 'wp/textlinks'], function(utils, textlinks){
         what: ['!leaderboard'],
         where: ['postlive/conferences/wonkblog-nyc/front']
       },
-      //22337-AL
-      postlive: {
-        what: ['!88x31'],
-        where: ['postlive']
-      },
 
       //Quigo Textlinks Begin:
       sponsor_links_in: {
@@ -255,6 +250,11 @@ define(['utils', 'wp/textlinks'], function(utils, textlinks){
       cap_one_tile: {
         what: ['88x31'],
         when: ['2013']
+      },
+      //22337-AL
+      postlive: {
+        what: ['!88x31'],
+        where: ['postlive']
       },
       //GOG-RESPONSIVE
       gog_responsive: {
