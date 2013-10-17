@@ -71,7 +71,7 @@ define(['jQuery'], function($){
         key;
       for(key in obj) {
         if(key !== '') {
-          temp[key] = clone(obj[key]);
+          temp[key] = this.clone(obj[key]);
         }
       }
       return temp;

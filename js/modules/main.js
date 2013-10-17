@@ -48,11 +48,13 @@ require(['gpt', 'siteScript', 'utils', 'jQuery', 'viewable'], function (gpt, wpA
           delivery: arguments[2],
           onTheFly: arguments[3]
         },
+        defaults = utils.clone(config),
         pos = config.what,
         posOverride = false,
         vi = typeof config.delivery === 'string' && config.delivery.toLowerCase() === 'vi',
         posArray,
         ad;
+
 
       // determine pos value and potential posOverride
       if(/\|/.test(config.what)){
@@ -88,7 +90,7 @@ require(['gpt', 'siteScript', 'utils', 'jQuery', 'viewable'], function (gpt, wpA
                 display: ''
               });
               //render the ad
-              placeAd2({what: pos});
+              placeAd2({what: defaults.what});
             }
           });
 
