@@ -2,6 +2,7 @@
  * Debug info for adops
  * For now this will do for basic dubug functionality
  */
+var wpAd = wpAd || {};
 (function(w, d, $){
 
   'use strict';
