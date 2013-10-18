@@ -79,9 +79,9 @@ require(['gpt', 'siteScript', 'utils', 'jQuery', 'viewable'], function (gpt, wpA
             display: 'block'
           //call the viewable method
           }).viewable({
-            //on view:
             offset: 10,
             interval: 300,
+            //on view:
             callback: function(){
               //reset above css
               $(this).css({

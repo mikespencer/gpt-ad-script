@@ -38,8 +38,33 @@ define([
 
   //extend with wp specific flags:
   utils.extend(utils.flags, {
-    homepage: !!(/^washingtonpost\.com/.test(window.commercialNode)),
-    test_env: !!(/prodprev\.|qaprev\.|devprev\./i.test(window.location.host))
+    //homepage: !!(/^washingtonpost\.com/.test(window.commercialNode)),
+    test_env: !!(/prodprev\.|qaprev\.|devprev\./i.test(window.location.host)),
+    pageType: (function(contentTypes){
+      //unique check for homepage:
+      if(/washingtonpost\.com/.test(window.commercialNode)){
+        return {
+          homepage: true
+        };
+      }
+
+      //bail if contentType is not defined:
+      if(!utils.wp_meta_data.contentType || !contentTypes){
+        return {};
+      }
+
+      //additional possible conetent types to check for (extended from zonebuilder):
+      contentTypes.compoundstory = 'article';
+
+      var ct = utils._toString(utils.wp_meta_data.contentType).toLowerCase();
+      var rv = {};
+      if(contentTypes[ct]){
+        rv[contentTypes[ct]] = true;
+      }
+
+      return rv;
+
+    })(zoneBuilder.contentType)
   });
 
   //extend or add keyvalues at the ad level

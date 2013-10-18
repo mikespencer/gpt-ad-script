@@ -11,7 +11,7 @@ define(function(){
         what: ['fixedBottom'],
         test: function(){
           //render only if device is in portrait orientation
-          return window.innerHeight > window.innerWidth;
+          return !window.hasOwnProperty('orientation') ? true : window.innerHeight > window.innerWidth;
         }
       }
     },
