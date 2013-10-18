@@ -127,10 +127,6 @@ require(['gpt', 'siteScript', 'utils', 'jQuery', 'viewable'], function (gpt, wpA
             wpAd.adsOnPage[pos].refresh();
           }
 
-          if(utils.flags.debug){
-            console.log('ADOPS DEBUG:' + pos + ' rendered', wpAd.adsOnPage[pos]);
-          }
-
         }
       } else {
         wpAd.adsDisabledOnPage[pos] = true;
