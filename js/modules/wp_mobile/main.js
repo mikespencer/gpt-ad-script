@@ -30,7 +30,7 @@ define([
   });*/
 
   if(utils.flags.debug){
-    console.log('ADOPS DEBUG: window.prefetchedAd = ', prefetchedAd);
+    console.log('ADOPS DEBUG: window.prefetchedAd = ', window.prefetchedAd);
   }
 
   //build commercialNode
