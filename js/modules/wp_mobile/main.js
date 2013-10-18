@@ -29,10 +29,6 @@ define([
 
   });*/
 
-  if(utils.flags.debug){
-    console.log('ADOPS DEBUG: window.prefetchedAd = ', window.prefetchedAd);
-  }
-
   //build commercialNode
   window.commercialNode = zoneBuilder.exec();
 
@@ -83,6 +79,19 @@ define([
       });
     }
   }, false);
+
+  //check to refresh ads if page content is prefetched
+  var previousURL = window.location.href;
+  setInterval(function(){
+    if(previousURL !== window.location.href && wpAd.adsOnPage){
+      previousURL = window.location.href;
+      for(var key in wpAd.adsOnPage){
+        if(wpAd.adsOnPage.hasOwnProperty(key)){
+          wpAd.adsOnPage[key].refresh();
+        }
+      }
+    }
+  }, 2000);
 
   return _wpAd;
 
