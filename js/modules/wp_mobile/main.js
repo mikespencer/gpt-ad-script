@@ -29,6 +29,10 @@ define([
 
   });*/
 
+  if(utils.flags.debug){
+    console.log('ADOPS DEBUG: window.prefetchedAd = ', prefetchedAd);
+  }
+
   //build commercialNode
   window.commercialNode = zoneBuilder.exec();
 
