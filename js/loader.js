@@ -78,7 +78,10 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
         //mobile tests:
         mobile = {
           iOS: (/iphone|ipad|ipod/i).test(ua),
-          Android: (/android/i).test(ua),
+          Android: {
+            isAndroid: (/android/i).test(ua),
+            version: versionCheck('Android')
+          },
           BlackBerry: (/blackberry/i).test(ua),
           Windows: (/iemobile/i).test(ua),
           FirefoxOS: (/mozilla/i).test(ua) && (/mobile/i).test(ua)
@@ -88,7 +91,39 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
         tablet = {
           iPad: (/ipad/i).test(ua)
         };
-
+        
+        function versionCheck(searchStr) {
+          var index = ua.indexOf(searchStr);
+          if (index == -1) {
+            return 'n/a';
+          }
+          return ua.substring(index+searchStr.length+1).split(" ")[0];
+        }
+        
+        //desktop browser detection
+        var desktop = {
+          OS: {
+            isWindows: (/Windows NT/i).test(ua),
+            isMac: (/Macintosh/i).test(ua)
+          },
+          Chrome: {
+            isChrome: (/Chrome/i).test(ua),
+            version: versionCheck('Chrome')
+          },
+          Firefox: {
+            isFirefox: (/Firefox/i).test(ua),
+            version: versionCheck('Firefox')
+          },
+          Safari: {
+            isSafari: (/Safari/i).test(ua) && !(/Chrome/i).test(ua),
+            version: versionCheck('Version')
+          },
+          IE: {
+            isIE: (/MSIE/i).test(ua),
+            version: versionCheck('MSIE')
+          }
+        };
+        
       //check if mobile:
       for(mobileKey in mobile){
         if(mobile.hasOwnProperty(mobileKey) && mobile[mobileKey]){
@@ -104,10 +139,12 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
           break;
         }
       }
+      
 
       return {
         mobile: mobile,
         tablet: tablet,
+        desktop: desktop,
         isMobile: isMobile,
         isTablet: isTablet,
         width: thisWidth,
