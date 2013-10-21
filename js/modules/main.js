@@ -151,12 +151,22 @@ require(['gpt', 'siteScript', 'utils', 'jQuery', 'viewable'], function (gpt, wpA
   // expose wpAd to the window for debugging + external code to access/build off of.
   window.wpAd = utils.extend(wpAd, window.wpAd);
 
-  //execute deferred functions
-  if(wpAd.deferred.length){
+  //execute deferred functions for $(window).load
+  if(wpAd.deferred.windowLoad.length){
     $(window).load(function(){
-      var l = wpAd.deferred.length;
+      var l = wpAd.deferred.windowLoad.length;
       for(var i = 0; i < l; i++){
-        wpAd.deferred[i]();
+        wpAd.deferred.windowLoad[i]();
+      }
+    });
+  }
+
+  //execute deferred functions for $(document).ready
+  if(wpAd.deferred.domReady.length){
+    $(document).ready(function(){
+      var l = wpAd.deferred.domReady.length;
+      for(var i = 0; i < l; i++){
+        wpAd.deferred.domReady[i]();
       }
     });
   }

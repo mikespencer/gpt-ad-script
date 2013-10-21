@@ -14,6 +14,7 @@ define([
   'wp/hpRefresh',
   'wp/textlinks',
   'wp/wpPlus',
+  'wp/pageType',
   'criteo'
 
 ], function(
@@ -29,6 +30,7 @@ define([
   hpRefresh,
   textlinks,
   wpPlus,
+  pageType,
   criteo
 
 ){
@@ -40,31 +42,7 @@ define([
   utils.extend(utils.flags, {
     //homepage: !!(/^washingtonpost\.com/.test(window.commercialNode)),
     test_env: !!(/prodprev\.|qaprev\.|devprev\./i.test(window.location.host)),
-    pageType: (function(contentTypes){
-      //unique check for homepage:
-      if(/washingtonpost\.com/.test(window.commercialNode)){
-        return {
-          homepage: true
-        };
-      }
-
-      //bail if contentType is not defined:
-      if(!utils.wp_meta_data.contentType || !contentTypes){
-        return {};
-      }
-
-      //additional possible conetent types to check for (extended from zonebuilder):
-      contentTypes.compoundstory = 'article';
-
-      var ct = utils._toString(utils.wp_meta_data.contentType).toLowerCase();
-      var rv = {};
-      if(contentTypes[ct]){
-        rv[contentTypes[ct]] = true;
-      }
-
-      return rv;
-
-    })(zoneBuilder.contentType)
+    pageType: pageType
   });
 
   //extend or add keyvalues at the ad level
@@ -98,13 +76,19 @@ define([
 
     criteo: criteo.exec(),
 
-    //Array of deferred functions to execute on $(window).load
-    deferred: [
-      wpPlus.exec
-    //, brandconnect
-    //, subscribe promos
-    //, etc
-    ],
+    deferred: {
+      //Array of deferred functions to execute on $(window).load
+      windowLoad: [
+        wpPlus.exec
+      //, brandconnect
+      //, subscribe promos
+      //, etc
+      ],
+      //Array of deferred functions to execute on $(window).load
+      domReady: [
+
+      ]
+    },
 
     textlinks: textlinks,
 

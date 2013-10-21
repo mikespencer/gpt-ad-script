@@ -190,7 +190,7 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
       console.log('--ADOPS DEBUG-- Loading site script:', script);
     }
 
-    //return siteScripts.wp;
+    //return siteScripts;
     return {
       script: script,
       site: site

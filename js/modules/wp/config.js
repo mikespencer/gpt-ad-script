@@ -1,10 +1,10 @@
 /**
  * Template of ad flights and available ad spots on washingtonpost.com (desktop)
  */
-define(['utils', 'wp/textlinks'], function(utils, textlinks){
+define(['utils', 'wp/pageType', 'wp/textlinks'], function(utils, pageType, textlinks){
 
   var brandconnect = utils.wp_meta_data.contentName && /brand-?connect/i.test(utils.wp_meta_data.contentName[0]);
-  var articlePage = utils.wp_meta_data.contentType && /compoundstory/i.test(utils.wp_meta_data.contentType[0]);
+  //var articlePage = utils.wp_meta_data.contentType && /compoundstory/i.test(utils.wp_meta_data.contentType[0]);
 
   return {
     flights: {
@@ -37,7 +37,7 @@ define(['utils', 'wp/textlinks'], function(utils, textlinks){
         ]
       },
 
-      //contains document.write's, fix in phase 2
+      //contains document.write's, fix in phase 2 if we even still need this
       /*topjobs: {
         what: ['topjobs'],
         hardcode: function(){
@@ -232,7 +232,7 @@ define(['utils', 'wp/textlinks'], function(utils, textlinks){
       moneygrab: {
         what: ['extra_bb'],
         test: function(){
-          return articlePage;
+          return pageType.article;
         }
       },
       //20552-CD

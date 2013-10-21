@@ -39,6 +39,18 @@ define(function(){
       mini_bb: {
         what: ['bigbox*'],
         where: ['life/mini']
+      },
+      //22334-CC
+      samsung_homepage: {
+        what: ['tiffanytile_2', 'leaderboard'],
+        where: ['homepage'],
+        when: ['20131021']
+      },
+      //22381-CC
+      prudential: {
+        what: ['468x60'],
+        where: ['homepage'],
+        when: ['20131022']
       }
 
     },

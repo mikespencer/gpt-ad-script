@@ -1,4 +1,5 @@
 @import "compass/reset/utilities"
+@import "compass/css3"
 @import vars
 @import mixins
 
@@ -12,7 +13,7 @@ $grey: #ccc
 $shadow-colour: #333
 
 .ad-debug-box, .ad-debug-console
-  @include nested-reset
+  +nested-reset
 
 body .ad-debug-box
   width: 300px
@@ -29,15 +30,15 @@ body .ad-debug-box
   line-height: 20px
   z-index: 999999999
   opacity: 0.95
-  @include shadow(0, 0, 7px, 1px, $shadow-colour)
-  @include transition(box-shadow 0.2s)
+  +box-shadow($shadow-colour 0 0 7px 1px)
+  +transition(box-shadow 0.2s)
 
   .ad-debug-handle
     cursor: move
     padding: 8px
     background: url($img_base + 'debug_drag_background.png') repeat top left transparent
     position: absolute
-    @include cursor-grab
+    +cursor-grab
 
   .ad-debug-handle.right
     right: 0
@@ -85,16 +86,16 @@ body .ad-debug-box
 
 .ad-debug-highlight-ad
   border: 1px solid #f00
-  @include shadow(0, 0, 10px, 2px, #000)
-  @include transition(box-shadow 0.15s)
+  +box-shadow(#000 0 0 10px 2px)
+  +transition(box-shadow 0.15s)
 
 
 body .ad-debug-box.dragging
-  @include shadow(0, 0, 14px, 3px, $shadow-colour)
-  @include transform(scale(1.03, 1.03))
-  @include cursor-grabbing
+  +box-shadow($shadow-colour 0 0 14px 3px)
+  +transform(scale(1.03, 1.03))
+  +cursor-grabbing
   .ad-debug-handle
-    @include cursor-grabbing
+    +cursor-grabbing
 
 
 body .ad-debug-console
@@ -105,7 +106,7 @@ body .ad-debug-console
   line-height: normal
   font-family: sans-serif
   text-align: left
-  @include shadow(0, 0, 10px, 1px, $shadow-colour)
+  +box-shadow($shadow-colour 0 0 10px 1px)
 
   .pad5
     padding: 5px

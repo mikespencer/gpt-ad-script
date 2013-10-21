@@ -18,7 +18,10 @@ define(function(){
     init: [],
 
     //array to store deferred functions
-    deferred: []
+    deferred: {
+      windowLoad: [],
+      domReady: []
+    }
 
   };
 

@@ -54,9 +54,9 @@ module.exports = function (grunt) {
         baseUrl: "js/modules",
         include: ['main'],
         preserveLicenseComments: false,
-        //optimize: 'uglify2',
-        optimize: 'none',
-        //generateSourceMaps: true,
+        optimize: 'uglify2',
+        //optimize: 'none',
+        generateSourceMaps: true,
         shim: {
           'gpt': {
             exports: 'googletag'
