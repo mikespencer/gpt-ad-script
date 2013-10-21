@@ -1,3 +1,5 @@
+/*global console:true*/
+
 /**
  * Script loader for adops. Defines, loads and executes necessary ad dependencies based on site.
  */

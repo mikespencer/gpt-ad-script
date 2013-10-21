@@ -41,7 +41,8 @@ define([
   //extend with wp specific flags:
   utils.extend(utils.flags, {
     //homepage: !!(/^washingtonpost\.com/.test(window.commercialNode)),
-    test_env: !!(/prodprev\.|qaprev\.|devprev\./i.test(window.location.host))
+    test_env: !!(/prodprev\.|qaprev\.|devprev\./i.test(window.location.host)),
+    pageType: pageType
   });
 
   //extend or add keyvalues at the ad level
