@@ -6,3 +6,4 @@ node_modules
 *.pyc
 js/min/*
 css/.sass-cache
+test/js
