@@ -193,7 +193,8 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
     //return siteScripts;
     return {
       script: script,
-      site: site
+      site: site,
+      responsive: responsive
     };
   }
 
