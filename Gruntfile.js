@@ -17,7 +17,8 @@ module.exports = function (grunt) {
   grunt.initConfig({
     clean: {
       sass: ['.sass-cache'],
-      js: ['js/min/*']
+      js: ['js/min/*'],
+      qunit: ['test/js']
     },
     uglify: {
       options: {
@@ -44,7 +45,7 @@ module.exports = function (grunt) {
         src: ['js/lib/krux.js']
       },
       qunit: {
-        src: ['test/**/*.js']
+        src: ['test/tests/*.js']
       }
     },
     requirejs: {
@@ -204,6 +205,13 @@ module.exports = function (grunt) {
         path: 'http://localhost:<%= connect.options.port %>/theroot.html'
       }
     },
+    copy: {
+      qunit: {
+        files: [
+          {expand: true, src: ['js/**'], dest: 'test'}
+        ]
+      }
+    },
     qunit: {
       all: ['test/**/*.html'],
       wp_article: ['test/wp_article_tests.html'],
@@ -239,7 +247,9 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'jshint:qunit',
-    'concurrent:qunit'
+    'copy:qunit',
+    'concurrent:qunit',
+    'clean:qunit'
   ]);
 
   grunt.registerTask('server', [

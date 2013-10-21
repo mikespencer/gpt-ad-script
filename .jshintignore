@@ -3,3 +3,4 @@ js/lib/*
 js/min/*
 js/debugBookmarklet.js
 bower_components/*
+test/js/*
