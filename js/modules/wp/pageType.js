@@ -1,6 +1,6 @@
 define(['utils', 'zoneBuilder'], function(utils, zoneBuilder){
 
-  var contentTypes = zoneBuilder.contentType;
+  var contentTypes = utils.clone(zoneBuilder.contentType);
   var rv = {};
 
   //unique check for homepage:

@@ -1,3 +1,5 @@
+/*global console:true*/
+
 /**
  * Script loader for adops. Defines, loads and executes necessary ad dependencies based on site.
  */
@@ -193,7 +195,8 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
     //return siteScripts;
     return {
       script: script,
-      site: site
+      site: site,
+      responsive: responsive
     };
   }
 
@@ -260,7 +263,7 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
     }
 
     //LOAD KRUX ASAP
-    if(/^wp/.test(siteInfo.site) && !/kidspost/i.test(commercialNode)){
+    if(/^wp/.test(siteInfo.site) && !/kidspost/i.test(window.commercialNode)){
       loadKrux('IbWIJ0xh');
     } else if(/^slate/.test(siteInfo.site)){
       loadKrux('IemEj7lF');
