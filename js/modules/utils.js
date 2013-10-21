@@ -13,7 +13,28 @@ define(['jQuery'], function($){
       l.type = 'text/css';
       document.getElementsByTagName('head')[0].appendChild(l);
     },
-
+    addCSS: function (url) {
+      this.addCss(url);
+    },
+    /**
+     * Appends an inline css <style> element to the <head>.
+     * Useful for style changes to elements created after $(document).ready();
+     * @param {String} a raw CSS string, i.e. "body {background-color: black;}".
+     */
+    addInlineCss: function (str) {
+      var el = document.createElement('style');
+      el.type = "text/css";
+      el.media = 'screen';
+      if(el.styleSheet){
+        el.styleSheet.cssText = str;
+      } else {
+        el.appendChild(document.createTextNode(str)); 
+      }
+      return document.getElementsByTagName('head')[0].appendChild(el);
+    },
+    addInlineCSS: function (str) {
+      utils.addInlineCss(str);
+    },
     /**
      * Appends a tracking pixel to the <body>.
      * @param {String} url A URL to the tracking pixel.
