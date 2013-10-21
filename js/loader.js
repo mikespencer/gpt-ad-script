@@ -181,7 +181,12 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
        ((typeof window.mobileMode === 'function' && window.mobileMode()) ||
         (device.isMobile && device.isMobileWidth))){
 
-      site += /_mobile$/.test(site) ? '' : '_mobile';
+      var mob_site = site + (/_mobile$/.test(site) ? '' : '_mobile');
+
+      if(siteScripts[mob_site]){
+        site = mob_site;
+        script = siteScripts[site];
+      }
 
       if(debug){
         console.log('--ADOPS DEBUG-- Resposive page detected. Attempting to use script:', script);
