@@ -6,22 +6,22 @@
 
   include: ['main'],
 
-  //define wp specific script output
+  //define slate specific script output
   out: '../js/min/slate.min.js',
 
   preserveLicenseComments: false,
   //generateSourceMaps: true,
 
   //for testing/debugging - need to install on server
-  //optimize: 'uglify2',
-  optimize: 'none',
+  optimize: 'uglify2',
+  //optimize: 'none',
 
   wrap: true,
 
   paths: {
     'gpt': '../lib/gpt',
 
-    //define wp site specific script here:
+    //define slate site specific script here:
     'siteScript': 'slate/main'
   },
 

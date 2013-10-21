@@ -40,7 +40,7 @@ define(['jQuery'], function($){
           dataType: 'script',
           cache: true,
           crossDomain: true,
-          timeout: 2000,
+          timeout: 4000,
           success: function(){
             if(utils.flags.debug){
               utils.log('AJAX request successful for', config.url);
