@@ -179,7 +179,7 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
     //if responsive page and mobile device, update script reference to mobile version
     if(responsive &&
        ((typeof window.mobileMode === 'function' && window.mobileMode()) ||
-        (device.isMobile && device.isMobileWidth))){
+        (device.isMobileWidth))){
 
       var mob_site = site + (/_mobile$/.test(site) ? '' : '_mobile');
 
