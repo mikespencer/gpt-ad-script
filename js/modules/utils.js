@@ -28,7 +28,7 @@ define(['jQuery'], function($){
       if(el.styleSheet){
         el.styleSheet.cssText = str;
       } else {
-        el.appendChild(document.createTextNode(str)); 
+        el.appendChild(document.createTextNode(str));
       }
       return document.getElementsByTagName('head')[0].appendChild(el);
     },
@@ -133,14 +133,21 @@ define(['jQuery'], function($){
 
     /**
      * Calls queued up placeAd2 calls (when placeAd2 is redefined).
+     * Has checks in here to prevent multiple calls to same ad (eg: data-ad-type and placeAd2 for same ad).
      * @param {Array} queue Array of arguments (Array's or Object's) to pass to each placeAd2 call.
      */
     execPlaceAd2Queue: function(queue){
       if(queue){
         var l = queue.length,
-          i = 0;
+          rendered = {},
+          i = 0,
+          pos;
         for(i;i<l;i++){
-          placeAd2.apply(window, queue[i]);
+          pos = utils.isObject(queue[i][0]) ? queue[i][0].what : queue[i][1];
+          if(!rendered[pos]){
+            placeAd2.apply(window, queue[i]);
+            rendered[pos] = true;
+          }
         }
       }
     },
