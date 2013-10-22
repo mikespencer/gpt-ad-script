@@ -144,7 +144,7 @@ define(['jQuery'], function($){
           pos;
         for(i;i<l;i++){
           pos = utils.isObject(queue[i][0]) ? queue[i][0].what : queue[i][1];
-          if(!rendered[pos]){
+          if(pos && !rendered[pos]){
             placeAd2.apply(window, queue[i]);
             rendered[pos] = true;
           }
