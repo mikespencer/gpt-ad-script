@@ -47,8 +47,8 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
     //base url for site scripts
     baseURL = localhost ? 'js/min/' : 'http://js.washingtonpost.com/wp-srv/ad/loaders/latest/js/min/',
 
-    //URL for jQuery to load if not already defined on the page
-    jQueryURL = 'http://js.washingtonpost.com/wpost/js/combo/?token=201210102320000&c=true&m=true&context=eidos&r=/jquery-1.7.1.js',
+    //fallback URL for jQuery to load if not already defined on the page
+    jQueryURL = 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js',
 
     //Config loading of site specific CSS or not.
     //I'm currently doing this to prevent needlessly loading empty files
@@ -139,7 +139,6 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
           break;
         }
       }
-
 
       return {
         mobile: mobile,

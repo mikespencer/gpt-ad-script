@@ -13,9 +13,15 @@ define(['jQuery'], function($){
       l.type = 'text/css';
       document.getElementsByTagName('head')[0].appendChild(l);
     },
+
+    /**
+     * Alias for utils.addCss
+     * @param {String} url A URL to the CSS file.
+     */
     addCSS: function (url) {
       this.addCss(url);
     },
+
     /**
      * Appends an inline css <style> element to the <head>.
      * Useful for style changes to elements created after $(document).ready();
@@ -32,9 +38,15 @@ define(['jQuery'], function($){
       }
       return document.getElementsByTagName('head')[0].appendChild(el);
     },
+
+    /**
+     * Alias for utils.addInlineCss
+     * @param {String} a raw CSS string, i.e. "body {background-color: black;}".
+     */
     addInlineCSS: function (str) {
       utils.addInlineCss(str);
     },
+
     /**
      * Appends a tracking pixel to the <body>.
      * @param {String} url A URL to the tracking pixel.

@@ -22,7 +22,7 @@ module.exports = function (grunt) {
     },
     uglify: {
       options: {
-        banner: '/* <%= grunt.template.today("yyyy-mm-dd") %> */\n',
+        //banner: '/* <%= grunt.template.today("yyyy-mm-dd") %> */\n',
         report: 'gzip',
         sourceMap: 'js/min/loader.map.js'
       },
