@@ -1,4 +1,4 @@
-/* jshint es5: true */
+/* global connect: true, static: true */
 
 var LIVERELOAD_PORT = 35729;
 var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
