@@ -57,8 +57,8 @@ var wpAd = wpAd || {};
           var oldHeight = $('div.ad-debug-console').outerHeight(),
               height, offset;
 
-          $('span', this).toggleClass('hidden');
-          $('div.ad-debug-console-inner').toggleClass('hidden');
+          $('span', this).toggleClass('debug-hidden');
+          $('div.ad-debug-console-inner').toggleClass('debug-hidden');
 
           height = $('div.ad-debug-console').outerHeight();
           offset = height > oldHeight ? height : 0 - oldHeight;
@@ -75,7 +75,8 @@ var wpAd = wpAd || {};
         $(document).on('keydown.wpAd', function(e){
           //if ctrl+f9 pressed
           if(e.ctrlKey && e.which === 120){
-            $('.ad-debug-box, .ad-debug-console').toggleClass('hidden');
+            console.log('f9');
+            $('.ad-debug-box, .ad-debug-console').toggleClass('debug-hidden');
           }
         });
 
@@ -122,8 +123,9 @@ var wpAd = wpAd || {};
             });
 
             wpAd.utils.log('RENDERED:', pos, ad);
+
             $('<a href="#' + pos + '" class="ad-console-box green">' +
-              debug.debugConsoleAdContents('Rendered', ad, pos) +
+              debug.debugConsoleAdContents('Rendered' + (wpAd.viQueue[pos] ? ' (VI)' : ''), ad, pos) +
             '</a>').on('click', function(e){
               var $this = $(this),
                   name = $this.attr('href').replace('#',''),
@@ -145,6 +147,13 @@ var wpAd = wpAd || {};
               debug.debugConsoleAdContents('UNIT DID NOT RENDER - Could not find element matching #slug_' + pos + ' or #wpni_adi_' + pos + ' for', ad, pos) +
             '</div>');
           }
+
+        } else if(wpAd.viQueue[pos]){
+          wpAd.utils.log('ADDED TO VI QUEUE:', pos);
+          $('.ad-debug-console-inner').append('<div class="ad-console-box vi-queue">' +
+            debug.debugConsoleAdContents('Added to VI queue', false, pos) +
+          '</div>');
+
         } else{
           wpAd.utils.log('DISABLED:', pos);
           $('.ad-debug-console-inner').append('<div class="ad-console-box grey">' +
@@ -159,10 +168,10 @@ var wpAd = wpAd || {};
             '<div class="ad-debug-console-title pad5">AdOps Debug Console</div>' +
             '<div class="ad-debug-console-hide ad-debug-bold pad5">' +
               '<span class="show blue">-- Show --</span>' +
-              '<span class="hide blue hidden">-- Hide --</span>' +
+              '<span class="hide blue debug-hidden">-- Hide --</span>' +
             '</div>' +
           '</div>' +
-          '<div class="ad-debug-console-inner hidden"></div>' +
+          '<div class="ad-debug-console-inner debug-hidden"></div>' +
         '</div>';
       },
 

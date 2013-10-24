@@ -14,7 +14,7 @@ define([
   'wp/hpRefresh',
   'wp/textlinks',
   'wp/wpPlus',
-  'wp/pageType',
+  'wp/flags',
   'criteo'
 
 ], function(
@@ -30,7 +30,7 @@ define([
   hpRefresh,
   textlinks,
   wpPlus,
-  pageType,
+  flags,
   criteo
 
 ){
@@ -39,11 +39,7 @@ define([
   window.commercialNode = zoneBuilder.exec();
 
   //extend with wp specific flags:
-  utils.extend(utils.flags, {
-    //homepage: !!(/^washingtonpost\.com/.test(window.commercialNode)),
-    test_env: !!(/prodprev\.|qaprev\.|devprev\./i.test(window.location.host)),
-    pageType: pageType
-  });
+  utils.extend(utils.flags, flags);
 
   //extend or add keyvalues at the ad level
   //each key can accept a function, or an array of functions

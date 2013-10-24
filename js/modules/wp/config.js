@@ -1,7 +1,7 @@
 /**
  * Template of ad flights and available ad spots on washingtonpost.com (desktop)
  */
-define(['utils', 'wp/pageType', 'wp/textlinks'], function(utils, pageType, textlinks){
+define(['utils', 'wp/flags', 'wp/textlinks'], function(utils, flags, textlinks){
 
   var brandconnect = utils.wp_meta_data.contentName && /brand-?connect/i.test(utils.wp_meta_data.contentName[0]);
   //var articlePage = utils.wp_meta_data.contentType && /compoundstory/i.test(utils.wp_meta_data.contentType[0]);
@@ -24,7 +24,7 @@ define(['utils', 'wp/pageType', 'wp/textlinks'], function(utils, pageType, textl
           'flex_ss_bb_hp',
           'flex_ss_tp',
           'grid_bigbox*',
-          'inline_bb',
+          'inline_bb*',
           'inline_flex*',
           'inline_lb*',
           'interstitial*',
@@ -232,7 +232,7 @@ define(['utils', 'wp/pageType', 'wp/textlinks'], function(utils, pageType, textl
       moneygrab: {
         what: ['extra_bb'],
         test: function(){
-          return pageType.article;
+          return flags.pageType.article;
         }
       },
       //20552-CD

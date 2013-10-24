@@ -58,7 +58,14 @@ define([
 
 
   //add listener to hide/show fixed ad based on orientation. Hide for landscape, show for portrait.
-  window.addEventListener('orientationchange', function() {
+  window.addEventListener('resize', onOrientationChange, false);
+  window.addEventListener('orientationchange', onOrientationChange, false);
+
+  //store orientation in case resize and orientationchange events both fire, to prevent double ad call:
+  var orientation = window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
+
+  //orientation change callback
+  function onOrientationChange(){
     //if page loaded in landscape, fixedBotton will be disabled.
     //rebuild the flights object and make placeAd2 call.
     if(!_wpAd.flights.fixedBottom){
@@ -68,17 +75,19 @@ define([
       });
     }
     //landscape
-    if(window.innerWidth > window.innerHeight){
+    if(window.innerWidth > window.innerHeight && orientation !== 'landscape'){
+      orientation = 'landscape';
       $('#slug_fixedBottom').css({
         display: 'none'
       });
     //portrait
-    } else {
+    } else if(orientation !== 'portrait'){
+      orientation = 'portrait';
       $('#slug_fixedBottom').css({
         display: 'block'
       });
     }
-  }, false);
+  }
 
   //check to refresh ads if page content is prefetched
   var previousURL = window.location.href;

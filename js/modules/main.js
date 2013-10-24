@@ -6,6 +6,8 @@ require(['gpt', 'siteScript', 'utils', 'jQuery', 'viewable'], function (gpt, wpA
 
   var queue = placeAd2.queue || [];
 
+  wpAd.viQueue = {};
+
   $.fn.viewable = vi;
 
   //make sure these are defined:
@@ -94,9 +96,7 @@ require(['gpt', 'siteScript', 'utils', 'jQuery', 'viewable'], function (gpt, wpA
             }
           });
 
-          if(utils.flags.debug){
-            console.log('ADOPS DEBUG:' + pos + ' added to vi queue');
-          }
+          wpAd.viQueue[pos] = true;
 
         //normal delivery
         } else {
@@ -133,10 +133,7 @@ require(['gpt', 'siteScript', 'utils', 'jQuery', 'viewable'], function (gpt, wpA
       }
 
       // always need to create this queue
-      // unless its a viewable impression, in which case it is not "disabled", so we hold off on this
-      if(!vi){
-        wpAd.debugQueue.push(pos);
-      }
+      wpAd.debugQueue.push(pos);
 
     };
 
