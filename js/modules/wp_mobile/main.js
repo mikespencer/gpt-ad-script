@@ -81,7 +81,7 @@ define([
           if(window.console){
             window.console.log('SETTING UP AD');
           }
-          window.wpAd.flights.fixedBottom = {
+          (window.wpAd && wpAd.flights || _wpAd.flights).fixedBottom = {
             id: 'fixedBottom'
           };
           window.placeAd2({
