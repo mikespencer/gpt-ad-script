@@ -26,7 +26,7 @@ watch_css:
 build_js: gpt wp.min.js slate.min.js slate_mobile.min.js wp_mobile.min.js theroot.min.js build_loader
 
 build_loader:
-	$(UGLIFYJS) -nc -o js/min/loader.min.js js/loader.js
+	cat js/lib/yepnope.js js/loader.js | $(UGLIFYJS) -nc -o js/min/loader.min.js
 
 gpt:
 	curl --silent --create-dirs -o $(GPT_LOCAL) $(GPT_URL)
