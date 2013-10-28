@@ -27,7 +27,7 @@ module.exports = function (grunt) {
         sourceMap: 'js/min/loader.map.js'
       },
       loader: {
-        src: ['bower_components/yepnope/yepnope.js', 'js/loader.js'],
+        src: ['js/lib/yepnope.js', 'js/loader.js'],
         dest: 'js/min/loader.min.js'
       }
     },
@@ -268,5 +268,6 @@ module.exports = function (grunt) {
     console.log('Grabbing ' + gpt_google + ' and saving to ' + gpt_local + '.');
     exec('curl --silent --create-dirs -o ' + gpt_local + ' ' + gpt_google);
   });
+
 
 };
