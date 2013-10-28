@@ -1,4 +1,4 @@
-/* global console:true, yepnope */
+/*global console:true, yepnope*/
 
 /**
  * Script loader for adops. Defines, loads and executes necessary ad dependencies based on site.
