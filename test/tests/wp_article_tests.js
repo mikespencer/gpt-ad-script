@@ -37,6 +37,9 @@
 
   module('leaderboard ad placement and kvs tests');
 
+  test('wpAd.adsOnPage defined', function(){
+    ok(wpAd.adsOnPage, 'wpAd.adsOnPage ok');
+  });
   test('leaderboard ad loaded', function(){
     ok(wpAd.adsOnPage.leaderboard, 'leadboard ok');
   });

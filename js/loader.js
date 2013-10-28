@@ -317,7 +317,7 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
 
     //tiffany tile fix on wp so that tile publisher still works
     yepnope({
-      test: wpAd.siteInfo.site === 'wp',
+      test: wpAd.siteInfo.site === 'wp' && !(wpAd.config && wpAd.config.tiffanyTiles),
       yep: 'http://js.washingtonpost.com/wp-srv/ad/tiffanyTiles.js',
       complete: function(){
 
