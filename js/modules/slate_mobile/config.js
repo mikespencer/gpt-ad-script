@@ -5,7 +5,7 @@ define(function(){
   return {
     flights: {
       defaults: {
-        what: ['b', 'fixedBottom', 't', 'mob_bigbox', 'mob_halfpage']
+        what: ['b', 'fixedBottom', 'inline_vid', 'mob_bigbox', 'mob_halfpage', 't']
       }
     },
     adTypes: {
@@ -21,9 +21,9 @@ define(function(){
           [1, 1]
         ]
       },
-      't': {
+      'inline_vid': {
         'size': [
-          [320, 50]
+          [300, 250]
         ]
       },
       'mob_bigbox': {
@@ -34,6 +34,11 @@ define(function(){
       'mob_halfpage': {
         'size': [
           [300, 600]
+        ]
+      },
+      't': {
+        'size': [
+          [320, 50]
         ]
       }
     }
