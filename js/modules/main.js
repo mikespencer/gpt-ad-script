@@ -146,7 +146,7 @@ require(['gpt', 'siteScript', 'utils', 'jQuery', 'viewable'], function (gpt, wpA
   wpAd.utils = utils;
 
   // expose wpAd to the window for debugging + external code to access/build off of.
-  window.wpAd = utils.extend(wpAd, window.wpAd);
+  window.wpAd = utils.extend(wpAd, window.wpAd, true);
 
   //execute deferred functions for $(window).load
   if(wpAd.deferred.windowLoad.length){

@@ -63,6 +63,11 @@ define([
     }
   }, config.flights);*/
 
+  //integrate tiffany tiles from tiffany tile publisher
+  if(window.wpAd && window.wpAd.config && window.wpAd.config.tiffanyTiles){
+    config.flights = $.extend(utils.clone(window.wpAd.config.tiffanyTiles), config.flights);
+  }
+
 
   //overrides config
   utils.extend(Ad.prototype.overrides, overrides);

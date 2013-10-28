@@ -27,7 +27,7 @@ module.exports = function (grunt) {
         sourceMap: 'js/min/loader.map.js'
       },
       loader: {
-        src: 'js/loader.js',
+        src: ['bower_components/yepnope/yepnope.js', 'js/loader.js'],
         dest: 'js/min/loader.min.js'
       }
     },

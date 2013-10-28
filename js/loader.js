@@ -1,11 +1,11 @@
-/*global console:true*/
+/* global console:true, yepnope */
 
 /**
  * Script loader for adops. Defines, loads and executes necessary ad dependencies based on site.
  */
 var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
 
-(function($){
+(function($, yepnope){
 
   'use strict';
 
@@ -315,22 +315,31 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
 
     loadSiteCSS(siteInfo.site);
 
-    // get site specific ad script
-    $.ajax({
-      url: scriptURL,
-      cache: true,
-      dataType: 'script',
-      crossDomain: true,
-      timeout: 4000,
-      error: function(err){
-        console.log('--ADOPS DEBUG-- AdOps site script failed to load:', err);
-      },
-      success: function(){
-        if(debug){
-          console.log('--ADOPS DEBUG--', scriptURL, 'loaded');
-        }
+    //tiffany tile fix on wp so that tile publisher still works
+    yepnope({
+      test: wpAd.siteInfo.site === 'wp',
+      yep: 'http://js.washingtonpost.com/wp-srv/ad/tiffanyTiles.js',
+      complete: function(){
 
-        displayAds();
+        // get site specific ad script
+        $.ajax({
+          url: scriptURL,
+          cache: true,
+          dataType: 'script',
+          crossDomain: true,
+          timeout: 4000,
+          error: function(err){
+            console.log('--ADOPS DEBUG-- AdOps site script failed to load:', err);
+          },
+          success: function(){
+            if(debug){
+              console.log('--ADOPS DEBUG--', scriptURL, 'loaded');
+            }
+
+            displayAds();
+          }
+        });
+
       }
     });
 
@@ -423,4 +432,4 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
     });
   }
 
-})(window.jQuery);
+})(window.jQuery, window.yepnope);
