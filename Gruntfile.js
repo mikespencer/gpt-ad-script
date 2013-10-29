@@ -6,6 +6,7 @@ var mountFolder = function (connect, dir) {
 
 var sys = require('sys');
 var exec = require('child_process').exec;
+var cheerio = require('cheerio');
 
 module.exports = function (grunt) {
   // load all grunt tasks:
@@ -18,7 +19,9 @@ module.exports = function (grunt) {
     clean: {
       sass: ['.sass-cache'],
       js: ['js/min/*'],
-      qunit: ['test/js']
+      qunit: ['test/js'],
+      testpages: ['*.html'],
+      tmp: ['tmp']
     },
     uglify: {
       options: {
@@ -189,20 +192,14 @@ module.exports = function (grunt) {
       ]
     },
     open: {
-      slate: {
-        path: 'http://localhost:<%= connect.options.port %>/slate.html'
-      },
-      wp_mobile: {
-        path: 'http://localhost:<%= connect.options.port %>/mobile_homepage.html'
-      },
-      wp: {
+      index: {
         path: 'http://localhost:<%= connect.options.port %>/index.html'
       },
-      wp_article: {
-        path: 'http://localhost:<%= connect.options.port %>/article_placeAd2.html'
+      wp: {
+        path: 'http://localhost:<%= connect.options.port %>/wp_homepage.html'
       },
-      theroot: {
-        path: 'http://localhost:<%= connect.options.port %>/theroot.html'
+      slate: {
+        path: 'http://localhost:<%= connect.options.port %>/slate_homepage.html'
       }
     },
     copy: {
@@ -217,6 +214,52 @@ module.exports = function (grunt) {
       wp_article: ['test/wp_article_tests.html'],
       wp_mobile: ['test/wp_mobile_tests.html'],
       slate: ['test/slate_tests.html']
+    },
+
+    //test page generation:
+    curl: {
+      wp_homepage: {
+        src: 'http://www.washingtonpost.com',
+        dest: 'tmp/wp/wp_homepage.html'
+      },
+      wp_front: {
+        src: 'http://www.washingtonpost.com/politics',
+        dest: 'tmp/wp/wp_front.html'
+      },
+      wp_article: {
+        src: 'http://www.washingtonpost.com/national/health-science/healthcaregov-fixes-wont-be-done-until-end-of-november/2013/10/25/22df29ba-3d93-11e3-b7ba-503fb5822c3e_story.html',
+        dest: 'tmp/wp/wp_article.html'
+      },
+      wp_blog: {
+        src: 'http://www.washingtonpost.com/blogs/post-politics/',
+        dest: 'tmp/wp/wp_blog.html'
+      },
+
+      slate_homepage: {
+        src: 'http://www.slate.com',
+        dest: 'tmp/slate/slate_homepage.html'
+      },
+      slate_front: {
+        src: 'http://www.slate.com/articles/news_and_politics.html',
+        dest: 'tmp/slate/slate_front.html'
+      },
+      slate_article: {
+        src: 'http://www.slate.com/articles/news_and_politics/roads/2013/10/unesco_and_japanese_culinary_tradition_can_a_u_n_body_s_designation_save.html',
+        dest: 'tmp/slate/slate_article.html'
+      },
+
+      theroot_homepage: {
+        src: 'http://www.theroot.com',
+        dest: 'tmp/theroot/theroot_homepage.html'
+      },
+      theroot_front: {
+        src: 'http://www.theroot.com/views/politics',
+        dest: 'tmp/theroot/theroot_front.html'
+      },
+      theroot_article: {
+        src: 'http://www.theroot.com/views/message-obama-get-work',
+        dest: 'tmp/theroot/theroot_article.html'
+      }
     }
   });
 
@@ -225,16 +268,15 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', [
     'build',
+    'generate_testpages',
     'server'
   ]);
 
   grunt.registerTask('build', [
     'clean:js',
     'build_gpt',
-    //'build_js',
-    //'build_css',
     'concurrent:build_all',
-    'test'
+    //'test'
   ]);
 
   grunt.registerTask('build_js', [
@@ -253,9 +295,16 @@ module.exports = function (grunt) {
     'clean:qunit'
   ]);
 
+  grunt.registerTask('generate_testpages', [
+    'clean:testpages',
+    'curl',
+    'localise_testpages',
+    'clean:tmp'
+  ]);
+
   grunt.registerTask('server', [
     'connect:livereload',
-    'open:wp_article',
+    'open:index',
     'watch'
   ]);
 
@@ -269,5 +318,76 @@ module.exports = function (grunt) {
     exec('curl --silent --create-dirs -o ' + gpt_local + ' ' + gpt_google);
   });
 
+
+  grunt.registerTask('localise_testpages', 'replaces ad script references in downloaded test pages to local refs', function(){
+
+    var index_html_data = {};
+
+    grunt.file.recurse('tmp', function(abspath, rootdir, subdir, filename){
+      grunt.log.ok(subdir);
+      grunt.log.ok(filename);
+
+
+      var html = grunt.file.read(abspath);
+      var $ = cheerio.load(html);
+
+      var data = {
+        'ad-site': subdir
+      };
+
+      if(subdir === 'slate'){
+        data['ad-page-type'] = 'responsive';
+      }
+
+      $('script[src*="/wp-srv/ad/wp.js"], ' +
+      'script[src*="/wp-srv/ad/root.js"], ' +
+      'script[src*="/wp-srv/ad/slate.js"], ' +
+      'script[src*="/wp-srv/ad/slate_mobile.js"], ' +
+      'script[src*="/wp-srv/ad/wp_mobile.js"]').remove();
+
+      $('script[src*="/wp-srv/ad/loaders/latest/js/min/loader.min.js"], ' +
+        'script[src*="/wp-srv/ad/generic_ad.js"], ' +
+        'script[src*="/wp-srv/ad/responsive_ad.js"], ' +
+        'script[src*="/wp-srv/ad/min/responsive_ad.js"], ' +
+        'script[src*="/wp-srv/ad/slate_responsive.js"], ' +
+        'script[src*="/wp-srv/ad/min/slate_responsive.js"]')
+      .first()
+      .attr({
+        src: 'js/min/loader.min.js?cacheBuster=' + Math.floor(Math.random() * 1E3)
+      })
+      .data(data);
+
+      grunt.file.write(filename, $.html());
+
+      index_html_data[subdir] = index_html_data[subdir] || [];
+      index_html_data[subdir].push('<li><a href="' + filename + '">' + filename + '</a></li>');
+
+    });
+
+    var output = [
+      '<!DOCTYPE html>',
+      '<html>',
+      '<head>',
+      '<!-- THIS FILE IS DYNAMICALLY GENERATED VIA Gruntfile.js AND THE localise_testpages TASK -->',
+      '<title>Test Pages</title>',
+      '</head>',
+      '<body>',
+      '<h1>Test Pages</h1>'
+    ];
+
+    for(var key in index_html_data){
+      if(index_html_data.hasOwnProperty(key)){
+        output.push('<h2>' + key + '</h2>');
+        output.push('<ul>');
+        output.push(index_html_data[key].join('\n'));
+        output.push('</ul>');
+      }
+    }
+
+    output.push('</body>');
+    output.push('</html>');
+    grunt.file.write('index.html', output.join('\n'));
+
+  });
 
 };
