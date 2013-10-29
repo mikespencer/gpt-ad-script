@@ -353,7 +353,7 @@ module.exports = function (grunt) {
         'script[src*="/wp-srv/ad/min/slate_responsive.js"]')
       .first()
       .attr({
-        src: 'js/min/loader.min.js?cacheBuster=' + Math.floor(Math.random() * 1E3)
+        src: '/js/min/loader.min.js?cacheBuster=' + Math.floor(Math.random() * 1E3)
       })
       .data(data);
 
