@@ -121,7 +121,7 @@ define(['utils', 'wp/flags', 'wp/textlinks'], function(utils, flags, textlinks){
       },
       //20428-CD
       sponsor_spots_rentals:{
-        what: ['featrent', 'featrent_2', 'featrent_3', 'featrent_4', 'featrent_5', 'featrent_6', 'featrent_7', 'featrent_8', 'featrent_9', 'featrent_10'],
+        what: ['featrent', 'featrent_2', 'featrent_3', 'featrent_4', 'featrent_5', 'featrent_6', 'featrent_7', 'featrent_8', 'featrent_9', 'featrent_10', 'featrent_11', 'featrent_12'],
         where: ['rentals']
       },
       jobs_336x60: {
