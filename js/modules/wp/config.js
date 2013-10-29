@@ -402,6 +402,8 @@ define(['utils', 'wp/flags', 'wp/textlinks'], function(utils, flags, textlinks){
       "sponsor_links_in": { "size": [[1,1]] },
       "sponsor_links_rr": { "size": [[1,1]] },
       "tiffany_tile": { "size": [[200,60]], "keyvalues": { "ad": ["tiff"], "pos": ["ad14"] } },
+      "theforum_88x31": { "size": [[88,31]] },
+      "theforum_336x60": { "size": [[336,60]] },
       "tooltile": { "size": [[1,1]] },
       "topjobs": { "size": [[1,1]] },
       "trendex_sponsor": { "size": [[1,1]] }
