@@ -9,7 +9,7 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
 
   'use strict';
 
-  if(/no_ads/.test(location.search)){
+  if(/no_ads/.test(location.search) || !yepnope){
     return false;
   }
 
@@ -317,8 +317,8 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
 
     //tiffany tile fix on wp so that tile publisher still works
     yepnope({
-      test: wpAd.siteInfo.site === 'wp' && !(wpAd.config && wpAd.config.tiffanyTiles),
-      yep: 'http://js.washingtonpost.com/wp-srv/ad/tiffanyTiles.js',
+      test: wpAd.siteInfo.site === 'wp' && (!wpAd.config || (wpAd.config && !wpAd.config.tiffanyTiles)),
+      yep: 'timeout=2000!http://js.washingtonpost.com/wp-srv/ad/tiffanyTiles.js',
       complete: function(){
 
         // get site specific ad script
@@ -412,8 +412,36 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
    * wpAd.$ in future.
    */
 
-  // make sure jQuery is defined and up to date, then display ads
   if ($ && $.fn && versionChecker($.fn.jquery, '1.7.1')) {
+    if(debug){
+      console.log('ADOPS DEBUG: jQuery >= 1.7.1, OK');
+    }
+    init();
+  } else {
+    yepnope([{
+      test: $,
+      yep: ['timeout=3000!' + jQueryURL],
+      callback: function(){
+        if(debug){
+          console.log('ADOPS DEBUG: jQuery < 1.7.1, using noConflict(true)');
+        }
+        $ = window.jQuery.noConflict(true);
+        init();
+      }
+    }, {
+      test: !$,
+      yep: ['timeout=3000!' + jQueryURL],
+      callback: function(){
+        if(debug){
+          console.log('ADOPS DEBUG: jQuery undefined, loading v1.7.1');
+        }
+        $ = window.jQuery;
+        init();
+      }
+    }]);
+  }
+  // make sure jQuery is defined and up to date, then display ads
+  /*if ($ && $.fn && versionChecker($.fn.jquery, '1.7.1')) {
     init();
 
   //else if no jquery at all, load it - can use noConflict() to not affect site's $ object
@@ -430,6 +458,6 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
       $ = window.jQuery.noConflict(true);
       init();
     });
-  }
+  }*/
 
 })(window.jQuery, window.yepnope);
