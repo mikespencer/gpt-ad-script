@@ -298,7 +298,7 @@ module.exports = function (grunt) {
   grunt.registerTask('generate_testpages', [
     'clean:testpages',
     'curl',
-    'localise_testpages',
+    'local_refs',
     'clean:tmp'
   ]);
 
@@ -319,14 +319,11 @@ module.exports = function (grunt) {
   });
 
 
-  grunt.registerTask('localise_testpages', 'replaces ad script references in downloaded test pages to local refs', function(){
+  grunt.registerTask('local_refs', 'Replaces ad script references in downloaded test pages to local refs', function(){
 
     var index_html_data = {};
 
     grunt.file.recurse('tmp', function(abspath, rootdir, subdir, filename){
-      grunt.log.ok(subdir);
-      grunt.log.ok(filename);
-
 
       var html = grunt.file.read(abspath);
       var $ = cheerio.load(html);
@@ -359,6 +356,8 @@ module.exports = function (grunt) {
 
       grunt.file.write(filename, $.html());
 
+      grunt.log.ok('Generated and parsed: ' + filename);
+
       index_html_data[subdir] = index_html_data[subdir] || [];
       index_html_data[subdir].push('<li><a href="' + filename + '">' + filename + '</a></li>');
 
@@ -387,6 +386,8 @@ module.exports = function (grunt) {
     output.push('</body>');
     output.push('</html>');
     grunt.file.write('index.html', output.join('\n'));
+
+    grunt.log.ok('Generated: index.html');
 
   });
 
