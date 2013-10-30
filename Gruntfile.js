@@ -1,3 +1,4 @@
+/*jshint ec5:true */
 var LIVERELOAD_PORT = 35729;
 var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
 var mountFolder = function (connect, dir) {
@@ -182,7 +183,7 @@ module.exports = function (grunt) {
       ],
       build_js: [
         'jshint:src',
-        'jshint:gruntfile',
+        //'jshint:gruntfile',
         'jshint:libs',
         'requirejs:wp',
         'requirejs:wp_mobile',
@@ -334,6 +335,7 @@ module.exports = function (grunt) {
       var html = grunt.file.read(abspath);
       var $ = cheerio.load(html);
 
+      //subdir should be the correct data-ad-site value (wp, slate, theroot, etc)
       var data = {
         'ad-site': subdir
       };
