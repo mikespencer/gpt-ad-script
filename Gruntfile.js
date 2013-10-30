@@ -241,6 +241,22 @@ module.exports = function (grunt) {
         src: 'http://www.washingtonpost.com/blogs/post-politics/',
         dest: 'tmp/wp/wp_blog.html'
       },
+      wp_games: {
+        src: 'http://games.washingtonpost.com/',
+        dest: 'tmp/wp/wp_games.html'
+      },
+      wp_rentals: {
+        src: 'http://www.washingtonpost.com/rentals',
+        dest: 'tmp/wp/wp_rentals.html'
+      },
+      wp_realestate: {
+        src: 'http://www.washingtonpost.com/realestate',
+        dest: 'tmp/wp/wp_realestate.html'
+      },
+      wp_gog: {
+        src: 'http://www.washingtonpost.com/goingoutguide',
+        dest: 'tmp/wp/wp_gog.html'
+      },
 
       slate_homepage: {
         src: 'http://www.slate.com',
@@ -340,27 +356,53 @@ module.exports = function (grunt) {
         'ad-site': subdir
       };
 
+      //fix for relative urls:
+      var bases = {
+        theroot: 'http://www.theroot.com'
+      }
+
       if(subdir === 'slate'){
         data['ad-page-type'] = 'responsive';
       }
 
+      //attempt to make all relative links absolute:
+      if(bases[subdir]){
+        $('script:not([src^="http:"]), script:not([src^="//"]), ' +
+          'link:not([href^="http:"]), link:not([href^="//"]), ' +
+          'img:not([src^="http:"]), img:not([src^="//"])').each(function(){
+          if($(this).attr('src')){
+            var src = $(this).attr('src').replace(/^\//, ''); //no leading /
+            $(this).attr({
+              src: bases[subdir] + '/' + src
+            });
+          } else if($(this).attr('href')){
+            var href = $(this).attr('href').replace(/^\//, ''); //no leading /
+            $(this).attr({
+              href: bases[subdir] + '/' + href
+            });
+          }
+        });
+      }
+
       //remove existing site specific ad script references
       $('script[src*="/wp-srv/ad/wp.js"], ' +
-      'script[src*="/wp-srv/ad/root.js"], ' +
-      'script[src*="/wp-srv/ad/slate.js"], ' +
-      'script[src*="/wp-srv/ad/slate_mobile.js"], ' +
-      'script[src*="/wp-srv/ad/wp_mobile.js"]').remove();
+        'script[src*="/wp-srv/ad/wp_ad.js"], ' +
+        'script[src*="/wp-srv/ad/root.js"], ' +
+        'script[src*="/wp-srv/ad/slate.js"], ' +
+        'script[src*="/wp-srv/ad/slate_mobile.js"], ' +
+        'script[src*="/wp-srv/ad/wp_mobile.js"]').remove();
 
       //replace the generic ad script on the page with a reference to our new loader.min.js script
       $('script[src*="/wp-srv/ad/loaders/latest/js/min/loader.min.js"], ' +
         'script[src*="/wp-srv/ad/generic_ad.js"], ' +
+        'script[src*="/wp-srv/ad/wpni_generic_ad.js"], ' +
         'script[src*="/wp-srv/ad/responsive_ad.js"], ' +
         'script[src*="/wp-srv/ad/min/responsive_ad.js"], ' +
         'script[src*="/wp-srv/ad/slate_responsive.js"], ' +
         'script[src*="/wp-srv/ad/min/slate_responsive.js"]')
       .first()
       .attr({
-        src: '/js/min/loader.min.js?cacheBuster=' + Math.floor(Math.random() * 1E3)
+        src: 'http://localhost:5000/js/min/loader.min.js?cacheBuster=' + Math.floor(Math.random() * 1E3)
       })
       .data(data);
 
@@ -371,7 +413,7 @@ module.exports = function (grunt) {
 
       //store data for generating the index.html page
       index_html_data[subdir] = index_html_data[subdir] || [];
-      index_html_data[subdir].push('<li><a href="' + filename + '">' + filename + '</a></li>');
+      index_html_data[subdir].push('<li><a href="' + filename + '">' + filename.split('_')[1].split('.')[0] + '</a></li>');
 
     });
 
