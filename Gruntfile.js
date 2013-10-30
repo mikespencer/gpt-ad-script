@@ -1,3 +1,4 @@
+/*jshint es5:true, node:true*/
 var LIVERELOAD_PORT = 35729;
 var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
 var mountFolder = function (connect, dir) {
@@ -170,6 +171,12 @@ module.exports = function (grunt) {
     },
     //faster buld time:
     concurrent: {
+      clean_build: [
+        'clean:js',
+        'clean:testpages',
+        'clean:qunit',
+        'clean:tmp'
+      ],
       build_all: [
         'build_js',
         'build_css'
@@ -267,16 +274,16 @@ module.exports = function (grunt) {
   //REGISTER TASKS BELOW:
 
   grunt.registerTask('default', [
+    'concurrent:clean_build',
     'build',
-    'generate_testpages',
+    'test',
+    'testpages',
     'server'
   ]);
 
   grunt.registerTask('build', [
-    'clean:js',
     'build_gpt',
-    'concurrent:build_all',
-    //'test'
+    'concurrent:build_all'
   ]);
 
   grunt.registerTask('build_js', [
@@ -295,7 +302,7 @@ module.exports = function (grunt) {
     'clean:qunit'
   ]);
 
-  grunt.registerTask('generate_testpages', [
+  grunt.registerTask('testpages', [
     'clean:testpages',
     'curl',
     'local_refs',
@@ -308,7 +315,7 @@ module.exports = function (grunt) {
     'watch'
   ]);
 
-  //custom gpt task:
+  //custom gpt grabber task:
   grunt.registerTask('build_gpt', 'Fetch latest gpt script from Google.', function(){
     var gpt_local = 'js/lib/gpt.js';
     var gpt_google = 'http://www.googletagservices.com/tag/js/gpt.js';
@@ -318,7 +325,7 @@ module.exports = function (grunt) {
     exec('curl --silent --create-dirs -o ' + gpt_local + ' ' + gpt_google);
   });
 
-
+  //custom task that generates test pages referencing local gpt scripts
   grunt.registerTask('local_refs', 'Replaces ad script references in downloaded test pages to local refs', function(){
 
     var index_html_data = {};
@@ -336,12 +343,14 @@ module.exports = function (grunt) {
         data['ad-page-type'] = 'responsive';
       }
 
+      //remove existing site specific ad script references
       $('script[src*="/wp-srv/ad/wp.js"], ' +
       'script[src*="/wp-srv/ad/root.js"], ' +
       'script[src*="/wp-srv/ad/slate.js"], ' +
       'script[src*="/wp-srv/ad/slate_mobile.js"], ' +
       'script[src*="/wp-srv/ad/wp_mobile.js"]').remove();
 
+      //replace the generic ad script on the page with a reference to our new loader.min.js script
       $('script[src*="/wp-srv/ad/loaders/latest/js/min/loader.min.js"], ' +
         'script[src*="/wp-srv/ad/generic_ad.js"], ' +
         'script[src*="/wp-srv/ad/responsive_ad.js"], ' +
@@ -354,21 +363,26 @@ module.exports = function (grunt) {
       })
       .data(data);
 
+      //rewrite the file with updated refs
       grunt.file.write(filename, $.html());
 
       grunt.log.ok('Generated and parsed: ' + filename);
 
+      //store data for generating the index.html page
       index_html_data[subdir] = index_html_data[subdir] || [];
       index_html_data[subdir].push('<li><a href="' + filename + '">' + filename + '</a></li>');
 
     });
 
+    //index page generation start:
     var output = [
       '<!DOCTYPE html>',
       '<html>',
       '<head>',
       '<!-- THIS FILE IS DYNAMICALLY GENERATED VIA Gruntfile.js AND THE localise_testpages TASK -->',
       '<title>Test Pages</title>',
+      '<link rel="stylesheet" href="bower_components/normalize-css/normalize.css" type="text/css" />',
+      '<style type="text/css">body{padding:0 25px;}</style>',
       '</head>',
       '<body>',
       '<h1>Test Pages</h1>'
@@ -386,6 +400,7 @@ module.exports = function (grunt) {
     output.push('</body>');
     output.push('</html>');
     grunt.file.write('index.html', output.join('\n'));
+    //index page generation end.
 
     grunt.log.ok('Generated: index.html');
 

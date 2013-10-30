@@ -5,6 +5,7 @@
     "jquery": "~1.7.2",
     "qunit": "~1.12.0",
     "enquire": "~2.1.0",
-    "yepnope": "~1.5.4"
+    "yepnope": "~1.5.4",
+    "normalize-css": "~2.1.3"
   }
 }
