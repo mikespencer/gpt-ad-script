@@ -9,3 +9,4 @@ css/.sass-cache
 test/js
 tmp
 *.html
+js/lib/gpt.js
