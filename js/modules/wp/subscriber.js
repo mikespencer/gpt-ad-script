@@ -1,6 +1,5 @@
 /**
  * Determines whether a user is subscribed (true) or not subscribed (false)
- * NEED TO FIGURE OUT HOW TO SYNC THIS UP WITH $(document).on('onTwpMeterReady')...
  */
 define(function(){
   return function(){

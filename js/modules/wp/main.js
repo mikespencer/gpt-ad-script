@@ -2,6 +2,7 @@
  * washingtonpost.com site specific ad script (desktop)
  */
 define([
+  'jQuery',
   'defaultSettings',
   'Ad',
   'GPTConfig',
@@ -15,9 +16,11 @@ define([
   'wp/textlinks',
   'wp/wpPlus',
   'wp/flags',
+  'wp/subscriber',
   'criteo'
 
 ], function(
+  $,
   defaultSettings,
   Ad,
   gptConfig,
@@ -31,6 +34,7 @@ define([
   textlinks,
   wpPlus,
   flags,
+  subscriber,
   criteo
 
 ){
@@ -63,6 +67,7 @@ define([
     }
   }, config.flights);*/
 
+
   //integrate tiffany tiles from tiffany tile publisher
   if(window.wpAd && window.wpAd.config && window.wpAd.config.tiffanyTiles){
     config.flights = $.extend(utils.clone(window.wpAd.config.tiffanyTiles), config.flights);
@@ -72,6 +77,40 @@ define([
   //overrides config
   utils.extend(Ad.prototype.overrides, overrides);
 
+  //subscribe promos
+  $(document).on('onTwpMeterReady', function(){
+    if(flags.pageType.homepage){
+      if(window.wpAd && window.wpAd.adsOnPage &&
+      !window.wpAd.adsOnPage.pushdown &&
+      !window.wpAd.adsOnPage.leaderboard &&
+      !(window.wpAd.flags && window.wpAd.flags.disableSubscribePromo)){
+
+        //placeholder for actual creative code
+        var code = '';
+
+        if(subscriber()){
+          //show welcome message
+          code = '<img src="http://img.wpdigital.net/wp-srv/ad/img/welcome-1-970x66.png" height="66" width="970" alt="" style="border:0;outline:0;" />';
+        } else {
+          //show subscribe message
+          code = '<a href="https://account.washingtonpost.com/acquisition/?promo=dgbanrad&destination&tid=signup_HP5">' +
+            '<img src="//img.wpdigital.net/wp-srv/ad/img/meter-promo-01-970x66.png" alt="Digital subscriptions starting at $0.99. Click here to subscribe." width="970" height="66" style="border:0;outline:0;" />' +
+          '</a>';
+        }
+
+        $('#wpni_adi_pushdown').removeClass('slug').append(code).css({display: 'block'});
+        $('#slug_pushdown').css({display: 'block'});
+
+      }
+    } else if((flags.pageType.article || flags.pageType.front) && !subscriber()){
+      //leverage existing logic for now
+      utils.ajax({
+        url: 'http://js.washingtonpost.com/wp-srv/ad/subscribePromo.js'
+      });
+    }
+  });
+
+
   //this is wpAd
   return utils.extend(defaultSettings, {
 
@@ -80,10 +119,21 @@ define([
     deferred: {
       //Array of deferred functions to execute on $(window).load
       windowLoad: [
-        wpPlus.exec
-      //, brandconnect
-      //, subscribe promos
-      //, etc
+        //WP+ tracking and config
+        wpPlus.exec,
+        //20999 - JH - brand connect tracking and config:
+        function(){
+          if($('div.brand-connect-module').length){
+            utils.ajax({
+              url: 'http://js.washingtonpost.com/wp-srv/ad/min/brandConnectTracking.js',
+              success: function(data){
+                if(wpAd.brandConnect && wpAd.brandConnect.init){
+                  wpAd.brandConnect.init();
+                }
+              }
+            });
+          }
+        }
       ],
       //Array of deferred functions to execute on $(window).load
       domReady: [

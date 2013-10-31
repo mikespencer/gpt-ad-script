@@ -413,34 +413,34 @@ module.exports = function (grunt) {
 
       //store data for generating the index.html page
       index_html_data[subdir] = index_html_data[subdir] || [];
-      index_html_data[subdir].push('<li><a href="' + filename + '">' + filename.split('_')[1].split('.')[0] + '</a></li>');
+      index_html_data[subdir].push('    <li><a href="' + filename + '">' + filename.split('.')[0] + '</a></li>');
 
     });
 
     //index page generation start:
     var output = [
       '<!DOCTYPE html>',
+      '<!-- This file is dynamically generated via Gruntfile.js and the localise_testpages task -->',
       '<html>',
       '<head>',
-      '<!-- THIS FILE IS DYNAMICALLY GENERATED VIA Gruntfile.js AND THE localise_testpages TASK -->',
-      '<title>Test Pages</title>',
-      '<link rel="stylesheet" href="bower_components/normalize-css/normalize.css" type="text/css" />',
-      '<style type="text/css">body{padding:0 25px;}</style>',
+      '  <title>Test Pages</title>',
+      '  <link rel="stylesheet" href="bower_components/normalize-css/normalize.css" type="text/css" />',
+      '  <style type="text/css">body{padding:0 25px;}</style>',
       '</head>',
-      '<body>',
-      '<h1>Test Pages</h1>'
+      '<body>\n',
+      '  <h1>Test Pages</h1>'
     ];
 
     for(var key in index_html_data){
       if(index_html_data.hasOwnProperty(key)){
-        output.push('<h2>' + key + '</h2>');
-        output.push('<ul>');
+        output.push('  <h2>' + key + '</h2>');
+        output.push('  <ul>');
         output.push(index_html_data[key].join('\n'));
-        output.push('</ul>');
+        output.push('  </ul>');
       }
     }
 
-    output.push('</body>');
+    output.push('\n</body>');
     output.push('</html>');
     grunt.file.write('index.html', output.join('\n'));
     //index page generation end.

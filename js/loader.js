@@ -318,7 +318,7 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
     //tiffany tile fix on wp so that tile publisher still works
     yepnope({
       test: wpAd.siteInfo.site === 'wp' && (!wpAd.config || (wpAd.config && !wpAd.config.tiffanyTiles)),
-      yep: 'timeout=2000!http://js.washingtonpost.com/wp-srv/ad/tiffanyTiles.js',
+      yep: 'timeout=3000!http://js.washingtonpost.com/wp-srv/ad/tiffanyTiles.js',
       complete: function(){
 
         // get site specific ad script
@@ -327,7 +327,7 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
           cache: true,
           dataType: 'script',
           crossDomain: true,
-          timeout: 4000,
+          timeout: 5000,
           error: function(err){
             console.log('--ADOPS DEBUG-- AdOps site script failed to load:', err);
           },
@@ -420,7 +420,7 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
   } else {
     yepnope([{
       test: $,
-      yep: ['timeout=3000!' + jQueryURL],
+      yep: ['timeout=5000!' + jQueryURL],
       callback: function(){
         if(debug){
           console.log('ADOPS DEBUG: jQuery < 1.7.1, using noConflict(true)');
@@ -430,7 +430,7 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
       }
     }, {
       test: !$,
-      yep: ['timeout=3000!' + jQueryURL],
+      yep: ['timeout=5000!' + jQueryURL],
       callback: function(){
         if(debug){
           console.log('ADOPS DEBUG: jQuery undefined, loading v1.7.1');
