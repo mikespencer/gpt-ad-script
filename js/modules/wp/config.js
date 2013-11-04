@@ -120,6 +120,7 @@ define(['utils', 'wp/flags', 'wp/textlinks'], function(utils, flags, textlinks){
         where: ['realestate/neighborhoods/front', 'realestate/buy']
       },
       //20428-CD
+      //22437-AL
       sponsor_spots_rentals:{
         what: ['featrent', 'featrent_2', 'featrent_3', 'featrent_4', 'featrent_5', 'featrent_6', 'featrent_7', 'featrent_8', 'featrent_9', 'featrent_10', 'featrent_11', 'featrent_12'],
         where: ['rentals']
@@ -207,15 +208,6 @@ define(['utils', 'wp/flags', 'wp/textlinks'], function(utils, flags, textlinks){
         what: ['600x130'],
         where: ['jobs/front']
       },
-      agoogleadaytest: {
-        what: ['agoogleaday'],
-        url_check: ['test_ads=agoogleaday']
-      },
-      networknews_test: {
-        url_check: ['test_ads=networknews'],
-        what: ['nn_hp'],
-        hardcode: '<div id="nn_ad_tile_hp" style="background-color: rgb(153, 153, 153); position: relative; padding: 0px; margin: 0px; height: 20px; width: 190px;"><img src="http://www.washingtonpost.com/wp-srv/images/spacer.gif" width="190" height="20"><div style="position: absolute; top: 5px; left: 5px; color: rgb(255, 255, 255); font-size: 12px; font-family: Arial,Helvetica,sans-serif;">190x20 Test Spot<br></div></div>'
-      },
       liveslostgallery: {
         what : ['!nav_tile', '!tiffany_tile', '!leaderboard', '!extra_bb', '!leaderboard_2', '!bigbox', '!promo'],
         test: function(){
@@ -254,8 +246,13 @@ define(['utils', 'wp/flags', 'wp/textlinks'], function(utils, flags, textlinks){
       },
       //22337-AL
       postlive: {
-        what: ['!88x31'],
+        what: ['!88x31', '!leaderboard', '!flex_ss_bb_hp'],
         where: ['postlive']
+      },
+      //22337-AL
+      postlive_edge: {
+        what: ['flex_ss_bb_hp'],
+        where: ['postlive/conferences/wonkblog-nyc/front']
       },
       //GOG-RESPONSIVE
       gog_responsive: {
@@ -276,20 +273,10 @@ define(['utils', 'wp/flags', 'wp/textlinks'], function(utils, flags, textlinks){
         },
         test: [function () {return (/http\:\/\/qaprev\.|http\:\/\/devprev\./).test(location.href);}]
       },
-      //21949
-      business_navtile: {
-        'what': ['navtile_business'],
-        'when': ['201310']
-      },
-      //22303-CD
-      'navtile_tech': {
-        'what': ['navtile_technology'],
-        'when': ['201310080000/201310142359']
-      },
       //more tiles
       tile_openings: {
-        'what': ['navtile_lifestyle', 'navtile_world'],
-        'when': ['2013']
+        what: ['navtile_lifestyle', 'navtile_world'],
+        when: ['2013']
       },
       //22235-JH
       trendex_sponsor_logo: {
@@ -307,44 +294,82 @@ define(['utils', 'wp/flags', 'wp/textlinks'], function(utils, flags, textlinks){
             '</div>')[0];
         }
       },
-      //22199-JH
-      ibm_business_brandConnect_rr_tile: {
-        what: ['marketing_2'],
-        where: ['business'],
-        when: ['201310080000/201310142359'],
+      //22368-CD
+      cfc_tile: {
+        what: ['336x60'],
+        when: ['201310170000/201312152359'],
+        where: ['washingtonpost.com']
+      },
+      //22394-CC
+      chevron: {
+        what: ['pushdown'],
+        where: ['washingtonpost.com'],
+        when: ['201310250000/201310252359', '201311080000/201311082359', '201311110000/201311112359', '201311210000/201311212359', '201312010000/201312012359', '201312060000/201312062359']
+      },
+      //22170-JH-31344507298
+      nasa_enterprise: {
+        what: ['enterprise', '!leaderboard', '!leaderboard_2'],
+        where: ['national/nasa/blog/blog'],
+        when: ['201310140000/201311302359']
+      },
+      //22439-CC
+      google_nexus: {
+        what: ['leaderboard'],
+        where: ['washingtonpost.com'],
+        when: ['201311040000/201311042359']
+      },
+      //22446-CC
+      msft: {
+        what: ['pushdown'],
+        where: ['washingtonpost.com'],
+        when: ['201311070000/201311072359']
+      },
+      theforum_88x31: {
+        what: ['theforum_88x31'],
         hardcode: function(){
-          var div = document.createElement('div'),
-            dv = document.createElement('script'),
-            a = document.createElement('a'),
-            i = document.createElement('img'),
-            pix = document.createElement('img');
+          var rndm = Math.floor(Math.random() * 1E5),
+            creative = document.createElement('img'),
+            pix = document.createElement('img'),
+            a = document.createElement('a');
 
-          i.src = 'http://img.wpdigital.net/wp-srv/ad/public/static/22303/tile.png';
-          i.alt = 'Click here for more information.';
-          i.width = '300';
-          i.height = '100';
-          i.style.border = 'none';
+          creative.src = 'http://img.wpdigital.net/wp-srv/ad/public/static/theforum-chevron/88x31-alt.jpg';
+          creative.alt = 'Click here for more information.';
 
-          a.href = 'http://ad.doubleclick.net/clk;276721894;103221377;h';
-          a.appendChild(i);
-
-          pix.src = 'http://ad.doubleclick.net/ad/N815.washingtonpost/B7878471.25;sz=1x1;ord=' + Math.floor(Math.random() * 1E5) + '?';
-          pix.alt = 'pixel';
-          pix.width = '1';
-          pix.height = '1';
-          pix.style.border = 'none';
+          pix.src = 'http://bs.serving-sys.com/BurstingPipe/adServer.bs?cn=tf&c=19&mc=imp&pli=8081231&PluID=0&ord=' + rndm + '&rtu=-1';
           pix.style.display = 'none';
 
-          dv.src = 'http://cdn.doubleverify.com/dvtp_src.js?ctx=589953&cmp=7878471&sid=101894&plc=103221377&num=&adid=&advid=592075&adsrv=1&region=30&btreg=&btadsrv=&crt=&crtname=&chnl=&unit=&pid=&uid=&dvtagver=6.1.src';
+          a.href = 'http://bs.serving-sys.com/BurstingPipe/adServer.bs?cn=tf&c=20&mc=click&pli=8081231&PluID=0&ord=' + rndm;
+          a.target = '_blank';
 
-          div.appendChild(a);
-          div.appendChild(pix);
-          div.appendChild(dv);
+          a.appendChild(creative);
+          a.appendChild(pix);
 
-          return div;
+          return a;
         }
-      }
+      }/*,
+      theforum_336x60: {
+        what: ['theforum_336x60'],
+        hardcode: function(){
+          var rndm = Math.floor(Math.random() * 1E5),
+            creative = document.createElement('img'),
+            pix = document.createElement('img'),
+            a = document.createElement('a');
 
+          creative.src = 'http://placehold.it/336x60';
+          creative.alt = 'Click here for more information.';
+
+          pix.src = 'http://bs.serving-sys.com/BurstingPipe/adServer.bs?cn=tf&c=19&mc=imp&pli=8081230&PluID=0&ord=' + rndm + '&rtu=-1';
+          pix.style.display = 'none';
+
+          a.href = 'http://bs.serving-sys.com/BurstingPipe/adServer.bs?cn=tf&c=20&mc=click&pli=8081230&PluID=0&ord=' + rndm;
+          a.target = '_blank';
+
+          a.appendChild(creative);
+          a.appendChild(pix);
+
+          return a;
+        }
+      }*/
     },
 
     adTypes: {
