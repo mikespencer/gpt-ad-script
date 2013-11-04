@@ -237,6 +237,10 @@ module.exports = function (grunt) {
         src: 'http://www.washingtonpost.com/national/health-science/healthcaregov-fixes-wont-be-done-until-end-of-november/2013/10/25/22df29ba-3d93-11e3-b7ba-503fb5822c3e_story.html',
         dest: 'tmp/wp/wp_article.html'
       },
+      wp_article_single_page: {
+        src: 'http://www.washingtonpost.com/055f8e9c-2ab1-11e3-8ade-a1f23cda135e_story.html',
+        dest: 'tmp/wp/wp_article_single_page.html'
+      },
       wp_blog: {
         src: 'http://www.washingtonpost.com/blogs/post-politics/',
         dest: 'tmp/wp/wp_blog.html'
