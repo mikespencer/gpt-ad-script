@@ -346,33 +346,6 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
   }
 
   /**
-   * Helper function to load scripts. Used here to load jQuery if it is not present on the page.
-   * @param {String|Object} src URL of script to load. Optionally pass in as Object to override type.
-   * @param {Function} opt_callback Optional callback function once the script has loaded.
-   */
-  function loadScript(src, opt_callback) {
-    var s = document.createElement('script');
-    var target = document.body || document.getElementsByTagName('head')[0] || false;
-    opt_callback = opt_callback || false;
-    if(target){
-      s.type = 'text/' + (src.type || 'javascript');
-      s.src = src.src || src;
-      s.async = true;
-      if(typeof opt_callback === 'function'){
-        s.onreadystatechange = s.onload = function() {
-          var state = s.readyState;
-          if (!opt_callback.done && (!state || /loaded|complete/.test(state))) {
-            opt_callback.done = true;
-            opt_callback();
-          }
-        };
-      }
-      target.appendChild(s);
-    }
-  }
-
-
-  /**
    * Checks version strings and returns true if 'thisVer' is more recent than or equal to 'minVer'
    * @param {String} thisVer The version to check
    * @param {String} minVer Minimum version to check against
@@ -440,24 +413,5 @@ var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
       }
     }]);
   }
-  // make sure jQuery is defined and up to date, then display ads
-  /*if ($ && $.fn && versionChecker($.fn.jquery, '1.7.1')) {
-    init();
-
-  //else if no jquery at all, load it - can use noConflict() to not affect site's $ object
-  } else if(!$){
-    loadScript(jQueryURL, function(){
-      //$ = window.jQuery.noConflict();
-      $ = window.jQuery;
-      init();
-    });
-
-  //else jquery must be out of date - use noConflict(true) to not affect site's $ or jQuery objects
-  } else {
-    loadScript(jQueryURL, function(){
-      $ = window.jQuery.noConflict(true);
-      init();
-    });
-  }*/
 
 })(window.jQuery, window.yepnope);

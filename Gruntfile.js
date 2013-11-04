@@ -276,11 +276,11 @@ module.exports = function (grunt) {
         dest: 'tmp/theroot/theroot_homepage.html'
       },
       theroot_front: {
-        src: 'http://www.theroot.com/views/politics',
+        src: 'http://www.theroot.com/articles/politics.html',
         dest: 'tmp/theroot/theroot_front.html'
       },
       theroot_article: {
-        src: 'http://www.theroot.com/views/message-obama-get-work',
+        src: 'http://www.theroot.com/articles/politics/2013/11/harry_belafonte_compares_koch_bros_to_the_kkk.html',
         dest: 'tmp/theroot/theroot_article.html'
       }
     }
@@ -396,6 +396,7 @@ module.exports = function (grunt) {
       $('script[src*="/wp-srv/ad/loaders/latest/js/min/loader.min.js"], ' +
         'script[src*="/wp-srv/ad/generic_ad.js"], ' +
         'script[src*="/wp-srv/ad/wpni_generic_ad.js"], ' +
+        'script[src*="jsGroups=adScripts"], ' +
         'script[src*="/wp-srv/ad/responsive_ad.js"], ' +
         'script[src*="/wp-srv/ad/min/responsive_ad.js"], ' +
         'script[src*="/wp-srv/ad/slate_responsive.js"], ' +
