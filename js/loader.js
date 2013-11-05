@@ -3,7 +3,10 @@
 /**
  * Script loader for adops. Defines, loads and executes necessary ad dependencies based on site.
  */
-var placeAd2, wpAd = wpAd || {}, googletag = googletag || { cmd: [] };
+
+var placeAd2 = function(){};
+var wpAd = wpAd || {};
+var googletag = googletag || { cmd: [] };
 
 (function($, yepnope){
 
