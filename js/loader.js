@@ -8,6 +8,8 @@ var placeAd2 = function(){};
 var wpAd = wpAd || {};
 var googletag = googletag || { cmd: [] };
 
+wpAd.cleanScriptTags = function(){};
+
 (function($, yepnope){
 
   'use strict';
