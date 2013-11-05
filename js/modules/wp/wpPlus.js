@@ -55,6 +55,10 @@ define(['utils'], function(utils){
       'washingtonpost.com': [
         'http://pixel.mathtag.com/event/js?mt_id=202444&mt_adid=109699&v1=&v2=&v3=&s1=&s2=&s3='
       ],
+      //22493
+      'politics/blog/federal-eye': [
+        'http://pixel.mathtag.com/event/js?mt_id=365876&mt_adid=109699&v1=&v2=&v3=&s1=&s2=&s3='
+      ],
       'lifestyle/home': [
         'http://pixel.mathtag.com/event/js?mt_id=220658&mt_adid=109699&v1=&v2=&v3=&s1=&s2=&s3='
       ],
