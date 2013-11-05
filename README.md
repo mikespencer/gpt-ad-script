@@ -159,6 +159,7 @@ This example will deliver the ad as a "viewable impression" (only once it is in 
 
 +  **FOR WP LAUNCH**
     +  county sponsor stuff
+    +  amazon a9 integration (amznads.getAdsAsync())
 
 
 ##NOTES:
