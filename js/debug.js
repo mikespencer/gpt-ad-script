@@ -77,7 +77,6 @@ var wpAd = wpAd || {};
         $(document).on('keydown.wpAd', function(e){
           //if ctrl+f9 pressed
           if(e.ctrlKey && e.which === 120){
-            console.log('f9');
             $('body').toggleClass('adops-debug-enabled');
           }
         });
