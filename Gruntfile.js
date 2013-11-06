@@ -241,6 +241,10 @@ module.exports = function (grunt) {
         src: 'http://www.washingtonpost.com/055f8e9c-2ab1-11e3-8ade-a1f23cda135e_story.html',
         dest: 'tmp/wp/wp_article_single_page.html'
       },
+      wp_long_comments: {
+        src: 'http://www.washingtonpost.com/local/virginia-politics/now-comes-the-hard-part-for-virginia-gov-elect-terry-mcauliffe/2013/11/05/a6320310-37e3-11e3-80c6-7e6dd8d22d8f_allComments.html?ctab=all_&',
+        dest: 'tmp/wp/wp_long_comments.html'
+      },
       wp_blog: {
         src: 'http://www.washingtonpost.com/blogs/post-politics/',
         dest: 'tmp/wp/wp_blog.html'
