@@ -5,6 +5,7 @@
 
 .ad-debug-box, .ad-debug-console
   +nested-reset
+  display: none
 
 body .ad-debug-box
   width: 300px
@@ -136,3 +137,7 @@ body .ad-debug-console
 
 .debug-hidden
   display: none
+
+body.adops-debug-enabled
+  .ad-debug-box, .ad-debug-console
+    display: block

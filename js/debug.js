@@ -72,11 +72,13 @@ var wpAd = wpAd || {};
           });
         });
 
+        $('body').toggleClass('adops-debug-enabled');
+
         $(document).on('keydown.wpAd', function(e){
           //if ctrl+f9 pressed
           if(e.ctrlKey && e.which === 120){
             console.log('f9');
-            $('.ad-debug-box, .ad-debug-console').toggleClass('debug-hidden');
+            $('body').toggleClass('adops-debug-enabled');
           }
         });
 
