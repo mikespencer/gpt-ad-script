@@ -22,7 +22,7 @@ module.exports = function (grunt) {
       js: ['js/min/*'],
       qunit: ['test/js'],
       testpages: ['*.html'],
-      tmp: ['tmp']
+      temp: ['.temp']
     },
     uglify: {
       options: {
@@ -59,8 +59,8 @@ module.exports = function (grunt) {
         baseUrl: "js/modules",
         include: ['main'],
         preserveLicenseComments: false,
-        optimize: 'uglify2',
-        //optimize: 'none',
+        //optimize: 'uglify2',
+        optimize: 'none',
         generateSourceMaps: true,
         shim: {
           'gpt': {
@@ -175,7 +175,7 @@ module.exports = function (grunt) {
         'clean:js',
         'clean:testpages',
         'clean:qunit',
-        'clean:tmp'
+        'clean:temp'
       ],
       build_all: [
         'build_js',
@@ -227,69 +227,69 @@ module.exports = function (grunt) {
     curl: {
       wp_homepage: {
         src: 'http://www.washingtonpost.com',
-        dest: 'tmp/wp/wp_homepage.html'
+        dest: '.temp/wp/wp_homepage.html'
       },
       wp_front: {
         src: 'http://www.washingtonpost.com/politics',
-        dest: 'tmp/wp/wp_front.html'
+        dest: '.temp/wp/wp_front.html'
       },
       wp_article: {
         src: 'http://www.washingtonpost.com/national/health-science/healthcaregov-fixes-wont-be-done-until-end-of-november/2013/10/25/22df29ba-3d93-11e3-b7ba-503fb5822c3e_story.html',
-        dest: 'tmp/wp/wp_article.html'
+        dest: '.temp/wp/wp_article.html'
       },
       wp_article_single_page: {
         src: 'http://www.washingtonpost.com/055f8e9c-2ab1-11e3-8ade-a1f23cda135e_story.html',
-        dest: 'tmp/wp/wp_article_single_page.html'
+        dest: '.temp/wp/wp_article_single_page.html'
       },
       wp_long_comments: {
         src: 'http://www.washingtonpost.com/local/virginia-politics/now-comes-the-hard-part-for-virginia-gov-elect-terry-mcauliffe/2013/11/05/a6320310-37e3-11e3-80c6-7e6dd8d22d8f_allComments.html?ctab=all_&',
-        dest: 'tmp/wp/wp_long_comments.html'
+        dest: '.temp/wp/wp_long_comments.html'
       },
       wp_blog: {
         src: 'http://www.washingtonpost.com/blogs/post-politics/',
-        dest: 'tmp/wp/wp_blog.html'
+        dest: '.temp/wp/wp_blog.html'
       },
       wp_games: {
         src: 'http://games.washingtonpost.com/',
-        dest: 'tmp/wp/wp_games.html'
+        dest: '.temp/wp/wp_games.html'
       },
       wp_rentals: {
         src: 'http://www.washingtonpost.com/rentals',
-        dest: 'tmp/wp/wp_rentals.html'
+        dest: '.temp/wp/wp_rentals.html'
       },
       wp_realestate: {
         src: 'http://www.washingtonpost.com/realestate',
-        dest: 'tmp/wp/wp_realestate.html'
+        dest: '.temp/wp/wp_realestate.html'
       },
       wp_gog: {
         src: 'http://www.washingtonpost.com/goingoutguide',
-        dest: 'tmp/wp/wp_gog.html'
+        dest: '.temp/wp/wp_gog.html'
       },
 
       slate_homepage: {
         src: 'http://www.slate.com',
-        dest: 'tmp/slate/slate_homepage.html'
+        dest: '.temp/slate/slate_homepage.html'
       },
       slate_front: {
         src: 'http://www.slate.com/articles/news_and_politics.html',
-        dest: 'tmp/slate/slate_front.html'
+        dest: '.temp/slate/slate_front.html'
       },
       slate_article: {
         src: 'http://www.slate.com/articles/news_and_politics/roads/2013/10/unesco_and_japanese_culinary_tradition_can_a_u_n_body_s_designation_save.html',
-        dest: 'tmp/slate/slate_article.html'
+        dest: '.temp/slate/slate_article.html'
       },
 
       theroot_homepage: {
         src: 'http://www.theroot.com',
-        dest: 'tmp/theroot/theroot_homepage.html'
+        dest: '.temp/theroot/theroot_homepage.html'
       },
       theroot_front: {
         src: 'http://www.theroot.com/articles/politics.html',
-        dest: 'tmp/theroot/theroot_front.html'
+        dest: '.temp/theroot/theroot_front.html'
       },
       theroot_article: {
         src: 'http://www.theroot.com/articles/politics/2013/11/harry_belafonte_compares_koch_bros_to_the_kkk.html',
-        dest: 'tmp/theroot/theroot_article.html'
+        dest: '.temp/theroot/theroot_article.html'
       }
     }
   });
@@ -330,7 +330,7 @@ module.exports = function (grunt) {
     'clean:testpages',
     'curl',
     'local_refs',
-    'clean:tmp'
+    'clean:temp'
   ]);
 
   grunt.registerTask('server', [
@@ -354,7 +354,7 @@ module.exports = function (grunt) {
 
     var index_html_data = {};
 
-    grunt.file.recurse('tmp', function(abspath, rootdir, subdir, filename){
+    grunt.file.recurse('.temp', function(abspath, rootdir, subdir, filename){
 
       var html = grunt.file.read(abspath);
       var $ = cheerio.load(html);
