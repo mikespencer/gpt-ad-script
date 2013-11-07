@@ -89,7 +89,7 @@ define(function(){
       'mostread': { 'size' : [[336,54],[336,90]], 'keyvalues' : { 'ad' : ['mostread'] } },
       'persistent_bb': { 'size' : [[300,250]] },
       'pushdown': { 'size' : [[1,1]] },
-      'rightflex': { 'size' : [[300,250],[160,600],[336,850],[300,600]], 'keyvalues' : { 'ad' : ['ss','hp','bb'] } },
+      'rightflex': { 'size' : [[300,250],[160,600],[336,850],[300,600],[300,1050]], 'keyvalues' : { 'ad' : ['ss','hp','bb'] } },
       'skyscraper': { 'size' : [[160,600]], 'keyvalues' : { 'ad' : ['ss'] } },
       'sponsor': { 'size' : [[88,31]], 'keyvalues' : { 'ad' : ['sponsor'] } },
       'tiffanytile': { 'size' : [[264,90]], 'keyvalues' : { 'ad' : ['tiff'] } },
