@@ -11,7 +11,9 @@ define(['jQuery', 'viewable'], function($, vi){
       container: '.main-content',
       pos: 'inline_bb',
       count: 1,
-      lastTargetElementIndex: 0
+      lastTargetElementIndex: 0,
+      scrollOffset: 20,
+      scrollInterval: 200
     },
 
     init: function(setup){
@@ -73,8 +75,8 @@ define(['jQuery', 'viewable'], function($, vi){
         height: 250,
         display: 'block'
       }).viewable({
-        offset: this.config.offset,
-        interval: this.config.interval,
+        offset: this.config.scrollOffset,
+        interval: this.config.scrollInterval,
         callback: function(){
           _this.render(element);
         }

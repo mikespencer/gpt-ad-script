@@ -7,6 +7,6 @@ node_modules
 js/min/*
 css/.sass-cache
 test/js
-tmp
+.temp
 *.html
 js/lib/gpt.js

@@ -33,7 +33,7 @@ define(function() {
       //99999-CD
       twits: {
         what: ['leaderboard_2', 'leaderboard_3', 'leaderboard_4'],
-        where: ['views/root_twitterati']
+        where: ['chatterati']
       },
       //xxx-ROOT
       slideshow: {

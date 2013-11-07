@@ -11,7 +11,7 @@ define(['jQuery', 'viewable'], function($, vi){
       contentSelector: '.main-content',
       count: 1,
       spacing: 1050,
-      scrollInterval: 300,
+      scrollInterval: 200,
       scrollOffset: 20,
       classes: '',
       css: {
@@ -75,8 +75,8 @@ define(['jQuery', 'viewable'], function($, vi){
         height: 850,
         display: 'block'
       }).viewable({
-        offset: this.config.offset,
-        interval: this.config.interval,
+        offset: this.config.scrollOffset,
+        interval: this.config.scrollInterval,
         callback: function(){
           _this.render(element);
         }
