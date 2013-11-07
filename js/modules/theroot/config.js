@@ -51,7 +51,7 @@ define(function() {
       '45x45': { 'size': [[45,45]], 'keyvalues': { 'ad': ['45x45'] } },
       '88x31': { 'size': [[88,31]], 'keyvalues': { 'ad': ['88x31'] } },
       'bigbox': { 'size': [[300,250]], 'keyvalues': { 'ad': ['bb'] } },
-      'flex': { 'size': [[300,250],[336,850],[160,600]], 'keyvalues': { 'ad': ['bb','hp','ss'] } },
+      'flex': { 'size': [[300,250],[336,850],[160,600],[300,600],[300,1050]], 'keyvalues': { 'ad': ['bb','hp','ss'] } },
       'headerTile': { 'size': [[234,60],[290,60],[300,45]], 'keyvalues': { 'ad': ['tiff'] } },
       'interstitial': { 'size': [['out of page']] },
       'leaderboard': { 'size': [[728,90]], 'keyvalues': { 'ad': ['lb'] } },
