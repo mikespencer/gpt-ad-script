@@ -17,7 +17,8 @@ define([
   'wp/wpPlus',
   'wp/flags',
   'wp/subscriber',
-  'criteo'
+  'criteo',
+  'wp/dynamicRightRailAds'
 
 ], function(
   $,
@@ -35,7 +36,8 @@ define([
   wpPlus,
   flags,
   subscriber,
-  criteo
+  criteo,
+  dynamicRightRailAds
 
 ){
 
@@ -72,7 +74,6 @@ define([
   if(window.wpAd && window.wpAd.config && window.wpAd.config.tiffanyTiles){
     config.flights = $.extend(utils.clone(window.wpAd.config.tiffanyTiles), config.flights);
   }
-
 
   //overrides config
   utils.extend(Ad.prototype.overrides, overrides);
@@ -119,8 +120,10 @@ define([
     deferred: {
       //Array of deferred functions to execute on $(window).load
       windowLoad: [
+
         //WP+ tracking and config
         wpPlus.exec,
+
         //20999 - JH - brand connect tracking and config:
         function(){
           if($('div.brand-connect-module').length){
@@ -137,7 +140,20 @@ define([
       ],
       //Array of deferred functions to execute on $(window).load
       domReady: [
-
+        function(){
+          if(/dynamic-ad-loading/.test(window.location.search) && flags.pageType.article){
+            dynamicRightRailAds.init({
+              count: 2,
+              spacing: 500,
+              pos: 'flex_ss_bb_hp',
+              classes: 'ads slug flex_ss_bb_hp rr'
+            });
+            /*dynamicInlineAds.init({
+              count: 12,
+              pos: 'inline_bb'
+            });*/
+          }
+        }
       ]
     },
 

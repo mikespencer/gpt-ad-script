@@ -21,7 +21,7 @@ define(['utils', 'wp/flags', 'wp/textlinks'], function(utils, flags, textlinks){
           'flex_bb_hp',
           'flex_re',
           'flex_ss_bb',
-          'flex_ss_bb_hp',
+          'flex_ss_bb_hp*',
           'flex_ss_tp',
           'grid_bigbox*',
           'inline_bb*',
