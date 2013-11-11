@@ -256,6 +256,10 @@ module.exports = function (grunt) {
         src: 'http://www.washingtonpost.com/local/virginia-politics/now-comes-the-hard-part-for-virginia-gov-elect-terry-mcauliffe/2013/11/05/a6320310-37e3-11e3-80c6-7e6dd8d22d8f_allComments.html?ctab=all_&',
         dest: '.temp/wp/wp_long_comments.html'
       },
+      wp_enterprise: {
+        src: 'http://www.washingtonpost.com/sf/national/2013/08/17/nasas-mission-improbable/',
+        dest: '.temp/wp/wp_enterprise.html'
+      },
       wp_blog: {
         src: 'http://www.washingtonpost.com/blogs/post-politics/',
         dest: '.temp/wp/wp_blog.html'
@@ -411,6 +415,7 @@ module.exports = function (grunt) {
         'script[src*="/wp-srv/ad/slate_mobile.js"], ' +
         'script[src*="/wp-srv/ad/wp_mobile.js"]').remove();
 
+      var loaderAdded = false;
       //replace the generic ad script on the page with a reference to our new loader.min.js script
       $('script[src*="/wp-srv/ad/loaders/latest/js/min/loader.min.js"], ' +
         'script[src*="/wp-srv/ad/generic_ad.js"], ' +
@@ -419,12 +424,17 @@ module.exports = function (grunt) {
         'script[src*="/wp-srv/ad/responsive_ad.js"], ' +
         'script[src*="/wp-srv/ad/min/responsive_ad.js"], ' +
         'script[src*="/wp-srv/ad/slate_responsive.js"], ' +
-        'script[src*="/wp-srv/ad/min/slate_responsive.js"]')
-      .first()
-      .attr({
-        src: 'http://localhost:5000/js/min/loader.min.js?cacheBuster=' + Math.floor(Math.random() * 1E3)
-      })
-      .data(data);
+        'script[src*="/wp-srv/ad/min/slate_responsive.js"]').each(function(){
+          if(!loaderAdded){
+            loaderAdded = true;
+            $(this).attr({
+              src: 'http://localhost:5000/js/min/loader.min.js?cacheBuster=' + Math.floor(Math.random() * 1E3)
+            }).data(data);
+          } else {
+            //remove duplicate ad scripts (they unfortunately exist..)
+            $(this).remove();
+          }
+        });
 
       //rewrite the file with updated refs
       grunt.file.write(filename, $.html());
