@@ -87,7 +87,7 @@ define(function(){
       'midarticleflex': { 'size' : [[446,33],[300,250]], 'keyvalues' : { 'ad' : ['fb','bb'] } },
       'meebo': { 'size' : [[55,21]], 'keyvalues' : { 'ad' : ['meebo'] } },
       'mostread': { 'size' : [[336,54],[336,90]], 'keyvalues' : { 'ad' : ['mostread'] } },
-      'persistent_bb': { 'size' : [[300,250]] },
+      'persistent_bb': { 'size' : [[300,600], [300,250]] },
       'pushdown': { 'size' : [[1,1]] },
       'rightflex': { 'size' : [[300,250],[160,600],[336,850],[300,600],[300,1050]], 'keyvalues' : { 'ad' : ['ss','hp','bb'] } },
       'skyscraper': { 'size' : [[160,600]], 'keyvalues' : { 'ad' : ['ss'] } },
