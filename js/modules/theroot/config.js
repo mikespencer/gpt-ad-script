@@ -3,7 +3,7 @@ define(function() {
   return {
     flights: {
     //default templates
-      'default01': { 'what': ['180x88', '234x60', '336x60', '336x60_homepage', '45x45', 'bigbox', 'flex', 'leaderboard', 'midarticleflex', 'tiffanytile']},
+      'default01': { 'what': ['180x88', '234x60', '336x60', '336x60_homepage', '45x45', 'bigbox', 'flex', 'interstitial*', 'leaderboard', 'midarticleflex', 'tiffanytile']},
       'default02': { 'what': ['!leaderboard'], 'where': ['homepage']},
       'default03': { 'what': ['!flex_2'], 'where': ['roots/mappingtool']},
       'default04': { 'what': ['!midarticleflex'], 'where': ['views/root100']},

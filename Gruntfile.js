@@ -377,7 +377,7 @@ module.exports = function (grunt) {
 
       //fix for relative urls:
       var bases = {
-        theroot: 'http://www.theroot.com'
+        //theroot: 'http://www.theroot.com'
       }
 
       if(subdir.match(/slate|theroot/)){

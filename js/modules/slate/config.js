@@ -30,6 +30,17 @@ define(function(){
         what: ['!leaderboard', 'tiffanytile'],
         where: ['homepage']
       },
+      //14079
+      siemens_sponsor: {
+        what: ['1x1'],
+        where: ['news/thehive'],
+        hardcode: '<div style="text-align:center;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#0C4790">' +
+          'The Hive is sponsored by Siemens. ' +
+          '<a href="http://ad.doubleclick.net/clk;226506771;50306605;a" target="_blank" style="color:#0C4790">' +
+            'Find out more about Siemens rail solutions.' +
+          '</a>' +
+        '</div>'
+      },
       //20280-CD
       lb_2_behold_blog: {
         what: ['leaderboard_2'],
@@ -40,22 +51,22 @@ define(function(){
         what: ['bigbox*'],
         where: ['life/mini']
       },
-      //22334-CC
-      samsung_homepage: {
-        what: ['tiffanytile_2', 'leaderboard'],
-        where: ['homepage'],
-        when: ['20131021']
+      //21385-SC
+      prudential_hive: {
+        what: ['sponsor', 'featurebar', 'featurebar_2'],
+        where: ['life/hive/secondacts']
       },
-      //22381-CC
-      prudential: {
-        what: ['468x60'],
+      //22161-LB
+      marriott: {
+        what: ['leaderboard', '468x60'],
         where: ['homepage'],
-        when: ['20131022']
+        when: ['20131112']
       }
 
     },
 
     adTypes: {
+      'interstitial': { 'size': [['out of page']] },
       '1x1': { 'size' : [[1,1]], 'keyvalues' : { 'ad' : ['onebyone'] } },
       '120x240bottom': { 'size' : [[120,240]], 'keyvalues' : { 'ad' : ['120x240'] } },
       '120x240top': { 'size' : [[120,240]], 'keyvalues' : { 'ad' : ['120x240'] } },
@@ -65,11 +76,8 @@ define(function(){
       '150x29': { 'size' : [[150,29]], 'keyvalues' : { 'ad' : ['150x29'] } },
       '167x115': { 'size' : [[167,115]], 'keyvalues' : { 'ad' : ['167x115'] } },
       '264x90': { 'size' : [[264,90]], 'keyvalues' : { 'ad' : ['264x90'] } },
-      '300x600': { 'size' : [[300,600]], 'keyvalues' : { 'ad' : ['300x600'] } },
-      '300x1050': { 'size' : [[300,1050]], 'keyvalues' : { 'ad' : ['300x1050'] } },
       '336x60': { 'size' : [[336,60]], 'keyvalues' : { 'ad' : ['336x60'] } },
       '336x90': { 'size' : [[336,90]], 'keyvalues' : { 'ad' : ['336x90'] } },
-      '336x850': { 'size' : [[336,850]], 'keyvalues' : { 'ad' : ['336x850'] } },
       '400x140': { 'size' : [[400,140]], 'keyvalues' : { 'ad' : ['400x140'] } },
       '468x60': { 'size' : [[468,60]], 'keyvalues' : { 'ad' : ['468x60'] } },
       '88x31': { 'size' : [[88,31]], 'keyvalues' : { 'ad' : ['88x31'] } },
@@ -81,13 +89,14 @@ define(function(){
       'featurebar': { 'size' : [[446,33],[468,60]], 'keyvalues' : { 'ad' : ['fb'] } },
       'flip': { 'size' : [[1,1]], 'keyvalues' : { 'ad' : ['flip'] } },
       'hive_textlinks': { 'size' : [[1,1]], 'keyvalues' : { 'ad' : ['hive_textlinks'] } },
-      'interstitial': { 'size': [['out of page']] },
+      'homepage_bb': { 'size' : [[300,250]] },
+      'inline_vid': { 'size' : [[570,400]] },
       'leaderboard': { 'size' : [[728,90]], 'keyvalues' : { 'ad' : ['lb'] } },
       'leftflex': { 'size' : [[160,600],[336,850],[300,250]], 'keyvalues' : { 'ad' : ['ss','hp','bb'] } },
       'midarticleflex': { 'size' : [[446,33],[300,250]], 'keyvalues' : { 'ad' : ['fb','bb'] } },
       'meebo': { 'size' : [[55,21]], 'keyvalues' : { 'ad' : ['meebo'] } },
       'mostread': { 'size' : [[336,54],[336,90]], 'keyvalues' : { 'ad' : ['mostread'] } },
-      'persistent_bb': { 'size' : [[300,600], [300,250]] },
+      'persistent_bb': { 'size' : [[300,600],[300,250]] },
       'pushdown': { 'size' : [[1,1]] },
       'rightflex': { 'size' : [[300,250],[160,600],[336,850],[300,600],[300,1050]], 'keyvalues' : { 'ad' : ['ss','hp','bb'] } },
       'skyscraper': { 'size' : [[160,600]], 'keyvalues' : { 'ad' : ['ss'] } },
