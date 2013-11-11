@@ -1,5 +1,5 @@
 /**
- * slate mobile web specific ad script
+ * theroot mobile web specific ad script
  */
 define([
   'defaultSettings',
@@ -7,8 +7,8 @@ define([
   'GPTConfig',
   'utils',
   'templateBuilder',
-  'slate_mobile/config',
-  'slate_mobile/keyvalues'
+  'theroot_mobile/config',
+  'theroot_mobile/keyvalues'
 ], function(
   defaultSettings,
   Ad,
@@ -29,8 +29,8 @@ define([
 
     //set network id
     constants: {
-      dfpSite: '/701/mob.slate.',
-      domain: 'mob.slate'
+      dfpSite: '/701/mob.roots.',
+      domain: 'mob.theroot'
     },
 
     //Ad builder

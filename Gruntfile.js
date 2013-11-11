@@ -112,6 +112,15 @@ module.exports = function (grunt) {
             'siteScript': 'slate_mobile/main'
           }
         }
+      },
+      theroot_mobile: {
+        options: {
+          out: 'js/min/theroot_mobile.min.js',
+          paths: {
+            'gpt': '../lib/gpt',
+            'siteScript': 'theroot_mobile/main'
+          }
+        }
       }
     },
     compass: {
@@ -190,6 +199,7 @@ module.exports = function (grunt) {
         'requirejs:slate',
         'requirejs:theroot',
         'requirejs:slate_mobile',
+        'requirejs:theroot_mobile',
         'uglify:loader'
       ],
       qunit: [
@@ -369,7 +379,7 @@ module.exports = function (grunt) {
         theroot: 'http://www.theroot.com'
       }
 
-      if(subdir === 'slate'){
+      if(subdir.match(/slate|theroot/)){
         data['ad-page-type'] = 'responsive';
       }
 

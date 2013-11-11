@@ -6,8 +6,8 @@
 
   include: ['main'],
 
-  //define slate mobile specific script output
-  out: '../js/min/slate_mobile.min.js',
+  //define theroot mobile specific script output
+  out: '../js/min/theroot_mobile.min.js',
 
   preserveLicenseComments: false,
   //generateSourceMaps: true,
@@ -20,8 +20,8 @@
   paths: {
     'gpt': '../lib/gpt',
 
-    //define slate site specific script here:
-    'siteScript': 'slate_mobile/main'
+    //define theroot site specific script here:
+    'siteScript': 'theroot_mobile/main'
   },
 
   shim: {

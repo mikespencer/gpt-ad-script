@@ -1,5 +1,5 @@
 /**
- * Extends Universal, page level keyvalues with wp mobile specific keyvalues
+ * Extends Universal, page level keyvalues with slate mobile specific keyvalues
  */
 define([
   'utils',

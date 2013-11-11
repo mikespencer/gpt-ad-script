@@ -59,10 +59,11 @@ wpAd.cleanScriptTags = function(){};
     //I'm currently doing this to prevent needlessly loading empty files
     loadCSS = {
       wp: true,
-      theroot: false,
-      slate: false,
       wp_mobile: true,
-      slate_mobile: false
+      slate: false,
+      slate_mobile: false,
+      theroot: false,
+      theroot_mobile: false
     },
 
     //device detection
@@ -200,10 +201,11 @@ wpAd.cleanScriptTags = function(){};
   function getSiteInfo(){
     var siteScripts = {
         'wp': 'wp.min.js',
-        'theroot': 'theroot.min.js',
-        'slate': 'slate.min.js',
         'wp_mobile': 'wp_mobile.min.js',
-        'slate_mobile': 'slate_mobile.min.js'
+        'slate': 'slate.min.js',
+        'slate_mobile': 'slate_mobile.min.js',
+        'theroot': 'theroot.min.js',
+        'theroot_mobile': 'theroot_mobile.min.js'
       },
       $target = $('script[data-ad-site][src*="loader.min.js"]:first'),
       responsive = $target.data('adPageType') === 'responsive',

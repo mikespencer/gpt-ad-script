@@ -23,7 +23,7 @@ watch:
 watch_css:
 	compass watch
 
-build_js: gpt wp.min.js slate.min.js slate_mobile.min.js wp_mobile.min.js theroot.min.js build_loader
+build_js: gpt wp.min.js wp_mobile.min.js slate.min.js slate_mobile.min.js theroot.min.js theroot_mobile.min.js build_loader
 
 build_loader:
 	cat js/lib/yepnope.js js/loader.js | $(UGLIFYJS) -nc -o js/min/loader.min.js
