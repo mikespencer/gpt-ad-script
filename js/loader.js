@@ -212,9 +212,22 @@ wpAd.cleanScriptTags = function(){};
       site = $target.data('adSite'),
       script = siteScripts[site];
 
+    //wpAd.loaderCofig setup for slate/requirejs
+    if(!script && wpAd.loaderConfig){
+      if(debug){
+        console.log('--ADOPS DEBUG-- wpAd.loaderConfig found:', wpAd.loaderConfig);
+      }
+      site = wpAd.loaderConfig.site || null;
+      script = siteScripts[site];
+      responsive = wpAd.loaderConfig.pageType === 'responsive' ? true : false;
+    }
+
     //set some default fallbacks
-    if(!siteScripts[site]){
-      console.log('--ADOPS DEBUG-- Could not find attribute "data-ad-site" or a corresponding value. Defaulting to wp.min.js.');
+    if(!script){
+      if(debug){
+        console.log('--ADOPS DEBUG-- Could not find attribute "data-ad-site" or a corresponding value. ' +
+                    'No valid wpAd.loaderConfig, either. Defaulting to wp.min.js.');
+      }
       site = 'wp';
       script = siteScripts.wp;
     }

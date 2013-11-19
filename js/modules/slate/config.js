@@ -56,11 +56,11 @@ define(function(){
         what: ['sponsor', 'featurebar', 'featurebar_2'],
         where: ['life/hive/secondacts']
       },
-      //22161-LB
-      marriott: {
-        what: ['leaderboard', '468x60'],
+      //21938-SP
+      dmi_tile: {
+        what: ['468x60'],
         where: ['homepage'],
-        when: ['20131112']
+        when: ['20131114']
       }
 
     },
