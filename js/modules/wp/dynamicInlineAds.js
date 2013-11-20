@@ -72,7 +72,6 @@ define(['jQuery'], function($){
           }));
 
           placeAd2(commercialNode, _this.getPosValue('|'), 'vi', '');
-          console.log(_this.getPosValue('|'));
 
           //increment for next ad placement
           _this.config.posOverride++;
