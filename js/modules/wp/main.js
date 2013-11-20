@@ -18,7 +18,7 @@ define([
   'wp/flags',
   'wp/subscriber',
   'criteo',
-  'wp/dynamicRightRailAds'
+  'wp/dynamicInlineAds'
 
 ], function(
   $,
@@ -37,7 +37,7 @@ define([
   flags,
   subscriber,
   criteo,
-  dynamicRightRailAds
+  dynamicInlineAds
 
 ){
 
@@ -138,20 +138,20 @@ define([
           }
         }
       ],
-      //Array of deferred functions to execute on $(window).load
+      //Array of deferred functions to execute on $(document).ready
       domReady: [
         function(){
-          if(/dynamic-ad-loading/.test(window.location.search) && flags.pageType.article){
-            dynamicRightRailAds.init({
-              count: 2,
-              spacing: 500,
-              pos: 'flex_ss_bb_hp',
-              classes: 'ads slug flex_ss_bb_hp rr'
+          if((/dynamic-ad-loading/.test(window.location.search) || /devprev\.digitalink/.test(location.hostname)) && flags.pageType.article){
+            dynamicInlineAds.init({
+              container: '#article_body',
+              selector: 'p',
+              minParagraphs: 6,
+              minChars: 2000,
+              what: 'inline_bb',
+              posOverride: 2,
+              width: 300,
+              height: 250
             });
-            /*dynamicInlineAds.init({
-              count: 12,
-              pos: 'inline_bb'
-            });*/
           }
         }
       ]

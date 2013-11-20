@@ -1,101 +1,86 @@
-define(['jQuery', 'viewable'], function($, vi){
-
-  $.fn.viewable = vi;
-
+define(['jQuery'], function($){
 
   return {
 
+    //default config - can be overridden with this.configure()
     config: {
-      minChars: 1000,
+      container: '#article_body',
+      selector: 'p',
       minParagraphs: 6,
-      container: '.main-content',
-      pos: 'inline_bb',
-      count: 1,
-      lastTargetElementIndex: 0,
-      scrollOffset: 20,
-      scrollInterval: 200
+      minChars: 2000,
+      what: 'inline_bb',
+      posOverride: 2,
+      width: 300,
+      height: 250
     },
 
-    init: function(setup){
-      console.debug('Initialising:', setup);
-      setup = setup || {};
-      this.configure(setup);
-      console.debug('Config:', this.config);
-      this.target = this.getTarget();
-      console.debug('Target:', this.target);
-      this.addSlug(this.target);
-      console.debug(this);
-      this.exec('#slug_' + this.config.pos + (this.config.count > 1 ? '_' + this.config.count : ''));
+    //for use in determining where to place inline ads (in this.exec)
+    counter: {
+      paragraphCount: 0,
+      charCount: 0
     },
 
+    //extends default config
     configure: function(newConfig){
       this.config = $.extend(true, this.config, newConfig);
     },
 
-    getTarget: function(){
-      var chars = 0;
-      var paragraphs = 0;
+    //resets the counters
+    reset: function(){
+      this.counter.paragraphCount = 0;
+      this.counter.charCount = 0;
+    },
+
+    //configure, reset counters, and then place the inline ads
+    init: function(config){
+      this.configure(config);
+      this.reset();
+      this.exec();
+    },
+
+    //gets the full pos value with posOverride, with optional delimiter (defuaults to '_')
+    getPosValue: function(delim){
+      delim = delim || '_';
+      return this.config.what + (this.config.posOverride > 1 ? delim + this.config.posOverride : '');
+    },
+
+    //finds where to place and places #slug_ div's, calls placeAd2 with vi arg.
+    exec: function(){
       var _this = this;
-      var target = null;
 
-      $('p:gt(' + this.config.lastTargetElementIndex + ')', this.config.container).each(function(i, el){
-        var charLen = $(this).text().length;
-        console.debug(chars, el);
-        chars += charLen;
-        if(charLen){
-          paragraphs += 1;
+      //get all eligible elements that do not contain an image
+      $(_this.config.selector + ':visible:not(:empty):not(:has(img))', _this.config.container).not(':last').each(function(){
+        var $this = $(this);
+        var textLen = $this.text().length;
+
+        //only increment paragraph counter if 'this' has text
+        if(textLen){
+          _this.counter.paragraphCount++;
+          _this.counter.charCount = _this.counter.charCount + textLen;
         }
-        if(paragraphs >= _this.config.minParagraphs && chars >= _this.config.minChars){
-          target = el;
-          console.debug('found target', target);
-          _this.config.lastTargetElementIndex += i;
-          console.debug('index', i);
-          return false;
+
+        //if enough paragraphs and characters have passed
+        if(_this.counter.paragraphCount >= _this.config.minParagraphs && _this.counter.charCount >= _this.config.minChars){
+
+          //creates and places the ad slug after the 'this'
+          $this.after($('<div id="slug_' + _this.getPosValue('_') + '"></div>').css({
+            width: _this.config.width + 'px',
+            height: _this.config.height + 'px',
+            display: 'block',
+            float: 'left',
+            margin: '5px 20px 20px 0'
+          }));
+
+          placeAd2(commercialNode, _this.getPosValue('|'), 'vi', '');
+          console.log(_this.getPosValue('|'));
+
+          //increment for next ad placement
+          _this.config.posOverride++;
+
+          //reset paragraph and char counter
+          _this.reset();
+
         }
-      });
-
-      console.debug('TARGET:', target);
-      return target;
-    },
-
-    addSlug: function(target){
-      var posOverride = this.config.count > 1 ? '_' + this.config.count : '';
-      var pos = this.config.pos + posOverride;
-      $(target).after($('<div></div>').attr({
-        id: 'slug_' + pos
-      }));
-      console.debug('added slug for', pos);
-    },
-
-    exec: function(element){
-      var _this = this;
-      console.debug('exec', element);
-      $(element).css({
-        width: 300,
-        height: 250,
-        display: 'block'
-      }).viewable({
-        offset: this.config.scrollOffset,
-        interval: this.config.scrollInterval,
-        callback: function(){
-          _this.render(element);
-        }
-      });
-    },
-
-    render: function(element){
-      console.debug('render', element);
-      $(element).css({
-        width: '',
-        height: ''
-      });
-
-      console.debug('loading ad:', this.pos);
-      placeAd2({
-        what: this.config.pos + (this.config.count > 1 ? '|' + this.config.count : '')
-      });
-      this.init({
-        count: this.config.count + 1
       });
     }
 
