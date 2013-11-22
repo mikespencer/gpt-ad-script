@@ -80,8 +80,12 @@ define([
 
   //subscribe promos
   $(document).on('onTwpMeterReady', function(){
+    var today = window.estNowWithYear.substr(0,8);
+    var cyberMonday = today === "20131202" || /cyber-monday-promos/.test(window.location.search) ||
+          /qaprev\.digitalink\.com/.test(window.location.host);
+
     if(flags.pageType.homepage){
-      if(window.wpAd && window.wpAd.adsOnPage &&
+      if(!cyberMonday && window.wpAd && window.wpAd.adsOnPage &&
       !window.wpAd.adsOnPage.pushdown &&
       !window.wpAd.adsOnPage.leaderboard &&
       !(window.wpAd.flags && window.wpAd.flags.disableSubscribePromo)){
@@ -90,8 +94,10 @@ define([
         var code = '';
 
         if(subscriber()){
-          //show welcome message
-          code = '<img src="http://img.wpdigital.net/wp-srv/ad/img/welcome-1-970x66.png" height="66" width="970" alt="" style="border:0;outline:0;" />';
+          //show welcome message/give a gift message
+          code = '<a href="https://account.washingtonpost.com/acquisition/gift-subscription.html?promo=dgbanrad_test1_gift01&tid=gift_hp">' +
+            '<img src="http://img.wpdigital.net/wp-srv/ad/public/static/22285/subscribed_push.png" height="66" width="970" alt="" style="border:0;outline:0;" />' +
+          '</a>';
         } else {
           //show subscribe message
           code = '<a href="https://account.washingtonpost.com/acquisition/?promo=dgbanrad&destination&tid=signup_HP5">' +
@@ -103,12 +109,13 @@ define([
         $('#slug_pushdown').css({display: 'block'});
 
       }
-    } else if((flags.pageType.article || flags.pageType.front) && !subscriber()){
-      //leverage existing logic for now
-      utils.ajax({
-        url: 'http://js.washingtonpost.com/wp-srv/ad/subscribePromo.js'
-      });
     }
+
+    //leverage existing logic for now
+    utils.ajax({
+      url: 'http://js.washingtonpost.com/wp-srv/ad/subscribePromo.js'
+    });
+
   });
 
 

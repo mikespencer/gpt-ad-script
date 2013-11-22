@@ -145,6 +145,9 @@ require(['gpt', 'siteScript', 'utils', 'jQuery', 'viewable'], function (gpt, wpA
   // expose utils for use in external ads, etc.
   wpAd.utils = utils;
 
+  // legacy compatibility
+  wpAd.flags = utils.flags;
+
   // expose wpAd to the window for debugging + external code to access/build off of.
   window.wpAd = utils.extend(wpAd, window.wpAd, true);
 
