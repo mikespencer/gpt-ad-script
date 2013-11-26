@@ -6,7 +6,9 @@ define(['jQuery'], function($){
     config: {
       container: '#article_body',
       selector: 'p',
+      initialParagraphOffset: 0,
       minParagraphs: 6,
+      initialCharOffset: 0,
       minChars: 2000,
       what: 'inline_bb',
       posOverride: 2,
@@ -35,6 +37,8 @@ define(['jQuery'], function($){
     init: function(config){
       this.configure(config);
       this.reset();
+      this.counter.paragraphCount -= this.config.initialParagraphOffset;
+      this.counter.charCount -= this.config.initialCharOffset;
       this.exec();
     },
 

@@ -148,10 +148,13 @@ define([
       //Array of deferred functions to execute on $(document).ready
       domReady: [
         function(){
-          if((/dynamic-ad-loading/.test(window.location.search) || /devprev\.digitalink/.test(location.hostname)) && flags.pageType.article){
+          var alreadyHasInlineBBs = (wpAd.adsOnPage && wpAd.adsOnPage.inline_bb_2) || (wpAd.viQueue && wpAd.viQueue.inline_bb_2);
+          if(flags.pageType.article && !alreadyHasInlineBBs && (/dynamic-ad-loading/.test(window.location.search) || /devprev\.digitalink/.test(location.hostname))){
             dynamicInlineAds.init({
               container: '#article_body',
               selector: 'p',
+              initialParagraphOffset: 12,
+              initialCharOffset: 4000,
               minParagraphs: 6,
               minChars: 2000,
               what: 'inline_bb',
