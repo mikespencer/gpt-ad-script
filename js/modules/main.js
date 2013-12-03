@@ -2,7 +2,7 @@
 
 // load dependencies:
 // "siteScript" is defined in the site specific build file (eg: build/slate.js)
-require(['gpt', 'siteScript', 'utils', 'jQuery', 'viewable'], function (gpt, wpAd, utils, $, vi){
+require(['gpt', 'siteScript', 'utils', 'jQuery', 'viewable', 'hideEmptyIframes'], function (gpt, wpAd, utils, $, vi, hideEmptyIframes){
 
   var queue = placeAd2.queue || [];
 
@@ -85,14 +85,23 @@ require(['gpt', 'siteScript', 'utils', 'jQuery', 'viewable'], function (gpt, wpA
             interval: 300,
             //on view:
             callback: function(){
+
               //reset above css
               $(this).css({
                 height: '',
                 width: '',
                 display: ''
               });
+
               //render the ad
               placeAd2({what: defaults.what});
+
+              $('iframe:visible', this).load(function(){
+                if(utils.flags.debug){
+                  utils.log('Checking iframe is not blank:', this);
+                }
+                hideEmptyIframes.exec(this);
+              });
             }
           });
 

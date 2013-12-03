@@ -1,7 +1,7 @@
 /**
  * Extends universal desktop, page level keyvalues with wp desktop specific keyvalues
  */
-define(['keyvalues/desktop', 'utils', 'zoneBuilder'], function(kvs, utils, zoneBuilder){
+define(['keyvalues/desktop', 'utils', 'zoneBuilder', 'wp/flags'], function(kvs, utils, zoneBuilder, flags){
 
   return utils.merge(kvs, {
 
@@ -76,6 +76,12 @@ define(['keyvalues/desktop', 'utils', 'zoneBuilder'], function(kvs, utils, zoneB
     page: [
       function(){
         return zoneBuilder.contentType[utils._toString(utils.wp_meta_data.contentType).toLowerCase()] || ['article'];
+      }
+    ],
+
+    wp_beta: [
+      function(){
+        return [flags.beta ? '1' : '0'];
       }
     ],
 
