@@ -85,6 +85,7 @@ require(['gpt', 'siteScript', 'utils', 'jQuery', 'viewable', 'hideEmptyIframes']
             interval: 300,
             //on view:
             callback: function(){
+              var el = this;
 
               //reset above css
               $(this).css({
@@ -98,10 +99,12 @@ require(['gpt', 'siteScript', 'utils', 'jQuery', 'viewable', 'hideEmptyIframes']
 
               if(/hideblanks/.test(window.location.search)){
                 $('iframe', this).load(function(){
-                  if(utils.flags.debug){
-                    utils.log('Checking iframe is not blank:', this);
-                  }
-                  hideEmptyIframes.exec(this);
+                  setTimeout(function(){
+                    if(utils.flags.debug){
+                      utils.log('Checking iframe is not blank:', el);
+                    }
+                    hideEmptyIframes.exec(el);
+                  }, 1000);
                 });
               }
             }
