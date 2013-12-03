@@ -324,6 +324,7 @@ define(['jQuery', 'utils', 'wp/flags', 'wp/textlinks'], function($, utils, flags
         where: ['washingtonpost.com'],
         when: ['201311070000/201311072359']
       },
+      //22675
       brandconnect_module: {
         what: ['brandconnect_module'],
         where: ['washingtonpost.com'],
