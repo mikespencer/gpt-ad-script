@@ -74,7 +74,7 @@ define(['jQuery'], function($){
             display: 'block',
             float: 'left',
             margin: '5px 20px 20px 0'
-          }).addClass(this.config.classes));
+          }).addClass(_this.config.classes));
 
           placeAd2(commercialNode, _this.getPosValue('|'), 'vi', '');
 
