@@ -149,7 +149,7 @@ define([
       domReady: [
         function(){
           var alreadyHasInlineBBs = (wpAd.adsOnPage && wpAd.adsOnPage.inline_bb_2) || (wpAd.viQueue && wpAd.viQueue.inline_bb_2);
-          if(flags.pageType.article && !alreadyHasInlineBBs && (/dynamic-ad-loading/.test(window.location.search) || /devprev\.digitalink/.test(location.hostname))){
+          if(flags.pageType.article && !alreadyHasInlineBBs){
             dynamicInlineAds.init({
               container: '#article_body',
               selector: 'p',
