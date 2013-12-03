@@ -96,12 +96,14 @@ require(['gpt', 'siteScript', 'utils', 'jQuery', 'viewable', 'hideEmptyIframes']
               //render the ad
               placeAd2({what: defaults.what});
 
-              //$('iframe:visible', this).load(function(){
-              //  if(utils.flags.debug){
-              //    utils.log('Checking iframe is not blank:', this);
-              //  }
-              //  hideEmptyIframes.exec(this);
-              //});
+              if(/hideblanks/.test(window.location.search)){
+                $('iframe', this).load(function(){
+                  if(utils.flags.debug){
+                    utils.log('Checking iframe is not blank:', this);
+                  }
+                  hideEmptyIframes.exec(this);
+                });
+              }
             }
           });
 

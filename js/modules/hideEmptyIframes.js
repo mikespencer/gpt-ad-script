@@ -6,7 +6,7 @@ define(['jQuery'], function($){
         var $this = $(this),
           hasContent = $this.contents().find('body *').length;
         if(!hasContent){
-          $this.hide();
+          $this.hide().closest('[id^="slug_"]').hide();
         }
       });
     }
