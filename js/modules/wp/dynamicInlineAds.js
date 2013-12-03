@@ -13,7 +13,8 @@ define(['jQuery'], function($){
       what: 'inline_bb',
       posOverride: 2,
       width: 300,
-      height: 250
+      height: 250,
+      classes: ''
     },
 
     //for use in determining where to place inline ads (in this.exec)
@@ -73,7 +74,7 @@ define(['jQuery'], function($){
             display: 'block',
             float: 'left',
             margin: '5px 20px 20px 0'
-          }));
+          }).addClass(this.config.classes));
 
           placeAd2(commercialNode, _this.getPosValue('|'), 'vi', '');
 

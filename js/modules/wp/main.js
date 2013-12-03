@@ -160,7 +160,8 @@ define([
               what: 'inline_bb',
               posOverride: 2,
               width: 300,
-              height: 250
+              height: 250,
+              classes: 'wp-inline-bb'
             });
           }
         }
