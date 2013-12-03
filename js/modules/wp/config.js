@@ -1,7 +1,7 @@
 /**
  * Template of ad flights and available ad spots on washingtonpost.com (desktop)
  */
-define(['utils', 'wp/flags', 'wp/textlinks'], function(utils, flags, textlinks){
+define(['jQuery', 'utils', 'wp/flags', 'wp/textlinks'], function($, utils, flags, textlinks){
 
   var brandconnect = utils.wp_meta_data.contentName && /brand-?connect/i.test(utils.wp_meta_data.contentName[0]);
   //var articlePage = utils.wp_meta_data.contentType && /compoundstory/i.test(utils.wp_meta_data.contentType[0]);
@@ -324,6 +324,35 @@ define(['utils', 'wp/flags', 'wp/textlinks'], function(utils, flags, textlinks){
         where: ['washingtonpost.com'],
         when: ['201311070000/201311072359']
       },
+      brandconnect_module: {
+        what: ['brandconnect_module'],
+        where: ['washingtonpost.com'],
+        when: ['20131204/20131205'],
+        hardcode: function(){
+          $(document).ready(function(){
+            $.ajax({
+              url: 'http://js.washingtonpost.com/wp-srv/ad/min/mediavoice.js',
+              dataType: 'script',
+              crossDomain: true,
+              cache: true,
+              complete: function(xhr, textStatus) {
+                //called when complete
+              },
+              success: function(data, textStatus, xhr) {
+                //called when successful
+              },
+              error: function(xhr, textStatus, errorThrown) {
+                if (window.console && typeof window.console.log === 'function') {
+                  window.console.log('error fetching mediavoice script:');
+                  window.console.log(errorThrown);
+                }
+              }
+            });
+          });
+          //actually render nothing:
+          return false;
+        }
+      },
       theforum_88x31: {
         what: ['theforum_88x31'],
         hardcode: function(){
@@ -385,6 +414,7 @@ define(['utils', 'wp/flags', 'wp/textlinks'], function(utils, flags, textlinks){
       "88x31": { "size": [[88,31]] },
       "agoogleaday": { "size": [[1,1]] },
       "bigbox": { "size": [[300,250]], "keyvalues": { "ad": ["bb"], "pos": ["ad20"] } },
+      "brandconnect_module": { "size": [[1,1]] },
       "deal": { "size": [[1,1]], "keyvalues": { "ad": ["deal"], "pos": ["ad45"] } },
       "dealer_showcase": { "size": [[1,1]] },
       "enterprise": { "size": [[1,1]] },
