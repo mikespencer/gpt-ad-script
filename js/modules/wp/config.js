@@ -363,7 +363,7 @@ define(['jQuery', 'utils', 'wp/flags', 'wp/textlinks'], function($, utils, flags
         what: ['brandconnect_module'],
         where: ['washingtonpost.com'],
         when: ['20131204/20131205'],
-        hardcode: brandConnectLoader,
+        hardcode: brandConnectLoader
       },
       //22683
       brandconnect_module_bus_tech: {
