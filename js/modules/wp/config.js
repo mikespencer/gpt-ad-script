@@ -6,6 +6,23 @@ define(['jQuery', 'utils', 'wp/flags', 'wp/textlinks'], function($, utils, flags
   var brandconnect = utils.wp_meta_data.contentName && /brand-?connect/i.test(utils.wp_meta_data.contentName[0]);
   //var articlePage = utils.wp_meta_data.contentType && /compoundstory/i.test(utils.wp_meta_data.contentType[0]);
 
+  //dont load brandconnect mediavoice plugin more than once (safeguard)
+  var bcloaded = false;
+
+  //use as hardcode function to render brandconnect. AJAX's in mediavoice plugin
+  function brandConnectLoader(){
+    if(!bcloaded){
+      bcloaded = true;
+      $(document).ready(function(){
+        utils.ajax({
+          url: 'http://js.washingtonpost.com/wp-srv/ad/min/mediavoice.js',
+          success: function(){}
+        });
+      });
+    }
+    return false;
+  }
+
   return {
     flights: {
       defaults: {
@@ -278,6 +295,35 @@ define(['jQuery', 'utils', 'wp/flags', 'wp/textlinks'], function($, utils, flags
         what: ['navtile_lifestyle', 'navtile_world'],
         when: ['2013']
       },
+      tech_navtile: {
+        what: ['navtile_technology'],
+        when: ['20131205/20131208']
+      },
+      //22391-JH
+      tech_brandconnect_tile: {
+        what: ['marketing_2'],
+        where: ['technology'],
+        when: ['20131205/20131208'],
+        hardcode: function(){
+          var div = document.createElement('div'),
+            a = document.createElement('a'),
+            i = document.createElement('img');
+
+          i.src = 'http://img.wpdigital.net/wp-srv/ad/img/AI_IBM_201312_300x100.png';
+          i.alt = 'Click here for more information.';
+          i.width = '300';
+          i.height = '100';
+          i.style.border = 'none';
+
+          a.href = 'http://www.washingtonpost.com/sf/brand-connect/wp/2013/12/04/learn-how-big-data-can-eradicate-cancer/';
+          a.appendChild(i);
+
+          div.appendChild(a);
+
+          return div;
+        }
+      },
+
       //22235-JH
       trendex_sponsor_logo: {
         what: ['trendex_sponsor'],
@@ -302,56 +348,77 @@ define(['jQuery', 'utils', 'wp/flags', 'wp/textlinks'], function($, utils, flags
       },
       //22394-CC
       chevron: {
-        what: ['pushdown'],
+        what: ['pushdown', '!tiffany_tile*'],
         where: ['washingtonpost.com'],
-        when: ['201310250000/201310252359', '201311080000/201311082359', '201311110000/201311112359', '201311210000/201311212359', '201312010000/201312012359', '201312060000/201312062359']
+        when: ['20131206']
       },
-      //22170-JH-31344507298
+      //22678-SP
       nasa_enterprise: {
-        what: ['enterprise', '!leaderboard', '!leaderboard_2'],
-        where: ['national/nasa/blog/blog'],
-        when: ['201310140000/201311302359']
-      },
-      //22439-CC
-      google_nexus: {
-        what: ['leaderboard'],
-        where: ['washingtonpost.com'],
-        when: ['201311040000/201311042359']
-      },
-      //22446-CC
-      msft: {
-        what: ['pushdown'],
-        where: ['washingtonpost.com'],
-        when: ['201311070000/201311072359']
+        what: ['enterprise'],
+        where: ['national/nasa/blog'],
+        when: ['2013']
       },
       //22675
-      brandconnect_module: {
+      brandconnect_module_homepage: {
         what: ['brandconnect_module'],
         where: ['washingtonpost.com'],
         when: ['20131204/20131205'],
-        hardcode: function(){
-          $(document).ready(function(){
-            $.ajax({
-              url: 'http://js.washingtonpost.com/wp-srv/ad/min/mediavoice.js',
-              dataType: 'script',
-              crossDomain: true,
-              cache: true,
-              complete: function(xhr, textStatus) {
-                //called when complete
-              },
-              success: function(data, textStatus, xhr) {
-                //called when successful
-              },
-              error: function(xhr, textStatus, errorThrown) {
-                if (window.console && typeof window.console.log === 'function') {
-                  window.console.log('error fetching mediavoice script:');
-                  window.console.log(errorThrown);
-                }
-              }
-            });
-          });
-          //actually render nothing:
-          return false;
+        hardcode: brandConnectLoader,
+      },
+      //22683
+      brandconnect_module_bus_tech: {
+        what: ['brandconnect_module'],
+        where: ['business/front', 'technology/front'],
+        when: ['20131205/20131208'],
+        hardcode: brandConnectLoader
+      },
+      brandconnect_module_test: {
+        what: ['brandconnect_module'],
+        test: [function(){
+          return !!(/brandconnect_module/.test(window.location.search));
+        }],
+        hardcode: brandConnectLoader
+      },
+      //22593-SP
+      msft_windows_homepage: {
+        what: ['leaderboard'],
+        when: ['20131126', '20131202', '20131208/201312081159'], //11/26, 12/02, 12/08 (midnight -> 12 noon)
+        where: ['washingtonpost.com']
+      },
+      politics_chevron_social_surface: {
+        what: ['theforum_336x60'],
+        where: ['politics'],
+        when: ['2013'],
+        hardcode: function () {
+          var rdm = Math.floor(Math.random() * 2),
+            creative = document.createElement('img'),
+            pix = document.createElement('img'),
+            a = document.createElement('a'),
+            tiles = [
+              'http://img.wpdigital.net/wp-srv/ad/img/Chevron_336x60_V1.jpg',
+              'http://img.wpdigital.net/wp-srv/ad/img/Chevron_336x60_V2.jpg'
+            ],
+            pixels = [
+              'http://bs.serving-sys.com/BurstingPipe/adServer.bs?cn=tf&c=19&mc=imp&pli=8081230&PluID=0&ord=%n&rtu=-1',
+              'http://bs.serving-sys.com/BurstingPipe/adServer.bs?cn=tf&c=19&mc=imp&pli=8582348&PluID=0&ord=%n&rtu=-1' //FOR V2
+            ],
+            hrefs = [
+              'http://bs.serving-sys.com/BurstingPipe/adServer.bs?cn=tf&c=20&mc=click&pli=8081230&PluID=0&ord=%n',
+              'http://bs.serving-sys.com/BurstingPipe/adServer.bs?cn=tf&c=20&mc=click&pli=8582348&PluID=0&ord=%n'
+            ];
+          creative.src = tiles[rdm];
+          creative.alt = "Click Here for More!";
+
+          pix.src = pixels[rdm];
+          pix.style.display = 'none';
+
+          a.href = hrefs[rdm];
+          a.target = "_blank";
+
+          a.appendChild(creative);
+          a.appendChild(pix);
+
+          return a;
         }
       },
       theforum_88x31: {
