@@ -18,7 +18,8 @@ define([
   'wp/flags',
   'wp/subscriber',
   'criteo',
-  'wp/dynamicInlineAds'
+  'wp/dynamicInlineAds',
+  'wp/mediavoice'
 
 ], function(
   $,
@@ -37,8 +38,8 @@ define([
   flags,
   subscriber,
   criteo,
-  dynamicInlineAds
-
+  dynamicInlineAds,
+  mediavoice
 ){
 
   //build commercialNode
@@ -117,6 +118,12 @@ define([
     });
 
   });
+
+
+  //load mediavoice plugin on secondary/brandconnect pages
+  if(mediavoice.secondaryPage){
+    mediavoice.load();
+  }
 
 
   //this is wpAd

@@ -1,27 +1,10 @@
 /**
  * Template of ad flights and available ad spots on washingtonpost.com (desktop)
  */
-define(['jQuery', 'utils', 'wp/flags', 'wp/textlinks'], function($, utils, flags, textlinks){
+define(['jQuery', 'utils', 'wp/flags', 'wp/textlinks', 'wp/mediavoice'], function($, utils, flags, textlinks, mediavoice){
 
   var brandconnect = utils.wp_meta_data.contentName && /brand-?connect/i.test(utils.wp_meta_data.contentName[0]);
   //var articlePage = utils.wp_meta_data.contentType && /compoundstory/i.test(utils.wp_meta_data.contentType[0]);
-
-  //dont load brandconnect mediavoice plugin more than once (safeguard)
-  var bcloaded = false;
-
-  //use as hardcode function to render brandconnect. AJAX's in mediavoice plugin
-  function brandConnectLoader(){
-    if(!bcloaded){
-      bcloaded = true;
-      $(document).ready(function(){
-        utils.ajax({
-          url: 'http://js.washingtonpost.com/wp-srv/ad/min/mediavoice.js',
-          success: function(){}
-        });
-      });
-    }
-    return false;
-  }
 
   return {
     flights: {
@@ -363,21 +346,30 @@ define(['jQuery', 'utils', 'wp/flags', 'wp/textlinks'], function($, utils, flags
         what: ['brandconnect_module'],
         where: ['washingtonpost.com'],
         when: ['20131204/20131205'],
-        hardcode: brandConnectLoader,
+        hardcode: function(){
+          mediavoice.load();
+          return false;
+        }
       },
       //22683
       brandconnect_module_bus_tech: {
         what: ['brandconnect_module'],
         where: ['business/front', 'technology/front'],
         when: ['20131205/20131208'],
-        hardcode: brandConnectLoader
+        hardcode: function(){
+          mediavoice.load();
+          return false;
+        }
       },
       brandconnect_module_test: {
         what: ['brandconnect_module'],
         test: [function(){
           return !!(/brandconnect_module/.test(window.location.search));
         }],
-        hardcode: brandConnectLoader
+        hardcode: function(){
+          mediavoice.load();
+          return false;
+        }
       },
       //22593-SP
       msft_windows_homepage: {
