@@ -278,35 +278,11 @@ define(['jQuery', 'utils', 'wp/flags', 'wp/textlinks', 'wp/mediavoice'], functio
         what: ['navtile_lifestyle', 'navtile_world'],
         when: ['2013']
       },
-      tech_navtile: {
-        what: ['navtile_technology'],
-        when: ['20131205/20131208']
+      //22611-CC
+      ibmtiles: {
+        'what': ['navtile_business'],
+        'when': ['20131209/20131211']
       },
-      //22391-JH
-      tech_brandconnect_tile: {
-        what: ['marketing_2'],
-        where: ['technology'],
-        when: ['20131205/20131208'],
-        hardcode: function(){
-          var div = document.createElement('div'),
-            a = document.createElement('a'),
-            i = document.createElement('img');
-
-          i.src = 'http://img.wpdigital.net/wp-srv/ad/img/AI_IBM_201312_300x100.png';
-          i.alt = 'Click here for more information.';
-          i.width = '300';
-          i.height = '100';
-          i.style.border = 'none';
-
-          a.href = 'http://www.washingtonpost.com/sf/brand-connect/wp/2013/12/04/learn-how-big-data-can-eradicate-cancer/';
-          a.appendChild(i);
-
-          div.appendChild(a);
-
-          return div;
-        }
-      },
-
       //22235-JH
       trendex_sponsor_logo: {
         what: ['trendex_sponsor'],
@@ -460,6 +436,30 @@ define(['jQuery', 'utils', 'wp/flags', 'wp/textlinks', 'wp/mediavoice'], functio
           document.body.appendChild(pix);
 
           return a;
+        }
+      },
+      //22391-JH
+      business_wonkblog_tile: {
+        what: ['marketing_2'],
+        where: ['business'],
+        when: ['20131209/20131215'],
+        hardcode: function(){
+          var div = document.createElement('div'),
+            a = document.createElement('a'),
+            i = document.createElement('img');
+
+          i.src = 'http://img.wpdigital.net/wp-srv/ad/img/AI_IBM_201312_300x100_V2.png';
+          i.alt = 'Click here for more information.';
+          i.width = '300';
+          i.height = '100';
+          i.style.border = 'none';
+
+          a.href = 'http://www.washingtonpost.com/sf/brand-connect/wp/2013/12/09/how-to-negotiate-cloud-contracts/?mvi=f7c8f2de105b4f3aa7ccfe8dc039bce3&mvt=in#!/';
+          a.appendChild(i);
+
+          div.appendChild(a);
+
+          return div;
         }
       },
       theforum_88x31: {
