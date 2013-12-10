@@ -305,12 +305,6 @@ define(['jQuery', 'utils', 'wp/flags', 'wp/textlinks', 'wp/mediavoice'], functio
         when: ['201310170000/201312152359'],
         where: ['washingtonpost.com']
       },
-      //22394-CC
-      chevron: {
-        what: ['pushdown', '!tiffany_tile*'],
-        where: ['washingtonpost.com'],
-        when: ['20131206']
-      },
       //22678-SP
       nasa_enterprise: {
         what: ['enterprise'],
@@ -346,12 +340,6 @@ define(['jQuery', 'utils', 'wp/flags', 'wp/textlinks', 'wp/mediavoice'], functio
           mediavoice.load();
           return false;
         }
-      },
-      //22593-SP
-      msft_windows_homepage: {
-        what: ['leaderboard'],
-        when: ['20131126', '20131202', '20131208/201312081159'], //11/26, 12/02, 12/08 (midnight -> 12 noon)
-        where: ['washingtonpost.com']
       },
       politics_chevron_social_surface: {
         what: ['theforum_336x60'],
@@ -405,8 +393,7 @@ define(['jQuery', 'utils', 'wp/flags', 'wp/textlinks', 'wp/mediavoice'], functio
             imp = 'http://t.mookie1.com/t/v1/imp?migAgencyId=549&migSource=adsrv2&migTrackDataExt=3811217;103077962;276012295;0&migTrackFmtExt=client;io;ad;crtv&migUnencodedDest=http://ad.doubleclick.net/ad/N4584.1434.9678266387321/B7873965.3;sz=1x1;ord=' + rndm + '?';
 
           if(/exxon_topicly_tile/.test(window.location.search)){
-            creative = 'http://img.wpdigital.net/wp-srv/ad/public/static/22693/exxon-logo.png';
-            height = '17';
+            creative = 'http://img.wpdigital.net/wp-srv/ad/public/static/22693/exxon-tile.png';
             href = 'http://bs.serving-sys.com/BurstingPipe/adServer.bs?cn=tf&c=20&mc=click&pli=8541856&PluID=0&ord=' + rndm;
             imp = 'http://bs.serving-sys.com/BurstingPipe/adServer.bs?cn=tf&c=19&mc=imp&pli=8541856&PluID=0&ord=' + rndm + '&rtu=-1';
           }
@@ -484,30 +471,7 @@ define(['jQuery', 'utils', 'wp/flags', 'wp/textlinks', 'wp/mediavoice'], functio
 
           return a;
         }
-      }/*,
-      theforum_336x60: {
-        what: ['theforum_336x60'],
-        hardcode: function(){
-          var rndm = Math.floor(Math.random() * 1E5),
-            creative = document.createElement('img'),
-            pix = document.createElement('img'),
-            a = document.createElement('a');
-
-          creative.src = 'http://placehold.it/336x60';
-          creative.alt = 'Click here for more information.';
-
-          pix.src = 'http://bs.serving-sys.com/BurstingPipe/adServer.bs?cn=tf&c=19&mc=imp&pli=8081230&PluID=0&ord=' + rndm + '&rtu=-1';
-          pix.style.display = 'none';
-
-          a.href = 'http://bs.serving-sys.com/BurstingPipe/adServer.bs?cn=tf&c=20&mc=click&pli=8081230&PluID=0&ord=' + rndm;
-          a.target = '_blank';
-
-          a.appendChild(creative);
-          a.appendChild(pix);
-
-          return a;
-        }
-      }*/
+      }
     },
 
     adTypes: {
