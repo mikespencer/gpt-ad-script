@@ -328,11 +328,7 @@ define(['jQuery', 'utils', 'wp/flags', 'wp/textlinks', 'wp/mediavoice'], functio
         where: ['business/front'],
         when: ['20131210/20131224'],
         hardcode: function(){
-          //defined in wp.js
-          if(wpAd.loadBrandConnect){
-            wpAd.loadBrandConnect();
-          }
-          //actually render nothing:
+          mediavoice.load();
           return false;
         }
       },
