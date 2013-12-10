@@ -322,12 +322,17 @@ define(['jQuery', 'utils', 'wp/flags', 'wp/textlinks', 'wp/mediavoice'], functio
         }
       },
       //22683
-      brandconnect_module_bus_tech: {
+      //extended per cd and clemenece
+      brandconnect_module_bus: {
         what: ['brandconnect_module'],
-        where: ['business/front', 'technology/front'],
-        when: ['20131205/20131208'],
+        where: ['business/front'],
+        when: ['20131210/20131224'],
         hardcode: function(){
-          mediavoice.load();
+          //defined in wp.js
+          if(wpAd.loadBrandConnect){
+            wpAd.loadBrandConnect();
+          }
+          //actually render nothing:
           return false;
         }
       },

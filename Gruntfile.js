@@ -336,9 +336,9 @@ module.exports = function (grunt) {
   grunt.registerTask('test', [
     'jshint:qunit',
     'clean:qunit',
-    'copy:qunit',
-    'concurrent:qunit',
-    'clean:qunit'
+    //'copy:qunit',
+    //'concurrent:qunit',
+    //'clean:qunit'
   ]);
 
   grunt.registerTask('testpages', [

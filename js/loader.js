@@ -335,33 +335,40 @@ wpAd.cleanScriptTags = function(){};
 
     loadSiteCSS(siteInfo.site);
 
-    //tiffany tile fix on wp so that tile publisher still works
-    yepnope({
+
+    var latitude = window.latlong && window.latlong.latitude || '';
+    var longitude = window.latlong && window.latlong.longitude || '';
+
+
+    //tiffany tile fix on wp so that tile publisher still works, then
+    //load cospon latlong stuff, then
+    //load main script and display ads
+    yepnope([{
+      test: window.latlong && /^realestate\/listings/i.test(window.commercialNode),
+      yep: 'timeout=3000!http://www.washingtonpost.com/real-estate/neighborhoods/getCountyName.json?latlon=' +
+            latitude + '/' + longitude + '&jsvar=wpAdCoSponData'
+    }, {
+      //check to determine whether or not to load tiffany tile config
       test: wpAd.siteInfo.site === 'wp' && (!wpAd.config || (wpAd.config && !wpAd.config.tiffanyTiles)),
+      //tiffany tile integration:
       yep: 'timeout=3000!http://js.washingtonpost.com/wp-srv/ad/tiffanyTiles.js',
+      //always load the main script:
+      load: scriptURL,
+      //since this is in last object of array, this will be called when all scripts have loaded:
       complete: function(){
+        if(debug){
+          console.log('--ADOPS DEBUG--', scriptURL, 'loaded');
+        }
 
-        // get site specific ad script
-        $.ajax({
-          url: scriptURL,
-          cache: true,
-          dataType: 'script',
-          crossDomain: true,
-          timeout: 5000,
-          error: function(err){
-            console.log('--ADOPS DEBUG-- AdOps site script failed to load:', err);
-          },
-          success: function(){
-            if(debug){
-              console.log('--ADOPS DEBUG--', scriptURL, 'loaded');
-            }
+        //$(document).trigger('wpAdAdScriptsReady');
 
-            displayAds();
-          }
-        });
+        displayAds();
+
+        //lets use this for triggering qunit tests
+        //$(document).trigger('wpAdComplete');
 
       }
-    });
+    }]);
 
   }
 

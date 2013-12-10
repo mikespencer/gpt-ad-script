@@ -42,6 +42,16 @@ define(['keyvalues/desktop', 'utils', 'zoneBuilder', 'wp/flags'], function(kvs, 
       }
     ],
 
+    co_spon: [
+      function(){
+        var data = window.wpAdCoSponData;
+        if(data && data.name && typeof data.name === 'string'){
+          return [data.name.replace(/\s+/g, '_').toLowerCase()];
+        }
+        return false;
+      }
+    ],
+
     de: [
       function(){
         var cookie = utils.getCookie('de');

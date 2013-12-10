@@ -158,7 +158,6 @@ This example will deliver the ad as a "viewable impression" (only once it is in 
 +  Let's see if we can get uglifyjs updated to version 2 on the server so that we can utilise source maps. Optimizer requires uglifyjs2 in order to generate source maps. I think this would be very useful/important for our debugging.
 
 +  **FOR WP LAUNCH**
-    +  county sponsor stuff
     +  amazon a9 integration (amznads.getAdsAsync())
 
 
