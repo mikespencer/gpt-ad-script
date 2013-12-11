@@ -312,10 +312,11 @@ define(['jQuery', 'utils', 'wp/flags', 'wp/textlinks', 'wp/mediavoice'], functio
         when: ['2013']
       },
       //22675
+      //22710
       brandconnect_module_homepage: {
         what: ['brandconnect_module'],
         where: ['washingtonpost.com'],
-        when: ['20131204/20131205'],
+        when: ['20131211', '20131212'],
         hardcode: function(){
           mediavoice.load();
           return false;
