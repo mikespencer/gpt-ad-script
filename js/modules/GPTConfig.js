@@ -25,17 +25,6 @@ define(['utils'], function(utils){
       } else{
         this.pubservice.enableAsyncRendering();
       }
-      if (navigator.geolocation && utils.urlCheck('?locationsniff')) {
-        console.log("Starting to fetch location.");
-        var getPosition = function(location) {
-          var lat = location.coords.latitude,
-              lng = location.coords.longitude;
-          console.log("Current location sending to google: lat="+lat+", long="+lng);
-          this.pubservice.setLocation(latitude, longitude);
-        };
-        navigator.geolocation.getCurrentPosition(getPosition);
-        console.log("Location info sent.");
-      }
       googletag.enableServices();
     },
 
