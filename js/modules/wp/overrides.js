@@ -17,6 +17,12 @@ define(['utils', 'wp/flags', 'jQuery'], function(utils, flags, $) {
         //important to disable carousel
         window.wpTiles = window.wpTiles || {};
         window.wpTiles.hasTiff = true;
+      },
+
+      flex_ss_bb_hp: function(){
+        this.addKeyvalues({
+          del: ['js']
+        });
       }
 
     },
@@ -62,12 +68,6 @@ define(['utils', 'wp/flags', 'jQuery'], function(utils, flags, $) {
           this.config.where === 'lifestyle/home-garden') {
           this.config.where += '/flex';
         }
-        this.addKeyvalues({
-          del: ['js']
-        });
-      },
-
-      flex_ss_bb_hp: function(){
         this.addKeyvalues({
           del: ['js']
         });
