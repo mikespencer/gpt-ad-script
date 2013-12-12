@@ -25,7 +25,6 @@ define(['utils'], function(utils){
       } else{
         this.pubservice.enableAsyncRendering();
       }
-
       googletag.enableServices();
     },
 
