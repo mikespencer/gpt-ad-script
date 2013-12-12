@@ -25,7 +25,14 @@ define(['utils'], function(utils){
       } else{
         this.pubservice.enableAsyncRendering();
       }
-
+      if (navigator.geolocation && utils.urlCheck('?locationsniff')) {
+        function getPosition(location) {
+          var lat = location.coords.latitude,
+              lng = location.coords.longitude;
+          this.pubservice.setLocation(latitude, longitude);
+        }
+        navigator.geolocation.getCurrentPosition(getPosition);
+      }
       googletag.enableServices();
     },
 
