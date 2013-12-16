@@ -33,7 +33,7 @@ define(['utils'], function(utils){
           var lat = location.coords.latitude,
               lng = location.coords.longitude;
           //console.log("Current location sending to google: lat="+lat+", long="+lng);
-          _this.pubservice.setLocation(latitude, longitude);
+          _this.pubservice.setLocation(lat, lng);
         };
         navigator.geolocation.getCurrentPosition(getPosition);
         //console.log("Location info sent.");
