@@ -336,7 +336,7 @@ define(['jQuery', 'utils', 'wp/flags', 'wp/textlinks', 'wp/mediavoice'], functio
       brandconnect_module_test: {
         what: ['brandconnect_module'],
         test: [function(){
-          return !!(/brandconnect_module/.test(window.location.search));
+          return !!(/brandconnect/.test(window.location.search));
         }],
         hardcode: function(){
           mediavoice.load();
