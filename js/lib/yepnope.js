@@ -106,6 +106,10 @@ var docElement            = doc.documentElement,
       }
     }, timeout );
 
+    // spencer fix: wp mobile pages breaking when linked from facebook.
+    // error: Uncaught TypeError: Cannot call method 'insertBefore' of null.
+    firstScript = firstScript || document.getElementsByTagName( "script" )[ 0 ];
+
     // Inject script into to document
     // or immediately callback if we know there
     // was previously a timeout error
