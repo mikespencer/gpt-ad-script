@@ -281,7 +281,7 @@ define(['jQuery', 'utils', 'wp/flags', 'wp/textlinks', 'wp/mediavoice'], functio
       //22611-CC
       ibmtiles: {
         'what': ['navtile_business'],
-        'when': ['20131209/20131211']
+        'when': ['20131219/20131225']
       },
       //22235-JH
       trendex_sponsor_logo: {
