@@ -381,7 +381,6 @@ wpAd.cleanScriptTags = function(){};
           displayAds();
         }
       });
-      displayAds();
     }
 
   }
