@@ -90,7 +90,8 @@ define(['utils'], function(utils){
         'ad20': 'bigbox',
         'ad43': 'pushdown',
         'ad44': 'extra_bb',
-        'ad45': 'deal'
+        'ad45': 'deal',
+        'brandconnect': 'brandconnect_module'
       };
       return convert.hasOwnProperty(pos) ? convert[pos] : pos;
     },

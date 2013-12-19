@@ -152,15 +152,6 @@ This example will deliver the ad as a "viewable impression" (only once it is in 
 
 
 
-##TODO:
-
-+  Seems to be caching issues when pushing live... Temporarily fixed for now by manually flushing each *.min.js url
-+  Let's see if we can get uglifyjs updated to version 2 on the server so that we can utilise source maps. Optimizer requires uglifyjs2 in order to generate source maps. I think this would be very useful/important for our debugging.
-
-+  **FOR WP LAUNCH**
-    +  amazon a9 integration (amznads.getAdsAsync())
-
-
 ##NOTES:
 
 +  You can debug the page by using `?debugAdCode`, the bookmarklet, or just press `ctrl+F9`. `ctrl+F9` will only work in a particular browser on a domain once you have used one of the other two methods to debug the page. This is to try to prevent users "accidently" pressing ctrl+f9 and getting our debug boxes.

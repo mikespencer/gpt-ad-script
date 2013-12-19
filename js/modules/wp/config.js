@@ -336,7 +336,7 @@ define(['jQuery', 'utils', 'wp/flags', 'wp/textlinks', 'wp/mediavoice'], functio
       brandconnect_module_test: {
         what: ['brandconnect_module'],
         test: [function(){
-          return !!(/brandconnect_module/.test(window.location.search));
+          return !!(/brandconnect/.test(window.location.search));
         }],
         hardcode: function(){
           mediavoice.load();
@@ -388,11 +388,11 @@ define(['jQuery', 'utils', 'wp/flags', 'wp/textlinks', 'wp/mediavoice'], functio
             img = document.createElement('img'),
             a = document.createElement('a'),
             pix = document.createElement('img'),
-            creative = 'http://img.wpdigital.net/wp-srv/ad/public/static/22135/Topicly_LandRover_Card3.png',
+            creative = 'http://img.wpdigital.net/wp-srv/ad/public/static/22693/topcily-sara.jpg',
             width = '90',
             height = '60',
-            href = 'http://t.mookie1.com/t/v1/clk?migAgencyId=549&migSource=adsrv2&migTrackDataExt=3811217;103077962;276353948;0&migRandom=[timestamp]&migTrackFmtExt=client;io;ad;crtv&migUnencodedDest=http://ad.doubleclick.net/clk;276353948;103077962;r',
-            imp = 'http://t.mookie1.com/t/v1/imp?migAgencyId=549&migSource=adsrv2&migTrackDataExt=3811217;103077962;276012295;0&migTrackFmtExt=client;io;ad;crtv&migUnencodedDest=http://ad.doubleclick.net/ad/N4584.1434.9678266387321/B7873965.3;sz=1x1;ord=' + rndm + '?';
+            href = 'http://www.washingtonpost.com/wp-apps/topicly/',
+            imp = false;
 
           if(/exxon_topicly_tile/.test(window.location.search)){
             creative = 'http://img.wpdigital.net/wp-srv/ad/public/static/22693/exxon-tile.png';
@@ -416,13 +416,15 @@ define(['jQuery', 'utils', 'wp/flags', 'wp/textlinks', 'wp/mediavoice'], functio
           img.style.display = 'inline-block';
 
           //impression tracking
-          pix.src = imp;
-          pix.height = '1';
-          pix.width = '1';
-          pix.style.display = 'none';
+          if(imp){
+            pix.src = imp;
+            pix.height = '1';
+            pix.width = '1';
+            pix.style.display = 'none';
+            document.body.appendChild(pix);
+          }
 
           a.appendChild(img);
-          document.body.appendChild(pix);
 
           return a;
         }
