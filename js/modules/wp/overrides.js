@@ -23,6 +23,10 @@ define(['utils', 'wp/flags', 'jQuery'], function(utils, flags, $) {
         this.addKeyvalues({
           del: ['js']
         });
+      },
+
+      navtile: function(){
+        this.config.where = 'wpnavtile';
       }
 
     },
