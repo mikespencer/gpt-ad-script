@@ -275,7 +275,7 @@ define(['jQuery', 'utils', 'wp/flags', 'wp/textlinks', 'wp/mediavoice'], functio
       },
       //more tiles
       tile_openings: {
-        what: ['navtile_lifestyle', 'navtile_world'],
+        what: ['navtile_lifestyle', 'navtile_world', 'navtile_national'],
         when: ['2013']
       },
       //22611-CC
