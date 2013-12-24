@@ -475,6 +475,18 @@ define(['jQuery', 'utils', 'wp/flags', 'wp/textlinks', 'wp/mediavoice'], functio
 
           return a;
         }
+      },
+      //22752
+      closeBottomLB: {
+        what: ['!leaderboard_2'],
+        where: [
+          'politics/blog/the-fix',
+          'politics/blog/post-politics',
+          'local/blog/capital-weather-gang',
+          'business/blog/ezra-klein',
+          'blogs/classical-beat',
+          'entertainment/music/blog/classical_beat'
+        ]
       }
     },
 
