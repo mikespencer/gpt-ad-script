@@ -161,6 +161,9 @@ require(['gpt', 'siteScript', 'utils', 'jQuery', 'viewable', 'hideEmptyIframes']
 
   // legacy compatibility
   wpAd.flags = utils.flags;
+  wpAd.tools = wpAd.tools || wpAd.utils;
+  window.getCookie = window.getCookie || utils.getCookie;
+  window.setCookie = window.setCookie || utils.setCookie;
 
   // expose wpAd to the window for debugging + external code to access/build off of.
   window.wpAd = utils.extend(wpAd, window.wpAd, true);

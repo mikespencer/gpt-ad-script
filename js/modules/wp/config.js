@@ -275,7 +275,7 @@ define(['jQuery', 'utils', 'wp/flags', 'wp/textlinks', 'wp/mediavoice'], functio
       },
       //more tiles
       tile_openings: {
-        what: ['navtile_lifestyle', 'navtile_world'],
+        what: ['navtile_lifestyle', 'navtile_world', 'navtile_national'],
         when: ['2013']
       },
       //22611-CC
@@ -475,6 +475,18 @@ define(['jQuery', 'utils', 'wp/flags', 'wp/textlinks', 'wp/mediavoice'], functio
 
           return a;
         }
+      },
+      //22752
+      closeBottomLB: {
+        what: ['!leaderboard_2'],
+        where: [
+          'politics/blog/the-fix',
+          'politics/blog/post-politics',
+          'local/blog/capital-weather-gang',
+          'business/blog/ezra-klein',
+          'blogs/classical-beat',
+          'entertainment/music/blog/classical_beat'
+        ]
       }
     },
 
