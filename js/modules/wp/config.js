@@ -379,6 +379,39 @@ define(['jQuery', 'utils', 'wp/flags', 'wp/textlinks', 'wp/mediavoice'], functio
           return a;
         }
       },
+      topicly_placeholder: {
+        what: ['topicly_tile'],
+        when: ['2014'],
+        hardcode: function(){
+          var img = document.createElement('img'),
+              a = document.createElement('a'),
+              creative = 'http://img.wpdigital.net/wp-srv/ad/img/topicly_tile.png',
+              width = '90',
+              height = '60',
+              href = 'http://www.washingtonpost.com/wp-apps/topicly/',
+
+          if(window.jQuery){
+            //remove ad label
+            window.jQuery('#wpni_adi_topicly_tile').removeClass('ads slug');
+          }
+
+          //clickthrough
+          a.href = href;
+          a.target = '_blank';
+
+          //creative
+          img.src = creative;
+          img.height = height;
+          img.width = width;
+          img.alt = 'Click here for more information';
+          img.style.border = '0';
+          img.style.display = 'inline-block';
+
+          a.appendChild(img);
+
+          return a;
+        }
+      },
       //22693-JH
       topicly_carousel_tile: {
         what: ['topicly_tile'],
