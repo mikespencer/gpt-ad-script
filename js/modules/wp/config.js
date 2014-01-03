@@ -388,7 +388,7 @@ define(['jQuery', 'utils', 'wp/flags', 'wp/textlinks', 'wp/mediavoice'], functio
               creative = 'http://img.wpdigital.net/wp-srv/ad/img/topicly_tile.png',
               width = '90',
               height = '60',
-              href = 'http://www.washingtonpost.com/wp-apps/topicly/',
+              href = 'http://www.washingtonpost.com/wp-apps/topicly/';
 
           //remove ad label
           $('#wpni_adi_topicly_tile').removeClass('ads slug');
