@@ -390,10 +390,8 @@ define(['jQuery', 'utils', 'wp/flags', 'wp/textlinks', 'wp/mediavoice'], functio
               height = '60',
               href = 'http://www.washingtonpost.com/wp-apps/topicly/',
 
-          if(window.jQuery){
-            //remove ad label
-            window.jQuery('#wpni_adi_topicly_tile').removeClass('ads slug');
-          }
+          //remove ad label
+          $('#wpni_adi_topicly_tile').removeClass('ads slug');
 
           //clickthrough
           a.href = href;
