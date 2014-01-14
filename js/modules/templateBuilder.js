@@ -113,12 +113,13 @@ define(['utils'], function(utils){
       },
 
       when: function (when) {
+        var today = utils.flags.test_date ? utils.flags.test_date + '0000' : utils.estNowWithYear;
         if(/\//.test(when)){
           when = when.split('/');
-          return when[0] <= utils.estNowWithYear.substr(0, when[0].length) &&
-                 when[1] >= utils.estNowWithYear.substr(0, when[1].length);
+          return when[0] <= today.substr(0, when[0].length) &&
+            when[1] >= today.substr(0, when[1].length);
         } else {
-          var now = utils.estNowWithYear.substr(0, when.length);
+          var now = today.substr(0, when.length);
           return when === now;
         }
       }

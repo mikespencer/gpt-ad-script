@@ -500,6 +500,9 @@ define(['jQuery'], function($){
     test_ads: utils.urlCheck('test_ads', {
       type: 'variable'
     }),
+    test_date: utils.urlCheck('on_date', {
+      type: 'variable'
+    }),
     dcnode: utils.urlCheck('dcnode', {
       type: 'variable'
     })
