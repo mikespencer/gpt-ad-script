@@ -283,6 +283,11 @@ define(['jQuery', 'utils', 'wp/flags', 'wp/textlinks', 'wp/mediavoice'], functio
         'what': ['navtile_business'],
         'when': ['20131219/20131225']
       },
+      //22810
+      dmi_navtile: {
+        'what': ['navtile_lifestyle'],
+        'when': ['20140120/20140126']
+      },
       //22235-JH
       trendex_sponsor_logo: {
         what: ['trendex_sponsor'],
