@@ -1,11 +1,21 @@
 /**
  *  Template of ad flights and available ad spots on washingtonpost.com (mobile web)
  */
-define(function(){
+define(['utils', 'wp_mobile/mediavoice'], function(utils, mediavoice){
   return {
     flights: {
       defaults: {
         what: ['b', 'mob_enterprise', 't']
+      },
+      brandconnect_module_test: {
+        what: ['brandconnect_module'],
+        test: [function(){
+          return !!(/brandconnect/.test(window.location.search));
+        }],
+        hardcode: function(){
+          mediavoice.load();
+          return false;
+        }
       }
     },
     adTypes: {
@@ -13,6 +23,11 @@ define(function(){
         'size': [
           [300,50],
           [320, 50]
+        ]
+      },
+      'brandconnect_module': {
+        'size': [
+          [1, 8]
         ]
       },
       'fixedBottom': {
