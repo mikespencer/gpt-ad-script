@@ -64,6 +64,25 @@ define(['keyvalues/desktop', 'utils', 'zoneBuilder', 'wp/flags'], function(kvs, 
       }
     ],
 
+    edlt: [
+      function(){
+        if(/http\:\/\/qaprev\./.test(window.location.href)){
+          var cookie = utils.getCookie('wapo_actmgmt'),
+            len;
+          if(cookie){
+            cookie = /\|/.test(cookie) ? cookie.split(/\|/) : [cookie];
+            len = cookie.length;
+            while(len--){
+              if(cookie[len] === 'edlt:1'){
+                return ['1'];
+              }
+            }
+          }
+        }
+        return false;
+      }
+    ],
+
     kw: [
       function(){
         var rv = [],
